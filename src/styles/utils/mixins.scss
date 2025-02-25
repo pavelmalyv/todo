@@ -1,0 +1,55 @@
+@mixin flex-center($isInline: false) {
+	@if $isInline {
+		display: inline-flex;
+	} @else {
+		display: flex;
+	}
+
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin square($size) {
+	aspect-ratio: 1;
+	width: $size;
+	max-width: 100%;
+}
+
+@mixin base-animation($properties...) {
+	transition: 0.2s ease-out;
+	transition-property: $properties;
+	will-change: $properties;
+}
+
+@mixin long-animation($properties...) {
+	transition: 0.4s ease;
+	transition-property: $properties;
+	will-change: $properties;
+}
+
+@mixin visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+	white-space: nowrap;
+	clip-path: inset(100%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+}
+
+@mixin hover() {
+	@media (hover: hover) {
+		&:hover {
+			@content;
+		}
+	}
+
+	@media (hover: none) {
+		&:active {
+			@content;
+		}
+	}
+}

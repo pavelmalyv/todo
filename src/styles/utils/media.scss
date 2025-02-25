@@ -1,0 +1,32 @@
+// tablet-l
+$tablet-l-above: 1101px;
+$tablet-l: 1100px;
+
+// mobile-l
+
+$mobile-l-above: 721px;
+$mobile-l: 720px;
+
+@mixin tablet-l-above {
+	@media (min-width: $tablet-l-above) {
+		@content;
+	}
+}
+
+@mixin tablet-l {
+	@media (max-width: $tablet-l) {
+		@content;
+	}
+}
+
+@mixin mobile-l-above {
+	@media (min-width: $mobile-l-above) {
+		@content;
+	}
+}
+
+@mixin mobile-l {
+	@media (max-width: $mobile-l) {
+		@content;
+	}
+}

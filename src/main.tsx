@@ -1,7 +1,16 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
-import './index.css';
+
+import '@fontsource/noto-sans/300.css';
+import '@fontsource/noto-sans/400.css';
+import '@fontsource/noto-sans/700.css';
+
+import '@fontsource/oswald/400.css';
+import '@fontsource/oswald/600.css';
+import '@fontsource/oswald/700.css';
+
+import '@styles/base/index.scss';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
