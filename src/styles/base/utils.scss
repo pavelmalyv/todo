@@ -25,3 +25,20 @@
 	flex-direction: column;
 	flex-grow: 1;
 }
+
+.link {
+	@include utils.base-animation(color);
+
+	text-decoration: underline;
+	text-decoration-skip-ink: none;
+
+	@include utils.hover {
+		text-decoration: none;
+		color: rgb(var(--color-text-secondary));
+	}
+}
+
+.h1 {
+	font-size: 36px;
+	font-family: var(--font-secondary);
+}
