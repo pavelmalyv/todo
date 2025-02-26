@@ -10,19 +10,21 @@ const Book = ({ children, ['aria-labelledby']: ariaLabelledby }: BookProps) => {
 	return (
 		<section className={classNames(cl.book, 'section')} aria-labelledby={ariaLabelledby}>
 			<div className="container">
-				<div className={cl.inner}>
-					<div className={cl.image}>
-						<picture>
-							<img
-								className={cl['image-img']}
-								src="/img/book.jpg"
-								width={1160}
-								height={1444}
-								alt="Пустой лист со списком задач висит на стене"
-							/>
-						</picture>
+				<div className={cl.wrapper}>
+					<div className={cl.inner}>
+						<div className={cl.image}>
+							<picture>
+								<img
+									className={cl['image-img']}
+									src="/img/book.jpg"
+									width={1160}
+									height={1444}
+									alt="Пустой лист со списком задач висит на стене"
+								/>
+							</picture>
+						</div>
+						<div className={cl.body}>{children}</div>
 					</div>
-					<div className={cl.body}>{children}</div>
 				</div>
 			</div>
 		</section>

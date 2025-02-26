@@ -1,3 +1,5 @@
+@use '@styles/utils';
+
 :root {
 	--container-width: 1185px;
 	--container-padding-x: 30px;
@@ -18,4 +20,9 @@
 	--color-background-quaternary: 196, 196, 196;
 	--color-accent-primary: 118, 222, 55;
 	--color-accent-secondary: 131, 246, 61;
+
+	@include utils.mobile-l {
+		--container-padding-x: 16px;
+		--section-padding-y: 30px;
+	}
 }
