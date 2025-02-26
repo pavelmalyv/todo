@@ -3,6 +3,7 @@ import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
 
 import { useId } from 'react';
+import { REGISTRATION_URL } from '@/consts/routes';
 
 const LoginPage = () => {
 	const titleId = useId();
@@ -16,11 +17,16 @@ const LoginPage = () => {
 				footer={{
 					description: 'Нет аккаунта?',
 					linkName: 'Зарегистрироваться',
-					linkUrl: '#',
+					linkUrl: REGISTRATION_URL,
 				}}
 			>
-				<Field type="email" label="Email" placeholder="Email" />
-				<Field label="Пароль" placeholder="Пароль" isProtected={true} />
+				<Field type="email" label="Email" placeholder="Email" autoComplete="email" />
+				<Field
+					label="Пароль"
+					placeholder="Пароль"
+					isProtected={true}
+					autoComplete="current-password"
+				/>
 			</Auth>
 		</Book>
 	);
