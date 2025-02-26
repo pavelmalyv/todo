@@ -19,7 +19,7 @@ const LoginPage = () => {
 					linkUrl: '#',
 				}}
 			>
-				<Field label="Email" placeholder="Email" />
+				<Field type="email" label="Email" placeholder="Email" />
 				<Field label="Пароль" placeholder="Пароль" isProtected={true} />
 			</Auth>
 		</Book>
