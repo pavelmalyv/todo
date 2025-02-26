@@ -23,6 +23,7 @@
 	--color-accent-secondary: 131, 246, 61;
 	--color-accent-tertiary: 245, 255, 240;
 	--color-border-secondary: 0, 0, 0;
+	--color-error: 213, 0, 0;
 
 	@include utils.mobile-l {
 		--container-padding-x: 16px;

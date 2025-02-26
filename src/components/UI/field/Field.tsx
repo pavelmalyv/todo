@@ -1,4 +1,6 @@
 import cl from './Field.module.scss';
+import FieldError from '../fieldError/FieldError';
+
 import { forwardRef, useId } from 'react';
 
 interface FieldProps {
@@ -9,6 +11,7 @@ interface FieldProps {
 	value?: string;
 	disabled?: boolean;
 	maxLength?: number;
+	errorMessage?: string;
 	autoComplete?: string;
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 	onBlur?: React.FocusEventHandler<HTMLInputElement>;
@@ -27,6 +30,7 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 			value,
 			disabled,
 			maxLength,
+			errorMessage,
 			autoComplete,
 			onChange,
 			onBlur,
@@ -37,6 +41,7 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 		ref,
 	) => {
 		const fieldId = useId();
+		const errorMessageId = useId();
 
 		return (
 			<div className={cl.wrapper}>
@@ -58,8 +63,10 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 					autoComplete={autoComplete}
 					aria-controls={ariaControls}
 					aria-invalid={ariaInvalid}
+					aria-describedby={errorMessageId}
 					aria-required={ariaRequired}
 				/>
+				<FieldError id={errorMessageId} message={errorMessage ? errorMessage : null} />
 			</div>
 		);
 	},
