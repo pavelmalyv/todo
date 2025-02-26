@@ -1,23 +1,9 @@
-@use '@styles/utils';
+@use '@styles/shared/buttons';
 
 .button {
-	--background-color: rgb(var(--color-accent-primary));
-
-	@include utils.flex-center(true);
-	@include utils.base-animation(background-color);
-
-	padding: 5px 20px;
-	min-height: 40px;
-	min-width: 218px;
-	text-align: center;
-	border-radius: 10px;
-	background-color: var(--background-color);
+	@include buttons.base;
 
 	&_full {
 		width: 100%;
-	}
-
-	@include utils.hover {
-		--background-color: rgb(var(--color-accent-secondary));
 	}
 }
