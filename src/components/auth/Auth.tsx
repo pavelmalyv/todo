@@ -1,26 +1,32 @@
-import cl from './Authorization.module.scss';
 import classNames from 'classnames';
+import cl from './Auth.module.scss';
 import SmallForm from '@/components/Forms/smallForm/SmallForm';
-import Field from '../UI/field/Field';
 import LoginSocials from '../loginSocials/LoginSocials';
 
 import { Link } from 'react-router';
 
-interface AuthorizationProps {
+interface AuthProps {
+	title: string;
 	titleId?: string;
+	children: React.ReactNode;
+	buttonName: string;
+	footer: {
+		description: string;
+		linkName: string;
+		linkUrl: string;
+	};
 }
 
-const Authorization = ({ titleId }: AuthorizationProps) => {
+const Auth = ({ title, titleId, children, buttonName, footer }: AuthProps) => {
 	return (
 		<div className={cl.authorization}>
 			<h1 id={titleId} className={classNames('h1', cl.title)}>
-				Вход
+				{title}
 			</h1>
 
 			<div className={cl.form}>
-				<SmallForm aria-labelledby={titleId} buttonName="Войти">
-					<Field label="Email" placeholder="Email" />
-					<Field label="Пароль" placeholder="Пароль" isProtected={true} />
+				<SmallForm aria-labelledby={titleId} buttonName={buttonName}>
+					{children}
 				</SmallForm>
 			</div>
 
@@ -29,13 +35,13 @@ const Authorization = ({ titleId }: AuthorizationProps) => {
 			</div>
 
 			<div className={cl.registration}>
-				Нет аккаунта?{' '}
-				<Link to={'#'} className="link">
-					Зарегистрироваться
+				{footer.description}{' '}
+				<Link to={footer.linkUrl} className="link">
+					{footer.linkName}
 				</Link>
 			</div>
 		</div>
 	);
 };
 
-export default Authorization;
+export default Auth;
