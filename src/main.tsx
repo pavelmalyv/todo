@@ -11,6 +11,7 @@ import '@fontsource/oswald/600.css';
 import '@fontsource/oswald/700.css';
 
 import '@styles/base/index.scss';
+import 'material-symbols';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
