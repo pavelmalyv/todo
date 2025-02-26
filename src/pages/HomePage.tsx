@@ -1,5 +1,7 @@
+import Book from '@/components/book/Book';
+
 const HomePage = () => {
-	return <div>HomePage</div>;
+	return <Book>Home</Book>;
 };
 
 export default HomePage;
