@@ -18,6 +18,7 @@ const Authorization = ({ titleId }: AuthorizationProps) => {
 				</h1>
 				<SmallForm aria-labelledby={titleId} buttonName="Войти">
 					<Field label="Email" placeholder="Email" />
+					<Field label="Пароль" placeholder="Пароль" isProtected={true} />
 				</SmallForm>
 				Нет аккаунта?{' '}
 				<Link to={'#'} className="link">

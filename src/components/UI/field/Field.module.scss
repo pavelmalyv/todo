@@ -1,5 +1,9 @@
 @use '@styles/utils';
 
+.body {
+	position: relative;
+}
+
 .field {
 	--border-color: rgb(var(--color-border-secondary));
 
@@ -29,4 +33,15 @@
 	&:focus {
 		--border-color: rgb(var(--color-accent-primary));
 	}
+
+	&_icon {
+		padding-right: 30px;
+	}
+}
+
+.button {
+	position: absolute;
+	top: 50%;
+	right: 0;
+	translate: 0 -50%;
 }

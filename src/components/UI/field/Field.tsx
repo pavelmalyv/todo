@@ -1,7 +1,9 @@
+import classNames from 'classnames';
 import cl from './Field.module.scss';
 import FieldError from '../fieldError/FieldError';
 
-import { forwardRef, useId } from 'react';
+import { forwardRef, useId, useState } from 'react';
+import ButtonIcon from '../buttonIcon/ButtonIcon';
 
 interface FieldProps {
 	label: string;
@@ -13,6 +15,7 @@ interface FieldProps {
 	maxLength?: number;
 	errorMessage?: string;
 	autoComplete?: string;
+	isProtected?: boolean;
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 	onBlur?: React.FocusEventHandler<HTMLInputElement>;
 	'aria-controls'?: string;
@@ -32,6 +35,7 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 			maxLength,
 			errorMessage,
 			autoComplete,
+			isProtected,
 			onChange,
 			onBlur,
 			'aria-controls': ariaControls,
@@ -40,32 +44,52 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 		},
 		ref,
 	) => {
+		const [isProtectedState, setIsProtectedState] = useState(true);
 		const fieldId = useId();
 		const errorMessageId = useId();
+
+		let typeField = type;
+		if (isProtected) {
+			typeField = isProtectedState ? 'password' : 'text';
+		}
 
 		return (
 			<div className={cl.wrapper}>
 				<label htmlFor={fieldId} className="visually-hidden">
 					{label}
 				</label>
-				<input
-					ref={ref}
-					id={fieldId}
-					className={cl.field}
-					type={type}
-					name={name}
-					placeholder={placeholder}
-					value={value}
-					disabled={disabled}
-					maxLength={maxLength}
-					onChange={onChange}
-					onBlur={onBlur}
-					autoComplete={autoComplete}
-					aria-controls={ariaControls}
-					aria-invalid={ariaInvalid}
-					aria-describedby={errorMessageId}
-					aria-required={ariaRequired}
-				/>
+				<div className={cl.body}>
+					<input
+						ref={ref}
+						id={fieldId}
+						className={classNames(cl.field, { [cl['field_icon']]: isProtected })}
+						type={typeField}
+						name={name}
+						placeholder={placeholder}
+						value={value}
+						disabled={disabled}
+						maxLength={maxLength}
+						onChange={onChange}
+						onBlur={onBlur}
+						autoComplete={autoComplete}
+						aria-controls={ariaControls}
+						aria-invalid={ariaInvalid}
+						aria-describedby={errorMessageId}
+						aria-required={ariaRequired}
+					/>
+					{isProtected && (
+						<div className={cl.button}>
+							<ButtonIcon
+								hiddenName={'Показать пароль'}
+								onClick={() => setIsProtectedState((prev) => !prev)}
+								aria-pressed={!isProtectedState}
+								aria-controls={fieldId}
+							>
+								{isProtectedState ? 'visibility' : 'visibility_off'}
+							</ButtonIcon>
+						</div>
+					)}
+				</div>
 				<FieldError id={errorMessageId} message={errorMessage ? errorMessage : null} />
 			</div>
 		);
