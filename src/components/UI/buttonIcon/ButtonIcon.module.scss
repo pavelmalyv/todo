@@ -1,0 +1,14 @@
+@use '@styles/utils';
+
+.button {
+	@include utils.base-animation(color);
+	@include utils.flex-center(true);
+	@include utils.square(30px);
+
+	font-size: 15px;
+	color: rgb(var(--color-text-secondary));
+
+	@include utils.hover {
+		color: rgb(var(--color-text-primary));
+	}
+}
