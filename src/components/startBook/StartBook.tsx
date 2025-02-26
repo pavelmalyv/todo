@@ -2,6 +2,8 @@ import classNames from 'classnames';
 import cl from './StartBook.module.scss';
 import ButtonLink from '../UI/buttonLink/ButtonLink';
 
+import { LOGIN_URL } from '@/consts/routes';
+
 interface StartBookProps {
 	titleId?: string;
 }
@@ -22,7 +24,7 @@ const StartBook = ({ titleId }: StartBookProps) => {
 				</p>
 			</div>
 			<div className={cl.button}>
-				<ButtonLink to={'#'} isFull={true}>
+				<ButtonLink to={LOGIN_URL} isFull={true}>
 					Начать
 				</ButtonLink>
 			</div>

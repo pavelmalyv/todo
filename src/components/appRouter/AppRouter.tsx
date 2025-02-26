@@ -1,8 +1,11 @@
 import Root from '@/pages/Root';
+
 import { Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';
+import { LOGIN_URL } from '@/consts/routes';
 
 const HomePage = lazy(() => import('../../pages/HomePage'));
+const LoginPage = lazy(() => import('../../pages/LoginPage'));
 
 const AppRouter = () => {
 	return (
@@ -13,6 +16,14 @@ const AppRouter = () => {
 					element={
 						<Suspense>
 							<HomePage />
+						</Suspense>
+					}
+				/>
+				<Route
+					path={LOGIN_URL}
+					element={
+						<Suspense>
+							<LoginPage />
 						</Suspense>
 					}
 				/>
