@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import cl from './StartBook.module.scss';
+import ButtonLink from '../UI/buttonLink/ButtonLink';
 
 interface StartBookProps {
 	titleId?: string;
@@ -19,6 +20,11 @@ const StartBook = ({ titleId }: StartBookProps) => {
 					ToDo — это цифровой инструмент управления задачами, разработанный для помощи пользователям
 					в организации и расстановке приоритетов в их повседневных делах и обязанностях.
 				</p>
+			</div>
+			<div className={cl.button}>
+				<ButtonLink to={'#'} isFull={true}>
+					Начать
+				</ButtonLink>
 			</div>
 		</div>
 	);
