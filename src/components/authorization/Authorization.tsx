@@ -1,6 +1,6 @@
 import cl from './Authorization.module.scss';
 import classNames from 'classnames';
-import SmallForm from '../Forms/smallForm/smallForm';
+import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import { Link } from 'react-router';
 
 interface AuthorizationProps {
@@ -14,7 +14,7 @@ const Authorization = ({ titleId }: AuthorizationProps) => {
 				<h1 id={titleId} className={classNames('h1', cl.title)}>
 					Вход
 				</h1>
-				<SmallForm aria-labelledby={titleId}></SmallForm>
+				<SmallForm aria-labelledby={titleId} buttonName="Войти"></SmallForm>
 				Нет аккаунта?{' '}
 				<Link to={'#'} className="link">
 					Зарегистрироваться
