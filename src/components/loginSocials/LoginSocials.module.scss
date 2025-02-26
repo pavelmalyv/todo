@@ -1,0 +1,53 @@
+@use '@styles/utils';
+
+.label {
+	position: relative;
+	color: rgb(var(--color-text-tertiary));
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	column-gap: 20px;
+	margin-bottom: 13px;
+
+	&::before,
+	&::after {
+		content: '';
+		top: 0;
+		left: 0;
+		flex-grow: 1;
+		height: 1px;
+		background-color: rgb(var(--color-text-tertiary));
+		margin-top: 0.4em;
+	}
+}
+
+.list {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 10px 16px;
+}
+
+.button {
+	--background-color: rgb(var(--color-background-fifth));
+
+	@include utils.base-animation(background-color);
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 8px;
+	min-height: 27px;
+	min-width: 118px;
+	padding: 4px 16px;
+	background-color: var(--background-color);
+	border-radius: 8px;
+
+	@include utils.hover {
+		--background-color: rgb(var(--color-accent-quaternary));
+	}
+
+	&-icon {
+		width: 13px;
+	}
+}
