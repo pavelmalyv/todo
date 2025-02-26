@@ -14,12 +14,15 @@
 
 	--color-text-primary: 0, 0, 0;
 	--color-text-secondary: 76, 76, 76;
+	--color-text-tertiary: 102, 100, 100;
 	--color-background-primary: 255, 255, 255;
 	--color-background-secondary: 244, 244, 244;
 	--color-background-tertiary: 255, 249, 249;
 	--color-background-quaternary: 196, 196, 196;
 	--color-accent-primary: 118, 222, 55;
 	--color-accent-secondary: 131, 246, 61;
+	--color-accent-tertiary: 245, 255, 240;
+	--color-border-secondary: 0, 0, 0;
 
 	@include utils.mobile-l {
 		--container-padding-x: 16px;
