@@ -20,6 +20,11 @@ export const ERRORS_MESSAGES_FIREBASE: Record<string, string> = {
 	'auth/email-already-exists': 'Email занят',
 	unknown: 'Неизвестная ошибка, попробуйте позже',
 };
+
+export const ERRORS_MESSAGES = {
+	userLoading: 'Ошибка загрузки пользователя, повторите попытку позже',
+};
+
 export const LOADING_MESSAGES = {
 	common: 'Загрузка...',
 };
