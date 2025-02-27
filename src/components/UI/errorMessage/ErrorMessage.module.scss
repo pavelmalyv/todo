@@ -1,0 +1,6 @@
+@use '@styles/utils';
+
+.error {
+	font-size: 14px;
+	color: rgb(var(--color-error));
+}
