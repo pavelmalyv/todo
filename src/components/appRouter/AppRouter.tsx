@@ -1,5 +1,7 @@
 import Root from '@/pages/Root';
 import useAuthWitchNotifications from '@/hooks/useAuthWitchNotifications';
+import LoadingScreen from '../loadingScreen/LoadingScreen';
+import useDelayedLoader from '@/hooks/useDelayedLoader';
 
 import { Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';
@@ -11,7 +13,12 @@ const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const UpcomingPage = lazy(() => import('@/pages/UpcomingPage'));
 
 const AppRouter = () => {
-	const [user] = useAuthWitchNotifications(auth);
+	const [user, isLoading] = useAuthWitchNotifications(auth);
+	const isDelayedLoading = useDelayedLoader(isLoading);
+
+	if (isDelayedLoading) {
+		return <LoadingScreen />;
+	}
 
 	const privateRoutes = (
 		<>

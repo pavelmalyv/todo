@@ -1,0 +1,13 @@
+@use '@styles/utils';
+@use '@styles/shared/spinner';
+
+.screen {
+	@include utils.flex-center;
+
+	padding: 30px;
+	height: 100%;
+}
+
+.spinner {
+	@include spinner.base(40px);
+}
