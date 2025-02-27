@@ -4,6 +4,7 @@ import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import LoginSocials from '../loginSocials/LoginSocials';
 
 import { Link } from 'react-router';
+// import { auth } from '@/firebase';
 
 interface AuthProps {
 	title: string;
@@ -15,9 +16,10 @@ interface AuthProps {
 		linkName: string;
 		linkUrl: string;
 	};
+	onSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
-const Auth = ({ title, titleId, children, buttonName, footer }: AuthProps) => {
+const Auth = ({ title, titleId, children, buttonName, footer, onSubmit }: AuthProps) => {
 	return (
 		<div className={cl.authorization}>
 			<h1 id={titleId} className={classNames('h1', cl.title)}>
@@ -25,7 +27,7 @@ const Auth = ({ title, titleId, children, buttonName, footer }: AuthProps) => {
 			</h1>
 
 			<div className={cl.form}>
-				<SmallForm aria-labelledby={titleId} buttonName={buttonName}>
+				<SmallForm aria-labelledby={titleId} buttonName={buttonName} onSubmit={onSubmit}>
 					{children}
 				</SmallForm>
 			</div>
