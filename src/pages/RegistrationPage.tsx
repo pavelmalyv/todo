@@ -1,19 +1,19 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
-import AuthSocials from '@/components/authSocials/AuthSocials';
 
 import { useId } from 'react';
 import { InferType, object } from 'yup';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
 	emailSchema,
 	getPasswordRepeatSchema,
 	nameSchema,
 	passwordCreateSchema,
 } from '@/schemas/fields';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+
 import { LOGIN_URL } from '@/consts/routes';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 const formSchema = object({
 	name: nameSchema,
@@ -46,78 +46,73 @@ const RegistrationPage = () => {
 			<Auth
 				title="Регистрация"
 				titleId={titleId}
+				buttonName="Зарегистрироваться"
 				footer={{ description: 'Уже зарегистрированы?', linkName: 'Войти', linkUrl: LOGIN_URL }}
+				onSubmit={handleSubmit(onSubmit)}
 			>
-				<Auth.Form buttonName="Зарегистрироваться" onSubmit={handleSubmit(onSubmit)}>
-					<Controller
-						name="name"
-						control={control}
-						render={({ field, fieldState }) => (
-							<Field
-								label="Имя"
-								placeholder="Имя*"
-								autoComplete="name"
-								{...field}
-								aria-required={true}
-								aria-invalid={fieldState.invalid}
-								errorMessage={fieldState.error?.message}
-							/>
-						)}
-					/>
-					<Controller
-						name="email"
-						control={control}
-						render={({ field, fieldState }) => (
-							<Field
-								type="email"
-								label="E-mail"
-								placeholder="E-mail*"
-								autoComplete="email"
-								{...field}
-								aria-required={true}
-								aria-invalid={fieldState.invalid}
-								errorMessage={fieldState.error?.message}
-							/>
-						)}
-					/>
-					<Controller
-						name="password"
-						control={control}
-						render={({ field, fieldState }) => (
-							<Field
-								label="Пароль"
-								placeholder="Пароль*"
-								isProtected={true}
-								autoComplete="new-password"
-								{...field}
-								aria-required={true}
-								aria-invalid={fieldState.invalid}
-								errorMessage={fieldState.error?.message}
-							/>
-						)}
-					/>
-					<Controller
-						name="passwordRepeat"
-						control={control}
-						render={({ field, fieldState }) => (
-							<Field
-								label="Повтор пароля"
-								placeholder="Повтор пароля*"
-								isProtected={true}
-								autoComplete="new-password"
-								{...field}
-								aria-required={true}
-								aria-invalid={fieldState.invalid}
-								errorMessage={fieldState.error?.message}
-							/>
-						)}
-					/>
-				</Auth.Form>
-				<Auth.Socials>
-					<AuthSocials>
-						<AuthSocials.Google />
-					</AuthSocials>
-				</Auth.Socials>
+				<Controller
+					name="name"
+					control={control}
+					render={({ field, fieldState }) => (
+						<Field
+							label="Имя"
+							placeholder="Имя*"
+							autoComplete="name"
+							{...field}
+							aria-required={true}
+							aria-invalid={fieldState.invalid}
+							errorMessage={fieldState.error?.message}
+						/>
+					)}
+				/>
+				<Controller
+					name="email"
+					control={control}
+					render={({ field, fieldState }) => (
+						<Field
+							type="email"
+							label="E-mail"
+							placeholder="E-mail*"
+							autoComplete="email"
+							{...field}
+							aria-required={true}
+							aria-invalid={fieldState.invalid}
+							errorMessage={fieldState.error?.message}
+						/>
+					)}
+				/>
+				<Controller
+					name="password"
+					control={control}
+					render={({ field, fieldState }) => (
+						<Field
+							label="Пароль"
+							placeholder="Пароль*"
+							isProtected={true}
+							autoComplete="new-password"
+							{...field}
+							aria-required={true}
+							aria-invalid={fieldState.invalid}
+							errorMessage={fieldState.error?.message}
+						/>
+					)}
+				/>
+				<Controller
+					name="passwordRepeat"
+					control={control}
+					render={({ field, fieldState }) => (
+						<Field
+							label="Повтор пароля"
+							placeholder="Повтор пароля*"
+							isProtected={true}
+							autoComplete="new-password"
+							{...field}
+							aria-required={true}
+							aria-invalid={fieldState.invalid}
+							errorMessage={fieldState.error?.message}
+						/>
+					)}
+				/>
 			</Auth>
 		</Book>
 	);

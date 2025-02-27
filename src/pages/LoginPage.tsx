@@ -1,8 +1,6 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
-import AuthSocials from '@/components/authSocials/AuthSocials';
-import useSignInGoogleWithNotifications from '@/hooks/useSignInGoogleWithNotifications';
 
 import { useId } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -24,7 +22,6 @@ type FormData = InferType<typeof formSchema>;
 const LoginPage = () => {
 	const titleId = useId();
 	const [signInWithEmailAndPassword, , isLoading, error] = useSignInWithEmailAndPassword(auth);
-	const [signInWithGoogle, , isLoadingGoogle] = useSignInGoogleWithNotifications(auth);
 
 	let errorMessage: string | undefined;
 	if (error) {
@@ -43,66 +40,54 @@ const LoginPage = () => {
 		await signInWithEmailAndPassword(data.email, data.password);
 	};
 
-	const handleClickGoogle = () => {
-		signInWithGoogle();
-	};
-
 	return (
 		<Book aria-labelledby={titleId}>
 			<Auth
 				title="Вход"
 				titleId={titleId}
+				isLoading={isLoading}
+				errorMessage={errorMessage}
+				buttonName="Войти"
 				footer={{
 					description: 'Нет аккаунта?',
 					linkName: 'Зарегистрироваться',
 					linkUrl: REGISTRATION_URL,
 				}}
+				onSubmit={handleSubmit(onSubmit)}
 			>
-				<Auth.Form
-					isLoading={isLoading}
-					errorMessage={errorMessage}
-					buttonName="Войти"
-					onSubmit={handleSubmit(onSubmit)}
-				>
-					<Controller
-						name="email"
-						control={control}
-						render={({ field, fieldState }) => (
-							<Field
-								type="email"
-								label="Email"
-								placeholder="Email"
-								autoComplete="email"
-								aria-required={true}
-								aria-invalid={fieldState.invalid}
-								errorMessage={fieldState.error?.message}
-								{...field}
-							/>
-						)}
-					/>
+				<Controller
+					name="email"
+					control={control}
+					render={({ field, fieldState }) => (
+						<Field
+							type="email"
+							label="Email"
+							placeholder="Email"
+							autoComplete="email"
+							aria-required={true}
+							aria-invalid={fieldState.invalid}
+							errorMessage={fieldState.error?.message}
+							{...field}
+						/>
+					)}
+				/>
 
-					<Controller
-						name="password"
-						control={control}
-						render={({ field, fieldState }) => (
-							<Field
-								label="Пароль"
-								placeholder="Пароль"
-								autoComplete="current-password"
-								isProtected={true}
-								aria-required={true}
-								aria-invalid={fieldState.invalid}
-								errorMessage={fieldState.error?.message}
-								{...field}
-							/>
-						)}
-					/>
-				</Auth.Form>
-				<Auth.Socials>
-					<AuthSocials>
-						<AuthSocials.Google isLoading={isLoadingGoogle} onClick={handleClickGoogle} />
-					</AuthSocials>
-				</Auth.Socials>
+				<Controller
+					name="password"
+					control={control}
+					render={({ field, fieldState }) => (
+						<Field
+							label="Пароль"
+							placeholder="Пароль"
+							autoComplete="current-password"
+							isProtected={true}
+							aria-required={true}
+							aria-invalid={fieldState.invalid}
+							errorMessage={fieldState.error?.message}
+							{...field}
+						/>
+					)}
+				/>
 			</Auth>
 		</Book>
 	);
