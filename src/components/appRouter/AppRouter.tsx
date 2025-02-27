@@ -3,7 +3,7 @@ import useAuthWitchNotifications from '@/hooks/useAuthWitchNotifications';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
 import useDelayedLoader from '@/hooks/useDelayedLoader';
 
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';
 import { auth } from '@/firebase';
 import { LOGIN_URL } from '@/consts/routes';
@@ -30,6 +30,7 @@ const AppRouter = () => {
 					</Suspense>
 				}
 			/>
+			<Route path="*" element={<Navigate to={'/'} />} />
 		</>
 	);
 
@@ -51,6 +52,7 @@ const AppRouter = () => {
 					</Suspense>
 				}
 			/>
+			<Route path="*" element={<Navigate to={LOGIN_URL} />} />
 		</>
 	);
 
