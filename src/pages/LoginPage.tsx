@@ -1,7 +1,7 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
-import LoginSocials from '@/components/loginSocials/LoginSocials';
+import AuthSocials from '@/components/authSocials/AuthSocials';
 import useSignInGoogleWithNotifications from '@/hooks/useSignInGoogleWithNotifications';
 
 import { useId } from 'react';
@@ -99,9 +99,9 @@ const LoginPage = () => {
 					/>
 				</Auth.Form>
 				<Auth.LoginSocials>
-					<LoginSocials>
-						<LoginSocials.Google isLoading={isLoadingGoogle} onClick={handleClickGoogle} />
-					</LoginSocials>
+					<AuthSocials>
+						<AuthSocials.Google isLoading={isLoadingGoogle} onClick={handleClickGoogle} />
+					</AuthSocials>
 				</Auth.LoginSocials>
 			</Auth>
 		</Book>

@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import cl from './LoginSocials.module.scss';
+import cl from './AuthSocials.module.scss';
 
-interface LoginSocialsProps {
+interface AuthSocialsProps {
 	children: React.ReactNode;
 }
 
-const LoginSocials = ({ children }: LoginSocialsProps) => {
+const AuthSocials = ({ children }: AuthSocialsProps) => {
 	return (
 		<div className={cl['login-socials']}>
 			<div className={cl.label}>или</div>
@@ -46,6 +46,6 @@ const Google = ({ isLoading = false, onClick }: SocialItemProps) => {
 	);
 };
 
-LoginSocials.Google = Google;
+AuthSocials.Google = Google;
 
-export default LoginSocials;
+export default AuthSocials;

@@ -1,7 +1,7 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
-import LoginSocials from '@/components/loginSocials/LoginSocials';
+import AuthSocials from '@/components/authSocials/AuthSocials';
 
 import { useId } from 'react';
 import { InferType, object } from 'yup';
@@ -114,9 +114,9 @@ const RegistrationPage = () => {
 					/>
 				</Auth.Form>
 				<Auth.LoginSocials>
-					<LoginSocials>
-						<LoginSocials.Google />
-					</LoginSocials>
+					<AuthSocials>
+						<AuthSocials.Google />
+					</AuthSocials>
 				</Auth.LoginSocials>
 			</Auth>
 		</Book>
