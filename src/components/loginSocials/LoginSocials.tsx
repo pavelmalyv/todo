@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import cl from './LoginSocials.module.scss';
 
 interface LoginSocialsProps {
@@ -13,18 +14,32 @@ const LoginSocials = ({ children }: LoginSocialsProps) => {
 	);
 };
 
-const Google = () => {
+interface SocialItemProps {
+	isLoading?: boolean;
+}
+
+const Google = ({ isLoading = false }: SocialItemProps) => {
 	return (
 		<li className={cl.item}>
-			<button type="button" className={cl.button}>
-				<img
-					src="/img/icons/google.svg"
-					className={cl['button-icon']}
-					width={24}
-					height={24}
-					alt=""
-				/>
-				<span>Google</span>
+			<button type="button" className={cl.button} disabled={isLoading}>
+				<span className={cl['button-body']}>
+					<img
+						src="/img/icons/google.svg"
+						className={cl['button-icon']}
+						width={24}
+						height={24}
+						alt=""
+					/>
+					<span>Google</span>
+				</span>
+
+				<span
+					className={classNames(cl['button-spinner-wrapper'], {
+						[cl['button-spinner-wrapper_visible']]: isLoading,
+					})}
+				>
+					<span className={cl['button-spinner']}></span>
+				</span>
 			</button>
 		</li>
 	);
