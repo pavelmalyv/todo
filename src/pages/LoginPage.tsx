@@ -73,6 +73,7 @@ const LoginPage = () => {
 								label="Email"
 								placeholder="Email"
 								autoComplete="email"
+								aria-required={true}
 								aria-invalid={fieldState.invalid}
 								errorMessage={fieldState.error?.message}
 								{...field}
@@ -89,6 +90,7 @@ const LoginPage = () => {
 								placeholder="Пароль"
 								autoComplete="current-password"
 								isProtected={true}
+								aria-required={true}
 								aria-invalid={fieldState.invalid}
 								errorMessage={fieldState.error?.message}
 								{...field}
