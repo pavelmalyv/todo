@@ -1,11 +1,14 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
+import useCreateUserFullFields from '@/hooks/useCreateUserFullFields';
 
 import { useId } from 'react';
 import { InferType, object } from 'yup';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { auth } from '@/firebase';
+import { getErrorMessageFirebase } from '@/utils/firebase';
 import {
 	emailSchema,
 	getPasswordRepeatSchema,
@@ -26,6 +29,7 @@ type FormData = InferType<typeof formSchema>;
 
 const RegistrationPage = () => {
 	const titleId = useId();
+	const [createUser, isLoading, error] = useCreateUserFullFields(auth);
 
 	const { handleSubmit, control } = useForm<FormData>({
 		resolver: yupResolver(formSchema),
@@ -38,8 +42,13 @@ const RegistrationPage = () => {
 	});
 
 	const onSubmit: SubmitHandler<FormData> = async (data) => {
-		console.log(data);
+		await createUser({ email: data.email, password: data.password, name: data.name });
 	};
+
+	let errorMessage: string | undefined;
+	if (error) {
+		errorMessage = getErrorMessageFirebase(error);
+	}
 
 	return (
 		<Book aria-labelledby={titleId}>
@@ -47,6 +56,8 @@ const RegistrationPage = () => {
 				title="Регистрация"
 				titleId={titleId}
 				buttonName="Зарегистрироваться"
+				isLoading={isLoading}
+				errorMessage={errorMessage}
 				footer={{ description: 'Уже зарегистрированы?', linkName: 'Войти', linkUrl: LOGIN_URL }}
 				onSubmit={handleSubmit(onSubmit)}
 			>

@@ -2,6 +2,8 @@ import App from './App.tsx';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { ToastContainer } from 'react-toastify';
+import { Provider } from 'react-redux';
+import { store } from './store/store.ts';
 import './consts/yupLocales.ts';
 
 import '@fontsource/noto-sans/300.css';
@@ -17,7 +19,9 @@ import 'material-symbols';
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
-		<App />
-		<ToastContainer />
+		<Provider store={store}>
+			<App />
+			<ToastContainer />
+		</Provider>
 	</StrictMode>,
 );

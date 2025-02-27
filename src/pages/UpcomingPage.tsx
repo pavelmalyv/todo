@@ -1,5 +1,5 @@
 const UpcomingPage = () => {
-	return <div>UpcomingPage</div>;
+	return 'UpcomingPage';
 };
 
 export default UpcomingPage;

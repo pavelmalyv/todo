@@ -21,7 +21,8 @@ export const ERRORS_MESSAGES_FIREBASE: Record<string, string> = {
 	'auth/invalid-display-name': 'Некорректное имя',
 	'auth/invalid-email': 'Некорректный email',
 	'auth/invalid-password': 'Некорректный пароль',
-	'auth/email-already-exists': 'Email занят',
+	'auth/password-does-not-meet-requirements': 'Некорректный пароль',
+	'auth/email-already-in-use': 'Пользователь с таким Email уже существует',
 	unknown: 'Неизвестная ошибка, попробуйте позже',
 };
 
