@@ -11,6 +11,7 @@ import { REGISTRATION_URL } from '@/consts/routes';
 import { auth } from '@/firebase';
 import { emailSchema, passwordSchema } from '@/schemas/fields';
 import { getErrorMessageFirebase } from '@/utils/firebase';
+import LoginSocials from '@/components/loginSocials/LoginSocials';
 
 const formSchema = object({
 	email: emailSchema,
@@ -45,47 +46,55 @@ const LoginPage = () => {
 			<Auth
 				title="Вход"
 				titleId={titleId}
-				buttonName="Войти"
 				footer={{
 					description: 'Нет аккаунта?',
 					linkName: 'Зарегистрироваться',
 					linkUrl: REGISTRATION_URL,
 				}}
-				onSubmit={handleSubmit(onSubmit)}
-				errorMessage={errorMessage}
-				isLoading={isLoading}
 			>
-				<Controller
-					name="email"
-					control={control}
-					render={({ field, fieldState }) => (
-						<Field
-							type="email"
-							label="Email"
-							placeholder="Email"
-							autoComplete="email"
-							aria-invalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
-							{...field}
-						/>
-					)}
-				/>
+				<Auth.Form
+					isLoading={isLoading}
+					errorMessage={errorMessage}
+					buttonName="Войти"
+					onSubmit={handleSubmit(onSubmit)}
+				>
+					<Controller
+						name="email"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Field
+								type="email"
+								label="Email"
+								placeholder="Email"
+								autoComplete="email"
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+								{...field}
+							/>
+						)}
+					/>
 
-				<Controller
-					name="password"
-					control={control}
-					render={({ field, fieldState }) => (
-						<Field
-							label="Пароль"
-							placeholder="Пароль"
-							autoComplete="current-password"
-							isProtected={true}
-							aria-invalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
-							{...field}
-						/>
-					)}
-				/>
+					<Controller
+						name="password"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Field
+								label="Пароль"
+								placeholder="Пароль"
+								autoComplete="current-password"
+								isProtected={true}
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+								{...field}
+							/>
+						)}
+					/>
+				</Auth.Form>
+				<Auth.LoginSocials>
+					<LoginSocials>
+						<LoginSocials.Google />
+					</LoginSocials>
+				</Auth.LoginSocials>
 			</Auth>
 		</Book>
 	);
