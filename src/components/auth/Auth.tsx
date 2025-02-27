@@ -49,7 +49,9 @@ const Auth = ({
 			</div>
 
 			<div className={cl['login-socials']}>
-				<LoginSocials />
+				<LoginSocials>
+					<LoginSocials.Google />
+				</LoginSocials>
 			</div>
 
 			<div className={cl.registration}>
