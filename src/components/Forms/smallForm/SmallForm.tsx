@@ -21,11 +21,13 @@ const SmallForm = ({
 }: SmallFormProps) => {
 	return (
 		<form className={cl.form} aria-labelledby={ariaLabelledby} onSubmit={onSubmit} noValidate>
-			<div className={cl.fields}>{children}</div>
+			<fieldset disabled={isLoading}>
+				<div className={cl.fields}>{children}</div>
 
-			<Button type="submit" isFull={true} isLoading={isLoading}>
-				{buttonName}
-			</Button>
+				<Button type="submit" isFull={true} isLoading={isLoading}>
+					{buttonName}
+				</Button>
+			</fieldset>
 
 			<div className={cl.error}>
 				<ErrorMessage message={errorMessage} />
