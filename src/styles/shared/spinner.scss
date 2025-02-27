@@ -1,0 +1,19 @@
+@mixin base($size) {
+	width: $size;
+	max-width: 100%;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	border: 3px solid currentcolor;
+	border-bottom-color: transparent;
+	animation: rotation 0.9s linear infinite;
+}
+
+@keyframes rotation {
+	from {
+		transform: rotate(0);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}

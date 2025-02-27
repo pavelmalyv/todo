@@ -1,4 +1,5 @@
 @use '@styles/shared/buttons';
+@use '@styles/shared/spinner';
 
 .button {
 	@include buttons.base;
@@ -6,4 +7,18 @@
 	&_full {
 		width: 100%;
 	}
+}
+
+.body {
+	position: relative;
+	padding: 0 25px;
+}
+
+.spinner {
+	@include spinner.base(16px);
+
+	position: absolute;
+	top: 50%;
+	right: 0;
+	translate: 0 -50%;
 }

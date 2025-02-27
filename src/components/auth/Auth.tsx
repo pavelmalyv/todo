@@ -4,7 +4,6 @@ import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import LoginSocials from '../loginSocials/LoginSocials';
 
 import { Link } from 'react-router';
-// import { auth } from '@/firebase';
 
 interface AuthProps {
 	title: string;
@@ -12,6 +11,7 @@ interface AuthProps {
 	children: React.ReactNode;
 	buttonName: string;
 	errorMessage?: string;
+	isLoading: boolean;
 	footer: {
 		description: string;
 		linkName: string;
@@ -26,6 +26,7 @@ const Auth = ({
 	children,
 	buttonName,
 	errorMessage,
+	isLoading,
 	footer,
 	onSubmit,
 }: AuthProps) => {
@@ -41,6 +42,7 @@ const Auth = ({
 					buttonName={buttonName}
 					errorMessage={errorMessage}
 					onSubmit={onSubmit}
+					isLoading={isLoading}
 				>
 					{children}
 				</SmallForm>

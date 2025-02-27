@@ -21,7 +21,7 @@ type FormData = InferType<typeof formSchema>;
 
 const LoginPage = () => {
 	const titleId = useId();
-	const [signInWithEmailAndPassword, , , error] = useSignInWithEmailAndPassword(auth);
+	const [signInWithEmailAndPassword, , isLoading, error] = useSignInWithEmailAndPassword(auth);
 
 	let errorMessage: string | undefined;
 	if (error) {
@@ -53,6 +53,7 @@ const LoginPage = () => {
 				}}
 				onSubmit={handleSubmit(onSubmit)}
 				errorMessage={errorMessage}
+				isLoading={isLoading}
 			>
 				<Controller
 					name="email"
