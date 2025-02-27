@@ -40,11 +40,11 @@ const Auth = ({ title, titleId, children, footer }: AuthProps) => {
 };
 
 interface FormProps {
-	isLoading: boolean;
-	errorMessage: string | undefined;
+	isLoading?: boolean;
+	errorMessage?: string;
 	buttonName: string;
 	children: React.ReactNode;
-	onSubmit: React.FormEventHandler<HTMLFormElement>;
+	onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
 
 const Form = ({ isLoading, errorMessage, buttonName, children, onSubmit }: FormProps) => {
