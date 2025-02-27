@@ -6,8 +6,8 @@ interface SmallFormProps {
 	children: React.ReactNode;
 	buttonName: string;
 	errorMessage?: string;
-	isLoading: boolean;
-	onSubmit: React.FormEventHandler<HTMLFormElement>;
+	isLoading?: boolean;
+	onSubmit?: React.FormEventHandler<HTMLFormElement>;
 	'aria-labelledby'?: string;
 }
 
@@ -15,7 +15,7 @@ const SmallForm = ({
 	children,
 	buttonName,
 	errorMessage,
-	isLoading,
+	isLoading = false,
 	onSubmit,
 	['aria-labelledby']: ariaLabelledby,
 }: SmallFormProps) => {
