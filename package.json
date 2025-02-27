@@ -14,9 +14,11 @@
 		"@fontsource/oswald": "^5.1.1",
 		"@hookform/resolvers": "^4.1.2",
 		"classnames": "^2.5.1",
+		"firebase": "^11.3.1",
 		"material-symbols": "^0.28.2",
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
+		"react-firebase-hooks": "^5.1.1",
 		"react-hook-form": "^7.54.2",
 		"react-router": "^7.2.0",
 		"yup": "^1.6.1"

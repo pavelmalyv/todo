@@ -11,6 +11,7 @@ interface AuthProps {
 	titleId?: string;
 	children: React.ReactNode;
 	buttonName: string;
+	errorMessage?: string;
 	footer: {
 		description: string;
 		linkName: string;
@@ -19,7 +20,15 @@ interface AuthProps {
 	onSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
-const Auth = ({ title, titleId, children, buttonName, footer, onSubmit }: AuthProps) => {
+const Auth = ({
+	title,
+	titleId,
+	children,
+	buttonName,
+	errorMessage,
+	footer,
+	onSubmit,
+}: AuthProps) => {
 	return (
 		<div className={cl.authorization}>
 			<h1 id={titleId} className={classNames('h1', cl.title)}>
@@ -27,7 +36,12 @@ const Auth = ({ title, titleId, children, buttonName, footer, onSubmit }: AuthPr
 			</h1>
 
 			<div className={cl.form}>
-				<SmallForm aria-labelledby={titleId} buttonName={buttonName} onSubmit={onSubmit}>
+				<SmallForm
+					aria-labelledby={titleId}
+					buttonName={buttonName}
+					errorMessage={errorMessage}
+					onSubmit={onSubmit}
+				>
 					{children}
 				</SmallForm>
 			</div>

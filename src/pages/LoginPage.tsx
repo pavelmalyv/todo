@@ -6,9 +6,11 @@ import { useId } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InferType, object } from 'yup';
+import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { REGISTRATION_URL } from '@/consts/routes';
-import { validatePassword } from 'firebase/auth';
+import { auth } from '@/firebase';
 import { emailSchema, passwordSchema } from '@/schemas/fields';
+import { getErrorMessageFirebase } from '@/utils/firebase';
 
 const formSchema = object({
 	email: emailSchema,
@@ -19,6 +21,12 @@ type FormData = InferType<typeof formSchema>;
 
 const LoginPage = () => {
 	const titleId = useId();
+	const [signInWithEmailAndPassword, , , error] = useSignInWithEmailAndPassword(auth);
+
+	let errorMessage: string | undefined;
+	if (error) {
+		errorMessage = getErrorMessageFirebase(error);
+	}
 
 	const { handleSubmit, control } = useForm<FormData>({
 		resolver: yupResolver(formSchema),
@@ -28,8 +36,8 @@ const LoginPage = () => {
 		},
 	});
 
-	const onSubmit: SubmitHandler<FormData> = (data) => {
-		console.log(data);
+	const onSubmit: SubmitHandler<FormData> = async (data) => {
+		await signInWithEmailAndPassword(data.email, data.password);
 	};
 
 	return (
@@ -44,6 +52,7 @@ const LoginPage = () => {
 					linkUrl: REGISTRATION_URL,
 				}}
 				onSubmit={handleSubmit(onSubmit)}
+				errorMessage={errorMessage}
 			>
 				<Controller
 					name="email"
