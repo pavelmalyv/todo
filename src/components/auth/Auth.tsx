@@ -67,14 +67,14 @@ const Form = ({ isLoading, errorMessage, buttonName, children, onSubmit }: FormP
 
 Auth.Form = Form;
 
-interface LoginSocialsProps {
+interface SocialsProps {
 	children: React.ReactNode;
 }
 
-const LoginSocials = ({ children }: LoginSocialsProps) => {
+const Socials = ({ children }: SocialsProps) => {
 	return <div className={cl['login-socials']}>{children}</div>;
 };
 
-Auth.LoginSocials = LoginSocials;
+Auth.Socials = Socials;
 
 export default Auth;

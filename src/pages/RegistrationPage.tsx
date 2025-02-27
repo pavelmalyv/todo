@@ -113,11 +113,11 @@ const RegistrationPage = () => {
 						)}
 					/>
 				</Auth.Form>
-				<Auth.LoginSocials>
+				<Auth.Socials>
 					<AuthSocials>
 						<AuthSocials.Google />
 					</AuthSocials>
-				</Auth.LoginSocials>
+				</Auth.Socials>
 			</Auth>
 		</Book>
 	);

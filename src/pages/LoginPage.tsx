@@ -98,11 +98,11 @@ const LoginPage = () => {
 						)}
 					/>
 				</Auth.Form>
-				<Auth.LoginSocials>
+				<Auth.Socials>
 					<AuthSocials>
 						<AuthSocials.Google isLoading={isLoadingGoogle} onClick={handleClickGoogle} />
 					</AuthSocials>
-				</Auth.LoginSocials>
+				</Auth.Socials>
 			</Auth>
 		</Book>
 	);
