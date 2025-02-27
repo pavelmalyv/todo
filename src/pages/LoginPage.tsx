@@ -1,17 +1,18 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
+import LoginSocials from '@/components/loginSocials/LoginSocials';
+import useSignInGoogleWithNotifications from '@/hooks/useSignInGoogleWithNotifications';
 
 import { useId } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InferType, object } from 'yup';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { REGISTRATION_URL } from '@/consts/routes';
 import { auth } from '@/firebase';
 import { emailSchema, passwordSchema } from '@/schemas/fields';
 import { getErrorMessageFirebase } from '@/utils/firebase';
-import LoginSocials from '@/components/loginSocials/LoginSocials';
+import { REGISTRATION_URL } from '@/consts/routes';
 
 const formSchema = object({
 	email: emailSchema,
@@ -23,6 +24,7 @@ type FormData = InferType<typeof formSchema>;
 const LoginPage = () => {
 	const titleId = useId();
 	const [signInWithEmailAndPassword, , isLoading, error] = useSignInWithEmailAndPassword(auth);
+	const [signInWithGoogle, , isLoadingGoogle] = useSignInGoogleWithNotifications(auth);
 
 	let errorMessage: string | undefined;
 	if (error) {
@@ -39,6 +41,10 @@ const LoginPage = () => {
 
 	const onSubmit: SubmitHandler<FormData> = async (data) => {
 		await signInWithEmailAndPassword(data.email, data.password);
+	};
+
+	const handleClickGoogle = () => {
+		signInWithGoogle();
 	};
 
 	return (
@@ -92,7 +98,7 @@ const LoginPage = () => {
 				</Auth.Form>
 				<Auth.LoginSocials>
 					<LoginSocials>
-						<LoginSocials.Google />
+						<LoginSocials.Google isLoading={isLoadingGoogle} onClick={handleClickGoogle} />
 					</LoginSocials>
 				</Auth.LoginSocials>
 			</Auth>

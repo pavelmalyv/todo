@@ -1,6 +1,6 @@
 import { ERRORS_MESSAGES_FIREBASE } from '@/consts/messages';
 
-const isErrorFirebase = (error: unknown): error is { code: string; message: string } => {
+export const isErrorFirebase = (error: unknown): error is { code: string; message: string } => {
 	return (
 		typeof error === 'object' &&
 		error !== null &&

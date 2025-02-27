@@ -23,6 +23,7 @@ export const ERRORS_MESSAGES_FIREBASE: Record<string, string> = {
 
 export const ERRORS_MESSAGES = {
 	userLoading: 'Ошибка загрузки пользователя, повторите попытку позже',
+	googleAuth: 'Ошибка аутентификации Google, повторите попытку позже',
 };
 
 export const LOADING_MESSAGES = {

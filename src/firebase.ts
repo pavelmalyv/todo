@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyCJh6q_buDIAZpFLdvKujnV25qi1KWnGIM',
-	authDomain: 'todo-25f8d.firebaseapp.com',
-	projectId: 'todo-25f8d',
-	storageBucket: 'todo-25f8d.firebasestorage.app',
-	messagingSenderId: '487510959419',
-	appId: '1:487510959419:web:b21799cf7a5b9981a7031e',
+	apiKey: 'AIzaSyDZgN1UJe6A8hzBTsldzWzw1_-66gn8iJQ',
+	authDomain: 'todo-60a12.firebaseapp.com',
+	projectId: 'todo-60a12',
+	storageBucket: 'todo-60a12.firebasestorage.app',
+	messagingSenderId: '284483277024',
+	appId: '1:284483277024:web:0990458bc810b970900085',
 };
 
 initializeApp(firebaseConfig);

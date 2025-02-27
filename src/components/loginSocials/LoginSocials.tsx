@@ -16,12 +16,13 @@ const LoginSocials = ({ children }: LoginSocialsProps) => {
 
 interface SocialItemProps {
 	isLoading?: boolean;
+	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Google = ({ isLoading = false }: SocialItemProps) => {
+const Google = ({ isLoading = false, onClick }: SocialItemProps) => {
 	return (
 		<li className={cl.item}>
-			<button type="button" className={cl.button} disabled={isLoading}>
+			<button type="button" className={cl.button} disabled={isLoading} onClick={onClick}>
 				<span className={cl['button-body']}>
 					<img
 						src="/img/icons/google.svg"
