@@ -2,6 +2,7 @@ import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
 import useCreateUserFullFields from '@/hooks/useCreateUserFullFields';
+import Checkbox from '@/components/UI/checkbox/Checkbox';
 
 import { useId } from 'react';
 import { InferType, object } from 'yup';
@@ -9,6 +10,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { auth } from '@/firebase';
 import { getErrorMessageFirebase } from '@/utils/firebase';
+import { Link } from 'react-router';
 import {
 	emailSchema,
 	getPasswordRepeatSchema,
@@ -123,6 +125,17 @@ const RegistrationPage = () => {
 							errorMessage={fieldState.error?.message}
 						/>
 					)}
+				/>
+
+				<Checkbox
+					label={
+						<>
+							Я принимаю{' '}
+							<Link className="link" to="#">
+								политику конфиденциальности
+							</Link>
+						</>
+					}
 				/>
 			</Auth>
 		</Book>

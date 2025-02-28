@@ -1,0 +1,68 @@
+@use '@styles/utils';
+
+.wrapper {
+	&_center {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+}
+
+.label {
+	display: flex;
+	align-items: flex-start;
+	column-gap: 8px;
+}
+
+.field {
+	@include utils.visually-hidden;
+}
+
+.emulator {
+	--background-color: transparent;
+	--border-color: rgb(var(--color-border-primary));
+
+	@include utils.base-animation(background-color, border-color);
+	@include utils.square(24px);
+
+	position: relative;
+	border: 1px solid var(--border-color);
+	background-color: var(--background-color);
+	border-radius: 4px;
+	flex-shrink: 0;
+
+	&-marker {
+		@include utils.base-animation(opacity);
+
+		display: flex;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+		font-size: 17px;
+		opacity: 0;
+	}
+}
+
+.field:checked + .emulator .emulator-marker {
+	opacity: 1;
+}
+
+.field[aria-invalid='true'] + .emulator {
+	--border-color: rgb(var(--color-error));
+}
+
+.field:focus + .emulator {
+	--border-color: rgb(var(--color-accent-primary));
+	--background-color: rgba(var(--color-background-tertiary-light));
+}
+
+[data-theme='dark'] .field:focus + .emulator {
+	--background-color: rgba(var(--color-background-secondary));
+}
+
+.description {
+	margin: auto 0;
+	font-size: 14px;
+	color: rgb(var(--color-text-secondary));
+}
