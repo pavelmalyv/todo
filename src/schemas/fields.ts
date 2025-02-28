@@ -1,6 +1,9 @@
 import { MESSAGES_FIELD } from '@/consts/messages';
-import { string, ref } from 'yup';
+import { string, ref, boolean } from 'yup';
 
+export const policySchema = boolean()
+	.oneOf([true], MESSAGES_FIELD.policyCheckbox)
+	.required(MESSAGES_FIELD.policyRequired);
 export const emailSchema = string().email().required(MESSAGES_FIELD.emailRequired);
 export const passwordSchema = string().required(MESSAGES_FIELD.passwordRequired);
 export const passwordCreateSchema = string()
@@ -10,6 +13,7 @@ export const passwordCreateSchema = string()
 	.matches(/[a-z]/, MESSAGES_FIELD.passwordLowerCase)
 	.matches(/[0-9]/, MESSAGES_FIELD.passwordNumber)
 	.required(MESSAGES_FIELD.passwordRequired);
+
 export const nameSchema = string()
 	.required(MESSAGES_FIELD.nameRequired)
 	.max(4096, MESSAGES_FIELD.nameMax(4096));

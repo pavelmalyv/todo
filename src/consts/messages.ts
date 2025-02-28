@@ -11,6 +11,8 @@ export const MESSAGES_FIELD = {
 	nameMax: (max: number) => `Максимальная длина имени ${max} символов`,
 	passwordRepeatRequired: 'Введите пароль еще раз',
 	passwordRepeatIncorrect: 'Пароли не совпадают',
+	policyRequired: 'Для продолжения примите политику конфиденциальности',
+	policyCheckbox: 'Для продолжения примите политику конфиденциальности',
 };
 
 export const ERRORS_MESSAGES_FIREBASE: Record<string, string> = {

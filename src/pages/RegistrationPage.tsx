@@ -16,6 +16,7 @@ import {
 	getPasswordRepeatSchema,
 	nameSchema,
 	passwordCreateSchema,
+	policySchema,
 } from '@/schemas/fields';
 
 import { LOGIN_URL } from '@/consts/routes';
@@ -25,6 +26,7 @@ const formSchema = object({
 	email: emailSchema,
 	password: passwordCreateSchema,
 	passwordRepeat: getPasswordRepeatSchema('password'),
+	policy: policySchema,
 });
 
 type FormData = InferType<typeof formSchema>;
@@ -40,6 +42,7 @@ const RegistrationPage = () => {
 			email: '',
 			password: '',
 			passwordRepeat: '',
+			policy: false,
 		},
 	});
 
@@ -127,15 +130,29 @@ const RegistrationPage = () => {
 					)}
 				/>
 
-				<Checkbox
-					label={
-						<>
-							Я принимаю{' '}
-							<Link className="link" to="#">
-								политику конфиденциальности
-							</Link>
-						</>
-					}
+				<Controller
+					name="policy"
+					control={control}
+					render={({ field, fieldState }) => {
+						const labelPolicy = (
+							<>
+								Я принимаю{' '}
+								<Link className="link" to="#">
+									политику конфиденциальности
+								</Link>
+							</>
+						);
+
+						return (
+							<Checkbox
+								label={labelPolicy}
+								{...field}
+								aria-required={true}
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+							/>
+						);
+					}}
 				/>
 			</Auth>
 		</Book>
