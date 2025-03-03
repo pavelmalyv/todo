@@ -7,9 +7,9 @@ import { store } from './store/store.ts';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import './consts/yupLocales.ts';
 
-import '@fontsource/noto-sans/300.css';
-import '@fontsource/noto-sans/400.css';
-import '@fontsource/noto-sans/700.css';
+import '@fontsource/inter/300.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/700.css';
 
 import '@fontsource/oswald/400.css';
 import '@fontsource/oswald/600.css';
