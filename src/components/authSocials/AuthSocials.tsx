@@ -1,4 +1,5 @@
 import type { CredentialResponse } from '@react-oauth/google';
+import type { GoogleIdTokenSchema } from '@/types/auth';
 
 import cl from './AuthSocials.module.scss';
 import useDelayedLoader from '@/hooks/useDelayedLoader';
@@ -7,18 +8,41 @@ import RegistrationModal from '../Modals/RegistrationModal/RegistrationModal';
 
 import { auth } from '@/firebase';
 import { showError } from '@/utils/notification';
-import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
+import { googleIdTokenSchema } from '@/schemas/auth';
 import { GoogleLogin } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
-import { googleIdTokenSchema } from '@/schemas/auth';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router';
+import { Controller, useForm } from 'react-hook-form';
+import { InferType, object } from 'yup';
+import { policySchema } from '@/schemas/fields';
+import { yupResolver } from '@hookform/resolvers/yup';
+import {
+	fetchSignInMethodsForEmail,
+	GoogleAuthProvider,
+	signInWithCredential,
+} from 'firebase/auth';
+
 import { ERRORS_MESSAGES } from '@/consts/messages';
 
+const registrationFormSchema = object({
+	policy: policySchema,
+});
+
+type RegistrationFormData = InferType<typeof registrationFormSchema>;
+
 const AuthSocials = () => {
-	const [isOpenPolicy, setIsOpenPolicy] = useState(false);
+	const [isOpenRegistrationComplete, setIsOpenRegistrationComplete] = useState(false);
 	const [isLoadingAuth, setIsLoadingAuth] = useState(false);
 	const isLoadingAuthDelayed = useDelayedLoader(isLoadingAuth);
+	const idTokenRef = useRef<string | null>(null);
+
+	const { control, handleSubmit } = useForm<RegistrationFormData>({
+		resolver: yupResolver(registrationFormSchema),
+		defaultValues: {
+			policy: false,
+		},
+	});
 
 	const handleGoogleAuthError = (error?: unknown) => {
 		showError(ERRORS_MESSAGES.googleAuth, error);
@@ -45,19 +69,35 @@ const AuthSocials = () => {
 		}
 
 		const idTokenDecoded = jwtDecode(idToken);
+		let userLoginInfo: GoogleIdTokenSchema | undefined;
 
 		try {
-			await googleIdTokenSchema.validate(idTokenDecoded);
+			userLoginInfo = await googleIdTokenSchema.validate(idTokenDecoded);
 		} catch (error) {
 			console.error(error);
 			handleGoogleAuthError();
 			return;
 		}
 
-		await authWithCredential(idToken);
+		const signInMethods = await fetchSignInMethodsForEmail(auth, userLoginInfo.email);
+		if (signInMethods.length > 0) {
+			await authWithCredential(idToken);
+			return;
+		}
+
+		idTokenRef.current = idToken;
+		setIsOpenRegistrationComplete(true);
 	};
 
-	const registrationCompleteHandle = () => {};
+	const registrationCompleteHandle = async () => {
+		const idToken = idTokenRef.current;
+		if (!idToken) {
+			handleGoogleAuthError();
+			return;
+		}
+
+		await authWithCredential(idToken);
+	};
 
 	return (
 		<>
@@ -79,21 +119,34 @@ const AuthSocials = () => {
 
 			<RegistrationModal
 				title="Завершение регистрации"
-				isOpen={isOpenPolicy}
-				onClose={() => setIsOpenPolicy(false)}
-				onSubmit={() => registrationCompleteHandle}
+				isLoading={isLoadingAuthDelayed}
+				isOpen={isOpenRegistrationComplete}
+				onClose={() => setIsOpenRegistrationComplete(false)}
+				onSubmit={handleSubmit(registrationCompleteHandle)}
 			>
-				<Checkbox
-					label={
-						<>
-							Я принимаю{' '}
-							<Link className="link" to="#">
-								политику
-								<br /> конфиденциальности
-							</Link>
-						</>
-					}
-					aria-required={true}
+				<Controller
+					name="policy"
+					control={control}
+					render={({ field, fieldState }) => {
+						const policyLabel = (
+							<>
+								Я принимаю{' '}
+								<Link className="link" to="#">
+									политику конфиденциальности
+								</Link>
+							</>
+						);
+
+						return (
+							<Checkbox
+								label={policyLabel}
+								{...field}
+								aria-required={true}
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+							/>
+						);
+					}}
 				/>
 			</RegistrationModal>
 		</>
