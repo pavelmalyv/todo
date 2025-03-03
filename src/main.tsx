@@ -4,6 +4,7 @@ import { createRoot } from 'react-dom/client';
 import { ToastContainer } from 'react-toastify';
 import { Provider } from 'react-redux';
 import { store } from './store/store.ts';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import './consts/yupLocales.ts';
 
 import '@fontsource/noto-sans/300.css';
@@ -20,8 +21,10 @@ import 'material-symbols';
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<Provider store={store}>
-			<App />
-			<ToastContainer />
+			<GoogleOAuthProvider clientId="907643870031-5e8fd0slg9t64ci5ktjfhqbf5e3ngpjf.apps.googleusercontent.com">
+				<App />
+				<ToastContainer />
+			</GoogleOAuthProvider>
 		</Provider>
 	</StrictMode>,
 );

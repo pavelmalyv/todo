@@ -22,66 +22,27 @@
 	}
 }
 
-.list {
+.google {
 	display: flex;
 	justify-content: center;
-	flex-wrap: wrap;
-	gap: 10px 16px;
 }
 
-.button {
-	--background-color: rgb(var(--color-background-fifth));
-
-	@include utils.base-animation(background-color);
-
+.google-wrapper {
 	position: relative;
-	min-height: 27px;
-	min-width: 118px;
-	padding: 4px 16px;
-	background-color: var(--background-color);
-	border-radius: 8px;
-	overflow: hidden;
+	display: inline-flex;
+}
 
-	&:not(:disabled) {
-		@include utils.hover {
-			--background-color: rgb(var(--color-accent-quaternary));
-		}
-	}
+.loader {
+	@include utils.flex-center(true);
 
-	&-body {
-		position: relative;
-		z-index: 0;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		column-gap: 8px;
-	}
-
-	&-icon {
-		width: 13px;
-	}
-
-	&-spinner-wrapper {
-		@include utils.base-animation(opacity, visibility);
-		@include utils.flex-center;
-
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: 100;
-		background-color: rgba(var(--color-background-fifth), 0.8);
-		opacity: 0;
-		visibility: hidden;
-
-		&_visible {
-			opacity: 1;
-			visibility: visible;
-		}
-	}
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(var(--color-background-primary), 0.6);
 
 	&-spinner {
-		@include spinner.base(16px);
+		@include spinner.base(18px);
 	}
 }

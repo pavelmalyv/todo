@@ -1,66 +1,72 @@
-import classNames from 'classnames';
+import type { CredentialResponse } from '@react-oauth/google';
+
 import cl from './AuthSocials.module.scss';
+import useDelayedLoader from '@/hooks/useDelayedLoader';
 
 import { auth } from '@/firebase';
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
-import { useEffect } from 'react';
-import { isErrorFirebase } from '@/utils/firebase';
 import { showError } from '@/utils/notification';
+import { GoogleAuthProvider, signInWithCredential } from 'firebase/auth';
+import { GoogleLogin } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
+import { googleIdTokenSchema } from '@/schemas/auth';
+import { useState } from 'react';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 
-const USER_CANCELLED_CODES = ['auth/popup-closed-by-user', 'auth/user-cancelled'];
-
 const AuthSocials = () => {
-	const [signInWithGoogle, , isLoading, error] = useSignInWithGoogle(auth);
+	const [isLoadingAuth, setIsLoadingAuth] = useState(false);
+	const isLoadingAuthDelayed = useDelayedLoader(isLoadingAuth);
 
-	useEffect(() => {
-		if (!error) {
-			return;
-		}
-
-		if (isErrorFirebase(error) && USER_CANCELLED_CODES.includes(error.code)) {
-			return;
-		}
-
+	const handleGoogleAuthError = (error?: unknown) => {
 		showError(ERRORS_MESSAGES.googleAuth, error);
-	}, [error]);
+	};
 
-	const handleClickGoogle = async () => {
-		await signInWithGoogle();
+	const authWithCredential = async (idToken: string) => {
+		const credential = GoogleAuthProvider.credential(idToken);
+
+		try {
+			setIsLoadingAuth(true);
+			await signInWithCredential(auth, credential);
+		} catch (error) {
+			handleGoogleAuthError(error);
+		} finally {
+			setIsLoadingAuth(false);
+		}
+	};
+
+	const successGoogleLoginHandle = async (credentialResponse: CredentialResponse) => {
+		const idToken = credentialResponse.credential;
+		if (!idToken) {
+			handleGoogleAuthError();
+			return;
+		}
+
+		const idTokenDecoded = jwtDecode(idToken);
+
+		try {
+			await googleIdTokenSchema.validate(idTokenDecoded);
+		} catch (error) {
+			console.error(error);
+			handleGoogleAuthError();
+			return;
+		}
+
+		await authWithCredential(idToken);
 	};
 
 	return (
 		<div className={cl['login-socials']}>
 			<div className={cl.label}>или</div>
-			<ul className={cl.list}>
-				<li className={cl.item}>
-					<button
-						type="button"
-						className={cl.button}
-						disabled={isLoading}
-						onClick={handleClickGoogle}
-					>
-						<span className={cl['button-body']}>
-							<img
-								src="/img/icons/google.svg"
-								className={cl['button-icon']}
-								width={24}
-								height={24}
-								alt=""
-							/>
-							<span>Google</span>
-						</span>
 
-						<span
-							className={classNames(cl['button-spinner-wrapper'], {
-								[cl['button-spinner-wrapper_visible']]: isLoading,
-							})}
-						>
-							<span className={cl['button-spinner']}></span>
-						</span>
-					</button>
-				</li>
-			</ul>
+			<div className={cl.google}>
+				<div className={cl['google-wrapper']}>
+					<GoogleLogin onSuccess={successGoogleLoginHandle} onError={handleGoogleAuthError} />
+					{isLoadingAuthDelayed && (
+						<div className={cl.loader}>
+							<div className={cl['loader-spinner']}></div>
+						</div>
+					)}
+				</div>
+			</div>
 		</div>
 	);
 };
