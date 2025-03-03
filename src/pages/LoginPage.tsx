@@ -43,6 +43,7 @@ const LoginPage = () => {
 	return (
 		<Book aria-labelledby={titleId}>
 			<Auth
+				type="signin"
 				title="Вход"
 				titleId={titleId}
 				isLoading={isLoading}

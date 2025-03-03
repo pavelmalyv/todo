@@ -6,6 +6,7 @@ import AuthSocials from '../authSocials/AuthSocials';
 import { Link } from 'react-router';
 
 interface AuthProps {
+	type?: 'signin' | 'signup';
 	title: string;
 	titleId?: string;
 	children: React.ReactNode;
@@ -21,6 +22,7 @@ interface AuthProps {
 }
 
 const Auth = ({
+	type,
 	title,
 	titleId,
 	children,
@@ -49,7 +51,7 @@ const Auth = ({
 			</div>
 
 			<div className={cl['login-socials']}>
-				<AuthSocials />
+				<AuthSocials type={type} />
 			</div>
 
 			<div className={cl.registration}>

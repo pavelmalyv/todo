@@ -58,6 +58,7 @@ const RegistrationPage = () => {
 	return (
 		<Book aria-labelledby={titleId}>
 			<Auth
+				type="signup"
 				title="Регистрация"
 				titleId={titleId}
 				buttonName="Зарегистрироваться"

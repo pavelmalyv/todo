@@ -31,7 +31,11 @@ const registrationFormSchema = object({
 
 type RegistrationFormData = InferType<typeof registrationFormSchema>;
 
-const AuthSocials = () => {
+interface AuthSocialsProps {
+	type?: 'signin' | 'signup';
+}
+
+const AuthSocials = ({ type }: AuthSocialsProps) => {
 	const [isOpenRegistrationComplete, setIsOpenRegistrationComplete] = useState(false);
 	const [isLoadingAuth, setIsLoadingAuth] = useState(false);
 	const isLoadingAuthDelayed = useDelayedLoader(isLoadingAuth);
@@ -99,6 +103,16 @@ const AuthSocials = () => {
 		await authWithCredential(idToken);
 	};
 
+	let googleLoginText: 'signin_with' | 'signup_with' | 'continue_with';
+
+	if (type === 'signin') {
+		googleLoginText = 'signin_with';
+	} else if (type === 'signup') {
+		googleLoginText = 'signup_with';
+	} else {
+		googleLoginText = 'continue_with';
+	}
+
 	return (
 		<>
 			<div className={cl['login-socials']}>
@@ -106,7 +120,11 @@ const AuthSocials = () => {
 
 				<div className={cl.google}>
 					<div className={cl['google-wrapper']}>
-						<GoogleLogin onSuccess={successGoogleLoginHandle} onError={handleGoogleAuthError} />
+						<GoogleLogin
+							onSuccess={successGoogleLoginHandle}
+							onError={handleGoogleAuthError}
+							text={googleLoginText}
+						/>
 
 						{isLoadingAuthDelayed && (
 							<div className={cl.loader}>
