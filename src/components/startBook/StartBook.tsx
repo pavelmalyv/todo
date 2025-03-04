@@ -23,11 +23,10 @@ const StartBook = ({ titleId }: StartBookProps) => {
 					в организации и расстановке приоритетов в их повседневных делах и обязанностях.
 				</p>
 			</div>
-			<div className={cl.button}>
-				<ButtonLink to={LOGIN_URL} isFull={true}>
-					Начать
-				</ButtonLink>
-			</div>
+
+			<ButtonLink className={cl.button} to={LOGIN_URL} isFull={true}>
+				Начать
+			</ButtonLink>
 		</div>
 	);
 };
