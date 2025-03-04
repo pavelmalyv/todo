@@ -1,9 +1,10 @@
 import Profile from '@/components/profile/Profile';
+import Section from '@/components/UI/section/Section';
 
 const UpcomingPage = () => {
 	return (
-		<Profile title="Upcoming" quantity={999}>
-			Page
+		<Profile title="Предстоящие" quantity={999}>
+			<Section title="Сегодня"> </Section>
 		</Profile>
 	);
 };

@@ -1,0 +1,19 @@
+.section {
+	&:not(:first-child) {
+		padding-top: var(--padding-section-y);
+	}
+
+	&:not(:last-child) {
+		padding-bottom: var(--padding-section-y);
+	}
+}
+
+.body {
+	padding: 13px 42px 70px;
+	border: 1px solid rgb(var(--color-border-primary));
+	border-radius: 30px;
+}
+
+.title {
+	margin-bottom: 12px;
+}
