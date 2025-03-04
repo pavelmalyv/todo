@@ -1,6 +1,7 @@
 import type { CredentialResponse } from '@react-oauth/google';
 import type { GoogleIdTokenSchema } from '@/types/auth';
 
+import classNames from 'classnames';
 import cl from './AuthSocials.module.scss';
 import useDelayedLoader from '@/hooks/useDelayedLoader';
 import Checkbox from '../UI/checkbox/Checkbox';
@@ -33,9 +34,10 @@ type RegistrationFormData = InferType<typeof registrationFormSchema>;
 
 interface AuthSocialsProps {
 	type?: 'signin' | 'signup';
+	className?: string;
 }
 
-const AuthSocials = ({ type }: AuthSocialsProps) => {
+const AuthSocials = ({ type, className }: AuthSocialsProps) => {
 	const [isOpenRegistrationComplete, setIsOpenRegistrationComplete] = useState(false);
 	const [isLoadingAuth, setIsLoadingAuth] = useState(false);
 	const isLoadingAuthDelayed = useDelayedLoader(isLoadingAuth);
@@ -115,7 +117,7 @@ const AuthSocials = ({ type }: AuthSocialsProps) => {
 
 	return (
 		<>
-			<div className={cl['login-socials']}>
+			<div className={classNames(cl['login-socials'], className)}>
 				<div className={cl.label}>или</div>
 
 				<div className={cl.google}>

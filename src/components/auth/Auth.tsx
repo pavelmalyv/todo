@@ -49,9 +49,7 @@ const Auth = ({
 				{children}
 			</SmallForm>
 
-			<div className={cl['login-socials']}>
-				<AuthSocials type={type} />
-			</div>
+			<AuthSocials className={cl['login-socials']} type={type} />
 
 			<div className={cl.registration}>
 				{footer.description}{' '}
