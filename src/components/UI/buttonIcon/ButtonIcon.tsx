@@ -1,9 +1,11 @@
-import Icon from '../icon/Icon';
+import classNames from 'classnames';
 import cl from './ButtonIcon.module.scss';
+import Icon from '../icon/Icon';
 
 interface ButtonIconProps {
 	children: React.ReactNode;
 	hiddenName: string;
+	size?: 'medium' | 'large';
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	['aria-pressed']?: boolean | 'mixed';
 	['aria-controls']?: string;
@@ -11,6 +13,7 @@ interface ButtonIconProps {
 const ButtonIcon = ({
 	children,
 	hiddenName,
+	size = 'medium',
 	onClick,
 	['aria-pressed']: ariaPressed,
 	['aria-controls']: ariaControls,
@@ -18,7 +21,7 @@ const ButtonIcon = ({
 	return (
 		<button
 			type="button"
-			className={cl.button}
+			className={classNames(cl.button, cl[`button_${size}`])}
 			onClick={onClick}
 			aria-pressed={ariaPressed}
 			aria-controls={ariaControls}

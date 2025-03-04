@@ -11,4 +11,10 @@
 	@include utils.hover {
 		color: rgb(var(--color-text-primary));
 	}
+
+	&_large {
+		@include utils.square(44px);
+
+		font-size: 24px;
+	}
 }
