@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import AppModal from '../UI/appModal/AppModal';
 import Icon from '../UI/icon/Icon';
+import TagMarker from '../UI/tagMarker/TagMarker';
 
 import { Link, NavLink } from 'react-router';
 import { useEffect, useId, useRef, useState } from 'react';
@@ -64,18 +65,22 @@ const Aside = ({ isModal = false, onClose }: AsideProps) => {
 						<ul className={cl['tags-list']}>
 							<li className={cl['tags-item']}>
 								<NavLink className={cl['tags-link']} to={'/'}>
-									<span className={cl['tags-marker']} style={{ backgroundColor: '#FF0000' }}></span>
+									<TagMarker color="#FF0000" />
+
 									<span className={cl['tags-name']}>Работа</span>
 								</NavLink>
 							</li>
 							<li className={cl['tags-item']}>
 								<NavLink className={cl['tags-link']} to={'other/'}>
-									<span className={cl['tags-marker']} style={{ backgroundColor: '#FF0000' }}></span>
+									<TagMarker color="#FF0000" />
+
 									<span className={cl['tags-name']}>Личное</span>
 								</NavLink>
 							</li>
 							<li className={cl['tags-item']}>
 								<NavLink className={cl['tags-link']} to={'other/'}>
+									<TagMarker color="#FF0000" />
+
 									<span className={cl['tags-name']}>
 										В частности, разбавленное изрядной долей эмпатии, рациональное мышление не
 										оставляет шанса для вывода текущих активов
