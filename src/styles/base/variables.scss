@@ -4,6 +4,7 @@
 	--container-width: 1185px;
 	--container-padding-x: 30px;
 	--section-padding-y: 57px;
+	--border-radius: 50px;
 
 	// font
 
@@ -15,11 +16,13 @@
 	--color-text-primary: 0, 0, 0;
 	--color-text-secondary: 76, 76, 76;
 	--color-text-tertiary: 102, 100, 100;
+	--color-text-quaternary: 67, 67, 67;
 	--color-background-primary: 255, 255, 255;
 	--color-background-secondary: 244, 244, 244;
 	--color-background-tertiary: 255, 249, 249;
 	--color-background-quaternary: 196, 196, 196;
 	--color-background-fifth: 235, 235, 235;
+	--color-background-sixth: 239, 239, 239;
 	--color-accent-primary: 118, 222, 55;
 	--color-accent-secondary: 131, 246, 61;
 	--color-accent-tertiary: 245, 255, 240;
@@ -27,10 +30,13 @@
 	--color-border-primary: 153, 153, 153;
 	--color-border-secondary: 0, 0, 0;
 	--color-error: 213, 0, 0;
+	--color-delete-primary: 200, 0, 0;
+	--color-delete-secondary: 255, 0, 0;
 	--color-overlay-primary: 0, 0, 0;
 
 	@include utils.mobile-l {
 		--container-padding-x: 16px;
 		--section-padding-y: 30px;
+		--border-radius: 30px;
 	}
 }

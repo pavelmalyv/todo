@@ -11,7 +11,7 @@ import { LOGIN_URL, REGISTRATION_URL } from '@/consts/routes';
 const HomePage = lazy(() => import('@/pages/HomePage'));
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
 const UpcomingPage = lazy(() => import('@/pages/UpcomingPage'));
-const RegistrationPage = lazy(() => import('../../pages/RegistrationPage'));
+const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'));
 
 const AppRouter = () => {
 	const [user, isLoading] = useAuthWitchNotifications(auth);
@@ -31,6 +31,7 @@ const AppRouter = () => {
 					</Suspense>
 				}
 			/>
+
 			<Route path="*" element={<Navigate to={'/'} />} />
 		</>
 	);
