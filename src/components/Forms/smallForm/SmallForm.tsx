@@ -37,9 +37,7 @@ const SmallForm = ({
 				</Button>
 			</fieldset>
 
-			<div className={cl.error}>
-				<ErrorMessage message={errorMessage} />
-			</div>
+			<ErrorMessage className={cl.error} message={errorMessage} />
 		</form>
 	);
 };
