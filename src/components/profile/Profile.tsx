@@ -90,18 +90,18 @@ const Aside = ({ isModal = false, onClose }: AsideProps) => {
 							</li>
 						</ul>
 					</nav>
-					<div className={cl['button-add']}>
-						<ButtonIconText icon="add_circle" size="small">
-							Добавить тег
-						</ButtonIconText>
-					</div>
+
+					<ButtonIconText className={cl['button-add']} icon="add_circle" size="small">
+						Добавить тег
+					</ButtonIconText>
 				</div>
 			</div>
 
 			<div className={cl.bottom}>
-				<div className={cl.exit}>
-					<ButtonIconText icon="exit_to_app">Sign Out</ButtonIconText>
-				</div>
+				<ButtonIconText className={cl.exit} icon="exit_to_app">
+					Sign Out
+				</ButtonIconText>
+
 				<nav className={cl['small-menu']}>
 					<ul className={cl['small-menu-list']}>
 						<li className={cl['small-menu-item']}>
