@@ -6,6 +6,7 @@ interface ButtonIconProps {
 	children: React.ReactNode;
 	hiddenName: string;
 	size?: 'medium' | 'large';
+	className?: string;
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
 	['aria-pressed']?: boolean | 'mixed';
 	['aria-controls']?: string;
@@ -14,6 +15,7 @@ const ButtonIcon = ({
 	children,
 	hiddenName,
 	size = 'medium',
+	className,
 	onClick,
 	['aria-pressed']: ariaPressed,
 	['aria-controls']: ariaControls,
@@ -21,7 +23,7 @@ const ButtonIcon = ({
 	return (
 		<button
 			type="button"
-			className={classNames(cl.button, cl[`button_${size}`])}
+			className={classNames(cl.button, cl[`button_${size}`], className)}
 			onClick={onClick}
 			aria-pressed={ariaPressed}
 			aria-controls={ariaControls}

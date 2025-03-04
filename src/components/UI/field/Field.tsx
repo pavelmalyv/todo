@@ -78,16 +78,15 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 						aria-required={ariaRequired}
 					/>
 					{isProtected && (
-						<div className={cl.button}>
-							<ButtonIcon
-								hiddenName={'Показать пароль'}
-								onClick={() => setIsProtectedState((prev) => !prev)}
-								aria-pressed={!isProtectedState}
-								aria-controls={fieldId}
-							>
-								{isProtectedState ? 'visibility' : 'visibility_off'}
-							</ButtonIcon>
-						</div>
+						<ButtonIcon
+							hiddenName={'Показать пароль'}
+							onClick={() => setIsProtectedState((prev) => !prev)}
+							aria-pressed={!isProtectedState}
+							aria-controls={fieldId}
+							className={cl.button}
+						>
+							{isProtectedState ? 'visibility' : 'visibility_off'}
+						</ButtonIcon>
 					)}
 				</div>
 				<FieldError id={errorMessageId} message={errorMessage ? errorMessage : null} />
