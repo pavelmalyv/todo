@@ -1,12 +1,14 @@
-import Button from '@/components/UI/button/Button';
+import classNames from 'classnames';
 import cl from './SmallForm.module.scss';
 import ErrorMessage from '@/components/UI/errorMessage/ErrorMessage';
+import Button from '@/components/UI/button/Button';
 
 interface SmallFormProps {
 	children: React.ReactNode;
 	buttonName: string;
 	errorMessage?: string;
 	isLoading?: boolean;
+	className?: string;
 	onSubmit?: React.FormEventHandler<HTMLFormElement>;
 	'aria-labelledby'?: string;
 }
@@ -16,11 +18,17 @@ const SmallForm = ({
 	buttonName,
 	errorMessage,
 	isLoading = false,
+	className,
 	onSubmit,
 	['aria-labelledby']: ariaLabelledby,
 }: SmallFormProps) => {
 	return (
-		<form className={cl.form} aria-labelledby={ariaLabelledby} onSubmit={onSubmit} noValidate>
+		<form
+			className={classNames(cl.form, className)}
+			aria-labelledby={ariaLabelledby}
+			onSubmit={onSubmit}
+			noValidate
+		>
 			<fieldset disabled={isLoading}>
 				<div className={cl.fields}>{children}</div>
 

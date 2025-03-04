@@ -38,17 +38,16 @@ const Auth = ({
 				{title}
 			</h1>
 
-			<div className={cl.form}>
-				<SmallForm
-					aria-labelledby={titleId}
-					buttonName={buttonName}
-					errorMessage={errorMessage}
-					onSubmit={onSubmit}
-					isLoading={isLoading}
-				>
-					{children}
-				</SmallForm>
-			</div>
+			<SmallForm
+				aria-labelledby={titleId}
+				buttonName={buttonName}
+				errorMessage={errorMessage}
+				isLoading={isLoading}
+				className={cl.form}
+				onSubmit={onSubmit}
+			>
+				{children}
+			</SmallForm>
 
 			<div className={cl['login-socials']}>
 				<AuthSocials type={type} />
