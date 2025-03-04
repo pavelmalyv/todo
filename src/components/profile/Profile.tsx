@@ -38,9 +38,8 @@ const Aside = ({ isModal = false, onClose }: AsideProps) => {
 							<li className={cl['menu-item']}>
 								<NavLink className={cl['menu-link']} to={'/'}>
 									<div className={cl['menu-name']}>
-										<span className={cl['menu-icon']}>
-											<Icon>double_arrow</Icon>
-										</span>
+										<Icon className={cl['menu-icon']}>double_arrow</Icon>
+
 										<span>Предстоящие</span>
 									</div>
 									<div className={cl['menu-quantity']}>00+</div>
@@ -49,9 +48,8 @@ const Aside = ({ isModal = false, onClose }: AsideProps) => {
 							<li className={cl['menu-item']}>
 								<NavLink className={cl['menu-link']} to={'other/'}>
 									<div className={cl['menu-name']}>
-										<span className={cl['menu-icon']}>
-											<Icon>list</Icon>
-										</span>
+										<Icon className={cl['menu-icon']}>list</Icon>
+
 										<span>Сегодня</span>
 									</div>
 									<div className={cl['menu-quantity']}>1</div>

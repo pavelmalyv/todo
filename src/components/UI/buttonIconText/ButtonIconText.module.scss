@@ -31,7 +31,6 @@
 .icon {
 	@include utils.base-animation(color);
 
-	display: flex;
 	font-size: 15px;
 	color: var(--color-icon);
 }

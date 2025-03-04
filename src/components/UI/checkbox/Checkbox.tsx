@@ -55,9 +55,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 						aria-required={ariaRequired}
 					/>
 					<span className={cl.emulator}>
-						<span className={cl['emulator-marker']}>
-							<Icon>check</Icon>
-						</span>
+						<Icon className={cl['emulator-marker']}>check</Icon>
 					</span>
 					<span className={cl.description}>{label}</span>
 				</label>

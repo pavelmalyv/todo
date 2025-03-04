@@ -23,9 +23,7 @@ const ButtonIconText = ({
 			className={classNames(cl.button, cl[`button_${size}`], className)}
 			onClick={onClick}
 		>
-			<span className={cl.icon}>
-				<Icon>{icon}</Icon>
-			</span>
+			<Icon className={cl.icon}>{icon}</Icon>
 
 			{children}
 		</button>
