@@ -1,5 +1,6 @@
 import cl from './Profile.module.scss';
 import classNames from 'classnames';
+import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
 import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import AppModal from '../UI/appModal/AppModal';
 import Icon from '../UI/icon/Icon';
@@ -89,12 +90,18 @@ const Aside = ({ isModal = false, onClose }: AsideProps) => {
 							</li>
 						</ul>
 					</nav>
-					<div className={cl['button-add']}></div>
+					<div className={cl['button-add']}>
+						<ButtonIconText icon="add_circle" size="small">
+							Добавить тег
+						</ButtonIconText>
+					</div>
 				</div>
 			</div>
 
 			<div className={cl.bottom}>
-				<div className={cl.exit}></div>
+				<div className={cl.exit}>
+					<ButtonIconText icon="exit_to_app">Sign Out</ButtonIconText>
+				</div>
 				<nav className={cl['small-menu']}>
 					<ul className={cl['small-menu-list']}>
 						<li className={cl['small-menu-item']}>

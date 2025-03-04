@@ -1,0 +1,37 @@
+@use '@styles/utils';
+
+.button {
+	--color: rgb(var(--color-text-quaternary));
+	--opacity-icon: 1;
+	--color-icon: rgba(var(--color-text-quaternary), var(--opacity-icon));
+
+	@include utils.base-animation(color);
+
+	display: flex;
+	align-items: center;
+	column-gap: 18px;
+	font-weight: 300;
+	font-size: 20px;
+	padding: 5px 0;
+	color: var(--color);
+
+	@include utils.hover {
+		--color: rgb(var(--color-text-primary));
+		--color-icon: rgba(var(--color-text-primary), var(--opacity-icon));
+	}
+
+	&_small {
+		--opacity-icon: 0.7;
+
+		column-gap: 11px;
+		font-size: 14px;
+	}
+}
+
+.icon {
+	@include utils.base-animation(color);
+
+	display: flex;
+	font-size: 15px;
+	color: var(--color-icon);
+}
