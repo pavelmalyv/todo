@@ -1,5 +1,5 @@
 import Root from '@/pages/Root';
-import useAuthWitchNotifications from '@/hooks/useAuthWitchNotifications';
+import useUserState from '@/hooks/useUserState';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
 import useDelayedLoader from '@/hooks/useDelayedLoader';
 
@@ -14,7 +14,7 @@ const UpcomingPage = lazy(() => import('@/pages/UpcomingPage'));
 const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'));
 
 const AppRouter = () => {
-	const [user, isLoading] = useAuthWitchNotifications(auth);
+	const [user, isLoading] = useUserState(auth);
 	const isDelayedLoading = useDelayedLoader(isLoading);
 
 	if (isDelayedLoading) {

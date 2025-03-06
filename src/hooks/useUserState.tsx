@@ -7,7 +7,7 @@ import { useAppSelector } from '@/store/hooks';
 import { selectProfileComplete } from '@/store/authSlice';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 
-const useAuthWitchNotifications = (auth: Auth) => {
+const useUserState = (auth: Auth) => {
 	const [userAuth, isLoadingAuth, error] = useAuthState(auth);
 	const isProfileComplete = useAppSelector(selectProfileComplete);
 
@@ -25,4 +25,4 @@ const useAuthWitchNotifications = (auth: Auth) => {
 	return [user, isLoading] as const;
 };
 
-export default useAuthWitchNotifications;
+export default useUserState;
