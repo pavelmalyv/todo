@@ -1,7 +1,7 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
-import useCreateUserFullFields from '@/hooks/useCreateUserFullFields';
+import useCreateUserEmailPasswordFullField from '@/hooks/useCreateUserEmailPasswordFullField';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
 
 import { useId } from 'react';
@@ -33,7 +33,7 @@ type FormData = InferType<typeof formSchema>;
 
 const RegistrationPage = () => {
 	const titleId = useId();
-	const [createUser, isLoading, error] = useCreateUserFullFields(auth);
+	const [createUser, isLoading, error] = useCreateUserEmailPasswordFullField(auth);
 
 	const { handleSubmit, control } = useForm<FormData>({
 		resolver: yupResolver(formSchema),

@@ -10,9 +10,9 @@ interface createUserFullFieldsParams {
 	name: string;
 }
 
-const useCreateUserFullFields = (auth: Auth) => {
+const useCreateUserEmailPasswordFullField = (auth: Auth) => {
 	const dispatch = useAppDispatch();
-	const [createUser, , isLoadingCreate, errorCreate] = useCreateUserWithEmailAndPassword(auth);
+	const [createUser, , isLoadingCreate, error] = useCreateUserWithEmailAndPassword(auth);
 	const [updateProfile, isLoadingUpdate] = useUpdateProfile(auth);
 
 	const isLoading = isLoadingCreate || isLoadingUpdate;
@@ -30,7 +30,7 @@ const useCreateUserFullFields = (auth: Auth) => {
 		}
 	};
 
-	return [createUserFullFields, isLoading, errorCreate] as const;
+	return [createUserFullFields, isLoading, error] as const;
 };
 
-export default useCreateUserFullFields;
+export default useCreateUserEmailPasswordFullField;
