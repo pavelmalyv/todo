@@ -6,18 +6,20 @@ import Checkbox from '../UI/checkbox/Checkbox';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import Skeleton from 'react-loading-skeleton';
 import MessageInfo from '../UI/messageInfo/MessageInfo';
+import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 
 import { showError } from '@/utils/notification';
 import { setTaskDoc } from '@/utils/firestore';
-import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
+import { ERRORS_MESSAGES, LOADING_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 interface TasksListProps {
 	tasks: Tasks | null[];
 	user: User | null;
+	isLoading: boolean;
 	error?: unknown;
 }
 
-const TasksList = ({ user, tasks, error }: TasksListProps) => {
+const TasksList = ({ user, tasks, isLoading, error }: TasksListProps) => {
 	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
 		try {
 			if (!user) {
@@ -39,28 +41,30 @@ const TasksList = ({ user, tasks, error }: TasksListProps) => {
 					{tasks.length === 0 ? (
 						<MessageInfo message={NOT_FOUND_MESSAGES.todayTasks} />
 					) : (
-						<ul className={cl.list}>
-							{tasks.map((task, index) => {
-								const key = task ? task.id : index;
+						<VisuallyHiddenLoader isLoading={isLoading} hiddenMessage={LOADING_MESSAGES.tasks}>
+							<ul className={cl.list}>
+								{tasks.map((task, index) => {
+									const key = task ? task.id : index;
 
-								return (
-									<li className={cl.item} key={key}>
-										{task ? (
-											<Checkbox
-												className={cl.task}
-												label={task.name}
-												checked={task.done}
-												onChange={(e) => handleChange(e, task.id)}
-											/>
-										) : (
-											<div className={cl.skeleton}>
-												<Skeleton height={22} />
-											</div>
-										)}
-									</li>
-								);
-							})}
-						</ul>
+									return (
+										<li className={cl.item} key={key}>
+											{task ? (
+												<Checkbox
+													className={cl.task}
+													label={task.name}
+													checked={task.done}
+													onChange={(e) => handleChange(e, task.id)}
+												/>
+											) : (
+												<div className={cl.skeleton}>
+													<Skeleton height={22} />
+												</div>
+											)}
+										</li>
+									);
+								})}
+							</ul>
+						</VisuallyHiddenLoader>
 					)}
 				</>
 			)}

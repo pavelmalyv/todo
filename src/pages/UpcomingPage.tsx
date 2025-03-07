@@ -4,13 +4,13 @@ import TasksList from '@/components/tasksList/TasksList';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
 
 const UpcomingPage = () => {
-	const [tasksData, user, , error] = useTasksSnapshot();
+	const [tasksData, user, isLoading, error] = useTasksSnapshot();
 	const tasks = tasksData ? tasksData : new Array(3).fill(null);
 
 	return (
 		<Profile title="Предстоящие" quantity={999}>
 			<Section title="Сегодня">
-				<TasksList tasks={tasks} user={user} error={error} />
+				<TasksList tasks={tasks} user={user} isLoading={isLoading} error={error} />
 			</Section>
 		</Profile>
 	);
