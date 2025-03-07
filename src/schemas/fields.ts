@@ -1,9 +1,6 @@
 import { MESSAGES_FIELD } from '@/consts/messages';
-import { string, ref, boolean } from 'yup';
+import { string, ref } from 'yup';
 
-export const policySchema = boolean()
-	.oneOf([true], MESSAGES_FIELD.policyCheckbox)
-	.required(MESSAGES_FIELD.policyRequired);
 export const emailSchema = string().email().required(MESSAGES_FIELD.emailRequired);
 export const passwordSchema = string().required(MESSAGES_FIELD.passwordRequired);
 export const passwordCreateSchema = string()

@@ -2,7 +2,6 @@ import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
 import useCreateUserEmailPasswordFullField from '@/hooks/useCreateUserEmailPasswordFullField';
-import Checkbox from '@/components/UI/checkbox/Checkbox';
 
 import { useId } from 'react';
 import { InferType, object } from 'yup';
@@ -10,13 +9,11 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { auth } from '@/firebase';
 import { getErrorMessageFirebase } from '@/utils/firebase';
-import { Link } from 'react-router';
 import {
 	emailSchema,
 	getPasswordRepeatSchema,
 	nameSchema,
 	passwordCreateSchema,
-	policySchema,
 } from '@/schemas/fields';
 
 import { LOGIN_URL } from '@/consts/routes';
@@ -26,7 +23,6 @@ const formSchema = object({
 	email: emailSchema,
 	password: passwordCreateSchema,
 	passwordRepeat: getPasswordRepeatSchema('password'),
-	policy: policySchema,
 });
 
 type FormData = InferType<typeof formSchema>;
@@ -42,7 +38,6 @@ const RegistrationPage = () => {
 			email: '',
 			password: '',
 			passwordRepeat: '',
-			policy: false,
 		},
 	});
 
@@ -129,31 +124,6 @@ const RegistrationPage = () => {
 							errorMessage={fieldState.error?.message}
 						/>
 					)}
-				/>
-
-				<Controller
-					name="policy"
-					control={control}
-					render={({ field, fieldState }) => {
-						const labelPolicy = (
-							<>
-								Я принимаю{' '}
-								<Link className="link" to="#">
-									политику конфиденциальности
-								</Link>
-							</>
-						);
-
-						return (
-							<Checkbox
-								label={labelPolicy}
-								{...field}
-								aria-required={true}
-								aria-invalid={fieldState.invalid}
-								errorMessage={fieldState.error?.message}
-							/>
-						);
-					}}
 				/>
 			</Auth>
 		</Book>

@@ -49,6 +49,13 @@ const Auth = ({
 				{children}
 			</SmallForm>
 
+			<small className={cl.policy}>
+				Продолжая аутентификацию вы соглашаетесь с{' '}
+				<Link to={'#'} target="_blank" className="link">
+					политикой конфиденциальности
+				</Link>
+			</small>
+
 			<AuthSocials className={cl['login-socials']} type={type} />
 
 			<div className={cl.registration}>
