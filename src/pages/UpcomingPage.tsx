@@ -4,7 +4,7 @@ import TasksList from '@/components/tasksList/TasksList';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
 
 const UpcomingPage = () => {
-	const [tasksData, user, error] = useTasksSnapshot();
+	const [tasksData, user, , error] = useTasksSnapshot();
 	const tasks = tasksData ? tasksData : new Array(3).fill(null);
 
 	return (

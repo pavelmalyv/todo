@@ -8,6 +8,7 @@ import { taskSchema } from '@/schemas/tasks';
 
 const useTasksSnapshot = () => {
 	const [tasks, setTasks] = useState<Tasks | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<unknown | undefined>(undefined);
 	const [user, , errorUser] = useUserState({
 		isHandleError: false,
@@ -15,12 +16,17 @@ const useTasksSnapshot = () => {
 
 	const uid = user ? user.uid : null;
 
+	const handleError = (error: unknown) => {
+		setIsLoading(false);
+		setError(error);
+	};
+
 	useEffect(() => {
 		if (!errorUser) {
 			return;
 		}
 
-		setError(errorUser);
+		handleError(errorUser);
 	}, [errorUser]);
 
 	useEffect(() => {
@@ -50,19 +56,20 @@ const useTasksSnapshot = () => {
 					const tasks = await Promise.all(tasksDataPromises);
 
 					setTasks(tasks);
+					setIsLoading(false);
 				} catch (error) {
-					setError(error);
+					handleError(error);
 				}
 			},
 			(error) => {
-				setError(error);
+				handleError(error);
 			},
 		);
 
 		return () => unsubscribe();
 	}, [uid]);
 
-	return [tasks, user, error] as const;
+	return [tasks, user, isLoading, error] as const;
 };
 
 export default useTasksSnapshot;
