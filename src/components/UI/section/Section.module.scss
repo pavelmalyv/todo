@@ -1,3 +1,5 @@
+@use '@styles/utils';
+
 .section {
 	&:not(:first-child) {
 		padding-top: var(--padding-section-y);
@@ -12,8 +14,13 @@
 	padding: 13px 42px 70px;
 	border: 1px solid rgb(var(--color-border-primary));
 	border-radius: 30px;
+
+	@include utils.mobile-l {
+		padding: 18px 16px 60px;
+		border-radius: 20px;
+	}
 }
 
 .title {
-	margin-bottom: 12px;
+	margin-bottom: 21px;
 }
