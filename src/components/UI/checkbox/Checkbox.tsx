@@ -12,6 +12,7 @@ interface CheckboxProps {
 	disabled?: boolean;
 	errorMessage?: string;
 	center?: boolean;
+	className?: string;
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 	onBlur?: React.FocusEventHandler<HTMLInputElement>;
 	'aria-controls'?: string;
@@ -28,6 +29,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 			disabled,
 			errorMessage,
 			center = false,
+			className,
 			onChange,
 			onBlur,
 			'aria-controls': ariaControls,
@@ -39,7 +41,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 		const errorMessageId = useId();
 
 		return (
-			<div className={classNames(cl.wrapper, { [cl['wrapper_center']]: center })}>
+			<div className={classNames(cl.wrapper, { [cl['wrapper_center']]: center }, className)}>
 				<label className={cl.label}>
 					<input
 						ref={ref}
