@@ -1,5 +1,3 @@
-import type { Auth } from 'firebase/auth';
-
 import { showError } from '@/utils/notification';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect } from 'react';
@@ -13,7 +11,7 @@ interface UseUserStateOptions {
 }
 
 const useUserState = (options?: UseUserStateOptions) => {
-const isHandleError = options?.isHandleError;
+	const isHandleError = options?.isHandleError;
 	const [userAuth, isLoadingAuth, error] = useAuthState(auth);
 	const isProfileComplete = useAppSelector(selectProfileComplete);
 
@@ -21,14 +19,14 @@ const isHandleError = options?.isHandleError;
 	const user = userAuth && isProfileComplete ? userAuth : null;
 
 	useEffect(() => {
-		if (!error) {
+		if (!error || !isHandleError) {
 			return;
 		}
 
 		showError(ERRORS_MESSAGES.userLoading, error);
-	}, [error]);
+	}, [error, isHandleError]);
 
-	return [user, isLoading] as const;
+	return [user, isLoading, error] as const;
 };
 
 export default useUserState;

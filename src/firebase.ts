@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
+import { collection, getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyDZgN1UJe6A8hzBTsldzWzw1_-66gn8iJQ',
@@ -10,6 +11,10 @@ const firebaseConfig = {
 	appId: '1:284483277024:web:0990458bc810b970900085',
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth();
+export const db = getFirestore(app);
+
+export const userCollectionRef = collection(db, 'users');
+export const tasksCollectionRef = (uid: string) => collection(userCollectionRef, uid, 'tasks');

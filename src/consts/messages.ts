@@ -31,8 +31,11 @@ export const ERRORS_MESSAGES_FIREBASE: Record<string, string> = {
 export const ERRORS_MESSAGES = {
 	userLoading: 'Ошибка загрузки пользователя, повторите попытку позже',
 	googleAuth: 'Ошибка аутентификации Google, повторите попытку позже',
+	updateTask: 'Ошибка обновления задачи, повторите попытку позже',
+	tasksLoading: 'При загрузке задач произошла ошибка, повторите попытку позже',
 };
 
 export const LOADING_MESSAGES = {
 	common: 'Загрузка...',
+	tasks: 'Загрузка задач...',
 };

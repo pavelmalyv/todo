@@ -1,0 +1,19 @@
+.list {
+	--padding-x: 11px;
+}
+
+.task {
+	padding: var(--padding-x) 13px;
+	border-bottom: 1px solid rgb(var(--color-border-primary));
+}
+
+.skeleton {
+	padding: var(--padding-x) 0;
+}
+
+.item:first-child {
+	.task,
+	.skeleton {
+		padding-top: 0;
+	}
+}

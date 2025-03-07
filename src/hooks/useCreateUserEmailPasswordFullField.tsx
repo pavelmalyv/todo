@@ -1,8 +1,7 @@
-import type { Auth } from 'firebase/auth';
-
 import { setIsProfileComplete } from '@/store/authSlice';
 import { useAppDispatch } from '@/store/hooks';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase';
 
 interface createUserFullFieldsParams {
 	email: string;
@@ -10,7 +9,7 @@ interface createUserFullFieldsParams {
 	name: string;
 }
 
-const useCreateUserEmailPasswordFullField = (auth: Auth) => {
+const useCreateUserEmailPasswordFullField = () => {
 	const dispatch = useAppDispatch();
 	const [createUser, , isLoadingCreate, error] = useCreateUserWithEmailAndPassword(auth);
 	const [updateProfile, isLoadingUpdate] = useUpdateProfile(auth);
