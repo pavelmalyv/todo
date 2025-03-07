@@ -39,3 +39,7 @@ export const LOADING_MESSAGES = {
 	common: 'Загрузка...',
 	tasks: 'Загрузка задач...',
 };
+
+export const NOT_FOUND_MESSAGES = {
+	todayTasks: 'На сегодня задач нет',
+};

@@ -5,10 +5,11 @@ import cl from './TasksList.module.scss';
 import Checkbox from '../UI/checkbox/Checkbox';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import Skeleton from 'react-loading-skeleton';
+import MessageInfo from '../UI/messageInfo/MessageInfo';
 
 import { showError } from '@/utils/notification';
 import { setTaskDoc } from '@/utils/firestore';
-import { ERRORS_MESSAGES } from '@/consts/messages';
+import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 interface TasksListProps {
 	tasks: Tasks | null[];
@@ -34,28 +35,34 @@ const TasksList = ({ user, tasks, error }: TasksListProps) => {
 			{error ? (
 				<ErrorMessage message={ERRORS_MESSAGES.tasksLoading} error={error} />
 			) : (
-				<ul className={cl.list}>
-					{tasks.map((task, index) => {
-						const key = task ? task.id : index;
+				<>
+					{tasks.length === 0 ? (
+						<MessageInfo message={NOT_FOUND_MESSAGES.todayTasks} />
+					) : (
+						<ul className={cl.list}>
+							{tasks.map((task, index) => {
+								const key = task ? task.id : index;
 
-						return (
-							<li className={cl.item} key={key}>
-								{task ? (
-									<Checkbox
-										className={cl.task}
-										label={task.name}
-										checked={task.done}
-										onChange={(e) => handleChange(e, task.id)}
-									/>
-								) : (
-									<div className={cl.skeleton}>
-										<Skeleton height={22} />
-									</div>
-								)}
-							</li>
-						);
-					})}
-				</ul>
+								return (
+									<li className={cl.item} key={key}>
+										{task ? (
+											<Checkbox
+												className={cl.task}
+												label={task.name}
+												checked={task.done}
+												onChange={(e) => handleChange(e, task.id)}
+											/>
+										) : (
+											<div className={cl.skeleton}>
+												<Skeleton height={22} />
+											</div>
+										)}
+									</li>
+								);
+							})}
+						</ul>
+					)}
+				</>
 			)}
 		</>
 	);
