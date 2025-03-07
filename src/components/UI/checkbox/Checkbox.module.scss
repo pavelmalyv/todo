@@ -1,17 +1,18 @@
 @use '@styles/utils';
 
 .wrapper {
+	display: flex;
+	flex-direction: column;
+
 	&_center {
-		display: flex;
-		flex-direction: column;
 		align-items: center;
 	}
 }
 
 .label {
-	display: flex;
+	display: inline-flex;
 	align-items: flex-start;
-	column-gap: 8px;
+	column-gap: 12px;
 }
 
 .field {
@@ -23,7 +24,7 @@
 	--border-color: rgb(var(--color-border-primary));
 
 	@include utils.base-animation(background-color, border-color);
-	@include utils.square(24px);
+	@include utils.square(22px);
 
 	position: relative;
 	border: 1px solid var(--border-color);
@@ -64,4 +65,8 @@
 	margin: auto 0;
 	font-size: 14px;
 	color: rgb(var(--color-text-secondary));
+}
+
+.field:checked + .emulator + .description {
+	text-decoration: line-through;
 }
