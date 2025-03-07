@@ -12,7 +12,7 @@ const Section = ({ title, children }: SectionProps) => {
 	const titleId = useId();
 
 	return (
-		<section className={cl.section} aria-labelledby={titleId}>
+		<section className="section" aria-labelledby={titleId}>
 			<div className={cl.body}>
 				<h2 id={titleId} className={classNames(cl.title, 'h1')}>
 					{title}

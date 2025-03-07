@@ -26,6 +26,16 @@
 	flex-grow: 1;
 }
 
+.section {
+	&:not(:first-child) {
+		padding-top: var(--section-padding-y);
+	}
+
+	&:not(:last-child) {
+		padding-bottom: var(--section-padding-y);
+	}
+}
+
 .link {
 	@include utils.base-animation(color);
 
