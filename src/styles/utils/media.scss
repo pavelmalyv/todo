@@ -7,6 +7,11 @@ $tablet-l: 1100px;
 $mobile-l-above: 721px;
 $mobile-l: 720px;
 
+// mobile-s
+
+$mobile-s-above: 371px;
+$mobile-s: 370px;
+
 @mixin tablet-l-above {
 	@media (min-width: $tablet-l-above) {
 		@content;
@@ -27,6 +32,18 @@ $mobile-l: 720px;
 
 @mixin mobile-l {
 	@media (max-width: $mobile-l) {
+		@content;
+	}
+}
+
+@mixin mobile-s-above {
+	@media (min-width: $mobile-s-above) {
+		@content;
+	}
+}
+
+@mixin mobile-s {
+	@media (max-width: $mobile-s) {
 		@content;
 	}
 }

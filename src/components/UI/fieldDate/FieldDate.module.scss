@@ -1,0 +1,55 @@
+@use '@styles/shared/field';
+@use '@styles/utils';
+
+.date-wrapper {
+	width: 100%;
+}
+
+.field-wrapper {
+	position: relative;
+}
+
+.field {
+	@include field.base;
+
+	padding-right: 46px;
+}
+
+.icon {
+	position: absolute;
+	top: 50%;
+	right: 14px;
+	translate: 0 -50%;
+	font-size: 18px;
+	color: rgb(var(--color-text-quaternary));
+}
+
+.popper {
+	position: absolute;
+	top: 100% !important;
+	left: 50% !important;
+	padding-bottom: 20px;
+	transform: translate(-50%, 15px) !important;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+
+	@include utils.mobile-s {
+		width: calc(100% + (var(--container-padding-x) * 2));
+	}
+}
+
+:global {
+	.react-datepicker {
+		&__time-container,
+		&__time-box {
+			@include utils.mobile-s {
+				width: 68px !important;
+			}
+		}
+
+		&__time-list-item {
+			@include utils.flex-center;
+		}
+	}
+}
