@@ -10,16 +10,17 @@ import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 
 import { showError } from '@/utils/notification';
 import { setTaskDoc } from '@/utils/firestore';
-import { ERRORS_MESSAGES, LOADING_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
+import { ERRORS_MESSAGES, LOADING_MESSAGES } from '@/consts/messages';
 
 interface TasksListProps {
 	tasks: Tasks | null[];
 	user: User | null;
 	isLoading: boolean;
+	notFoundMessage: string;
 	error?: unknown;
 }
 
-const TasksList = ({ user, tasks, isLoading, error }: TasksListProps) => {
+const TasksList = ({ user, tasks, isLoading, notFoundMessage, error }: TasksListProps) => {
 	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
 		try {
 			if (!user) {
@@ -39,7 +40,7 @@ const TasksList = ({ user, tasks, isLoading, error }: TasksListProps) => {
 			) : (
 				<>
 					{tasks.length === 0 ? (
-						<MessageInfo message={NOT_FOUND_MESSAGES.todayTasks} />
+						<MessageInfo message={notFoundMessage} />
 					) : (
 						<VisuallyHiddenLoader isLoading={isLoading} hiddenMessage={LOADING_MESSAGES.tasks}>
 							<ul className={cl.list}>

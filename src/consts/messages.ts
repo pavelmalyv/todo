@@ -42,4 +42,6 @@ export const LOADING_MESSAGES = {
 
 export const NOT_FOUND_MESSAGES = {
 	todayTasks: 'На сегодня задач нет',
+	tomorrowTasks: 'На завтра задач нет',
+	nearTasks: 'Ближайших задач нет',
 };

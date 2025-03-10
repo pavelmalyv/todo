@@ -4,6 +4,7 @@ import TasksList from '@/components/tasksList/TasksList';
 import TableSections from '@/components/tableSections/TableSections';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
 import { getDateRanges } from '@/utils/date';
+import { NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 const UpcomingPage = () => {
 	const dateRanges = getDateRanges();
@@ -33,6 +34,7 @@ const UpcomingPage = () => {
 					tasks={tasksToday}
 					user={userToday}
 					isLoading={isLoadingToday}
+					notFoundMessage={NOT_FOUND_MESSAGES.todayTasks}
 					error={errorToday}
 				/>
 			</Section>
@@ -43,6 +45,7 @@ const UpcomingPage = () => {
 						tasks={tasksTomorrow}
 						user={userTomorrow}
 						isLoading={isLoadingTomorrow}
+						notFoundMessage={NOT_FOUND_MESSAGES.tomorrowTasks}
 						error={errorTomorrow}
 					/>
 				</Section>
@@ -51,6 +54,7 @@ const UpcomingPage = () => {
 						tasks={tasksNear}
 						user={userNear}
 						isLoading={isLoadingNear}
+						notFoundMessage={NOT_FOUND_MESSAGES.nearTasks}
 						error={errorNear}
 					/>
 				</Section>
