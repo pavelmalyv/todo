@@ -1,5 +1,10 @@
 @use '@styles/shared/buttons';
 @use '@styles/shared/spinner';
+@use '@styles/utils';
+
+.spinner {
+	@include spinner.base(16px);
+}
 
 .button {
 	@include buttons.base;
@@ -7,18 +12,26 @@
 	&_full {
 		width: 100%;
 	}
-}
 
-.body {
-	position: relative;
-	padding: 0 25px;
-}
+	&:not(&_small) {
+		.body {
+			position: relative;
+			padding: 0 25px;
+		}
 
-.spinner {
-	@include spinner.base(16px);
+		.spinner {
+			position: absolute;
+			top: 50%;
+			right: 0;
+			translate: 0 -50%;
+		}
+	}
 
-	position: absolute;
-	top: 50%;
-	right: 0;
-	translate: 0 -50%;
+	&_small {
+		@include buttons.base-small;
+	}
+
+	&_border {
+		@include buttons.base-border;
+	}
 }

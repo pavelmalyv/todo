@@ -5,6 +5,8 @@ import useDelayedLoader from '@/hooks/useDelayedLoader';
 interface ButtonProps {
 	type?: 'button' | 'submit' | 'reset';
 	disabled?: boolean;
+	size?: 'small' | 'medium';
+	style?: 'background' | 'border';
 	isFull?: boolean;
 	isLoading?: boolean;
 	children: React.ReactNode;
@@ -14,6 +16,8 @@ interface ButtonProps {
 const Button = ({
 	type = 'button',
 	disabled,
+	size = 'medium',
+	style = 'background',
 	isFull,
 	isLoading = false,
 	children,
@@ -25,12 +29,18 @@ const Button = ({
 		<button
 			type={type}
 			disabled={disabled || isLoading}
-			className={classNames(cl.button, { [cl['button_full']]: isFull })}
+			className={classNames(cl.button, cl[`button_${size}`], cl[`button_${style}`], {
+				[cl['button_full']]: isFull,
+			})}
 			onClick={onClick}
 		>
 			<span className={cl.body}>
 				<span>{children}</span>
-				{isLoadingDelayed && <span className={cl.spinner}></span>}
+				{isLoadingDelayed && (
+					<span className={cl['spinner-wrapper']}>
+						<span className={cl.spinner}></span>
+					</span>
+				)}
 			</span>
 		</button>
 	);
