@@ -15,6 +15,9 @@ export const getDateRanges = () => {
 	const nearEnd = new Date(tomorrowEnd);
 	nearEnd.setDate(nearEnd.getDate() + 5);
 
+	const nearAllEnd = new Date(todayStart);
+	nearAllEnd.setDate(nearAllEnd.getDate() + 7);
+
 	return {
 		today: {
 			start: todayStart.getTime(),
@@ -27,6 +30,10 @@ export const getDateRanges = () => {
 		near: {
 			start: nearStart.getTime(),
 			end: nearEnd.getTime(),
+		},
+		nearAll: {
+			start: todayStart.getTime(),
+			end: nearAllEnd.getTime(),
 		},
 	};
 };

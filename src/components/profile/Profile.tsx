@@ -7,10 +7,15 @@ import Icon from '../UI/icon/Icon';
 import TagMarker from '../UI/tagMarker/TagMarker';
 import Skeleton from 'react-loading-skeleton';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
+import useTasksSnapshot from '@/hooks/useTasksSnapshot';
 
 import { Link, NavLink } from 'react-router';
 import { useEffect, useId, useRef, useState } from 'react';
 import { throttle } from 'lodash';
+import { getDateRanges } from '@/utils/date';
+import { showError } from '@/utils/notification';
+import { getQuantityRemainingTasks } from '@/utils/firebase';
+import { ERRORS_MESSAGES } from '@/consts/messages';
 
 interface AsideProps {
 	isModal?: boolean;
@@ -19,6 +24,37 @@ interface AsideProps {
 
 const Aside = ({ isModal = false, onClose }: AsideProps) => {
 	const titleId = useId();
+	const dateRanges = getDateRanges();
+
+	const [tasksDataUpcoming, , isLoadingUpcoming, errorUpcoming] = useTasksSnapshot(
+		dateRanges.nearAll.start,
+		dateRanges.nearAll.end,
+	);
+	const tasksLengthUpcoming = tasksDataUpcoming
+		? getQuantityRemainingTasks(tasksDataUpcoming)
+		: null;
+
+	useEffect(() => {
+		if (!errorUpcoming) {
+			return;
+		}
+
+		showError(ERRORS_MESSAGES.quantityUpcomingTasksLoading);
+	}, [errorUpcoming]);
+
+	const [tasksDataToday, , isLoadingToday, errorToday] = useTasksSnapshot(
+		dateRanges.today.start,
+		dateRanges.today.end,
+	);
+	const tasksLengthToday = tasksDataToday ? getQuantityRemainingTasks(tasksDataToday) : null;
+
+	useEffect(() => {
+		if (!errorToday) {
+			return;
+		}
+
+		showError(ERRORS_MESSAGES.quantityTodayTasksLoading);
+	}, [errorToday]);
 
 	return (
 		<aside className={cl.aside} aria-labelledby={titleId}>
@@ -44,7 +80,11 @@ const Aside = ({ isModal = false, onClose }: AsideProps) => {
 
 										<span>Предстоящие</span>
 									</div>
-									<div className={cl['menu-quantity']}>00+</div>
+									<div className={cl['menu-quantity']}>
+										<VisuallyHiddenLoader isLoading={isLoadingUpcoming}>
+											{tasksLengthUpcoming !== null ? tasksLengthUpcoming : <Skeleton />}
+										</VisuallyHiddenLoader>
+									</div>
 								</NavLink>
 							</li>
 							<li className={cl['menu-item']}>
@@ -54,7 +94,11 @@ const Aside = ({ isModal = false, onClose }: AsideProps) => {
 
 										<span>Сегодня</span>
 									</div>
-									<div className={cl['menu-quantity']}>1</div>
+									<div className={cl['menu-quantity']}>
+										<VisuallyHiddenLoader isLoading={isLoadingToday}>
+											{tasksLengthToday !== null ? tasksLengthToday : <Skeleton />}
+										</VisuallyHiddenLoader>
+									</div>
 								</NavLink>
 							</li>
 						</ul>
@@ -132,8 +176,8 @@ interface ProfileProps {
 	isLoadingQuantity?: boolean;
 	children: React.ReactNode;
 }
+
 const Profile = ({ title, quantity, isLoadingQuantity = false, children }: ProfileProps) => {
-const Profile = ({ title, quantity, children }: ProfileProps) => {
 	const profileRef = useRef<HTMLDivElement | null>(null);
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
