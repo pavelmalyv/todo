@@ -2,11 +2,11 @@ import type { Tasks } from '@/types/tasks';
 
 import useUserState from './useUserState';
 import { useEffect, useState } from 'react';
-import { onSnapshot, query } from 'firebase/firestore';
+import { onSnapshot, orderBy, query, Timestamp, where } from 'firebase/firestore';
 import { tasksCollectionRef } from '@/firebase';
 import { taskSchema } from '@/schemas/tasks';
 
-const useTasksSnapshot = () => {
+const useTasksSnapshot = (timestampStart: number, timestampEnd: number) => {
 	const [tasks, setTasks] = useState<Tasks | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<unknown | undefined>(undefined);
@@ -34,7 +34,15 @@ const useTasksSnapshot = () => {
 			return;
 		}
 
-		const q = query(tasksCollectionRef(uid));
+		const startDate = Timestamp.fromMillis(timestampStart);
+		const endDate = Timestamp.fromMillis(timestampEnd);
+
+		const q = query(
+			tasksCollectionRef(uid),
+			where('dueAt', '>=', startDate),
+			where('dueAt', '<', endDate),
+			orderBy('createdAt', 'desc'),
+		);
 
 		const unsubscribe = onSnapshot(
 			q,
@@ -67,7 +75,7 @@ const useTasksSnapshot = () => {
 		);
 
 		return () => unsubscribe();
-	}, [uid]);
+	}, [uid, timestampStart, timestampEnd]);
 
 	return [tasks, user, isLoading, error] as const;
 };
