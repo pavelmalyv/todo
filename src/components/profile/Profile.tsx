@@ -7,6 +7,7 @@ import Icon from '../UI/icon/Icon';
 import TagMarker from '../UI/tagMarker/TagMarker';
 import Skeleton from 'react-loading-skeleton';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
+import Button from '../UI/button/Button';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
 
 import { Link, NavLink } from 'react-router';
@@ -219,27 +220,32 @@ const Profile = ({ title, quantity, isLoadingQuantity = false, children }: Profi
 
 					<div className={cl.page}>
 						<div className={cl['page-head']}>
-							<div className={cl['page-burger']}>
-								<ButtonIcon size="large" hiddenName="Меню" onClick={() => setIsOpenSidebar(true)}>
-									Menu
-								</ButtonIcon>
+							<div className={cl['page-main']}>
+								<div className={cl['page-burger']}>
+									<ButtonIcon size="large" hiddenName="Меню" onClick={() => setIsOpenSidebar(true)}>
+										Menu
+									</ButtonIcon>
+								</div>
+								<div className={cl['page-title']}>
+									<h1 className="h2">{title}</h1>
+									{quantity !== undefined && (
+										<VisuallyHiddenLoader isLoading={isLoadingQuantity}>
+											<div className={cl['page-quantity']}>
+												{quantity !== null ? (
+													<>{quantity > 99 ? '99+' : quantity}</>
+												) : (
+													<div className={cl['page-quantity-skeleton']}>
+														<Skeleton />
+													</div>
+												)}
+											</div>
+										</VisuallyHiddenLoader>
+									)}
+								</div>
 							</div>
-							<div className={cl['page-title']}>
-								<h1 className="h2">{title}</h1>
-								{quantity !== undefined && (
-									<VisuallyHiddenLoader isLoading={isLoadingQuantity}>
-										<div className={cl['page-quantity']}>
-											{quantity !== null ? (
-												<>{quantity > 99 ? '99+' : quantity}</>
-											) : (
-												<div className={cl['page-quantity-skeleton']}>
-													<Skeleton />
-												</div>
-											)}
-										</div>
-									</VisuallyHiddenLoader>
-								)}
-							</div>
+							<Button size="small" style="border">
+								Добавить задачу
+							</Button>
 						</div>
 						{children}
 					</div>

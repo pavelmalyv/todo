@@ -215,14 +215,37 @@
 	&-head {
 		display: flex;
 		align-items: center;
-		column-gap: 16px;
+		justify-content: space-between;
+		gap: 18px 20px;
 		margin-bottom: 36px;
+
+		@include utils.mobile-l {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+
+	&-main {
+		display: flex;
+		align-items: center;
+		column-gap: 16px;
+
+		@include utils.mobile-l {
+			width: 100%;
+			justify-content: space-between;
+			column-gap: 14px;
+		}
 	}
 
 	&-title {
 		display: flex;
 		align-items: center;
-		column-gap: 19px;
+		gap: 10px 19px;
+
+		@include utils.mobile-l {
+			flex-wrap: wrap;
+			column-gap: 12px;
+		}
 	}
 
 	&-quantity {
@@ -244,6 +267,10 @@
 	&-burger {
 		@include utils.tablet-l-above {
 			display: none;
+		}
+
+		@include utils.mobile-l {
+			order: 1;
 		}
 	}
 }
