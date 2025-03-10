@@ -10,6 +10,10 @@ interface ErrorMessageProps {
 
 const ErrorMessage = ({ message, error, className }: ErrorMessageProps) => {
 	useEffect(() => {
+		if (!error) {
+			return;
+		}
+
 		console.error(error);
 	}, [error]);
 
