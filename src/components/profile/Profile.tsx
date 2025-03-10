@@ -5,6 +5,8 @@ import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import AppModal from '../UI/appModal/AppModal';
 import Icon from '../UI/icon/Icon';
 import TagMarker from '../UI/tagMarker/TagMarker';
+import Skeleton from 'react-loading-skeleton';
+import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 
 import { Link, NavLink } from 'react-router';
 import { useEffect, useId, useRef, useState } from 'react';
@@ -126,10 +128,11 @@ const Aside = ({ isModal = false, onClose }: AsideProps) => {
 
 interface ProfileProps {
 	title: string;
-	quantity?: number;
+	quantity?: number | null;
+	isLoadingQuantity?: boolean;
 	children: React.ReactNode;
 }
-
+const Profile = ({ title, quantity, isLoadingQuantity = false, children }: ProfileProps) => {
 const Profile = ({ title, quantity, children }: ProfileProps) => {
 	const profileRef = useRef<HTMLDivElement | null>(null);
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -179,8 +182,18 @@ const Profile = ({ title, quantity, children }: ProfileProps) => {
 							</div>
 							<div className={cl['page-title']}>
 								<h1 className="h2">{title}</h1>
-								{quantity && (
-									<div className={cl['page-quantity']}>{quantity > 99 ? '99+' : quantity}</div>
+								{quantity !== undefined && (
+									<VisuallyHiddenLoader isLoading={isLoadingQuantity}>
+										<div className={cl['page-quantity']}>
+											{quantity !== null ? (
+												<>{quantity > 99 ? '99+' : quantity}</>
+											) : (
+												<div className={cl['page-quantity-skeleton']}>
+													<Skeleton />
+												</div>
+											)}
+										</div>
+									</VisuallyHiddenLoader>
 								)}
 							</div>
 						</div>

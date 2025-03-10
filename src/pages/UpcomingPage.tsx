@@ -3,7 +3,9 @@ import Section from '@/components/UI/section/Section';
 import TasksList from '@/components/tasksList/TasksList';
 import TableSections from '@/components/tableSections/TableSections';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
+
 import { getDateRanges } from '@/utils/date';
+import { getQuantityRemainingTasks } from '@/utils/firebase';
 import { NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 const UpcomingPage = () => {
@@ -27,8 +29,18 @@ const UpcomingPage = () => {
 	);
 	const tasksNear = tasksDataNear ? tasksDataNear : new Array(3).fill(null);
 
+	let quantity: null | number = null;
+	const isLoadingQuantity = isLoadingToday || isLoadingTomorrow || isLoadingNear;
+
+	if (tasksDataToday && tasksDataTomorrow && tasksDataNear) {
+		quantity =
+			getQuantityRemainingTasks(tasksDataToday) +
+			getQuantityRemainingTasks(tasksDataTomorrow) +
+			getQuantityRemainingTasks(tasksDataNear);
+	}
+
 	return (
-		<Profile title="Предстоящие" quantity={999}>
+		<Profile title="Предстоящие" quantity={quantity} isLoadingQuantity={isLoadingQuantity}>
 			<Section title="Сегодня">
 				<TasksList
 					tasks={tasksToday}

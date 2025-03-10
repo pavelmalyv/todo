@@ -237,6 +237,10 @@
 		border-radius: 100px 50px 100px 100px;
 	}
 
+	&-quantity-skeleton {
+		flex-grow: 1;
+	}
+
 	&-burger {
 		@include utils.tablet-l-above {
 			display: none;
