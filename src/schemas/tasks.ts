@@ -15,4 +15,4 @@ export const addTaskSchema = object({
 	dueAt: date().required(),
 });
 
-export const tasksSchemas = array().of(taskSchema).required();
+export const tasksSchema = array().of(taskSchema).required();

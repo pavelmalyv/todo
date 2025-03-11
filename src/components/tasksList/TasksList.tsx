@@ -7,9 +7,12 @@ import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import Skeleton from 'react-loading-skeleton';
 import MessageInfo from '../UI/messageInfo/MessageInfo';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
+import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
+import EditTaskModal from '../Modals/editTaskModal/EditTaskModal';
 
 import { showError } from '@/utils/notification';
 import { setTaskDoc } from '@/utils/firestore';
+import { useState } from 'react';
 import { ERRORS_MESSAGES, LOADING_MESSAGES } from '@/consts/messages';
 
 interface TasksListProps {
@@ -21,6 +24,12 @@ interface TasksListProps {
 }
 
 const TasksList = ({ user, tasks, isLoading, notFoundMessage, error }: TasksListProps) => {
+	const [isOpenEditModals, setIsOpenEditModals] = useState<{ [key: string]: boolean }>({});
+
+	const setIsOpenEditModal = (id: string, value: boolean) => {
+		setIsOpenEditModals((prev) => ({ ...prev, [id]: value }));
+	};
+
 	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
 		try {
 			if (!user) {
@@ -50,13 +59,29 @@ const TasksList = ({ user, tasks, isLoading, notFoundMessage, error }: TasksList
 									return (
 										<li className={cl.item} key={key}>
 											{task ? (
-												<Checkbox
-													className={cl.task}
+												<>
+													<div className={cl.task}>
+														<Checkbox
 															style="through"
-													label={task.name}
-													checked={task.done}
-													onChange={(e) => handleChange(e, task.id)}
-												/>
+															label={task.name}
+															checked={task.done}
+															onChange={(e) => handleChange(e, task.id)}
+														/>
+														<ButtonIcon
+															style="circle"
+															hiddenName="Редактировать задачу"
+															onClick={() => setIsOpenEditModal(task.id, true)}
+														>
+															edit
+														</ButtonIcon>
+													</div>
+
+													<EditTaskModal
+														initialData={task}
+														isOpen={isOpenEditModals[task.id] ?? false}
+														onClose={() => setIsOpenEditModal(task.id, false)}
+													/>
+												</>
 											) : (
 												<div className={cl.skeleton}>
 													<Skeleton height={22} />
