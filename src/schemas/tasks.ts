@@ -1,17 +1,18 @@
-import { array, boolean, date, number, object, string } from 'yup';
+import { array, date, number, object, string } from 'yup';
+import { doneTaskSchema, nameTaskSchema } from './fields';
 
 export const taskSchema = object({
 	id: string().required(),
 	name: string().required(),
-	done: boolean().required(),
+	done: doneTaskSchema,
 	dueAt: object({
 		seconds: number().required(),
 	}),
 });
 
 export const saveTaskSchema = object({
-	name: string().required(),
-	done: boolean().required(),
+	name: nameTaskSchema,
+	done: doneTaskSchema,
 	dueAt: date().required(),
 });
 

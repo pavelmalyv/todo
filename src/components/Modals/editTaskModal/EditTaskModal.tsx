@@ -6,10 +6,10 @@ import AppModal from '@/components/UI/appModal/AppModal';
 import FieldDate from '@/components/UI/fieldDate/FieldDate';
 import Field from '@/components/UI/field/Field';
 
-import { datePickerSchema, nameTaskSchema } from '@/schemas/fields';
+import { datePickerSchema, doneTaskSchema, nameTaskSchema } from '@/schemas/fields';
 import { useId } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { boolean, InferType, object } from 'yup';
+import { InferType, object } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
 
@@ -24,7 +24,7 @@ interface EditTaskModalProps {
 const editTaskModalFormSchema = object({
 	dueAt: datePickerSchema,
 	name: nameTaskSchema,
-	done: boolean(),
+	done: doneTaskSchema,
 });
 
 const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => {

@@ -1,5 +1,5 @@
 import { MESSAGES_FIELD } from '@/consts/messages';
-import { string, ref, date } from 'yup';
+import { string, ref, date, boolean } from 'yup';
 
 export const emailSchema = string().email().required(MESSAGES_FIELD.emailRequired);
 export const passwordSchema = string().required(MESSAGES_FIELD.passwordRequired);
@@ -28,3 +28,5 @@ export const datePickerSchema = date()
 export const nameTaskSchema = string()
 	.max(350, MESSAGES_FIELD.nameTaskMax(350))
 	.required(MESSAGES_FIELD.nameTaskRequired);
+
+export const doneTaskSchema = boolean().required();
