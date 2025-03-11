@@ -83,7 +83,6 @@ const Title = ({ id, children }: TitleProps) => {
 		</>
 	);
 };
-
 AppModal.Title = Title;
 
 interface ButtonsProps {
@@ -95,5 +94,15 @@ const Buttons = ({ children }: ButtonsProps) => {
 };
 
 AppModal.Buttons = Buttons;
+
+interface DescriptionProps {
+	className?: string;
+	children: React.ReactNode;
+}
+
+const Description = ({ className, children }: DescriptionProps) => {
+	return <div className={classNames(cl.description, className)}>{children}</div>;
+};
+AppModal.Description = Description;
 
 export default AppModal;

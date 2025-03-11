@@ -89,6 +89,12 @@
 	row-gap: 12px;
 }
 
+.description {
+	line-height: 1.4;
+	text-align: center;
+	color: rgb(var(--color-text-secondary));
+}
+
 @keyframes fade-in {
 	0% {
 		opacity: 0;
