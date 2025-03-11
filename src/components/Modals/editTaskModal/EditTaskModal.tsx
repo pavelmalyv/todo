@@ -114,7 +114,7 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 
 					<SmallForm.Footer>
 					<AppModal.Buttons>
-						<Button actionStyle="delete" isFull={true} onClick={() => {}}>
+							<Button style="delete" isFull={true} onClick={() => {}}>
 							Удалить
 						</Button>
 							<Button

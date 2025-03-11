@@ -37,7 +37,7 @@
 	--border-color: rgb(var(--color-border-primary));
 	--color-text: rgb(var(--color-text-secondary));
 
-	@include utils.base-animation(color, background-color, border-color);
+	@include utils.base-animation(color, border-color);
 
 	border: 1px solid var(--border-color);
 	color: var(--color-text);
@@ -51,11 +51,19 @@
 }
 
 @mixin base-delete {
-	--background-color: rgb(var(--color-attention-primary));
+	--background-color: transparent !important;
+	--border-color: rgb(var(--color-attention-primary));
+	--color-text: rgb(var(--color-attention-primary));
+
+	@include utils.base-animation(color, border-color);
+
+	border: 1px solid var(--border-color);
+	color: var(--color-text);
 
 	&:not(:disabled) {
 		@include utils.hover {
-			--background-color: rgb(var(--color-attention-secondary));
+			--border-color: rgb(var(--color-attention-secondary));
+			--color-text: rgb(var(--color-attention-secondary));
 		}
 	}
 }
