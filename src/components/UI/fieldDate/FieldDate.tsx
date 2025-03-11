@@ -2,7 +2,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import cl from './FieldDate.module.scss';
 
 import DatePicker, { registerLocale } from 'react-datepicker';
-import { forwardRef, useId } from 'react';
+import { forwardRef, useId, useRef } from 'react';
 import { ru } from 'date-fns/locale';
 import Icon from '../icon/Icon';
 import FieldError from '../fieldError/FieldError';
@@ -44,8 +44,15 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 		},
 		ref,
 	) => {
+		const isOpenRef = useRef<boolean | null>(null);
 		const titleId = useId();
 		const errorMessageId = useId();
+
+		const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+			if (event.key == 'Escape' && isOpenRef.current) {
+				event.stopPropagation();
+			}
+		};
 
 		return (
 			<div>
@@ -83,6 +90,8 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 						ariaRequired={String(ariaRequired)}
 						ariaDescribedBy={errorMessageId}
 						customInput={<CustomInput ref={ref} />}
+						onCalendarClose={() => (isOpenRef.current = false)}
+						onCalendarOpen={() => (isOpenRef.current = true)}
 						popperModifiers={[
 							{
 								name: 'flip',
@@ -91,6 +100,7 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 								}),
 							},
 						]}
+						onKeyDown={handleKeyDown}
 					/>
 
 					<Icon className={cl.icon}>calendar_month</Icon>
