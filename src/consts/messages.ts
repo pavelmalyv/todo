@@ -13,6 +13,9 @@ export const MESSAGES_FIELD = {
 	passwordRepeatIncorrect: 'Пароли не совпадают',
 	policyRequired: 'Для продолжения примите политику конфиденциальности',
 	policyCheckbox: 'Для продолжения примите политику конфиденциальности',
+	dateRequired: 'Дата обязательна',
+	nameTaskMax: (max: number) => `Максимальная длина названия задачи ${max} символов`,
+	nameTaskRequired: 'Название задачи обязательно',
 };
 
 export const ERRORS_MESSAGES_FIREBASE: Record<string, string> = {

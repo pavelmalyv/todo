@@ -1,5 +1,5 @@
 import { MESSAGES_FIELD } from '@/consts/messages';
-import { string, ref } from 'yup';
+import { string, ref, date } from 'yup';
 
 export const emailSchema = string().email().required(MESSAGES_FIELD.emailRequired);
 export const passwordSchema = string().required(MESSAGES_FIELD.passwordRequired);
@@ -20,3 +20,11 @@ export const getPasswordRepeatSchema = (fieldRef: string) => {
 		.oneOf([ref(fieldRef)], MESSAGES_FIELD.passwordRepeatIncorrect)
 		.required(MESSAGES_FIELD.passwordRequired);
 };
+export const dataSchema = date()
+	.required(MESSAGES_FIELD.dateRequired)
+	.nullable(MESSAGES_FIELD.dateRequired)
+	.test('not-empty', MESSAGES_FIELD.dateRequired, (value) => value !== null);
+
+export const nameTaskSchema = string()
+	.max(30, MESSAGES_FIELD.nameTaskMax(30))
+	.required(MESSAGES_FIELD.nameTaskRequired);
