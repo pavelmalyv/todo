@@ -48,7 +48,10 @@ const SmallForm = ({
 				)}
 			</fieldset>
 
-			<ErrorMessage className={cl.error} message={errorMessage} />
+			<ErrorMessage
+				className={classNames(cl.error, { [cl['error_visible']]: errorMessage })}
+				message={errorMessage}
+			/>
 		</form>
 	);
 };
