@@ -3,6 +3,7 @@ import cl from './ButtonIcon.module.scss';
 import Icon from '../icon/Icon';
 
 interface ButtonIconProps {
+	style?: 'light' | 'circle';
 	children: React.ReactNode;
 	hiddenName: string;
 	size?: 'medium' | 'large';
@@ -12,6 +13,7 @@ interface ButtonIconProps {
 	['aria-controls']?: string;
 }
 const ButtonIcon = ({
+	style = 'light',
 	children,
 	hiddenName,
 	size = 'medium',
@@ -23,7 +25,7 @@ const ButtonIcon = ({
 	return (
 		<button
 			type="button"
-			className={classNames(cl.button, cl[`button_${size}`], className)}
+			className={classNames(cl.button, cl[`button_${style}`], cl[`button_${size}`], className)}
 			onClick={onClick}
 			aria-pressed={ariaPressed}
 			aria-controls={ariaControls}

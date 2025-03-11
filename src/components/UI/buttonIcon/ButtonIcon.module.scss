@@ -7,6 +7,7 @@
 
 	font-size: 15px;
 	color: rgb(var(--color-text-secondary));
+	flex-shrink: 0;
 
 	@include utils.hover {
 		color: rgb(var(--color-text-primary));
@@ -16,5 +17,18 @@
 		@include utils.square(44px);
 
 		font-size: 24px;
+	}
+
+	&_circle {
+		--background-color: rgb(var(--color-background-secondary));
+
+		@include utils.base-animation(color, background-color);
+
+		background-color: var(--background-color);
+		border-radius: 50%;
+
+		@include utils.hover {
+			--background-color: rgb(var(--color-background-fifth));
+		}
 	}
 }
