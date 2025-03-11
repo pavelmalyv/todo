@@ -1,15 +1,5 @@
 @use '@styles/utils';
 
-.wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-
-	&_center {
-		align-items: center;
-	}
-}
-
 .label {
 	display: inline-flex;
 	align-items: flex-start;
@@ -68,6 +58,16 @@
 	color: rgb(var(--color-text-secondary));
 }
 
-.wrapper_through .field:checked + .emulator + .description {
-	text-decoration: line-through;
+.checkbox {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+
+	&_center {
+		align-items: center;
+	}
+
+	&_through .field:checked + .emulator + .description {
+		text-decoration: line-through;
+	}
 }

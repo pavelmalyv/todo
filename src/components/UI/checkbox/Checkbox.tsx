@@ -45,9 +45,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 		return (
 			<div
 				className={classNames(
-					cl.wrapper,
-					cl[`wrapper_${style}`],
-					{ [cl['wrapper_center']]: center },
+					cl.checkbox,
+					cl[`checkbox_${style}`],
+					{ [cl['checkbox_center']]: center },
 					className,
 				)}
 			>
