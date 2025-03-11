@@ -4,8 +4,10 @@ import LoadingScreen from '../loadingScreen/LoadingScreen';
 import useDelayedLoader from '@/hooks/useDelayedLoader';
 
 import { Navigate, Route, Routes } from 'react-router';
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
+import { showError } from '@/utils/notification';
 import { LOGIN_URL, REGISTRATION_URL } from '@/consts/routes';
+import { ERRORS_MESSAGES } from '@/consts/messages';
 
 const HomePage = lazy(() => import('@/pages/HomePage'));
 const LoginPage = lazy(() => import('@/pages/LoginPage'));
@@ -13,12 +15,16 @@ const UpcomingPage = lazy(() => import('@/pages/UpcomingPage'));
 const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'));
 
 const AppRouter = () => {
-	const [user, isLoading] = useUserState();
+	const [user, isLoading, error] = useUserState();
 	const isDelayedLoading = useDelayedLoader(isLoading);
 
-	if (isDelayedLoading) {
-		return <LoadingScreen />;
-	}
+	useEffect(() => {
+		if (!error) {
+			return;
+		}
+
+		showError(ERRORS_MESSAGES.userLoading, error);
+	}, [error]);
 
 	const privateRoutes = (
 		<>
@@ -64,6 +70,10 @@ const AppRouter = () => {
 			<Route path="*" element={<Navigate to={LOGIN_URL} />} />
 		</>
 	);
+
+	if (isDelayedLoading) {
+		return <LoadingScreen />;
+	}
 
 	return (
 		<Routes>

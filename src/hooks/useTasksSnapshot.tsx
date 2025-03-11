@@ -10,9 +10,7 @@ const useTasksSnapshot = (timestampStart: number, timestampEnd: number) => {
 	const [tasks, setTasks] = useState<Tasks | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<unknown | undefined>(undefined);
-	const [user, , errorUser] = useUserState({
-		isHandleError: false,
-	});
+	const [user, , errorUser] = useUserState();
 
 	const uid = user ? user.uid : null;
 
