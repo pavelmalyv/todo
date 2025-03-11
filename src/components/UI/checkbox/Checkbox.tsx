@@ -8,6 +8,7 @@ import { forwardRef, useId } from 'react';
 interface CheckboxProps {
 	label: React.ReactNode;
 	name?: string;
+	style?: 'default' | 'through';
 	checked?: boolean;
 	disabled?: boolean;
 	errorMessage?: string;
@@ -25,6 +26,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 		{
 			label,
 			name,
+			style = 'default',
 			checked,
 			disabled,
 			errorMessage,
@@ -41,7 +43,14 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 		const errorMessageId = useId();
 
 		return (
-			<div className={classNames(cl.wrapper, { [cl['wrapper_center']]: center }, className)}>
+			<div
+				className={classNames(
+					cl.wrapper,
+					cl[`wrapper_${style}`],
+					{ [cl['wrapper_center']]: center },
+					className,
+				)}
+			>
 				<label className={cl.label}>
 					<input
 						ref={ref}

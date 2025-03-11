@@ -52,6 +52,7 @@ const TasksList = ({ user, tasks, isLoading, notFoundMessage, error }: TasksList
 											{task ? (
 												<Checkbox
 													className={cl.task}
+															style="through"
 													label={task.name}
 													checked={task.done}
 													onChange={(e) => handleChange(e, task.id)}
