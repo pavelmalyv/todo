@@ -37,7 +37,7 @@
 	--border-color: rgb(var(--color-border-primary));
 	--color-text: rgb(var(--color-text-secondary));
 
-	@include utils.base-animation(color, border-color);
+	@include utils.base-animation(color, border-color, opacity);
 
 	border: 1px solid var(--border-color);
 	color: var(--color-text);
@@ -55,7 +55,7 @@
 	--border-color: rgb(var(--color-attention-primary));
 	--color-text: rgb(var(--color-attention-primary));
 
-	@include utils.base-animation(color, border-color);
+	@include utils.base-animation(color, border-color, opacity);
 
 	border: 1px solid var(--border-color);
 	color: var(--color-text);
