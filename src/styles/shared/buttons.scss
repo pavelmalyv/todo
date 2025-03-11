@@ -37,15 +37,15 @@
 	--border-color: rgb(var(--color-border-primary));
 	--color-text: rgb(var(--color-text-secondary));
 
-	@include utils.base-animation(color, background-color);
+	@include utils.base-animation(color, background-color, border-color);
 
 	border: 1px solid var(--border-color);
 	color: var(--color-text);
 
 	&:not(:disabled) {
 		@include utils.hover {
-			--border-color: rgb(var(--color-accent-primary));
-			--color-text: rgb(var(--color-accent-primary));
+			--border-color: rgb(var(--color-border-secondary));
+			--color-text: rgb(var(--color-border-secondary));
 		}
 	}
 }
