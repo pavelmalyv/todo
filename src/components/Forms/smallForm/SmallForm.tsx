@@ -6,6 +6,7 @@ import Button from '@/components/UI/button/Button';
 type SmallFormProps = {
 	children: React.ReactNode;
 	buttonName: string;
+	isDisabledButtonName?: boolean;
 	errorMessage?: string;
 	isLoading?: boolean;
 	className?: string;
@@ -25,6 +26,7 @@ type SmallFormProps = {
 const SmallForm = ({
 	children,
 	buttonName,
+	isDisabledButtonName,
 	deleteButtonName,
 	errorMessage,
 	isLoading = false,
@@ -50,7 +52,7 @@ const SmallForm = ({
 						</Button>
 					)}
 
-					<Button type="submit" isFull={true} isLoading={isLoading}>
+					<Button type="submit" isFull={true} isLoading={isLoading} disabled={isDisabledButtonName}>
 						{buttonName}
 					</Button>
 				</div>
