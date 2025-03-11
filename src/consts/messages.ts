@@ -40,6 +40,7 @@ export const ERRORS_MESSAGES = {
 		'При загрузке количества предстоящих задач произошла ошибка, повторите попытку позже',
 	quantityTodayTasksLoading:
 		'При загрузке количества задач на завтра произошла ошибка, повторите попытку позже',
+	addTask: 'Ошибка добавления задачи, повторите попытку позже',
 };
 
 export const LOADING_MESSAGES = {
@@ -51,4 +52,8 @@ export const NOT_FOUND_MESSAGES = {
 	todayTasks: 'На сегодня задач нет',
 	tomorrowTasks: 'На завтра задач нет',
 	nearTasks: 'Ближайших задач нет',
+};
+
+export const SUCCESS_MESSAGES = {
+	addTask: 'Задача добавлена',
 };

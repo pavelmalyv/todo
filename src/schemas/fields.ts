@@ -20,7 +20,7 @@ export const getPasswordRepeatSchema = (fieldRef: string) => {
 		.oneOf([ref(fieldRef)], MESSAGES_FIELD.passwordRepeatIncorrect)
 		.required(MESSAGES_FIELD.passwordRequired);
 };
-export const dataSchema = date()
+export const datePickerSchema = date()
 	.required(MESSAGES_FIELD.dateRequired)
 	.nullable(MESSAGES_FIELD.dateRequired)
 	.test('not-empty', MESSAGES_FIELD.dateRequired, (value) => value !== null);

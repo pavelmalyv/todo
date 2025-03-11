@@ -9,3 +9,9 @@ export const showError = (message: string, error?: unknown) => {
 		console.error(error);
 	}
 };
+
+export const showSuccess = (message: string) => {
+	toast.success(message, {
+		transition: Slide,
+	});
+};

@@ -39,7 +39,7 @@ const useTasksSnapshot = (timestampStart: number, timestampEnd: number) => {
 			tasksCollectionRef(uid),
 			where('dueAt', '>=', startDate),
 			where('dueAt', '<', endDate),
-			orderBy('createdAt', 'desc'),
+			orderBy('dueAt', 'desc'),
 		);
 
 		const unsubscribe = onSnapshot(
