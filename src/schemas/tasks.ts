@@ -9,7 +9,7 @@ export const taskSchema = object({
 	}),
 });
 
-export const addTaskSchema = object({
+export const saveTaskSchema = object({
 	name: string().required(),
 	done: boolean().required(),
 	dueAt: date().required(),
