@@ -26,5 +26,5 @@ export const dataSchema = date()
 	.test('not-empty', MESSAGES_FIELD.dateRequired, (value) => value !== null);
 
 export const nameTaskSchema = string()
-	.max(30, MESSAGES_FIELD.nameTaskMax(30))
+	.max(350, MESSAGES_FIELD.nameTaskMax(350))
 	.required(MESSAGES_FIELD.nameTaskRequired);

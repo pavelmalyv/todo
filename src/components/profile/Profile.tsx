@@ -6,6 +6,7 @@ import Skeleton from 'react-loading-skeleton';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import Button from '../UI/button/Button';
 import Menu from '../menu/Menu';
+import AddTaskModal from '../Modals/addTaskModal/AddTaskModal';
 
 import { useEffect, useRef, useState } from 'react';
 import { throttle } from 'lodash';
@@ -20,8 +21,13 @@ interface ProfileProps {
 const Profile = ({ title, quantity, isLoadingQuantity = false, children }: ProfileProps) => {
 	const profileRef = useRef<HTMLDivElement | null>(null);
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+	const [isOpenTaskModal, setIsOpenTaskModal] = useState(false);
 
-	const handleClose = () => {
+	const handleTaskModalClose = () => {
+		setIsOpenTaskModal(false);
+	};
+
+	const handleSidebarClose = () => {
 		setIsOpenSidebar(false);
 	};
 
@@ -82,7 +88,7 @@ const Profile = ({ title, quantity, isLoadingQuantity = false, children }: Profi
 									)}
 								</div>
 							</div>
-							<Button size="small" style="border">
+							<Button size="small" style="border" onClick={() => setIsOpenTaskModal(true)}>
 								Добавить задачу
 							</Button>
 						</div>
@@ -99,10 +105,12 @@ const Profile = ({ title, quantity, isLoadingQuantity = false, children }: Profi
 					root: cl['sidebar-dialog'],
 					modalContainer: cl['sidebar-dialog-container'],
 				}}
-				onClose={handleClose}
+				onClose={handleSidebarClose}
 			>
-				<Menu isModal={true} onClose={handleClose} />
+				<Menu isModal={true} onClose={handleSidebarClose} />
 			</AppModal>
+
+			<AddTaskModal isOpen={isOpenTaskModal} onClose={handleTaskModalClose} />
 		</>
 	);
 };

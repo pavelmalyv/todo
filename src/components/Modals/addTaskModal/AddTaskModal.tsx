@@ -27,6 +27,7 @@ const AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
 	const { control, handleSubmit } = useForm<AddTaskFormData>({
 		defaultValues: {
 			datetime: null,
+name: '',
 		},
 		resolver: yupResolver(addTaskFormSchema),
 	});
