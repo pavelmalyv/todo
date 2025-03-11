@@ -117,9 +117,17 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 						<Button actionStyle="delete" isFull={true} onClick={() => {}}>
 							Удалить
 						</Button>
+							<Button
+								style="border"
+								isFull={true}
+								onClick={() => reset()}
+								disabled={!formState.isDirty}
+							>
+								Сбросить
+							</Button>
 							<Button type="submit" isFull={true} disabled={!formState.isDirty}>
-							Обновить
-						</Button>
+								Обновить
+							</Button>
 					</AppModal.Buttons>
 					</SmallForm.Footer>
 			</SmallForm>
