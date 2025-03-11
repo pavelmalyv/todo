@@ -42,9 +42,11 @@
 	border: 1px solid var(--border-color);
 	color: var(--color-text);
 
-	@include utils.hover {
-		--border-color: rgb(var(--color-accent-primary));
-		--color-text: rgb(var(--color-accent-primary));
+	&:not(:disabled) {
+		@include utils.hover {
+			--border-color: rgb(var(--color-accent-primary));
+			--color-text: rgb(var(--color-accent-primary));
+		}
 	}
 }
 
