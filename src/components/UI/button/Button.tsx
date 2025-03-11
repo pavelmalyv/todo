@@ -7,7 +7,7 @@ interface ButtonProps {
 	disabled?: boolean;
 	size?: 'small' | 'medium';
 	style?: 'background' | 'border';
-	action?: 'default' | 'delete';
+	actionStyle?: 'default' | 'delete';
 	isFull?: boolean;
 	isLoading?: boolean;
 	children: React.ReactNode;
@@ -19,7 +19,7 @@ const Button = ({
 	disabled,
 	size = 'medium',
 	style = 'background',
-	action = 'default',
+	actionStyle = 'default',
 	isFull,
 	isLoading = false,
 	children,
@@ -33,7 +33,7 @@ const Button = ({
 			disabled={disabled || isLoading}
 			className={classNames(
 				cl.button,
-				cl[`button_${action}`],
+				cl[`button_${actionStyle}`],
 				cl[`button_${size}`],
 				cl[`button_${style}`],
 				{
