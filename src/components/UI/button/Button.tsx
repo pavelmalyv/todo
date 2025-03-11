@@ -7,6 +7,7 @@ interface ButtonProps {
 	disabled?: boolean;
 	size?: 'small' | 'medium';
 	style?: 'background' | 'border';
+	action?: 'default' | 'delete';
 	isFull?: boolean;
 	isLoading?: boolean;
 	children: React.ReactNode;
@@ -18,6 +19,7 @@ const Button = ({
 	disabled,
 	size = 'medium',
 	style = 'background',
+	action = 'default',
 	isFull,
 	isLoading = false,
 	children,
@@ -29,9 +31,15 @@ const Button = ({
 		<button
 			type={type}
 			disabled={disabled || isLoading}
-			className={classNames(cl.button, cl[`button_${size}`], cl[`button_${style}`], {
-				[cl['button_full']]: isFull,
-			})}
+			className={classNames(
+				cl.button,
+				cl[`button_${action}`],
+				cl[`button_${size}`],
+				cl[`button_${style}`],
+				{
+					[cl['button_full']]: isFull,
+				},
+			)}
 			onClick={onClick}
 		>
 			<span className={cl.body}>

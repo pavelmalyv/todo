@@ -47,3 +47,13 @@
 		--color-text: rgb(var(--color-accent-primary));
 	}
 }
+
+@mixin base-delete {
+	--background-color: rgb(var(--color-attention-primary));
+
+	&:not(:disabled) {
+		@include utils.hover {
+			--background-color: rgb(var(--color-attention-secondary));
+		}
+	}
+}

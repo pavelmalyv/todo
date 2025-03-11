@@ -34,4 +34,8 @@
 	&_border {
 		@include buttons.base-border;
 	}
+
+	&_delete {
+		@include buttons.base-delete;
+	}
 }
