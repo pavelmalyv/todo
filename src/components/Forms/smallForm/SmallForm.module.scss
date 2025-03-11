@@ -1,17 +1,17 @@
-.fields {
+.body {
 	display: flex;
 	flex-direction: column;
 	row-gap: 20px;
-	margin-bottom: 25px;
+}
+
+.footer {
+	margin-top: 5px;
 }
 
 .error {
-	margin-top: 16px;
 	text-align: center;
-}
 
-.buttons {
-	display: flex;
-	flex-direction: column;
-	row-gap: 18px;
+	&_visible {
+		margin-top: 16px;
+	}
 }

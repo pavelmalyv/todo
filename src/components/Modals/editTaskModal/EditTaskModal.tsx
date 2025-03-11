@@ -7,6 +7,7 @@ import FieldDate from '@/components/UI/fieldDate/FieldDate';
 import Field from '@/components/UI/field/Field';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
 import useSaveTask from '@/hooks/useSaveTask';
+import Button from '@/components/UI/button/Button';
 
 import { datePickerSchema, doneTaskSchema, nameTaskSchema } from '@/schemas/fields';
 import { useId } from 'react';
@@ -65,10 +66,7 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 			<AppModal.Title id={titleId}>Редактирование задачи</AppModal.Title>
 
 			<SmallForm
-				buttonName="Обновить"
-				deleteButtonName="Удалить"
-				deleteButtonOnClick={() => {}}
-				onSubmit={handleSubmit(onSubmit)}
+								onSubmit={handleSubmit(onSubmit)}
 				isDisabledButtonName={!formState.isDirty}
 				isLoading={isLoading}
 			>
@@ -113,6 +111,17 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 						/>
 					)}
 				/>
+
+					<SmallForm.Footer>
+					<AppModal.Buttons>
+						<Button action="delete" isFull={true} onClick={() => {}}>
+							Удалить
+						</Button>
+							<Button type="submit" isFull={true} disabled={!formState.isDirty}>
+							Обновить
+						</Button>
+					</AppModal.Buttons>
+					</SmallForm.Footer>
 			</SmallForm>
 		</AppModal>
 	);

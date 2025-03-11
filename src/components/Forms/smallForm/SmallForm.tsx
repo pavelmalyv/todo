@@ -3,36 +3,25 @@ import cl from './SmallForm.module.scss';
 import ErrorMessage from '@/components/UI/errorMessage/ErrorMessage';
 import Button from '@/components/UI/button/Button';
 
-type SmallFormProps = {
+interface SmallFormProps {
 	children: React.ReactNode;
-	buttonName: string;
+	buttonName?: string;
 	isDisabledButtonName?: boolean;
 	errorMessage?: string;
 	isLoading?: boolean;
 	className?: string;
 	onSubmit?: React.FormEventHandler<HTMLFormElement>;
 	'aria-labelledby'?: string;
-} & (
-	| {
-			deleteButtonName?: never;
-			deleteButtonOnClick?: never;
-	  }
-	| {
-			deleteButtonName: string;
-			deleteButtonOnClick: React.MouseEventHandler<HTMLButtonElement>;
-	  }
-);
+}
 
 const SmallForm = ({
 	children,
 	buttonName,
 	isDisabledButtonName,
-	deleteButtonName,
 	errorMessage,
 	isLoading = false,
 	className,
 	onSubmit,
-	deleteButtonOnClick,
 	['aria-labelledby']: ariaLabelledby,
 }: SmallFormProps) => {
 	return (
@@ -42,25 +31,36 @@ const SmallForm = ({
 			onSubmit={onSubmit}
 			noValidate
 		>
-			<fieldset disabled={isLoading}>
-				<div className={cl.fields}>{children}</div>
+			<fieldset className={cl.body} disabled={isLoading}>
+				{children}
 
-				<div className={cl.buttons}>
-					{deleteButtonName && (
-						<Button action="delete" isFull={true} onClick={deleteButtonOnClick}>
-							{deleteButtonName}
+				{buttonName && (
+					<div className={cl.footer}>
+						<Button
+							type="submit"
+							isFull={true}
+							isLoading={isLoading}
+							disabled={isDisabledButtonName}
+						>
+							{buttonName}
 						</Button>
-					)}
-
-					<Button type="submit" isFull={true} isLoading={isLoading} disabled={isDisabledButtonName}>
-						{buttonName}
-					</Button>
-				</div>
+					</div>
+				)}
 			</fieldset>
 
 			<ErrorMessage className={cl.error} message={errorMessage} />
 		</form>
 	);
 };
+
+interface FooterProps {
+	children: React.ReactNode;
+}
+
+const Footer = ({ children }: FooterProps) => {
+	return <div className={cl.footer}>{children}</div>;
+};
+
+SmallForm.Footer = Footer;
 
 export default SmallForm;

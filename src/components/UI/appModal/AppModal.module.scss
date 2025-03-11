@@ -83,6 +83,12 @@
 	text-align: center;
 }
 
+.buttons {
+	display: flex;
+	flex-direction: column;
+	row-gap: 18px;
+}
+
 @keyframes fade-in {
 	0% {
 		opacity: 0;
