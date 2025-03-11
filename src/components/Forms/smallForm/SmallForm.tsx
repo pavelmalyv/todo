@@ -3,7 +3,7 @@ import cl from './SmallForm.module.scss';
 import ErrorMessage from '@/components/UI/errorMessage/ErrorMessage';
 import Button from '@/components/UI/button/Button';
 
-interface SmallFormProps {
+type SmallFormProps = {
 	children: React.ReactNode;
 	buttonName: string;
 	errorMessage?: string;
@@ -11,15 +11,26 @@ interface SmallFormProps {
 	className?: string;
 	onSubmit?: React.FormEventHandler<HTMLFormElement>;
 	'aria-labelledby'?: string;
-}
+} & (
+	| {
+			deleteButtonName?: never;
+			deleteButtonOnClick?: never;
+	  }
+	| {
+			deleteButtonName: string;
+			deleteButtonOnClick: React.MouseEventHandler<HTMLButtonElement>;
+	  }
+);
 
 const SmallForm = ({
 	children,
 	buttonName,
+	deleteButtonName,
 	errorMessage,
 	isLoading = false,
 	className,
 	onSubmit,
+	deleteButtonOnClick,
 	['aria-labelledby']: ariaLabelledby,
 }: SmallFormProps) => {
 	return (
@@ -32,9 +43,17 @@ const SmallForm = ({
 			<fieldset disabled={isLoading}>
 				<div className={cl.fields}>{children}</div>
 
-				<Button type="submit" isFull={true} isLoading={isLoading}>
-					{buttonName}
-				</Button>
+				<div className={cl.buttons}>
+					{deleteButtonName && (
+						<Button action="delete" isFull={true} onClick={deleteButtonOnClick}>
+							{deleteButtonName}
+						</Button>
+					)}
+
+					<Button type="submit" isFull={true} isLoading={isLoading}>
+						{buttonName}
+					</Button>
+				</div>
 			</fieldset>
 
 			<ErrorMessage className={cl.error} message={errorMessage} />
