@@ -16,7 +16,7 @@ import { Link, NavLink } from 'react-router';
 import { getQuantityShort } from '@/utils/quantity';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LIMIT_QUANTITY_TODAY } from '@/consts/docLimits';
-import { getQuantityShort } from '@/utils/quantity';
+import { TODAY_TASKS_URL } from '@/consts/routes';
 
 interface MenuProps {
 	isModal?: boolean;
@@ -72,7 +72,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 								</NavLink>
 							</li>
 							<li className={cl['menu-item']}>
-								<NavLink className={cl['menu-link']} to={'other/'}>
+								<NavLink className={cl['menu-link']} to={TODAY_TASKS_URL}>
 									<div className={cl['menu-name']}>
 										<Icon className={cl['menu-icon']}>list</Icon>
 

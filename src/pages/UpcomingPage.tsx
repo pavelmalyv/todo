@@ -9,6 +9,7 @@ import useNotificationError from '@/hooks/useNotificationError';
 import { getDateRanges } from '@/utils/date';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 import { LIMIT_UPCOMING_TASKS } from '@/consts/docLimits';
+import { TODAY_TASKS_URL } from '@/consts/routes';
 
 const UpcomingPage = () => {
 	const dateRanges = getDateRanges();
@@ -47,7 +48,7 @@ const UpcomingPage = () => {
 					tasks={tasksToday}
 					isLoading={isLoadingToday}
 					isVisibleMore={tasksDataToday?.length === LIMIT_UPCOMING_TASKS}
-					moreTo="#"
+					moreTo={TODAY_TASKS_URL}
 					notFoundMessage={NOT_FOUND_MESSAGES.todayTasks}
 					error={errorToday}
 				/>
