@@ -9,21 +9,39 @@ import MessageInfo from '../UI/messageInfo/MessageInfo';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import EditTaskModal from '../Modals/editTaskModal/EditTaskModal';
+import Button from '../UI/button/Button';
 
 import { showError } from '@/utils/notification';
 import { setTaskDoc } from '@/utils/firestore';
 import { useState } from 'react';
 import { ERRORS_MESSAGES, LOADING_MESSAGES } from '@/consts/messages';
 
-interface TasksListProps {
+type TasksListProps = {
 	tasks: Tasks | null[];
 	user: User | null;
 	isLoading: boolean;
 	notFoundMessage: string;
 	error?: unknown;
-}
+} & (
+	| {
+			isVisibleMore?: never;
+			moreTo?: never;
+	  }
+	| {
+			isVisibleMore: boolean;
+			moreTo: string;
+	  }
+);
 
-const TasksList = ({ user, tasks, isLoading, notFoundMessage, error }: TasksListProps) => {
+const TasksList = ({
+	user,
+	tasks,
+	isLoading,
+	isVisibleMore,
+	moreTo,
+	notFoundMessage,
+	error,
+}: TasksListProps) => {
 	const [isOpenEditModals, setIsOpenEditModals] = useState<{ [key: string]: boolean }>({});
 
 	const setIsOpenEditModal = (id: string, value: boolean) => {
@@ -91,6 +109,12 @@ const TasksList = ({ user, tasks, isLoading, notFoundMessage, error }: TasksList
 									);
 								})}
 							</ul>
+
+							{isVisibleMore && (
+								<Button type="link" to={moreTo} className={cl.button} style="border" size="small">
+									Смотреть все
+								</Button>
+							)}
 						</VisuallyHiddenLoader>
 					)}
 				</>
