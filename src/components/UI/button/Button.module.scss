@@ -1,4 +1,3 @@
-@use '@styles/shared/buttons';
 @use '@styles/shared/spinner';
 @use '@styles/utils';
 
@@ -7,10 +6,26 @@
 }
 
 .button {
-	@include buttons.base;
+	--background-color: rgb(var(--color-accent-primary));
 
-	&_full {
-		width: 100%;
+	@include utils.flex-center(true);
+	@include utils.base-animation(background-color, opacity);
+
+	padding: 5px 20px;
+	min-height: 40px;
+	min-width: 218px;
+	text-align: center;
+	border-radius: 10px;
+	background-color: var(--background-color);
+
+	&:not(:disabled) {
+		@include utils.hover {
+			--background-color: rgb(var(--color-accent-secondary));
+		}
+	}
+
+	&:disabled {
+		opacity: 0.8;
 	}
 
 	&:not(&_small) {
@@ -27,15 +42,51 @@
 		}
 	}
 
+	&_full {
+		width: 100%;
+	}
+
 	&_small {
-		@include buttons.base-small;
+		font-size: 14px;
+		min-height: 30px;
+		min-width: initial;
+		padding: 4px 14px;
+		border-radius: 8px;
 	}
 
 	&_border {
-		@include buttons.base-border;
+		--background-color: transparent !important;
+		--border-color: rgb(var(--color-border-primary));
+		--color-text: rgb(var(--color-text-secondary));
+
+		@include utils.base-animation(color, border-color, opacity);
+
+		border: 1px solid var(--border-color);
+		color: var(--color-text);
+
+		&:not(:disabled) {
+			@include utils.hover {
+				--border-color: rgb(var(--color-border-secondary));
+				--color-text: rgb(var(--color-border-secondary));
+			}
+		}
 	}
 
 	&_delete {
-		@include buttons.base-delete;
+		--background-color: transparent !important;
+		--border-color: rgb(var(--color-attention-primary));
+		--color-text: rgb(var(--color-attention-primary));
+
+		@include utils.base-animation(color, border-color, opacity);
+
+		border: 1px solid var(--border-color);
+		color: var(--color-text);
+
+		&:not(:disabled) {
+			@include utils.hover {
+				--border-color: rgb(var(--color-attention-secondary));
+				--color-text: rgb(var(--color-attention-secondary));
+			}
+		}
 	}
 }

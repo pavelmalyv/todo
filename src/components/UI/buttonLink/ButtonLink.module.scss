@@ -1,9 +1,0 @@
-@use '@styles/shared/buttons';
-
-.button {
-	@include buttons.base;
-
-	&_full {
-		width: 100%;
-	}
-}
