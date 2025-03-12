@@ -1,13 +1,13 @@
 @use '@styles/utils';
 
 .body {
-	padding: 13px 42px 70px;
+	padding: 13px 42px 45px;
 	border: 1px solid rgb(var(--color-border-primary));
 	border-radius: 30px;
 	height: 100%;
 
 	@include utils.mobile-l {
-		padding: 18px 16px 60px;
+		padding: 18px 16px 45px;
 		border-radius: 20px;
 	}
 }
