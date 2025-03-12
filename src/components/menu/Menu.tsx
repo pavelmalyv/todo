@@ -13,8 +13,10 @@ import useNotificationError from '@/hooks/useNotificationError';
 import { useId } from 'react';
 import { getDateRanges } from '@/utils/date';
 import { Link, NavLink } from 'react-router';
+import { getQuantityShort } from '@/utils/quantity';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LIMIT_QUANTITY_TODAY } from '@/consts/docLimits';
+import { getQuantityShort } from '@/utils/quantity';
 
 interface MenuProps {
 	isModal?: boolean;
@@ -36,11 +38,6 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 		limit: LIMIT_QUANTITY_TODAY + 1,
 	});
 
-	let quantityTodayDisplay: string | null = null;
-	if (quantityToday) {
-		quantityTodayDisplay =
-			quantityToday > LIMIT_QUANTITY_TODAY ? `${LIMIT_QUANTITY_TODAY}+` : String(quantityToday);
-	}
 	useNotificationError(ERRORS_MESSAGES.quantityTodayTasksLoading, errorQuantityToday);
 
 	return (
@@ -83,7 +80,11 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 									</div>
 									<div className={cl['menu-quantity']}>
 										<VisuallyHiddenLoader isLoading={isLoadingQuantityToday}>
-											{quantityTodayDisplay !== null ? quantityTodayDisplay : <Skeleton />}
+											{quantityToday !== null ? (
+												getQuantityShort(quantityToday, LIMIT_QUANTITY_TODAY)
+											) : (
+												<Skeleton />
+											)}
 										</VisuallyHiddenLoader>
 									</div>
 								</NavLink>
