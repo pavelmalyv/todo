@@ -92,7 +92,7 @@ const Profile = ({ title, quantity, isLoadingQuantity = false, children }: Profi
 								Добавить задачу
 							</Button>
 						</div>
-						{children}
+						<div>{children}</div>
 					</div>
 				</div>
 			</div>
