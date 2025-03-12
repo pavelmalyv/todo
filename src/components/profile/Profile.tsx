@@ -13,7 +13,7 @@ import { throttle } from 'lodash';
 
 interface ProfileProps {
 	title: string;
-	quantity?: number | null;
+	quantity?: string | null;
 	isLoadingQuantity?: boolean;
 	children: React.ReactNode;
 }
@@ -77,7 +77,7 @@ const Profile = ({ title, quantity, isLoadingQuantity = false, children }: Profi
 										<VisuallyHiddenLoader isLoading={isLoadingQuantity}>
 											<div className={cl.quantity}>
 												{quantity !== null ? (
-													<>{quantity > 99 ? '99+' : quantity}</>
+													quantity
 												) : (
 													<div className={cl['quantity-skeleton']}>
 														<Skeleton />
