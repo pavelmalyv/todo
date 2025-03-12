@@ -8,26 +8,31 @@ import { getDateRanges } from '@/utils/date';
 import { getQuantityRemainingTasks } from '@/utils/firebase';
 import { NOT_FOUND_MESSAGES } from '@/consts/messages';
 
+const LIMIT = 4;
+
 const UpcomingPage = () => {
 	const dateRanges = getDateRanges();
 
 	const [tasksDataToday, userToday, isLoadingToday, errorToday] = useTasksSnapshot({
 		timestampStart: dateRanges.today.start,
 		timestampEnd: dateRanges.today.end,
+		limit: LIMIT,
 	});
-	const tasksToday = tasksDataToday ? tasksDataToday : new Array(3).fill(null);
+	const tasksToday = tasksDataToday ? tasksDataToday : new Array(LIMIT).fill(null);
 
 	const [tasksDataTomorrow, userTomorrow, isLoadingTomorrow, errorTomorrow] = useTasksSnapshot({
 		timestampStart: dateRanges.tomorrow.start,
 		timestampEnd: dateRanges.tomorrow.end,
+		limit: LIMIT,
 	});
-	const tasksTomorrow = tasksDataTomorrow ? tasksDataTomorrow : new Array(3).fill(null);
+	const tasksTomorrow = tasksDataTomorrow ? tasksDataTomorrow : new Array(LIMIT).fill(null);
 
 	const [tasksDataNear, userNear, isLoadingNear, errorNear] = useTasksSnapshot({
 		timestampStart: dateRanges.near.start,
 		timestampEnd: dateRanges.near.end,
+		limit: LIMIT,
 	});
-	const tasksNear = tasksDataNear ? tasksDataNear : new Array(3).fill(null);
+	const tasksNear = tasksDataNear ? tasksDataNear : new Array(LIMIT).fill(null);
 
 	let quantity: null | number = null;
 	const isLoadingQuantity = isLoadingToday || isLoadingTomorrow || isLoadingNear;
@@ -46,6 +51,8 @@ const UpcomingPage = () => {
 					tasks={tasksToday}
 					user={userToday}
 					isLoading={isLoadingToday}
+					isVisibleMore={tasksDataToday?.length === LIMIT}
+					moreTo="#"
 					notFoundMessage={NOT_FOUND_MESSAGES.todayTasks}
 					error={errorToday}
 				/>
@@ -57,6 +64,8 @@ const UpcomingPage = () => {
 						tasks={tasksTomorrow}
 						user={userTomorrow}
 						isLoading={isLoadingTomorrow}
+						isVisibleMore={tasksDataTomorrow?.length === LIMIT}
+						moreTo="#"
 						notFoundMessage={NOT_FOUND_MESSAGES.tomorrowTasks}
 						error={errorTomorrow}
 					/>
@@ -66,6 +75,8 @@ const UpcomingPage = () => {
 						tasks={tasksNear}
 						user={userNear}
 						isLoading={isLoadingNear}
+						isVisibleMore={tasksDataNear?.length === LIMIT}
+						moreTo="#"
 						notFoundMessage={NOT_FOUND_MESSAGES.nearTasks}
 						error={errorNear}
 					/>

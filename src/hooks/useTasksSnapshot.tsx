@@ -2,16 +2,21 @@ import type { Tasks } from '@/types/tasks';
 
 import useUserState from './useUserState';
 import { useEffect, useState } from 'react';
-import { onSnapshot, orderBy, query, Timestamp, where } from 'firebase/firestore';
+import { onSnapshot, orderBy, query, Timestamp, where, limit } from 'firebase/firestore';
 import { tasksCollectionRef } from '@/firebase';
 import { taskSchema } from '@/schemas/tasks';
 
 interface TasksSnapshotOptions {
 	timestampStart: number;
 	timestampEnd: number;
+	limit?: number;
 }
 
-const useTasksSnapshot = ({ timestampStart, timestampEnd }: TasksSnapshotOptions) => {
+const useTasksSnapshot = ({
+	timestampStart,
+	timestampEnd,
+	limit: limitQuery = 30,
+}: TasksSnapshotOptions) => {
 	const [tasks, setTasks] = useState<Tasks | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<unknown | undefined>(undefined);
@@ -45,6 +50,7 @@ const useTasksSnapshot = ({ timestampStart, timestampEnd }: TasksSnapshotOptions
 			where('dueAt', '>=', startDate),
 			where('dueAt', '<', endDate),
 			orderBy('dueAt', 'desc'),
+			limit(limitQuery),
 		);
 
 		const unsubscribe = onSnapshot(
@@ -78,7 +84,7 @@ const useTasksSnapshot = ({ timestampStart, timestampEnd }: TasksSnapshotOptions
 		);
 
 		return () => unsubscribe();
-	}, [uid, timestampStart, timestampEnd]);
+	}, [uid, timestampStart, timestampEnd, limitQuery]);
 
 	return [tasks, user, isLoading, error] as const;
 };
