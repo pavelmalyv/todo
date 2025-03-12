@@ -6,14 +6,15 @@ import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import Skeleton from 'react-loading-skeleton';
 import TagMarker from '../UI/tagMarker/TagMarker';
 import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
-import useTasksSnapshot from '@/hooks/useTasksSnapshot';
+import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
+import useQuantityTasksSnapshot from '@/hooks/useQuantityTasksSnapshot';
 
 import { useEffect, useId } from 'react';
 import { getDateRanges } from '@/utils/date';
-import { getQuantityRemainingTasks } from '@/utils/firebase';
 import { showError } from '@/utils/notification';
 import { Link, NavLink } from 'react-router';
 import { ERRORS_MESSAGES } from '@/consts/messages';
+import { LIMIT_QUANTITY_TODAY } from '@/consts/docLimits';
 
 interface MenuProps {
 	isModal?: boolean;
@@ -24,35 +25,36 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 	const titleId = useId();
 	const dateRanges = getDateRanges();
 
-	const [tasksDataUpcoming, , isLoadingUpcoming, errorUpcoming] = useTasksSnapshot({
-		timestampStart: dateRanges.nearAll.start,
-		timestampEnd: dateRanges.nearAll.end,
-	});
-	const tasksLengthUpcoming = tasksDataUpcoming
-		? getQuantityRemainingTasks(tasksDataUpcoming)
-		: null;
+	const [quantityUpcoming, isLoadingQuantityUpcoming, errorQuantityUpcoming] =
+		useQuantityUpcomingTasksSnapshot();
 
 	useEffect(() => {
-		if (!errorUpcoming) {
+		if (!errorQuantityUpcoming) {
 			return;
 		}
 
-		showError(ERRORS_MESSAGES.quantityUpcomingTasksLoading);
-	}, [errorUpcoming]);
+		showError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantityUpcoming);
+	}, [errorQuantityUpcoming]);
 
-	const [tasksDataToday, , isLoadingToday, errorToday] = useTasksSnapshot({
+	const [quantityToday, isLoadingQuantityToday, errorQuantityToday] = useQuantityTasksSnapshot({
 		timestampStart: dateRanges.today.start,
 		timestampEnd: dateRanges.today.end,
+		limit: LIMIT_QUANTITY_TODAY + 1,
 	});
-	const tasksLengthToday = tasksDataToday ? getQuantityRemainingTasks(tasksDataToday) : null;
+
+	let quantityTodayDisplay: string | null = null;
+	if (quantityToday) {
+		quantityTodayDisplay =
+			quantityToday > LIMIT_QUANTITY_TODAY ? `${LIMIT_QUANTITY_TODAY}+` : String(quantityToday);
+	}
 
 	useEffect(() => {
-		if (!errorToday) {
+		if (!errorQuantityToday) {
 			return;
 		}
 
-		showError(ERRORS_MESSAGES.quantityTodayTasksLoading);
-	}, [errorToday]);
+		showError(ERRORS_MESSAGES.quantityTodayTasksLoading, errorQuantityToday);
+	}, [errorQuantityToday]);
 
 	return (
 		<aside className={cl.aside} aria-labelledby={titleId}>
@@ -79,8 +81,8 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 										<span>Предстоящие</span>
 									</div>
 									<div className={cl['menu-quantity']}>
-										<VisuallyHiddenLoader isLoading={isLoadingUpcoming}>
-											{tasksLengthUpcoming !== null ? tasksLengthUpcoming : <Skeleton />}
+										<VisuallyHiddenLoader isLoading={isLoadingQuantityUpcoming}>
+											{quantityUpcoming !== null ? quantityUpcoming : <Skeleton />}
 										</VisuallyHiddenLoader>
 									</div>
 								</NavLink>
@@ -93,8 +95,8 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 										<span>Сегодня</span>
 									</div>
 									<div className={cl['menu-quantity']}>
-										<VisuallyHiddenLoader isLoading={isLoadingToday}>
-											{tasksLengthToday !== null ? tasksLengthToday : <Skeleton />}
+										<VisuallyHiddenLoader isLoading={isLoadingQuantityToday}>
+											{quantityTodayDisplay !== null ? quantityTodayDisplay : <Skeleton />}
 										</VisuallyHiddenLoader>
 									</div>
 								</NavLink>

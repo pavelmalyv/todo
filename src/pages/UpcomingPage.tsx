@@ -3,12 +3,13 @@ import Section from '@/components/UI/section/Section';
 import TasksList from '@/components/tasksList/TasksList';
 import TableSections from '@/components/tableSections/TableSections';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
+import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
 
+import { showError } from '@/utils/notification';
+import { useEffect } from 'react';
 import { getDateRanges } from '@/utils/date';
-import { getQuantityRemainingTasks } from '@/utils/firebase';
-import { NOT_FOUND_MESSAGES } from '@/consts/messages';
-
-const LIMIT = 4;
+import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
+import { LIMIT_UPCOMING_TASKS } from '@/consts/docLimits';
 
 const UpcomingPage = () => {
 	const dateRanges = getDateRanges();
@@ -16,33 +17,35 @@ const UpcomingPage = () => {
 	const [tasksDataToday, userToday, isLoadingToday, errorToday] = useTasksSnapshot({
 		timestampStart: dateRanges.today.start,
 		timestampEnd: dateRanges.today.end,
-		limit: LIMIT,
+		limit: LIMIT_UPCOMING_TASKS,
 	});
-	const tasksToday = tasksDataToday ? tasksDataToday : new Array(LIMIT).fill(null);
+	const tasksToday = tasksDataToday ? tasksDataToday : new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
 	const [tasksDataTomorrow, userTomorrow, isLoadingTomorrow, errorTomorrow] = useTasksSnapshot({
 		timestampStart: dateRanges.tomorrow.start,
 		timestampEnd: dateRanges.tomorrow.end,
-		limit: LIMIT,
+		limit: LIMIT_UPCOMING_TASKS,
 	});
-	const tasksTomorrow = tasksDataTomorrow ? tasksDataTomorrow : new Array(LIMIT).fill(null);
+	const tasksTomorrow = tasksDataTomorrow
+		? tasksDataTomorrow
+		: new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
 	const [tasksDataNear, userNear, isLoadingNear, errorNear] = useTasksSnapshot({
 		timestampStart: dateRanges.near.start,
 		timestampEnd: dateRanges.near.end,
-		limit: LIMIT,
+		limit: LIMIT_UPCOMING_TASKS,
 	});
-	const tasksNear = tasksDataNear ? tasksDataNear : new Array(LIMIT).fill(null);
+	const tasksNear = tasksDataNear ? tasksDataNear : new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
-	let quantity: null | number = null;
-	const isLoadingQuantity = isLoadingToday || isLoadingTomorrow || isLoadingNear;
+	const [quantity, isLoadingQuantity, errorQuantity] = useQuantityUpcomingTasksSnapshot();
 
-	if (tasksDataToday && tasksDataTomorrow && tasksDataNear) {
-		quantity =
-			getQuantityRemainingTasks(tasksDataToday) +
-			getQuantityRemainingTasks(tasksDataTomorrow) +
-			getQuantityRemainingTasks(tasksDataNear);
-	}
+	useEffect(() => {
+		if (!errorQuantity) {
+			return;
+		}
+
+		showError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantity);
+	}, [errorQuantity]);
 
 	return (
 		<Profile title="Предстоящие" quantity={quantity} isLoadingQuantity={isLoadingQuantity}>
@@ -51,7 +54,7 @@ const UpcomingPage = () => {
 					tasks={tasksToday}
 					user={userToday}
 					isLoading={isLoadingToday}
-					isVisibleMore={tasksDataToday?.length === LIMIT}
+					isVisibleMore={tasksDataToday?.length === LIMIT_UPCOMING_TASKS}
 					moreTo="#"
 					notFoundMessage={NOT_FOUND_MESSAGES.todayTasks}
 					error={errorToday}
@@ -64,7 +67,7 @@ const UpcomingPage = () => {
 						tasks={tasksTomorrow}
 						user={userTomorrow}
 						isLoading={isLoadingTomorrow}
-						isVisibleMore={tasksDataTomorrow?.length === LIMIT}
+						isVisibleMore={tasksDataTomorrow?.length === LIMIT_UPCOMING_TASKS}
 						moreTo="#"
 						notFoundMessage={NOT_FOUND_MESSAGES.tomorrowTasks}
 						error={errorTomorrow}
@@ -75,7 +78,7 @@ const UpcomingPage = () => {
 						tasks={tasksNear}
 						user={userNear}
 						isLoading={isLoadingNear}
-						isVisibleMore={tasksDataNear?.length === LIMIT}
+						isVisibleMore={tasksDataNear?.length === LIMIT_UPCOMING_TASKS}
 						moreTo="#"
 						notFoundMessage={NOT_FOUND_MESSAGES.nearTasks}
 						error={errorNear}
