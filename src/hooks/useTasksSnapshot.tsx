@@ -6,7 +6,12 @@ import { onSnapshot, orderBy, query, Timestamp, where } from 'firebase/firestore
 import { tasksCollectionRef } from '@/firebase';
 import { taskSchema } from '@/schemas/tasks';
 
-const useTasksSnapshot = (timestampStart: number, timestampEnd: number) => {
+interface TasksSnapshotOptions {
+	timestampStart: number;
+	timestampEnd: number;
+}
+
+const useTasksSnapshot = ({ timestampStart, timestampEnd }: TasksSnapshotOptions) => {
 	const [tasks, setTasks] = useState<Tasks | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<unknown | undefined>(undefined);

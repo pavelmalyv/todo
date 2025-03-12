@@ -24,10 +24,10 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 	const titleId = useId();
 	const dateRanges = getDateRanges();
 
-	const [tasksDataUpcoming, , isLoadingUpcoming, errorUpcoming] = useTasksSnapshot(
-		dateRanges.nearAll.start,
-		dateRanges.nearAll.end,
-	);
+	const [tasksDataUpcoming, , isLoadingUpcoming, errorUpcoming] = useTasksSnapshot({
+		timestampStart: dateRanges.nearAll.start,
+		timestampEnd: dateRanges.nearAll.end,
+	});
 	const tasksLengthUpcoming = tasksDataUpcoming
 		? getQuantityRemainingTasks(tasksDataUpcoming)
 		: null;
@@ -40,10 +40,10 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 		showError(ERRORS_MESSAGES.quantityUpcomingTasksLoading);
 	}, [errorUpcoming]);
 
-	const [tasksDataToday, , isLoadingToday, errorToday] = useTasksSnapshot(
-		dateRanges.today.start,
-		dateRanges.today.end,
-	);
+	const [tasksDataToday, , isLoadingToday, errorToday] = useTasksSnapshot({
+		timestampStart: dateRanges.today.start,
+		timestampEnd: dateRanges.today.end,
+	});
 	const tasksLengthToday = tasksDataToday ? getQuantityRemainingTasks(tasksDataToday) : null;
 
 	useEffect(() => {

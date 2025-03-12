@@ -11,22 +11,22 @@ import { NOT_FOUND_MESSAGES } from '@/consts/messages';
 const UpcomingPage = () => {
 	const dateRanges = getDateRanges();
 
-	const [tasksDataToday, userToday, isLoadingToday, errorToday] = useTasksSnapshot(
-		dateRanges.today.start,
-		dateRanges.today.end,
-	);
+	const [tasksDataToday, userToday, isLoadingToday, errorToday] = useTasksSnapshot({
+		timestampStart: dateRanges.today.start,
+		timestampEnd: dateRanges.today.end,
+	});
 	const tasksToday = tasksDataToday ? tasksDataToday : new Array(3).fill(null);
 
-	const [tasksDataTomorrow, userTomorrow, isLoadingTomorrow, errorTomorrow] = useTasksSnapshot(
-		dateRanges.tomorrow.start,
-		dateRanges.tomorrow.end,
-	);
+	const [tasksDataTomorrow, userTomorrow, isLoadingTomorrow, errorTomorrow] = useTasksSnapshot({
+		timestampStart: dateRanges.tomorrow.start,
+		timestampEnd: dateRanges.tomorrow.end,
+	});
 	const tasksTomorrow = tasksDataTomorrow ? tasksDataTomorrow : new Array(3).fill(null);
 
-	const [tasksDataNear, userNear, isLoadingNear, errorNear] = useTasksSnapshot(
-		dateRanges.near.start,
-		dateRanges.near.end,
-	);
+	const [tasksDataNear, userNear, isLoadingNear, errorNear] = useTasksSnapshot({
+		timestampStart: dateRanges.near.start,
+		timestampEnd: dateRanges.near.end,
+	});
 	const tasksNear = tasksDataNear ? tasksDataNear : new Array(3).fill(null);
 
 	let quantity: null | number = null;
