@@ -36,6 +36,18 @@ const useQuantityUpcomingTasksSnapshot = () => {
 		error = new Error("Couldn't get the number of upcoming tasks");
 	}
 
+	if (errorToday) {
+		console.error(errorToday);
+	}
+
+	if (errorTomorrow) {
+		console.error(errorTomorrow);
+	}
+
+	if (errorNear) {
+		console.error(errorNear);
+	}
+
 	return [quantity, isLoading, error] as const;
 };
 
