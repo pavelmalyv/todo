@@ -1,3 +1,5 @@
+@use '@styles/utils';
+
 .list {
 	--padding-x: 11px;
 }
@@ -6,9 +8,16 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	column-gap: 20px;
+	column-gap: 10px;
 	padding: var(--padding-x) 13px;
 	border-bottom: 1px solid rgb(var(--color-border-primary));
+
+	@include utils.mobile-l {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
 .button {
 	margin-top: 28px;
 }
