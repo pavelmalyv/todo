@@ -11,7 +11,7 @@ const useQuantityTasksSnapshot = ({
 	timestampEnd,
 	limit,
 }: QuantityTasksSnapshotOptions) => {
-	const [tasks, , isLoading, error] = useTasksSnapshot({ timestampStart, timestampEnd, limit });
+	const [tasks, isLoading, error] = useTasksSnapshot({ timestampStart, timestampEnd, limit });
 	let quantity: number | null = null;
 
 	if (tasks) {

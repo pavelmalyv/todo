@@ -1,5 +1,4 @@
 import type { Tasks } from '@/types/tasks';
-import type { User } from 'firebase/auth';
 
 import cl from './TasksList.module.scss';
 import Checkbox from '../UI/checkbox/Checkbox';
@@ -11,6 +10,7 @@ import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import EditTaskModal from '../Modals/editTaskModal/EditTaskModal';
 import Button from '../UI/button/Button';
 
+import { auth } from '@/firebase';
 import { showError } from '@/utils/notification';
 import { setTaskDoc } from '@/utils/firestore';
 import { useState } from 'react';
@@ -18,7 +18,6 @@ import { ERRORS_MESSAGES, LOADING_MESSAGES } from '@/consts/messages';
 
 type TasksListProps = {
 	tasks: Tasks | null[];
-	user: User | null;
 	isLoading: boolean;
 	notFoundMessage: string;
 	error?: unknown;
@@ -34,7 +33,6 @@ type TasksListProps = {
 );
 
 const TasksList = ({
-	user,
 	tasks,
 	isLoading,
 	isVisibleMore,
@@ -49,11 +47,12 @@ const TasksList = ({
 	};
 
 	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
-		try {
-			if (!user) {
-				throw new Error('Invalid user value');
-			}
+		const user = auth.currentUser;
+		if (!user) {
+			throw new Error('Invalid user value');
+		}
 
+		try {
 			await setTaskDoc(user.uid, id, { done: e.target.checked });
 		} catch (error) {
 			showError(ERRORS_MESSAGES.updateTask, error);

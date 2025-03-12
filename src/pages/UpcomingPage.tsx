@@ -14,14 +14,14 @@ import { LIMIT_UPCOMING_TASKS } from '@/consts/docLimits';
 const UpcomingPage = () => {
 	const dateRanges = getDateRanges();
 
-	const [tasksDataToday, userToday, isLoadingToday, errorToday] = useTasksSnapshot({
+	const [tasksDataToday, isLoadingToday, errorToday] = useTasksSnapshot({
 		timestampStart: dateRanges.today.start,
 		timestampEnd: dateRanges.today.end,
 		limit: LIMIT_UPCOMING_TASKS,
 	});
 	const tasksToday = tasksDataToday ? tasksDataToday : new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
-	const [tasksDataTomorrow, userTomorrow, isLoadingTomorrow, errorTomorrow] = useTasksSnapshot({
+	const [tasksDataTomorrow, isLoadingTomorrow, errorTomorrow] = useTasksSnapshot({
 		timestampStart: dateRanges.tomorrow.start,
 		timestampEnd: dateRanges.tomorrow.end,
 		limit: LIMIT_UPCOMING_TASKS,
@@ -30,7 +30,7 @@ const UpcomingPage = () => {
 		? tasksDataTomorrow
 		: new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
-	const [tasksDataNear, userNear, isLoadingNear, errorNear] = useTasksSnapshot({
+	const [tasksDataNear, isLoadingNear, errorNear] = useTasksSnapshot({
 		timestampStart: dateRanges.near.start,
 		timestampEnd: dateRanges.near.end,
 		limit: LIMIT_UPCOMING_TASKS,
@@ -52,7 +52,6 @@ const UpcomingPage = () => {
 			<Section title="Сегодня">
 				<TasksList
 					tasks={tasksToday}
-					user={userToday}
 					isLoading={isLoadingToday}
 					isVisibleMore={tasksDataToday?.length === LIMIT_UPCOMING_TASKS}
 					moreTo="#"
@@ -65,7 +64,6 @@ const UpcomingPage = () => {
 				<Section title="Завтра">
 					<TasksList
 						tasks={tasksTomorrow}
-						user={userTomorrow}
 						isLoading={isLoadingTomorrow}
 						isVisibleMore={tasksDataTomorrow?.length === LIMIT_UPCOMING_TASKS}
 						moreTo="#"
@@ -76,7 +74,6 @@ const UpcomingPage = () => {
 				<Section title="Ближайшие">
 					<TasksList
 						tasks={tasksNear}
-						user={userNear}
 						isLoading={isLoadingNear}
 						isVisibleMore={tasksDataNear?.length === LIMIT_UPCOMING_TASKS}
 						moreTo="#"

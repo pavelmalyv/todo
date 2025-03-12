@@ -86,7 +86,7 @@ const useTasksSnapshot = ({
 		return () => unsubscribe();
 	}, [uid, timestampStart, timestampEnd, limitQuery]);
 
-	return [tasks, user, isLoading, error] as const;
+	return [tasks, isLoading, error] as const;
 };
 
 export default useTasksSnapshot;
