@@ -7,7 +7,6 @@ import { useId } from 'react';
 import { InferType, object } from 'yup';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { auth } from '@/firebase';
 import { getErrorMessageFirebase } from '@/utils/firebase';
 import {
 	emailSchema,
@@ -29,7 +28,7 @@ type FormData = InferType<typeof formSchema>;
 
 const RegistrationPage = () => {
 	const titleId = useId();
-	const [createUser, isLoading, error] = useCreateUserEmailPasswordFullField(auth);
+	const [createUser, isLoading, error] = useCreateUserEmailPasswordFullField();
 
 	const { handleSubmit, control } = useForm<FormData>({
 		resolver: yupResolver(formSchema),
