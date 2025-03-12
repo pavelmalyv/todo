@@ -1,21 +1,16 @@
 import classNames from 'classnames';
 import cl from './ErrorMessage.module.scss';
-import { useEffect } from 'react';
 
 interface ErrorMessageProps {
 	message: string | undefined;
-	error?: unknown;
+	error?: Error;
 	className?: string;
 }
 
 const ErrorMessage = ({ message, error, className }: ErrorMessageProps) => {
-	useEffect(() => {
-		if (!error) {
-			return;
-		}
-
+	if (error) {
 		console.error(error);
-	}, [error]);
+	}
 
 	return (
 		<div className={classNames(cl.error, className)} role="status">

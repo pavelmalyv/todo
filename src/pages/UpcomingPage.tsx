@@ -4,9 +4,8 @@ import TasksList from '@/components/tasksList/TasksList';
 import TableSections from '@/components/tableSections/TableSections';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
 import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
+import useNotificationError from '@/hooks/useNotificationError';
 
-import { showError } from '@/utils/notification';
-import { useEffect } from 'react';
 import { getDateRanges } from '@/utils/date';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 import { LIMIT_UPCOMING_TASKS } from '@/consts/docLimits';
@@ -39,13 +38,7 @@ const UpcomingPage = () => {
 
 	const [quantity, isLoadingQuantity, errorQuantity] = useQuantityUpcomingTasksSnapshot();
 
-	useEffect(() => {
-		if (!errorQuantity) {
-			return;
-		}
-
-		showError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantity);
-	}, [errorQuantity]);
+	useNotificationError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantity);
 
 	return (
 		<Profile title="Предстоящие" quantity={quantity} isLoadingQuantity={isLoadingQuantity}>

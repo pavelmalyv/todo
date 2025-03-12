@@ -26,7 +26,7 @@ const useQuantityUpcomingTasksSnapshot = () => {
 
 	const isLoading = isLoadingToday || isLoadingTomorrow || isLoadingNear;
 	let quantity: number | null = null;
-	let error: unknown | undefined;
+	let error: Error | undefined;
 
 	if (today !== null && tomorrow !== null && near !== null) {
 		quantity = today + tomorrow + near;

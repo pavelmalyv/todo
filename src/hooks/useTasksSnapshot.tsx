@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { onSnapshot, orderBy, query, Timestamp, where, limit } from 'firebase/firestore';
 import { tasksCollectionRef } from '@/firebase';
 import { taskSchema } from '@/schemas/tasks';
+import { normalizeError } from '@/utils/error';
 
 interface TasksSnapshotOptions {
 	timestampStart: number;
@@ -19,23 +20,27 @@ const useTasksSnapshot = ({
 }: TasksSnapshotOptions) => {
 	const [tasks, setTasks] = useState<Tasks | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
-	const [error, setError] = useState<unknown | undefined>(undefined);
+	const [error, setError] = useState<Error | undefined>(undefined);
 	const [user, , errorUser] = useUserState();
 
 	const uid = user ? user.uid : null;
 
-	const handleError = (error: unknown) => {
+	const handleError = (error: Error) => {
 		setIsLoading(false);
 		setError(error);
 	};
 
+	if (errorUser) {
+		console.error(errorUser);
+	}
+
 	useEffect(() => {
-		if (!errorUser) {
+		if (!errorUser?.message) {
 			return;
 		}
 
-		handleError(errorUser);
-	}, [errorUser]);
+		handleError(new Error('Authorization error'));
+	}, [errorUser?.message]);
 
 	useEffect(() => {
 		if (!uid) {
@@ -75,7 +80,7 @@ const useTasksSnapshot = ({
 					setTasks(tasks);
 					setIsLoading(false);
 				} catch (error) {
-					handleError(error);
+					handleError(normalizeError(error));
 				}
 			},
 			(error) => {

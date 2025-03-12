@@ -8,10 +8,10 @@ import TagMarker from '../UI/tagMarker/TagMarker';
 import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
 import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
 import useQuantityTasksSnapshot from '@/hooks/useQuantityTasksSnapshot';
+import useNotificationError from '@/hooks/useNotificationError';
 
-import { useEffect, useId } from 'react';
+import { useId } from 'react';
 import { getDateRanges } from '@/utils/date';
-import { showError } from '@/utils/notification';
 import { Link, NavLink } from 'react-router';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LIMIT_QUANTITY_TODAY } from '@/consts/docLimits';
@@ -28,13 +28,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 	const [quantityUpcoming, isLoadingQuantityUpcoming, errorQuantityUpcoming] =
 		useQuantityUpcomingTasksSnapshot();
 
-	useEffect(() => {
-		if (!errorQuantityUpcoming) {
-			return;
-		}
-
-		showError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantityUpcoming);
-	}, [errorQuantityUpcoming]);
+	useNotificationError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantityUpcoming);
 
 	const [quantityToday, isLoadingQuantityToday, errorQuantityToday] = useQuantityTasksSnapshot({
 		timestampStart: dateRanges.today.start,
@@ -47,14 +41,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 		quantityTodayDisplay =
 			quantityToday > LIMIT_QUANTITY_TODAY ? `${LIMIT_QUANTITY_TODAY}+` : String(quantityToday);
 	}
-
-	useEffect(() => {
-		if (!errorQuantityToday) {
-			return;
-		}
-
-		showError(ERRORS_MESSAGES.quantityTodayTasksLoading, errorQuantityToday);
-	}, [errorQuantityToday]);
+	useNotificationError(ERRORS_MESSAGES.quantityTodayTasksLoading, errorQuantityToday);
 
 	return (
 		<aside className={cl.aside} aria-labelledby={titleId}>

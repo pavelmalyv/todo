@@ -20,7 +20,7 @@ type TasksListProps = {
 	tasks: Tasks | null[];
 	isLoading: boolean;
 	notFoundMessage: string;
-	error?: unknown;
+	error?: Error;
 } & (
 	| {
 			isVisibleMore?: never;
