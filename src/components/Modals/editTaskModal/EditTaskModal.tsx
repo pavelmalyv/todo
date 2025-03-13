@@ -70,6 +70,7 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 			await deleteTask(initialData.id);
 
 			onClose();
+			setIsOpenConfirm(false);
 			showSuccess(SUCCESS_MESSAGES.deleteTask);
 		} catch (error) {
 			showError(ERRORS_MESSAGES.deleteTask, error);
