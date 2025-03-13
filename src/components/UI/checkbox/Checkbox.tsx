@@ -14,6 +14,7 @@ interface CheckboxProps {
 	errorMessage?: string;
 	center?: boolean;
 	className?: string;
+	labelId?: string;
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 	onBlur?: React.FocusEventHandler<HTMLInputElement>;
 	'aria-controls'?: string;
@@ -32,6 +33,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 			errorMessage,
 			center = false,
 			className,
+			labelId,
 			onChange,
 			onBlur,
 			'aria-controls': ariaControls,
@@ -68,7 +70,9 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 					<span className={cl.emulator}>
 						<Icon className={cl['emulator-marker']}>check</Icon>
 					</span>
-					<span className={cl.description}>{label}</span>
+					<span id={labelId} className={cl.description}>
+						{label}
+					</span>
 				</label>
 				<FieldError id={errorMessageId} message={errorMessage ? errorMessage : null} />
 			</div>
