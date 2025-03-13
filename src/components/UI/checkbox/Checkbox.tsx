@@ -42,6 +42,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 		},
 		ref,
 	) => {
+		const fieldId = useId();
 		const errorMessageId = useId();
 
 		return (
@@ -53,20 +54,21 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 					className,
 				)}
 			>
-				<label className={cl.label}>
-					<input
-						ref={ref}
-						type="checkbox"
-						className={cl.field}
-						name={name}
-						checked={checked}
-						disabled={disabled}
-						onChange={onChange}
-						onBlur={onBlur}
-						aria-controls={ariaControls}
-						aria-invalid={ariaInvalid}
-						aria-required={ariaRequired}
-					/>
+				<input
+					id={fieldId}
+					ref={ref}
+					type="checkbox"
+					className={cl.field}
+					name={name}
+					checked={checked}
+					disabled={disabled}
+					onChange={onChange}
+					onBlur={onBlur}
+					aria-controls={ariaControls}
+					aria-invalid={ariaInvalid}
+					aria-required={ariaRequired}
+				/>
+				<label htmlFor={fieldId} className={cl.label}>
 					<span className={cl.emulator}>
 						<Icon className={cl['emulator-marker']}>check</Icon>
 					</span>

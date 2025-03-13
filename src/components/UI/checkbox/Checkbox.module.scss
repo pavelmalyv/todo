@@ -35,20 +35,20 @@
 	}
 }
 
-.field:checked + .emulator .emulator-marker {
+.field:checked + .label .emulator .emulator-marker {
 	opacity: 1;
 }
 
-.field[aria-invalid='true'] + .emulator {
+.field[aria-invalid='true'] + .label .emulator {
 	--border-color: rgb(var(--color-error));
 }
 
-.field:focus + .emulator {
+.field:focus + .label .emulator {
 	--border-color: rgb(var(--color-accent-primary));
 	--background-color: rgba(var(--color-background-tertiary-light));
 }
 
-[data-theme='dark'] .field:focus + .emulator {
+[data-theme='dark'] .field:focus + .label .emulator {
 	--background-color: rgba(var(--color-background-secondary));
 }
 
@@ -67,7 +67,7 @@
 		align-items: center;
 	}
 
-	&_through .field:checked + .emulator + .description {
+	&_through .field:checked + .label .emulator + .description {
 		text-decoration: line-through;
 	}
 }
