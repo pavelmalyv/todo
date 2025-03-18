@@ -15,7 +15,7 @@ import { getDateRanges } from '@/utils/date';
 import { Link, NavLink } from 'react-router';
 import { getQuantityShort } from '@/utils/quantity';
 import { ERRORS_MESSAGES } from '@/consts/messages';
-import { LIMIT_QUANTITY_TODAY } from '@/consts/docLimits';
+import { LIMIT_QUANTITY_TASKS } from '@/consts/docLimits';
 import { TODAY_TASKS_URL } from '@/consts/routes';
 
 interface MenuProps {
@@ -35,7 +35,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 	const [quantityToday, isLoadingQuantityToday, errorQuantityToday] = useQuantityTasksSnapshot({
 		timestampStart: dateRanges.today.start,
 		timestampEnd: dateRanges.today.end,
-		limit: LIMIT_QUANTITY_TODAY + 1,
+		limit: LIMIT_QUANTITY_TASKS + 1,
 	});
 
 	useNotificationError(ERRORS_MESSAGES.quantityTodayTasksLoading, errorQuantityToday);
@@ -81,7 +81,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 									<div className={cl['menu-quantity']}>
 										<VisuallyHiddenLoader isLoading={isLoadingQuantityToday}>
 											{quantityToday !== null ? (
-												getQuantityShort(quantityToday, LIMIT_QUANTITY_TODAY)
+												getQuantityShort(quantityToday, LIMIT_QUANTITY_TASKS)
 											) : (
 												<Skeleton />
 											)}
