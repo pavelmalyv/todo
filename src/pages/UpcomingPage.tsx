@@ -10,7 +10,7 @@ import Button from '@/components/UI/button/Button';
 import { getDateRanges } from '@/utils/date';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 import { LIMIT_UPCOMING_TASKS } from '@/consts/docLimits';
-import { TODAY_TASKS_URL } from '@/consts/routes';
+import { TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
 
 const UpcomingPage = () => {
 	const dateRanges = getDateRanges();
@@ -71,7 +71,7 @@ const UpcomingPage = () => {
 					>
 						{tasksDataTomorrow?.length === LIMIT_UPCOMING_TASKS && (
 							<TasksList.Button>
-								<Button type="link" to="#" style="border" size="small">
+								<Button type="link" to={TOMORROW_TASKS_URL} style="border" size="small">
 									Смотреть все
 								</Button>
 							</TasksList.Button>
