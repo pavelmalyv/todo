@@ -47,21 +47,32 @@
 	}
 
 	&_small {
+		position: relative;
 		font-size: 14px;
 		min-height: 30px;
 		min-width: initial;
 		padding: 4px 14px;
 		border-radius: 8px;
+
+		.spinner-wrapper {
+			@include utils.flex-center(true);
+
+			position: absolute;
+			inset: calc(var(--border-width, 0) * -1);
+			background-color: rgba(var(--color-background-primary), 0.3);
+			color: rgb(var(--color-text-primary));
+		}
 	}
 
 	&_border {
+		--border-width: 1px;
 		--background-color: transparent !important;
 		--border-color: rgb(var(--color-border-primary));
 		--color-text: rgb(var(--color-text-secondary));
 
 		@include utils.base-animation(color, border-color, opacity);
 
-		border: 1px solid var(--border-color);
+		border: var(--border-width) solid var(--border-color);
 		color: var(--color-text);
 
 		&:not(:disabled) {
