@@ -5,6 +5,7 @@ import TableSections from '@/components/tableSections/TableSections';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
 import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
 import useNotificationError from '@/hooks/useNotificationError';
+import Button from '@/components/UI/button/Button';
 
 import { getDateRanges } from '@/utils/date';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
@@ -47,11 +48,17 @@ const UpcomingPage = () => {
 				<TasksList
 					tasks={tasksToday}
 					isLoading={isLoadingToday}
-					isVisibleMore={tasksDataToday?.length === LIMIT_UPCOMING_TASKS}
-					moreTo={TODAY_TASKS_URL}
 					notFoundMessage={NOT_FOUND_MESSAGES.todayTasks}
 					error={errorToday}
-				/>
+				>
+					{tasksDataToday?.length === LIMIT_UPCOMING_TASKS && (
+						<TasksList.Button>
+							<Button type="link" to={TODAY_TASKS_URL} style="border" size="small">
+								Смотреть все
+							</Button>
+						</TasksList.Button>
+					)}
+				</TasksList>
 			</Section>
 
 			<TableSections>
@@ -59,21 +66,33 @@ const UpcomingPage = () => {
 					<TasksList
 						tasks={tasksTomorrow}
 						isLoading={isLoadingTomorrow}
-						isVisibleMore={tasksDataTomorrow?.length === LIMIT_UPCOMING_TASKS}
-						moreTo="#"
 						notFoundMessage={NOT_FOUND_MESSAGES.tomorrowTasks}
 						error={errorTomorrow}
-					/>
+					>
+						{tasksDataTomorrow?.length === LIMIT_UPCOMING_TASKS && (
+							<TasksList.Button>
+								<Button type="link" to="#" style="border" size="small">
+									Смотреть все
+								</Button>
+							</TasksList.Button>
+						)}
+					</TasksList>
 				</Section>
 				<Section title="Ближайшие">
 					<TasksList
 						tasks={tasksNear}
 						isLoading={isLoadingNear}
-						isVisibleMore={tasksDataNear?.length === LIMIT_UPCOMING_TASKS}
-						moreTo="#"
 						notFoundMessage={NOT_FOUND_MESSAGES.nearTasks}
 						error={errorNear}
-					/>
+					>
+						{tasksDataNear?.length === LIMIT_UPCOMING_TASKS && (
+							<TasksList.Button>
+								<Button type="link" to="#" style="border" size="small">
+									Смотреть все
+								</Button>
+							</TasksList.Button>
+						)}
+					</TasksList>
 				</Section>
 			</TableSections>
 		</Profile>

@@ -8,7 +8,6 @@ import MessageInfo from '../UI/messageInfo/MessageInfo';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import EditTaskModal from '../Modals/editTaskModal/EditTaskModal';
-import Button from '../UI/button/Button';
 
 import { auth } from '@/firebase';
 import { showError } from '@/utils/notification';
@@ -21,25 +20,10 @@ type TasksListProps = {
 	isLoading: boolean;
 	notFoundMessage: string;
 	error?: Error;
-} & (
-	| {
-			isVisibleMore?: never;
-			moreTo?: never;
-	  }
-	| {
-			isVisibleMore: boolean;
-			moreTo: string;
-	  }
-);
+	children?: React.ReactNode;
+};
 
-const TasksList = ({
-	tasks,
-	isLoading,
-	isVisibleMore,
-	moreTo,
-	notFoundMessage,
-	error,
-}: TasksListProps) => {
+const TasksList = ({ tasks, isLoading, notFoundMessage, error, children }: TasksListProps) => {
 	const [isOpenEditModals, setIsOpenEditModals] = useState<{ [key: string]: boolean }>({});
 
 	const setIsOpenEditModal = (id: string, value: boolean) => {
@@ -109,11 +93,7 @@ const TasksList = ({
 								})}
 							</ul>
 
-							{isVisibleMore && (
-								<Button type="link" to={moreTo} className={cl.button} style="border" size="small">
-									Смотреть все
-								</Button>
-							)}
+							{children}
 						</VisuallyHiddenLoader>
 					)}
 				</>
@@ -121,5 +101,15 @@ const TasksList = ({
 		</>
 	);
 };
+
+interface ButtonProps {
+	children: React.ReactNode;
+}
+
+const Button = ({ children }: ButtonProps) => {
+	return <div className={cl.button}>{children}</div>;
+};
+
+TasksList.Button = Button;
 
 export default TasksList;
