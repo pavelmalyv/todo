@@ -55,12 +55,14 @@ export const ERRORS_MESSAGES = {
 export const LOADING_MESSAGES = {
 	common: 'Загрузка...',
 	tasks: 'Загрузка задач...',
+	tags: 'Загрузка тегов...',
 };
 
 export const NOT_FOUND_MESSAGES = {
 	todayTasks: 'На сегодня задач нет',
 	tomorrowTasks: 'На завтра задач нет',
 	nearTasks: 'Ближайших задач нет',
+	tags: 'Тегов нет',
 };
 
 export const SUCCESS_MESSAGES = {

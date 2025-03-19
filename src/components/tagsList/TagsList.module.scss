@@ -1,6 +1,8 @@
 @use '@styles/utils';
 
 .list {
+	--padding-y: 5px;
+
 	display: flex;
 	flex-direction: column;
 	row-gap: 13px;
@@ -14,7 +16,7 @@
 	display: flex;
 	align-items: center;
 	column-gap: 10px;
-	padding: 5px 4px;
+	padding: var(--padding-y) 4px;
 	border-radius: 50px;
 	background-color: var(--background-color);
 
@@ -25,6 +27,11 @@
 	&[aria-current='page'] {
 		--background-color: rgb(var(--color-accent-quaternary));
 	}
+}
+
+.skeleton {
+	padding: var(--padding-y) 0;
+	border-radius: 50px;
 }
 
 .name {
