@@ -1,6 +1,6 @@
 import type { Tags } from '@/types/tags';
 
-import cl from './TagsList.module.scss';
+import cl from './TagsNav.module.scss';
 import TagMarker from '../UI/tagMarker/TagMarker';
 import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
 import AddTagModal from '../Modals/addTagModal/AddTagModal';
@@ -8,14 +8,14 @@ import useTagsSnapshot from '@/hooks/useTagsSnapshot';
 import Skeleton from 'react-loading-skeleton';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
+import MessageInfo from '../UI/messageInfo/MessageInfo';
 
 import { NavLink } from 'react-router';
 import { useState } from 'react';
 import { LIMIT_TAGS } from '@/consts/docLimits';
 import { ERRORS_MESSAGES, LOADING_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
-import MessageInfo from '../UI/messageInfo/MessageInfo';
 
-const TagsList = () => {
+const TagsNav = () => {
 	const [tagsData, isLoading, error] = useTagsSnapshot();
 	const [isOpenAddTag, setIsOpenAddTag] = useState(false);
 	const tags: Tags | null[] = tagsData ?? new Array(4).fill(null);
@@ -26,7 +26,7 @@ const TagsList = () => {
 
 	return (
 		<>
-			<div className={cl.tags}>
+			<div>
 				{tags.length === 0 ? (
 					<MessageInfo message={NOT_FOUND_MESSAGES.tags} />
 				) : (
@@ -72,4 +72,4 @@ const TagsList = () => {
 	);
 };
 
-export default TagsList;
+export default TagsNav;

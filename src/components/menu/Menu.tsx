@@ -4,7 +4,7 @@ import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import Icon from '../UI/icon/Icon';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import Skeleton from 'react-loading-skeleton';
-import TagsList from '../tagsList/TagsList';
+import TagsNav from '../tagsNav/TagsNav';
 import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
 import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
 import useQuantityTasksSnapshot from '@/hooks/useQuantityTasksSnapshot';
@@ -122,7 +122,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 				<div className={cl.section}>
 					<h3 className={classNames('h3', cl.subtitle)}>Теги</h3>
 
-					<TagsList />
+					<TagsNav />
 				</div>
 			</div>
 
