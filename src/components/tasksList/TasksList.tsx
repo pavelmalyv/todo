@@ -43,60 +43,58 @@ const TasksList = ({ tasks, isLoading, notFoundMessage, error, children }: Tasks
 		}
 	};
 
+	if (error) {
+		return <ErrorMessage message={ERRORS_MESSAGES.tasksLoading} error={error} />;
+	}
+
 	return (
 		<>
-			{error ? (
-				<ErrorMessage message={ERRORS_MESSAGES.tasksLoading} error={error} />
+			{tasks.length === 0 ? (
+				<MessageInfo message={notFoundMessage} />
 			) : (
-				<>
-					{tasks.length === 0 ? (
-						<MessageInfo message={notFoundMessage} />
-					) : (
-						<VisuallyHiddenLoader isLoading={isLoading} hiddenMessage={LOADING_MESSAGES.tasks}>
-							<ul className={cl.list}>
-								{tasks.map((task, index) => {
-									const key = task ? task.id : index;
+				<VisuallyHiddenLoader isLoading={isLoading} hiddenMessage={LOADING_MESSAGES.tasks}>
+					<ul className={cl.list}>
+						{tasks.map((task, index) => {
+							const key = task ? task.id : index;
 
-									return (
-										<li className={cl.item} key={key}>
-											{task ? (
-												<>
-													<div className={cl.task}>
-														<Checkbox
-															style="through"
-															label={task.name}
-															checked={task.done}
-															onChange={(e) => handleChange(e, task.id)}
-														/>
-														<ButtonIcon
-															style="circle"
-															hiddenName="Редактировать задачу"
-															onClick={() => setIsOpenEditModal(task.id, true)}
-														>
-															edit
-														</ButtonIcon>
-													</div>
+							return (
+								<li className={cl.item} key={key}>
+									{task ? (
+										<>
+											<div className={cl.task}>
+												<Checkbox
+													style="through"
+													label={task.name}
+													checked={task.done}
+													onChange={(e) => handleChange(e, task.id)}
+												/>
+												<ButtonIcon
+													style="circle"
+													hiddenName="Редактировать задачу"
+													onClick={() => setIsOpenEditModal(task.id, true)}
+												>
+													edit
+												</ButtonIcon>
+											</div>
 
-													<EditTaskModal
-														initialData={task}
-														isOpen={isOpenEditModals[task.id] ?? false}
-														onClose={() => setIsOpenEditModal(task.id, false)}
-													/>
-												</>
-											) : (
-												<div className={cl.skeleton}>
-													<Skeleton height={22} />
-												</div>
-											)}
-										</li>
-									);
-								})}
-							</ul>
+											<EditTaskModal
+												initialData={task}
+												isOpen={isOpenEditModals[task.id] ?? false}
+												onClose={() => setIsOpenEditModal(task.id, false)}
+											/>
+										</>
+									) : (
+										<div className={cl.skeleton}>
+											<Skeleton height={22} />
+										</div>
+									)}
+								</li>
+							);
+						})}
+					</ul>
 
-							{children}
-						</VisuallyHiddenLoader>
-					)}
-				</>
+					{children}
+				</VisuallyHiddenLoader>
 			)}
 		</>
 	);
