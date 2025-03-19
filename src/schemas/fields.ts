@@ -30,3 +30,11 @@ export const nameTaskSchema = string()
 	.required(MESSAGES_FIELD.nameTaskRequired);
 
 export const doneTaskSchema = boolean().required();
+
+export const nameTagSchema = string()
+	.max(100, MESSAGES_FIELD.nameTagMax(100))
+	.required(MESSAGES_FIELD.nameTagRequired);
+
+export const hexColorSchema = string()
+	.matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, MESSAGES_FIELD.hexColorInvalid)
+	.required(MESSAGES_FIELD.colorRequired);

@@ -16,6 +16,10 @@ export const MESSAGES_FIELD = {
 	dateRequired: 'Дата обязательна',
 	nameTaskMax: (max: number) => `Максимальная длина названия задачи ${max} символов`,
 	nameTaskRequired: 'Название задачи обязательно',
+	nameTagMax: (max: number) => `Максимальная длина названия тега ${max} символов`,
+	nameTagRequired: 'Название тега обязательно',
+	hexColorInvalid: 'Неверный цвет в формате HEX',
+	colorRequired: 'Цвет обязателен',
 };
 
 export const ERRORS_MESSAGES_FIREBASE: Record<string, string> = {
@@ -45,6 +49,7 @@ export const ERRORS_MESSAGES = {
 	addTask: 'Ошибка добавления задачи, повторите попытку позже',
 	saveTask: 'Ошибка обновления задачи, повторите попытку позже',
 	deleteTask: 'Ошибка удаления задачи, повторите попытку позже',
+	addTag: 'Ошибка добавления тега, повторите попытку позже',
 };
 
 export const LOADING_MESSAGES = {
@@ -62,4 +67,5 @@ export const SUCCESS_MESSAGES = {
 	addTask: 'Задача добавлена',
 	saveTask: 'Изменения сохранены',
 	deleteTask: 'Задача удалена',
+	addTag: 'Тег добавлен',
 };

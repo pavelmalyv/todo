@@ -18,3 +18,4 @@ export const db = getFirestore(app);
 
 export const userCollectionRef = collection(db, 'users');
 export const tasksCollectionRef = (uid: string) => collection(userCollectionRef, uid, 'tasks');
+export const tagsCollectionRef = (uid: string) => collection(userCollectionRef, uid, 'tags');
