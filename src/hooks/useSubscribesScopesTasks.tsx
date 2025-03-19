@@ -56,13 +56,17 @@ const useSubscribesScopesTasks = () => {
 
 	const setTasksFromSnapshot = useCallback(
 		async (querySnapshot: QuerySnapshot, subscribeId: string) => {
-			querySnapshot.docChanges().forEach(async (change) => {
+			const changes = querySnapshot.docChanges();
+			for (const key in changes) {
+				const change = changes[key];
+
 				const taskData = {
 					id: change.doc.id,
 					...change.doc.data(),
 				};
 
 				const task = await taskSchema.validate(taskData);
+
 				const valueTaskData = { task, doc: change.doc };
 
 				switch (change.type) {
@@ -140,7 +144,7 @@ const useSubscribesScopesTasks = () => {
 						break;
 					}
 				}
-			});
+			}
 		},
 		[unsubscribeFetchMore],
 	);
