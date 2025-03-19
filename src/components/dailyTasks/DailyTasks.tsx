@@ -1,3 +1,5 @@
+import type { Tasks } from '@/types/tasks';
+
 import Profile from '@/components/profile/Profile';
 import Section from '@/components/UI/section/Section';
 import TasksList from '@/components/tasksList/TasksList';
@@ -40,7 +42,7 @@ const DailyTasks = ({
 			limit,
 		});
 
-	const tasksToday = tasks ? tasks : new Array(limit).fill(null);
+	const tasksToday: Tasks | null[] = tasks ?? new Array(limit).fill(null);
 	const [quantity, isLoadingQuantity, errorQuantityToday] = useQuantityTasksSnapshot({
 		timestampStart,
 		timestampEnd,
