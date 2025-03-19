@@ -1,3 +1,5 @@
+import type { Tasks } from '@/types/tasks';
+
 import Profile from '@/components/profile/Profile';
 import Section from '@/components/UI/section/Section';
 import TasksList from '@/components/tasksList/TasksList';
@@ -20,23 +22,22 @@ const UpcomingPage = () => {
 		timestampEnd: dateRanges.today.end,
 		limit: LIMIT_UPCOMING_TASKS,
 	});
-	const tasksToday = tasksDataToday ? tasksDataToday : new Array(LIMIT_UPCOMING_TASKS).fill(null);
+	const tasksToday: Tasks | null[] = tasksDataToday ?? new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
 	const [tasksDataTomorrow, isLoadingTomorrow, errorTomorrow] = useTasksSnapshot({
 		timestampStart: dateRanges.tomorrow.start,
 		timestampEnd: dateRanges.tomorrow.end,
 		limit: LIMIT_UPCOMING_TASKS,
 	});
-	const tasksTomorrow = tasksDataTomorrow
-		? tasksDataTomorrow
-		: new Array(LIMIT_UPCOMING_TASKS).fill(null);
+	const tasksTomorrow: Tasks | null[] =
+		tasksDataTomorrow ?? new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
 	const [tasksDataNear, isLoadingNear, errorNear] = useTasksSnapshot({
 		timestampStart: dateRanges.near.start,
 		timestampEnd: dateRanges.near.end,
 		limit: LIMIT_UPCOMING_TASKS,
 	});
-	const tasksNear = tasksDataNear ? tasksDataNear : new Array(LIMIT_UPCOMING_TASKS).fill(null);
+	const tasksNear: Tasks | null[] = tasksDataNear ?? new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
 	const [quantity, isLoadingQuantity, errorQuantity] = useQuantityUpcomingTasksSnapshot();
 
