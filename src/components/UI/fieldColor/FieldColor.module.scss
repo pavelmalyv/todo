@@ -1,0 +1,67 @@
+@use '@styles/utils';
+
+.head-wrapper {
+	margin-bottom: 12px;
+}
+
+.head {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+}
+
+.label {
+	font-size: 16px;
+	color: rgb(var(--color-text-tertiary));
+}
+
+.selected {
+	--border-color: rgb(var(--color-border-secondary));
+
+	@include utils.base-animation(border-color);
+
+	width: 48px;
+	aspect-ratio: 2.5;
+	border: 1px solid var(--border-color);
+	border-radius: 50px;
+}
+
+.field {
+	&:focus + .selected,
+	&[aria-invalid='true'] + .selected {
+		outline: 2px solid rgb(var(--color-background-tertiary));
+		outline-offset: -3px;
+	}
+
+	&:focus + .selected {
+		--border-color: rgb(var(--color-accent-primary));
+	}
+
+	&[aria-invalid='true'] + .selected {
+		--border-color: rgb(var(--color-error));
+	}
+}
+
+:global {
+	.sketch-picker {
+		--triangle-width: 15px;
+		--border-color: rgba(var(--color-border-primary), 0.5);
+		--background-color: rgb(var(--color-background-primary));
+
+		position: relative;
+		z-index: 0;
+		border: 1px solid var(--border-color);
+		box-shadow: none !important;
+		border-radius: 8px !important;
+		background-color: var(--background-color) !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+
+		.flexbox-fix {
+			input,
+			label {
+				display: none !important;
+			}
+		}
+	}
+}
