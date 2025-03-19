@@ -4,7 +4,7 @@ import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import Icon from '../UI/icon/Icon';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import Skeleton from 'react-loading-skeleton';
-import TagMarker from '../UI/tagMarker/TagMarker';
+import TagsList from '../tagsList/TagsList';
 import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
 import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
 import useQuantityTasksSnapshot from '@/hooks/useQuantityTasksSnapshot';
@@ -121,38 +121,8 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 				</div>
 				<div className={cl.section}>
 					<h3 className={classNames('h3', cl.subtitle)}>Теги</h3>
-					<nav className={cl.tags}>
-						<ul className={cl['tags-list']}>
-							<li className={cl['tags-item']}>
-								<NavLink className={cl['tags-link']} to={'/'}>
-									<TagMarker color="#FF0000" />
 
-									<span className={cl['tags-name']}>Работа</span>
-								</NavLink>
-							</li>
-							<li className={cl['tags-item']}>
-								<NavLink className={cl['tags-link']} to={'other/'}>
-									<TagMarker color="#FF0000" />
-
-									<span className={cl['tags-name']}>Личное</span>
-								</NavLink>
-							</li>
-							<li className={cl['tags-item']}>
-								<NavLink className={cl['tags-link']} to={'other/'}>
-									<TagMarker color="#FF0000" />
-
-									<span className={cl['tags-name']}>
-										В частности, разбавленное изрядной долей эмпатии, рациональное мышление не
-										оставляет шанса для вывода текущих активов
-									</span>
-								</NavLink>
-							</li>
-						</ul>
-					</nav>
-
-					<ButtonIconText className={cl['button-add']} icon="add_circle" size="small">
-						Добавить тег
-					</ButtonIconText>
+					<TagsList />
 				</div>
 			</div>
 

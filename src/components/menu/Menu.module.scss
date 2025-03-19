@@ -103,45 +103,6 @@
 	}
 }
 
-.tags {
-	&-list {
-		display: flex;
-		flex-direction: column;
-		row-gap: 13px;
-	}
-
-	&-link {
-		--background-color: rgb(var(--color-background-sixth));
-
-		@include utils.base-animation(background-color);
-
-		display: flex;
-		align-items: center;
-		column-gap: 10px;
-		padding: 5px 4px;
-		border-radius: 50px;
-		background-color: var(--background-color);
-
-		@include utils.hover {
-			--background-color: rgb(var(--color-accent-quaternary));
-		}
-
-		&[aria-current='page'] {
-			--background-color: rgb(var(--color-accent-quaternary));
-		}
-	}
-
-	&-name {
-		overflow: hidden;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-}
-
-.button-add {
-	margin-top: 12px;
-}
-
 .bottom {
 	margin-top: auto;
 }
