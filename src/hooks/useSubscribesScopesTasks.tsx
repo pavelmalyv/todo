@@ -60,12 +60,17 @@ const useSubscribesScopesTasks = () => {
 			for (const key in changes) {
 				const change = changes[key];
 
-				const taskData = {
-					id: change.doc.id,
-					...change.doc.data(),
-				};
+				let task: Task;
 
-				const task = await taskSchema.validate(taskData);
+				try {
+					task = await taskSchema.validate({
+						id: change.doc.id,
+						...change.doc.data(),
+					});
+				} catch (error) {
+					console.error(error);
+					continue;
+				}
 
 				const valueTaskData = { task, doc: change.doc };
 
