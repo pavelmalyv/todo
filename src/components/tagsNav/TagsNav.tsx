@@ -2,22 +2,18 @@ import type { Tags } from '@/types/tags';
 
 import cl from './TagsNav.module.scss';
 import TagMarker from '../UI/tagMarker/TagMarker';
-import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
-import AddTagModal from '../Modals/addTagModal/AddTagModal';
 import useTagsSnapshot from '@/hooks/useTagsSnapshot';
 import Skeleton from 'react-loading-skeleton';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import MessageInfo from '../UI/messageInfo/MessageInfo';
+import AddTagButton from '../addTagButton/AddTagButton';
 
 import { NavLink } from 'react-router';
-import { useState } from 'react';
-import { LIMIT_TAGS } from '@/consts/docLimits';
 import { ERRORS_MESSAGES, LOADING_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 const TagsNav = () => {
 	const [tagsData, isLoading, error] = useTagsSnapshot();
-	const [isOpenAddTag, setIsOpenAddTag] = useState(false);
 	const tags: Tags | null[] = tagsData ?? new Array(4).fill(null);
 
 	if (error) {
@@ -55,19 +51,8 @@ const TagsNav = () => {
 					</nav>
 				)}
 
-				{tagsData && tagsData.length < LIMIT_TAGS && (
-					<ButtonIconText
-						className={cl['button']}
-						icon="add_circle"
-						size="small"
-						onClick={() => setIsOpenAddTag(true)}
-					>
-						Добавить тег
-					</ButtonIconText>
-				)}
+				<AddTagButton tags={tagsData} className={cl['button']} />
 			</div>
-
-			<AddTagModal isOpen={isOpenAddTag} onClose={() => setIsOpenAddTag(false)} />
 		</>
 	);
 };
