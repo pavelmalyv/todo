@@ -99,7 +99,12 @@ const Profile = ({
 									)}
 								</div>
 							</div>
-							<Button size="small" style="border" onClick={() => setIsOpenTaskModal(true)}>
+							<Button
+								className={cl.button}
+								size="small"
+								style="border"
+								onClick={() => setIsOpenTaskModal(true)}
+							>
 								Добавить задачу
 							</Button>
 						</div>

@@ -40,13 +40,21 @@
 }
 
 .head {
+	--margin-top: 6px;
+
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: space-between;
 	gap: 18px 20px;
 	margin-bottom: 36px;
 
+	@include utils.tablet-l {
+		--margin-top: 4px;
+	}
+
 	@include utils.mobile-l {
+		--margin-top: 1px;
+
 		flex-direction: column;
 		align-items: flex-start;
 	}
@@ -54,7 +62,7 @@
 
 .main {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	column-gap: 16px;
 
 	@include utils.mobile-l {
@@ -66,7 +74,7 @@
 
 .title {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 	gap: 10px 19px;
 
 	@include utils.mobile-l {
@@ -81,10 +89,16 @@
 	padding: 3px 7px;
 	min-height: 28px;
 	min-width: 52px;
+	margin-top: var(--margin-top);
 	font-size: 16px;
 	line-height: 1;
 	border: 1px solid rgb(var(--color-border-primary));
 	border-radius: 100px 50px 100px 100px;
+}
+
+.button {
+	flex-shrink: 0;
+	margin-top: var(--margin-top);
 }
 
 .quantity-skeleton {
