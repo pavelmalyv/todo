@@ -1,4 +1,4 @@
-import DailyTasks from '@/components/dailyTasks/DailyTasks';
+import TasksPage from './TasksPage';
 
 import { getDateRanges } from '@/utils/date';
 import { LIMIT_TASKS, LIMIT_QUANTITY_TASKS } from '@/consts/docLimits';
@@ -8,7 +8,7 @@ const TodayPage = () => {
 	const dateRanges = getDateRanges();
 
 	return (
-		<DailyTasks
+		<TasksPage
 			title="Сегодня"
 			subtitle="Задачи"
 			timestampStart={dateRanges.today.start}

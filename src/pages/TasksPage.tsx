@@ -12,7 +12,7 @@ import { getQuantityShort } from '@/utils/quantity';
 import { showError } from '@/utils/notification';
 import { useId } from 'react';
 
-interface DailyTasksProps {
+interface TasksPageProps {
 	title: string;
 	subtitle: string;
 	timestampStart: number;
@@ -24,7 +24,7 @@ interface DailyTasksProps {
 	notFoundMessage: string;
 }
 
-const DailyTasks = ({
+const TasksPage = ({
 	title,
 	subtitle,
 	timestampStart,
@@ -34,7 +34,7 @@ const DailyTasks = ({
 	errorMessageQuantityLoading,
 	errorMessageTasksLoading,
 	notFoundMessage,
-}: DailyTasksProps) => {
+}: TasksPageProps) => {
 	const [tasks, isLoading, errorToday, { fetchMore, isLoadingMore, hasMoreData }] =
 		useTasksSnapshot({
 			timestampStart,
@@ -90,4 +90,4 @@ const DailyTasks = ({
 	);
 };
 
-export default DailyTasks;
+export default TasksPage;
