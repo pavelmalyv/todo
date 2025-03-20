@@ -23,6 +23,7 @@ interface TasksPageProps {
 	errorMessageQuantityLoading: string;
 	errorMessageTasksLoading: string;
 	notFoundMessage: string;
+	headButtons?: React.ReactNode;
 }
 
 const TasksPage = ({
@@ -34,6 +35,7 @@ const TasksPage = ({
 	errorMessageQuantityLoading,
 	errorMessageTasksLoading,
 	notFoundMessage,
+	headButtons,
 }: TasksPageProps) => {
 	const [tasks, isLoading, errorToday, { fetchMore, isLoadingMore, hasMoreData }] =
 		useTasksSnapshot({
@@ -70,6 +72,7 @@ const TasksPage = ({
 			isLoadingTitle={isLoadingTitle}
 			quantity={quantityShort}
 			isLoadingQuantity={isLoadingQuantity}
+			headButtons={headButtons}
 		>
 			<Section title="Задачи" titleId={titleId}>
 				<TasksList
