@@ -9,7 +9,12 @@
 .legend {
 	font-size: 16px;
 	margin-bottom: 12px;
-color: rgb(var(--color-text-tertiary));
+	color: rgb(var(--color-text-tertiary));
+}
+
+.item {
+	--min-height-item: 28px;
+	--border-radius-item: 30px;
 }
 
 .label {
@@ -22,12 +27,18 @@ color: rgb(var(--color-text-tertiary));
 	display: flex;
 	align-items: center;
 	column-gap: 10px;
-	min-height: 28px;
+	min-height: var(--min-height-item);
 	padding: 5px 12px;
-	border-radius: 30px;
+	border-radius: var(--border-radius-item);
 	border: 1px solid var(--border-color);
 	color: var(--color-text);
 	background-color: var(--background-color);
+}
+
+.skeleton {
+	height: var(--min-height-item);
+	width: 60px;
+	border-radius: var(--border-radius-item);
 }
 
 .checkbox {

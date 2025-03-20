@@ -1,5 +1,6 @@
 import cl from './TagsSelect.module.scss';
 import TagMarker from '../tagMarker/TagMarker';
+import Skeleton from 'react-loading-skeleton';
 import { useId } from 'react';
 
 interface TagsSelectProps {
@@ -21,14 +22,23 @@ const TagsSelect = ({ children }: TagsSelectProps) => {
 	);
 };
 
-interface TagProps {
-	color: string;
-	value?: string;
-	onChange?: React.ChangeEventHandler<HTMLInputElement>;
-	children: React.ReactNode;
-}
+type TagProps =
+	| {
+			isSkeleton: true;
+			color?: never;
+			value?: never;
+			children?: never;
+			onChange?: never;
+	  }
+	| {
+			isSkeleton?: false;
+			color: string;
+			value?: string;
+			children: React.ReactNode;
+			onChange?: React.ChangeEventHandler<HTMLInputElement>;
+	  };
 
-const Tag = ({ color, children, value, onChange }: TagProps) => {
+const Tag = ({ color, children, value, isSkeleton, onChange }: TagProps) => {
 	const titleId = useId();
 
 	return (
@@ -40,10 +50,14 @@ const Tag = ({ color, children, value, onChange }: TagProps) => {
 				value={value}
 				onChange={onChange}
 			/>
-			<label htmlFor={titleId} className={cl.label}>
-				<TagMarker color={color} />
-				<span className={cl.name}>{children}</span>
-			</label>
+			{isSkeleton ? (
+				<Skeleton className={cl.skeleton} />
+			) : (
+				<label htmlFor={titleId} className={cl.label}>
+					<TagMarker color={color} />
+					<span className={cl.name}>{children}</span>
+				</label>
+			)}
 		</div>
 	);
 };
