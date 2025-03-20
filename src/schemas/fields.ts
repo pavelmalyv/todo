@@ -1,5 +1,5 @@
-import { MESSAGES_FIELD } from '@/consts/messages';
 import { string, ref, date, boolean } from 'yup';
+import { MESSAGES_FIELD } from '@/consts/messages';
 
 export const emailSchema = string().email().required(MESSAGES_FIELD.emailRequired);
 export const passwordSchema = string().required(MESSAGES_FIELD.passwordRequired);
@@ -39,4 +39,5 @@ export const hexColorSchema = string()
 	.matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, MESSAGES_FIELD.hexColorInvalid)
 	.required(MESSAGES_FIELD.colorRequired);
 
+export const tagIdSchema = string().required();
 export const tagIdSchemaOptional = string();

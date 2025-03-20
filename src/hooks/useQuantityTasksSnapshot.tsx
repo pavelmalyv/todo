@@ -1,17 +1,26 @@
+import type { TagId } from '@/types/fields';
+
 import useTasksSnapshot from './useTasksSnapshot';
 
 interface QuantityTasksSnapshotOptions {
-	timestampStart: number;
-	timestampEnd: number;
+	timestampStart?: number;
+	timestampEnd?: number;
+	tagId?: TagId;
 	limit?: number;
 }
 
 const useQuantityTasksSnapshot = ({
 	timestampStart,
 	timestampEnd,
+	tagId,
 	limit,
 }: QuantityTasksSnapshotOptions) => {
-	const [tasks, isLoading, error] = useTasksSnapshot({ timestampStart, timestampEnd, limit });
+	const [tasks, isLoading, error] = useTasksSnapshot({
+		timestampStart,
+		timestampEnd,
+		tagId,
+		limit,
+	});
 	let quantity: number | null = null;
 
 	if (tasks) {
