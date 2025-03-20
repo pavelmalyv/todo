@@ -17,6 +17,7 @@ interface ProfileProps {
 	quantity?: string | null;
 	isLoadingQuantity?: boolean;
 	children: React.ReactNode;
+	headButtons?: React.ReactNode;
 }
 
 const Profile = ({
@@ -25,6 +26,7 @@ const Profile = ({
 	quantity,
 	isLoadingQuantity = false,
 	children,
+	headButtons,
 }: ProfileProps) => {
 	const profileRef = useRef<HTMLDivElement | null>(null);
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
@@ -99,14 +101,18 @@ const Profile = ({
 									)}
 								</div>
 							</div>
-							<Button
-								className={cl.button}
-								size="small"
-								style="border"
-								onClick={() => setIsOpenTaskModal(true)}
-							>
-								Добавить задачу
-							</Button>
+							<div className={cl.buttons}>
+								{headButtons}
+
+								<Button
+									className={cl.button}
+									size="small"
+									style="border"
+									onClick={() => setIsOpenTaskModal(true)}
+								>
+									Добавить задачу
+								</Button>
+							</div>
 						</div>
 						<div>{children}</div>
 					</div>

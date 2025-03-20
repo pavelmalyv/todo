@@ -45,6 +45,7 @@
 	display: flex;
 	align-items: flex-start;
 	justify-content: space-between;
+	flex-wrap: wrap;
 	gap: 18px 20px;
 	margin-bottom: 36px;
 
@@ -96,9 +97,16 @@
 	border-radius: 100px 50px 100px 100px;
 }
 
-.button {
-	flex-shrink: 0;
+.buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
 	margin-top: var(--margin-top);
+	flex-shrink: 0;
+}
+
+.buttons > * {
+	flex-grow: 1;
 }
 
 .quantity-skeleton {
