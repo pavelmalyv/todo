@@ -28,11 +28,19 @@
 	align-items: center;
 	column-gap: 10px;
 	min-height: var(--min-height-item);
+	max-width: 250px;
 	padding: 5px 12px;
 	border-radius: var(--border-radius-item);
 	border: 1px solid var(--border-color);
 	color: var(--color-text);
 	background-color: var(--background-color);
+}
+
+.name {
+	font-size: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .skeleton {
@@ -58,8 +66,4 @@
 
 .checkbox:focus + .label {
 	--border-color: rgb(var(--color-accent-primary));
-}
-
-.name {
-	font-size: 14px;
 }
