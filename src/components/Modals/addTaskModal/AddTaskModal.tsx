@@ -4,14 +4,14 @@ import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import AppModal from '@/components/UI/appModal/AppModal';
 import Field from '@/components/UI/field/Field';
 import FieldDate from '@/components/UI/fieldDate/FieldDate';
-import TagsSelect from '@/components/UI/tagsSelect/TagsSelect';
+import TagsSelectList from '@/components/tagsSelectList/TagsSelectList';
 import useAddTask from '@/hooks/useAddTask';
 
-import { useId } from 'react';
+import { ChangeEvent, useId } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InferType, object } from 'yup';
-import { datePickerSchema, nameTaskSchema } from '@/schemas/fields';
+import { datePickerSchema, nameTaskSchema, tagIdSchemaOptional } from '@/schemas/fields';
 import { showError, showSuccess } from '@/utils/notification';
 import { ERRORS_MESSAGES, SUCCESS_MESSAGES } from '@/consts/messages';
 
@@ -23,6 +23,7 @@ interface AddTaskModalProps {
 const addTaskFormSchema = object({
 	dueAt: datePickerSchema,
 	name: nameTaskSchema,
+	tagId: tagIdSchemaOptional,
 });
 
 type AddTaskFormData = InferType<typeof addTaskFormSchema>;
@@ -31,10 +32,11 @@ const AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
 	const [addTask, isLoading] = useAddTask();
 
 	const titleId = useId();
-	const { control, reset, handleSubmit } = useForm<AddTaskFormData>({
+	const { control, reset, handleSubmit, setValue } = useForm<AddTaskFormData>({
 		defaultValues: {
 			dueAt: null,
 			name: '',
+			tagId: '',
 		},
 		resolver: yupResolver(addTaskFormSchema),
 	});
@@ -92,13 +94,21 @@ const AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
 						/>
 					)}
 				/>
-
-				<TagsSelect>
-					<TagsSelect.Tag color="#FF0000">Работа</TagsSelect.Tag>
-					<TagsSelect.Tag color="#61FF00">Личное</TagsSelect.Tag>
-					<TagsSelect.Tag color="#FFB700">Учеба</TagsSelect.Tag>
-					<TagsSelect.Tag color="#5D7DF0">В частности, разбавленное изрядной</TagsSelect.Tag>
-				</TagsSelect>
+				<Controller
+					name="tagId"
+					control={control}
+					render={({ field, fieldState }) => (
+						<TagsSelectList
+							aria-invalid={fieldState.invalid}
+							errorMessage={fieldState.error?.message}
+							{...field}
+							onChange={(e: ChangeEvent<HTMLInputElement>) => {
+								const value = e.target.value;
+								setValue('tagId', field.value === value ? '' : value);
+							}}
+						/>
+					)}
+				/>
 			</SmallForm>
 		</AppModal>
 	);

@@ -1,5 +1,5 @@
 import { array, date, number, object, string } from 'yup';
-import { doneTaskSchema, nameTaskSchema } from './fields';
+import { doneTaskSchema, nameTaskSchema, tagIdSchemaOptional } from './fields';
 
 export const taskSchema = object({
 	id: string().required(),
@@ -14,6 +14,7 @@ export const saveTaskSchema = object({
 	name: nameTaskSchema,
 	done: doneTaskSchema,
 	dueAt: date().required(),
+	tagId: tagIdSchemaOptional,
 });
 
 export const tasksSchema = array().of(taskSchema).required();

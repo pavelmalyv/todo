@@ -38,3 +38,5 @@ export const nameTagSchema = string()
 export const hexColorSchema = string()
 	.matches(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/, MESSAGES_FIELD.hexColorInvalid)
 	.required(MESSAGES_FIELD.colorRequired);
+
+export const tagIdSchemaOptional = string();
