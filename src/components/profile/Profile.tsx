@@ -12,13 +12,20 @@ import { useEffect, useRef, useState } from 'react';
 import { throttle } from 'lodash';
 
 interface ProfileProps {
-	title: string;
+	title: string | null;
+	isLoadingTitle?: boolean;
 	quantity?: string | null;
 	isLoadingQuantity?: boolean;
 	children: React.ReactNode;
 }
 
-const Profile = ({ title, quantity, isLoadingQuantity = false, children }: ProfileProps) => {
+const Profile = ({
+	title,
+	isLoadingTitle = false,
+	quantity,
+	isLoadingQuantity = false,
+	children,
+}: ProfileProps) => {
 	const profileRef = useRef<HTMLDivElement | null>(null);
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 	const [isOpenTaskModal, setIsOpenTaskModal] = useState(false);
@@ -72,7 +79,11 @@ const Profile = ({ title, quantity, isLoadingQuantity = false, children }: Profi
 									</ButtonIcon>
 								</div>
 								<div className={cl.title}>
-									<h1 className="h2">{title}</h1>
+									<h1 className="h2">
+										<VisuallyHiddenLoader isLoading={isLoadingTitle}>
+											{title ? title : <Skeleton width={160} />}
+										</VisuallyHiddenLoader>
+									</h1>
 									{quantity !== undefined && (
 										<VisuallyHiddenLoader isLoading={isLoadingQuantity}>
 											<div className={cl.quantity}>
