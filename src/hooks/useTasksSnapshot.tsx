@@ -1,5 +1,6 @@
 import type { Tasks } from '@/types/tasks';
 import type { QueryConstraint, QueryDocumentSnapshot } from 'firebase/firestore';
+import type { TagId } from '@/types/fields';
 
 import useUserState from './useUserState';
 import useSubscribesScopesTasks from './useSubscribesScopesTasks';
@@ -19,13 +20,15 @@ import {
 } from 'firebase/firestore';
 
 interface TasksSnapshotOptions {
-	timestampStart: number;
-	timestampEnd: number;
+	timestampStart?: number;
+	timestampEnd?: number;
+	tagId?: TagId;
 	limit?: number;
 }
 const useTasksSnapshot = ({
 	timestampStart,
 	timestampEnd,
+	tagId,
 	limit: limitQuery = 30,
 }: TasksSnapshotOptions) => {
 	const limitQueryNext = limitQuery + 1;
@@ -59,14 +62,23 @@ const useTasksSnapshot = ({
 			limitQuery?: number;
 			startDoc?: QueryDocumentSnapshot;
 		}) => {
-			const startDate = Timestamp.fromMillis(timestampStart);
-			const endDate = Timestamp.fromMillis(timestampEnd);
+			const conditions: QueryConstraint[] = [];
 
-			const conditions: QueryConstraint[] = [
-				where('dueAt', '>=', startDate),
-				where('dueAt', '<', endDate),
-				orderBy('dueAt', 'desc'),
-			];
+			if (timestampStart) {
+				const startDate = Timestamp.fromMillis(timestampStart);
+				conditions.push(where('dueAt', '>=', startDate));
+			}
+
+			if (timestampEnd) {
+				const endDate = Timestamp.fromMillis(timestampEnd);
+				conditions.push(where('dueAt', '<', endDate));
+			}
+
+			if (tagId) {
+				conditions.push(where('tagId', '==', tagId));
+			}
+
+			conditions.push(orderBy('dueAt', 'desc'));
 
 			if (limitQuery) {
 				conditions.push(limit(limitQuery));
@@ -78,7 +90,7 @@ const useTasksSnapshot = ({
 
 			return query(tasksCollectionRef(uid), ...conditions);
 		},
-		[timestampStart, timestampEnd],
+		[timestampStart, timestampEnd, tagId],
 	);
 
 	const handleErrorInit = (error: Error) => {
