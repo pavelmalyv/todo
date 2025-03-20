@@ -1,0 +1,68 @@
+import type { Tag } from '@/types/tags';
+import type { TagId } from '@/types/fields';
+
+import useUserState from './useUserState';
+import { useCallback, useEffect, useState } from 'react';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { tagsCollectionRef } from '@/firebase';
+import { tagSchema } from '@/schemas/tags';
+import { normalizeError } from '@/utils/error';
+
+const useTagSnapshot = (id: TagId) => {
+	const [tag, setTag] = useState<Tag | null>(null);
+	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState<Error | undefined>(undefined);
+	const [user, , errorUser] = useUserState();
+	const uid = user ? user.uid : null;
+
+	if (errorUser) {
+		console.error(errorUser);
+	}
+
+	const handleError = useCallback((error: Error) => {
+		setError(error);
+		setIsLoading(false);
+	}, []);
+
+	useEffect(() => {
+		if (!errorUser?.message) {
+			return;
+		}
+
+		handleError(new Error('Authorization error'));
+	}, [errorUser?.message, handleError]);
+
+	useEffect(() => {
+		if (!uid) {
+			return;
+		}
+
+		const unsubscribe = onSnapshot(
+			doc(tagsCollectionRef(uid), id),
+			async (querySnapshot) => {
+				try {
+					setIsLoading(true);
+
+					const tag = await tagSchema.validate({
+						id: querySnapshot.id,
+						...querySnapshot.data(),
+					});
+
+					setTag(tag);
+					setIsLoading(false);
+				} catch (error) {
+					handleError(normalizeError(error));
+				}
+			},
+			(error) => {
+				handleError(error);
+			},
+		);
+
+		return () => unsubscribe();
+	}, [uid, id, handleError]);
+
+	return [tag, isLoading, error] as const;
+};
+
+export default useTagSnapshot;
