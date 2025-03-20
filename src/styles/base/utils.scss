@@ -55,11 +55,27 @@
 .h1 {
 	font-size: 36px;
 	font-family: var(--font-secondary);
+
+	@include utils.tablet-l {
+		font-size: 32px;
+	}
+
+	@include utils.mobile-l {
+		font-size: 28px;
+	}
 }
 
 .h2 {
 	font-size: 32px;
 	font-family: var(--font-secondary);
+
+	@include utils.tablet-l {
+		font-size: 28px;
+	}
+
+	@include utils.mobile-l {
+		font-size: 24px;
+	}
 }
 
 .h3 {
