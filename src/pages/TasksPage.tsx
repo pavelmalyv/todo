@@ -15,7 +15,8 @@ import { useId } from 'react';
 import { LIMIT_QUANTITY_TASKS, LIMIT_TASKS } from '@/consts/docLimits';
 
 interface TasksPageProps {
-	title: string;
+	title: string | null;
+	isLoadingTitle?: boolean;
 	timestampStart?: number;
 	timestampEnd?: number;
 	tagId?: TagId;
@@ -26,6 +27,7 @@ interface TasksPageProps {
 
 const TasksPage = ({
 	title,
+	isLoadingTitle,
 	timestampStart,
 	timestampEnd,
 	tagId,
@@ -63,7 +65,12 @@ const TasksPage = ({
 	const titleId = useId();
 
 	return (
-		<Profile title={title} quantity={quantityShort} isLoadingQuantity={isLoadingQuantity}>
+		<Profile
+			title={title}
+			isLoadingTitle={isLoadingTitle}
+			quantity={quantityShort}
+			isLoadingQuantity={isLoadingQuantity}
+		>
 			<Section title="Задачи" titleId={titleId}>
 				<TasksList
 					tasks={tasksToday}
