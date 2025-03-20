@@ -1,4 +1,5 @@
 import type { Tasks } from '@/types/tasks';
+import type { TagId } from '@/types/fields';
 
 import Profile from '@/components/profile/Profile';
 import Section from '@/components/UI/section/Section';
@@ -11,14 +12,13 @@ import useNotificationError from '@/hooks/useNotificationError';
 import { getQuantityShort } from '@/utils/quantity';
 import { showError } from '@/utils/notification';
 import { useId } from 'react';
+import { LIMIT_QUANTITY_TASKS, LIMIT_TASKS } from '@/consts/docLimits';
 
 interface TasksPageProps {
 	title: string;
-	subtitle: string;
-	timestampStart: number;
-	timestampEnd: number;
-	limit: number;
-	limitQuantity: number;
+	timestampStart?: number;
+	timestampEnd?: number;
+	tagId?: TagId;
 	errorMessageQuantityLoading: string;
 	errorMessageTasksLoading: string;
 	notFoundMessage: string;
@@ -26,11 +26,9 @@ interface TasksPageProps {
 
 const TasksPage = ({
 	title,
-	subtitle,
 	timestampStart,
 	timestampEnd,
-	limit,
-	limitQuantity,
+	tagId,
 	errorMessageQuantityLoading,
 	errorMessageTasksLoading,
 	notFoundMessage,
@@ -39,14 +37,16 @@ const TasksPage = ({
 		useTasksSnapshot({
 			timestampStart,
 			timestampEnd,
-			limit,
+			tagId,
+			limit: LIMIT_TASKS,
 		});
 
-	const tasksToday: Tasks | null[] = tasks ?? new Array(limit).fill(null);
+	const tasksToday: Tasks | null[] = tasks ?? new Array(LIMIT_TASKS).fill(null);
 	const [quantity, isLoadingQuantity, errorQuantityToday] = useQuantityTasksSnapshot({
 		timestampStart,
 		timestampEnd,
-		limit: limitQuantity + 1,
+		tagId,
+		limit: LIMIT_QUANTITY_TASKS + 1,
 	});
 
 	useNotificationError(errorMessageQuantityLoading, errorQuantityToday);
@@ -59,12 +59,12 @@ const TasksPage = ({
 		}
 	};
 
-	const quantityShort = quantity !== null ? getQuantityShort(quantity, limitQuantity) : null;
+	const quantityShort = quantity !== null ? getQuantityShort(quantity, LIMIT_QUANTITY_TASKS) : null;
 	const titleId = useId();
 
 	return (
 		<Profile title={title} quantity={quantityShort} isLoadingQuantity={isLoadingQuantity}>
-			<Section title={subtitle} titleId={titleId}>
+			<Section title="Задачи" titleId={titleId}>
 				<TasksList
 					tasks={tasksToday}
 					isLoading={isLoading}
