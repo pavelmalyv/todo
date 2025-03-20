@@ -6,7 +6,13 @@ import useNotificationError from '@/hooks/useNotificationError';
 
 import { Navigate, Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';
-import { LOGIN_URL, REGISTRATION_URL, TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
+import {
+	getTagUrl,
+	LOGIN_URL,
+	REGISTRATION_URL,
+	TODAY_TASKS_URL,
+	TOMORROW_TASKS_URL,
+} from '@/consts/routes';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 
 const HomePage = lazy(() => import('@/pages/HomePage'));
@@ -15,6 +21,7 @@ const UpcomingPage = lazy(() => import('@/pages/UpcomingPage'));
 const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'));
 const TodayPage = lazy(() => import('@/pages/TodayPage'));
 const TomorrowPage = lazy(() => import('@/pages/TomorrowPage'));
+const TagPage = lazy(() => import('@/pages/TagPage'));
 
 const AppRouter = () => {
 	const [user, isLoading, error] = useUserState();
@@ -45,6 +52,14 @@ const AppRouter = () => {
 				element={
 					<Suspense>
 						<TomorrowPage />
+					</Suspense>
+				}
+			/>
+			<Route
+				path={getTagUrl(':id')}
+				element={
+					<Suspense>
+						<TagPage />
 					</Suspense>
 				}
 			/>

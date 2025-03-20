@@ -11,6 +11,7 @@ import AddTagButton from '../addTagButton/AddTagButton';
 
 import { NavLink } from 'react-router';
 import { ERRORS_MESSAGES, LOADING_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
+import { getTagUrl } from '@/consts/routes';
 
 const TagsNav = () => {
 	const [tagsData, isLoading, error] = useTagsSnapshot();
@@ -35,7 +36,7 @@ const TagsNav = () => {
 									return (
 										<li className={cl.item} key={key}>
 											{tag ? (
-												<NavLink className={cl.link} to={'/other'}>
+												<NavLink className={cl.link} to={getTagUrl(tag.id)}>
 													<TagMarker color={tag.color} />
 
 													<span className={cl.name}>{tag.name}</span>
