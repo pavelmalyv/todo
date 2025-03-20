@@ -24,11 +24,18 @@ const SmallForm = ({
 	onSubmit,
 	['aria-labelledby']: ariaLabelledby,
 }: SmallFormProps) => {
+	const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+		e.stopPropagation();
+
+		if (onSubmit) {
+			onSubmit(e);
+		}
+	};
 	return (
 		<form
 			className={classNames(cl.form, className)}
 			aria-labelledby={ariaLabelledby}
-			onSubmit={onSubmit}
+			onSubmit={handleSubmit}
 			noValidate
 		>
 			<fieldset className={cl.body} disabled={isLoading}>
