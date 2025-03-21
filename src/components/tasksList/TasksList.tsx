@@ -1,4 +1,4 @@
-import type { Tasks } from '@/types/tasks';
+import type { TaskId, Tasks } from '@/types/tasks';
 
 import cl from './TasksList.module.scss';
 import Checkbox from '../UI/checkbox/Checkbox';
@@ -24,13 +24,13 @@ type TasksListProps = {
 };
 
 const TasksList = ({ tasks, isLoading, notFoundMessage, error, children }: TasksListProps) => {
-	const [isOpenEditModals, setIsOpenEditModals] = useState<{ [key: string]: boolean }>({});
+	const [isOpenEditModals, setIsOpenEditModals] = useState<{ [key: TaskId]: boolean }>({});
 
-	const setIsOpenEditModal = (id: string, value: boolean) => {
+	const setIsOpenEditModal = (id: TaskId, value: boolean) => {
 		setIsOpenEditModals((prev) => ({ ...prev, [id]: value }));
 	};
 
-	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+	const handleChange = async (e: React.ChangeEvent<HTMLInputElement>, id: TaskId) => {
 		const user = auth.currentUser;
 		if (!user) {
 			throw new Error('Invalid user value');

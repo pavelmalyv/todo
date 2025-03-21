@@ -1,4 +1,4 @@
-import type { SaveTask } from '@/types/tasks';
+import type { SaveTask, TaskId } from '@/types/tasks';
 
 import { auth, tasksCollectionRef } from '@/firebase';
 import { doc, updateDoc } from 'firebase/firestore';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 const useSaveTask = () => {
 	const [isLoading, setIsLoading] = useState(false);
 
-	const saveTask = async (id: string, data: SaveTask) => {
+	const saveTask = async (id: TaskId, data: SaveTask) => {
 		const user = auth.currentUser;
 		if (!user) {
 			throw new Error('The user is not logged in');

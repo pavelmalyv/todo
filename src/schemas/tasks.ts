@@ -1,8 +1,8 @@
 import { array, date, number, object, string } from 'yup';
-import { doneTaskSchema, nameTaskSchema, tagIdSchemaOptional } from './fields';
+import { doneTaskSchema, nameTaskSchema, taskIdSchema, tagIdSchemaOptional } from './fields';
 
 export const taskSchema = object({
-	id: string().required(),
+	id: taskIdSchema,
 	name: string().required(),
 	done: doneTaskSchema,
 	tagId: tagIdSchemaOptional,

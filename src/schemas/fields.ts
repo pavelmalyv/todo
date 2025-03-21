@@ -25,6 +25,8 @@ export const datePickerSchema = date()
 	.nullable(MESSAGES_FIELD.dateRequired)
 	.test('not-empty', MESSAGES_FIELD.dateRequired, (value) => value !== null);
 
+export const taskIdSchema = string().required();
+
 export const nameTaskSchema = string()
 	.max(350, MESSAGES_FIELD.nameTaskMax(350))
 	.required(MESSAGES_FIELD.nameTaskRequired);
