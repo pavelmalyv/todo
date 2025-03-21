@@ -16,13 +16,8 @@ const useDeleteTask = () => {
 
 			const docRef = doc(tasksCollectionRef(user.uid), id);
 			await deleteDoc(docRef);
-
+		} finally {
 			setIsLoading(false);
-			return docRef;
-		} catch (error) {
-			setIsLoading(false);
-
-			throw error;
 		}
 	};
 
