@@ -9,6 +9,7 @@ import Checkbox from '@/components/UI/checkbox/Checkbox';
 import useSaveTask from '@/hooks/useSaveTask';
 import ConfirmModal from '../confirmModal/ConfirmModal';
 import Button from '@/components/UI/button/Button';
+import useDeleteTask from '@/hooks/useDeleteTask';
 
 import { datePickerSchema, doneTaskSchema, nameTaskSchema } from '@/schemas/fields';
 import { useId, useState } from 'react';
@@ -17,7 +18,6 @@ import { InferType, object } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { showError, showSuccess } from '@/utils/notification';
 import { ERRORS_MESSAGES, SUCCESS_MESSAGES } from '@/consts/messages';
-import useDeleteTask from '@/hooks/useDeleteTask';
 
 type EditTaskModalFormData = InferType<typeof editTaskModalFormSchema>;
 
