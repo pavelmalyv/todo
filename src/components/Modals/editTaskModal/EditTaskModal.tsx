@@ -142,7 +142,12 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 							>
 								Сбросить
 							</Button>
-							<Button type="submit" isFull={true} disabled={!formState.isDirty}>
+							<Button
+								type="submit"
+								isLoading={isLoading}
+								isFull={true}
+								disabled={!formState.isDirty}
+							>
 								Обновить
 							</Button>
 						</AppModal.Buttons>
