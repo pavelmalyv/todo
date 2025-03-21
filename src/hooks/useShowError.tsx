@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const useShowError = (message: string, error: Error | undefined) => {
 	useEffect(() => {
-		if (!error?.message || !error?.message) {
+		if (!error?.name || !error?.message) {
 			return;
 		}
 
