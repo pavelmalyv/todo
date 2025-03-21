@@ -9,9 +9,15 @@ import Checkbox from '@/components/UI/checkbox/Checkbox';
 import useSaveTask from '@/hooks/useSaveTask';
 import ConfirmModal from '../confirmModal/ConfirmModal';
 import Button from '@/components/UI/button/Button';
+import TagsSelectList from '@/components/tagsSelectList/TagsSelectList';
 import useDeleteTask from '@/hooks/useDeleteTask';
 
-import { datePickerSchema, doneTaskSchema, nameTaskSchema } from '@/schemas/fields';
+import {
+	datePickerSchema,
+	doneTaskSchema,
+	nameTaskSchema,
+	tagIdSchemaOptional,
+} from '@/schemas/fields';
 import { useId, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { InferType, object } from 'yup';
@@ -31,6 +37,7 @@ const editTaskModalFormSchema = object({
 	dueAt: datePickerSchema,
 	name: nameTaskSchema,
 	done: doneTaskSchema,
+	tagId: tagIdSchemaOptional,
 });
 
 const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => {
@@ -39,12 +46,13 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 	const [deleteTask, isLoadingDelete] = useDeleteTask();
 	const titleId = useId();
 
-	const { control, formState, reset, handleSubmit } = useForm<EditTaskModalFormData>({
+	const { control, formState, reset, handleSubmit, setValue } = useForm<EditTaskModalFormData>({
 		resolver: yupResolver(editTaskModalFormSchema),
 		defaultValues: {
 			dueAt: new Date(initialData.dueAt.seconds * 1000),
 			name: initialData.name,
 			done: initialData.done,
+			tagId: initialData.tagId,
 		},
 	});
 
@@ -125,6 +133,25 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 								errorMessage={fieldState.error?.message}
 								{...field}
 								checked={field.value}
+							/>
+						)}
+					/>
+
+					<Controller
+						name="tagId"
+						control={control}
+						render={({ field, fieldState }) => (
+							<TagsSelectList
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+								{...field}
+								onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+									const value = e.target.value;
+									setValue('tagId', field.value === value ? '' : value, {
+										shouldValidate: true,
+										shouldDirty: true,
+									});
+								}}
 							/>
 						)}
 					/>

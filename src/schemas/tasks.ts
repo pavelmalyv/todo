@@ -5,6 +5,7 @@ export const taskSchema = object({
 	id: string().required(),
 	name: string().required(),
 	done: doneTaskSchema,
+	tagId: tagIdSchemaOptional,
 	dueAt: object({
 		seconds: number().required(),
 	}),
