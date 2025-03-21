@@ -104,7 +104,10 @@ const AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
 							{...field}
 							onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
 								const value = e.target.value;
-								setValue('tagId', field.value === value ? '' : value);
+								setValue('tagId', field.value === value ? '' : value, {
+									shouldValidate: true,
+									shouldDirty: true,
+								});
 							}}
 						/>
 					)}
