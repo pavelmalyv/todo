@@ -18,12 +18,8 @@ const useSaveTask = () => {
 
 			const docRef = doc(tasksCollectionRef(user.uid), id);
 			await updateDoc(docRef, data);
-
+		} finally {
 			setIsLoading(false);
-		} catch (error) {
-			setIsLoading(false);
-
-			throw error;
 		}
 	};
 
