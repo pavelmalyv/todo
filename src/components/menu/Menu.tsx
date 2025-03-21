@@ -128,7 +128,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 
 			<div className={cl.bottom}>
 				<ButtonIconText className={cl.exit} icon="exit_to_app">
-					Sign Out
+					Выйти
 				</ButtonIconText>
 
 				<nav className={cl['small-menu']}>
