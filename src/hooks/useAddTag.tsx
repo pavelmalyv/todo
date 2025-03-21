@@ -15,17 +15,13 @@ const useAddTag = () => {
 
 		try {
 			setIsLoading(true);
-			const docRef = await addDoc(tagsCollectionRef(user.uid), {
+
+			return await addDoc(tagsCollectionRef(user.uid), {
 				...data,
 				createdAt: serverTimestamp(),
 			});
-
+		} finally {
 			setIsLoading(false);
-			return docRef;
-		} catch (error) {
-			setIsLoading(false);
-
-			throw error;
 		}
 	};
 
