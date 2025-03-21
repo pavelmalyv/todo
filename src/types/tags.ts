@@ -1,7 +1,7 @@
 import { tagSchema, tagsSchema } from './../schemas/tags';
-import { tagSaveSchema } from '@/schemas/tags';
+import { saveTagSchema } from '@/schemas/tags';
 import { InferType } from 'yup';
 
 export type Tag = InferType<typeof tagSchema>;
-export type TagSave = InferType<typeof tagSaveSchema>;
+export type SaveTag = InferType<typeof saveTagSchema>;
 export type Tags = InferType<typeof tagsSchema>;

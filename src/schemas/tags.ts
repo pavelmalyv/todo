@@ -10,7 +10,7 @@ export const tagSchema = object({
 	}),
 });
 
-export const tagSaveSchema = object({
+export const saveTagSchema = object({
 	name: nameTagSchema,
 	color: hexColorSchema,
 });
