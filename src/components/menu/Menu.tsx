@@ -8,7 +8,7 @@ import TagsNav from '../tagsNav/TagsNav';
 import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
 import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
 import useQuantityTasksSnapshot from '@/hooks/useQuantityTasksSnapshot';
-import useNotificationError from '@/hooks/useNotificationError';
+import useShowError from '@/hooks/useShowError';
 
 import { useId } from 'react';
 import { getDateRanges } from '@/utils/date';
@@ -30,7 +30,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 	const [quantityUpcoming, isLoadingQuantityUpcoming, errorQuantityUpcoming] =
 		useQuantityUpcomingTasksSnapshot();
 
-	useNotificationError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantityUpcoming);
+	useShowError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantityUpcoming);
 
 	const [quantityToday, isLoadingQuantityToday, errorQuantityToday] = useQuantityTasksSnapshot({
 		timestampStart: dateRanges.today.start,
@@ -38,7 +38,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 		limit: LIMIT_QUANTITY_TASKS + 1,
 	});
 
-	useNotificationError(ERRORS_MESSAGES.quantityTodayTasksLoading, errorQuantityToday);
+	useShowError(ERRORS_MESSAGES.quantityTodayTasksLoading, errorQuantityToday);
 
 	const [quantityTomorrow, isLoadingQuantityTomorrow, errorQuantityTomorrow] =
 		useQuantityTasksSnapshot({
@@ -47,7 +47,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 			limit: LIMIT_QUANTITY_TASKS + 1,
 		});
 
-	useNotificationError(ERRORS_MESSAGES.quantityTomorrowTasksLoading, errorQuantityTomorrow);
+	useShowError(ERRORS_MESSAGES.quantityTomorrowTasksLoading, errorQuantityTomorrow);
 
 	return (
 		<aside className={cl.aside} aria-labelledby={titleId}>

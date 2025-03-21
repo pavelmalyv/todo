@@ -2,7 +2,7 @@ import Root from '@/pages/Root';
 import useUserState from '@/hooks/useUserState';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
 import useDelayedLoader from '@/hooks/useDelayedLoader';
-import useNotificationError from '@/hooks/useNotificationError';
+import useShowError from '@/hooks/useShowError';
 
 import { Navigate, Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';
@@ -27,7 +27,7 @@ const AppRouter = () => {
 	const [user, isLoading, error] = useUserState();
 	const isDelayedLoading = useDelayedLoader(isLoading);
 
-	useNotificationError(ERRORS_MESSAGES.userLoading, error);
+	useShowError(ERRORS_MESSAGES.userLoading, error);
 
 	const privateRoutes = (
 		<>

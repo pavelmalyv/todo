@@ -6,7 +6,7 @@ import TasksList from '@/components/tasksList/TasksList';
 import TableSections from '@/components/tableSections/TableSections';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
 import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
-import useNotificationError from '@/hooks/useNotificationError';
+import useShowError from '@/hooks/useShowError';
 import Button from '@/components/UI/button/Button';
 
 import { getDateRanges } from '@/utils/date';
@@ -41,7 +41,7 @@ const UpcomingPage = () => {
 
 	const [quantity, isLoadingQuantity, errorQuantity] = useQuantityUpcomingTasksSnapshot();
 
-	useNotificationError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantity);
+	useShowError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantity);
 
 	return (
 		<Profile title="Предстоящие" quantity={String(quantity)} isLoadingQuantity={isLoadingQuantity}>

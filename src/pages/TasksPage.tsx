@@ -7,7 +7,7 @@ import TasksList from '@/components/tasksList/TasksList';
 import Button from '@/components/UI/button/Button';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
 import useQuantityTasksSnapshot from '@/hooks/useQuantityTasksSnapshot';
-import useNotificationError from '@/hooks/useNotificationError';
+import useShowError from '@/hooks/useShowError';
 
 import { getQuantityShort } from '@/utils/quantity';
 import { showError } from '@/utils/notification';
@@ -53,7 +53,7 @@ const TasksPage = ({
 		limit: LIMIT_QUANTITY_TASKS + 1,
 	});
 
-	useNotificationError(errorMessageQuantityLoading, errorQuantityToday);
+	useShowError(errorMessageQuantityLoading, errorQuantityToday);
 
 	const handleFetchMore = () => {
 		try {

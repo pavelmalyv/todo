@@ -1,7 +1,7 @@
 import TasksPage from './TasksPage';
 import Button from '@/components/UI/button/Button';
 import useTagSnapshot from '@/hooks/useTagSnapshot';
-import useNotificationError from '@/hooks/useNotificationError';
+import useShowError from '@/hooks/useShowError';
 
 import { requiredParamOrThrow } from '@/utils/error';
 import { useParams } from 'react-router';
@@ -12,7 +12,7 @@ const TagPage = () => {
 	const id = requiredParamOrThrow(params.id);
 	const [tag, isLoading, error] = useTagSnapshot(id);
 
-	useNotificationError(ERRORS_MESSAGES.tagNameLoading, error);
+	useShowError(ERRORS_MESSAGES.tagNameLoading, error);
 
 	return (
 		<TasksPage
