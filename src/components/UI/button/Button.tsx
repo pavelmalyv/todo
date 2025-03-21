@@ -1,6 +1,9 @@
 import classNames from 'classnames';
 import cl from './Button.module.scss';
+import VisuallyHiddenLoader from '@/components/visuallyHiddenLoader/VisuallyHiddenLoader';
+import Skeleton from 'react-loading-skeleton';
 import useDelayedLoader from '@/hooks/useDelayedLoader';
+
 import { Link } from 'react-router';
 
 type ButtonProps = {
@@ -9,6 +12,8 @@ type ButtonProps = {
 	className?: string;
 	isFull?: boolean;
 	isLoading?: boolean;
+	isLoadingSkeleton?: boolean;
+	isSkeleton?: boolean;
 	children: React.ReactNode;
 } & (
 	| {
@@ -37,6 +42,8 @@ const Button = ({
 	className,
 	isFull,
 	isLoading = false,
+	isLoadingSkeleton = false,
+	isSkeleton = false,
 	children,
 	onClick,
 }: ButtonProps) => {
@@ -71,14 +78,22 @@ const Button = ({
 		);
 	}
 	return (
-		<button
-			type={type}
-			disabled={disabled || isLoading}
-			className={classNameButton}
-			onClick={onClick}
-		>
-			{body}
-		</button>
+		<div className={classNames(cl['button-wrapper'], cl[`button-wrapper_${size}`])}>
+			<VisuallyHiddenLoader isLoading={isLoadingSkeleton}>
+				{isSkeleton ? (
+					<Skeleton className={cl.skeleton} />
+				) : (
+					<button
+						type={type}
+						disabled={disabled || isLoading}
+						className={classNameButton}
+						onClick={onClick}
+					>
+						{body}
+					</button>
+				)}
+			</VisuallyHiddenLoader>
+		</div>
 	);
 };
 
