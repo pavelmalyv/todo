@@ -7,7 +7,7 @@ import FieldDate from '@/components/UI/fieldDate/FieldDate';
 import TagsSelectList from '@/components/tagsSelectList/TagsSelectList';
 import useAddTask from '@/hooks/useAddTask';
 
-import { ChangeEvent, useId } from 'react';
+import { useId } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InferType, object } from 'yup';
@@ -102,7 +102,7 @@ const AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
 							aria-invalid={fieldState.invalid}
 							errorMessage={fieldState.error?.message}
 							{...field}
-							onChange={(e: ChangeEvent<HTMLInputElement>) => {
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
 								const value = e.target.value;
 								setValue('tagId', field.value === value ? '' : value);
 							}}
