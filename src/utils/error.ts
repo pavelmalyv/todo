@@ -5,6 +5,16 @@ export class NotFoundError extends Error {
 	}
 }
 
+export const checkNotFoundErrorOrThrow = (error: unknown) => {
+	if (error instanceof NotFoundError) {
+		throw NotFoundError;
+	}
+};
+
+export const isNotFoundError = (error: unknown) => {
+	return error instanceof NotFoundError;
+};
+
 export const requiredParamOrThrow = (param: string | undefined) => {
 	if (!param) {
 		throw new NotFoundError();

@@ -2,32 +2,52 @@ import TasksPage from './TasksPage';
 import Button from '@/components/UI/button/Button';
 import useTagSnapshot from '@/hooks/useTagSnapshot';
 import useShowError from '@/hooks/useShowError';
+import EditTagModal from '@/components/Modals/editTagModal/EditTagModal';
+import useRedirectNotFound from '@/hooks/useRedirectNotFound';
 
-import { requiredParamOrThrow } from '@/utils/error';
+import { checkNotFoundErrorOrThrow, isNotFoundError, requiredParamOrThrow } from '@/utils/error';
 import { useParams } from 'react-router';
+import { useState } from 'react';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 const TagPage = () => {
 	const params = useParams<{ id?: string }>();
 	const id = requiredParamOrThrow(params.id);
+	const [isDeleting, setIsDeleting] = useState(false);
 	const [tag, isLoading, error] = useTagSnapshot(id);
+	const [isOpenModal, setIsOpenModal] = useState(false);
 
-	useShowError(ERRORS_MESSAGES.tagNameLoading, error);
+	const isRedirect = isDeleting && isNotFoundError(error);
+	const errorWithoutDeleting = isDeleting ? undefined : error;
+
+	useRedirectNotFound(isRedirect, '/');
+	checkNotFoundErrorOrThrow(errorWithoutDeleting);
+	useShowError(ERRORS_MESSAGES.tagNameLoading, errorWithoutDeleting);
 
 	return (
-		<TasksPage
-			title={tag?.name ?? null}
-			isLoadingTitle={isLoading}
-			errorMessageQuantityLoading={ERRORS_MESSAGES.quantityTasksLoading}
-			errorMessageTasksLoading={ERRORS_MESSAGES.tasksLoading}
-			notFoundMessage={NOT_FOUND_MESSAGES.tasks}
-			tagId={id}
-			headButtons={
-				<Button size="small" style="border">
-					Редактировать тег
-				</Button>
-			}
-		/>
+		<>
+			<TasksPage
+				title={tag?.name ?? null}
+				isLoadingTitle={isLoading}
+				errorMessageQuantityLoading={ERRORS_MESSAGES.quantityTasksLoading}
+				errorMessageTasksLoading={ERRORS_MESSAGES.tasksLoading}
+				notFoundMessage={NOT_FOUND_MESSAGES.tasks}
+				tagId={id}
+				headButtons={
+					<Button size="small" style="border" onClick={() => setIsOpenModal(true)}>
+						Редактировать тег
+					</Button>
+				}
+			/>
+			<EditTagModal
+				initialData={tag}
+				isLoadingData={isLoading}
+				isOpen={isOpenModal}
+				onClose={() => setIsOpenModal(false)}
+				onBeforeDelete={() => setIsDeleting(true)}
+				onAfterDelete={() => setIsDeleting(false)}
+			/>
+		</>
 	);
 };
 
