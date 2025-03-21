@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { tagsCollectionRef } from '@/firebase';
 import { tagSchema } from '@/schemas/tags';
-import { normalizeError } from '@/utils/error';
+import { normalizeError, NotFoundError } from '@/utils/error';
 
 const useTagSnapshot = (id: TagId) => {
 	const [tag, setTag] = useState<Tag | null>(null);
@@ -42,6 +42,10 @@ const useTagSnapshot = (id: TagId) => {
 			async (querySnapshot) => {
 				try {
 					setIsLoading(true);
+
+					if (!querySnapshot.data()) {
+						throw new NotFoundError();
+					}
 
 					const tag = await tagSchema.validate({
 						id: querySnapshot.id,
