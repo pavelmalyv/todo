@@ -11,7 +11,6 @@ import useShowError from '@/hooks/useShowError';
 
 import { getQuantityShort } from '@/utils/quantity';
 import { showError } from '@/utils/notification';
-import { useId } from 'react';
 import { LIMIT_QUANTITY_TASKS, LIMIT_TASKS } from '@/consts/docLimits';
 
 interface TasksPageProps {
@@ -64,7 +63,6 @@ const TasksPage = ({
 	};
 
 	const quantityShort = quantity !== null ? getQuantityShort(quantity, LIMIT_QUANTITY_TASKS) : null;
-	const titleId = useId();
 
 	return (
 		<Profile
@@ -74,13 +72,12 @@ const TasksPage = ({
 			isLoadingQuantity={isLoadingQuantity}
 			headButtons={headButtons}
 		>
-			<Section title="Задачи" titleId={titleId}>
+			<Section title="Задачи">
 				<TasksList
 					tasks={tasksToday}
 					isLoading={isLoading}
 					notFoundMessage={notFoundMessage}
 					error={errorToday}
-					aria-labelledby={titleId}
 				>
 					{hasMoreData && (
 						<TasksList.Button>

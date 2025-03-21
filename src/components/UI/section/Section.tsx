@@ -5,18 +5,16 @@ import { useId } from 'react';
 
 interface SectionProps {
 	title: string;
-	titleId?: string;
 	children: React.ReactNode;
 }
 
-const Section = ({ title, titleId, children }: SectionProps) => {
-	const titleIdGenerated = useId();
-	const titleIdSection = titleId ? titleId : titleIdGenerated;
+const Section = ({ title, children }: SectionProps) => {
+	const titleId = useId();
 
 	return (
-		<section className="section" aria-labelledby={titleIdSection}>
+		<section className="section" aria-labelledby={titleId}>
 			<div className={cl.body}>
-				<h2 id={titleIdSection} className={classNames(cl.title, 'h1')}>
+				<h2 id={titleId} className={classNames(cl.title, 'h1')}>
 					{title}
 				</h2>
 
