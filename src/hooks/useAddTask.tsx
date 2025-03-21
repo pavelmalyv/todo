@@ -15,17 +15,13 @@ const useAddTask = () => {
 
 		try {
 			setIsLoading(true);
-			const docRef = await addDoc(tasksCollectionRef(user.uid), {
+
+			return await addDoc(tasksCollectionRef(user.uid), {
 				...data,
 				createdAt: serverTimestamp(),
 			});
-
+		} finally {
 			setIsLoading(false);
-			return docRef;
-		} catch (error) {
-			setIsLoading(false);
-
-			throw error;
 		}
 	};
 
