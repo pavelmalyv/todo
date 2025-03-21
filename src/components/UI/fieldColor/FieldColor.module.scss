@@ -26,6 +26,11 @@
 	border-radius: 50px;
 }
 
+.skeleton-field {
+	width: 80px;
+	height: 20px;
+}
+
 .field {
 	&:focus + .selected,
 	&[aria-invalid='true'] + .selected {
@@ -40,6 +45,11 @@
 	&[aria-invalid='true'] + .selected {
 		--border-color: rgb(var(--color-error));
 	}
+}
+
+.skeleton-picker {
+	height: 215px;
+	border-radius: 8px;
 }
 
 :global {
