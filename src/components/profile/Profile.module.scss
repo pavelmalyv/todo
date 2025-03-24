@@ -12,12 +12,12 @@
 
 .body {
 	display: grid;
-	grid-template-columns: 346px 1fr;
+	grid-template-columns: auto 1fr;
 	column-gap: 29px;
 	flex-grow: 1;
 
 	@include utils.tablet-l {
-		grid-template-columns: 1fr;
+		grid-template-columns: minmax(0, 1fr);
 	}
 }
 
