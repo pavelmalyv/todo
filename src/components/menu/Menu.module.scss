@@ -3,13 +3,13 @@
 .aside {
 	display: flex;
 	flex-direction: column;
-	padding: 25px 34px;
+	padding: 25px;
 	border-radius: var(--border-radius);
 	color: rgb(var(--color-text-quaternary));
 	background-color: rgb(var(--color-background-secondary));
 	min-height: 100%;
 	width: 100%;
-	max-width: 346px;
+	max-width: 320px;
 
 	@include utils.mobile-l {
 		max-width: 300px;
