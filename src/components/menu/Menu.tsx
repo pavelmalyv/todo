@@ -16,7 +16,7 @@ import { Link, NavLink } from 'react-router';
 import { getQuantityShort } from '@/utils/quantity';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LIMIT_QUANTITY_TASKS } from '@/consts/docLimits';
-import { TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
+import { CALENDAR, TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
 
 interface MenuProps {
 	isModal?: boolean;
@@ -113,6 +113,15 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 												<Skeleton />
 											)}
 										</VisuallyHiddenLoader>
+									</div>
+								</NavLink>
+							</li>
+							<li className={cl['menu-item']}>
+								<NavLink className={cl['menu-link']} to={CALENDAR}>
+									<div className={cl['menu-name']}>
+										<Icon className={cl['menu-icon']}>calendar_month</Icon>
+
+										<span>Календарь</span>
 									</div>
 								</NavLink>
 							</li>

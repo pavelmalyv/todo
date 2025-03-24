@@ -7,6 +7,7 @@ import useShowError from '@/hooks/useShowError';
 import { Navigate, Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';
 import {
+	CALENDAR,
 	getTagUrl,
 	LOGIN_URL,
 	REGISTRATION_URL,
@@ -22,6 +23,7 @@ const RegistrationPage = lazy(() => import('@/pages/RegistrationPage'));
 const TodayPage = lazy(() => import('@/pages/TodayPage'));
 const TomorrowPage = lazy(() => import('@/pages/TomorrowPage'));
 const TagPage = lazy(() => import('@/pages/TagPage'));
+const CalendarPage = lazy(() => import('@/pages/CalendarPage'));
 
 const AppRouter = () => {
 	const [user, isLoading, error] = useUserState();
@@ -60,6 +62,14 @@ const AppRouter = () => {
 				element={
 					<Suspense>
 						<TagPage />
+					</Suspense>
+				}
+			/>
+			<Route
+				path={CALENDAR}
+				element={
+					<Suspense>
+						<CalendarPage />
 					</Suspense>
 				}
 			/>
