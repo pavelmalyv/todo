@@ -8,8 +8,10 @@ import Skeleton from 'react-loading-skeleton';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import useTasksSnapshot from '@/hooks/useTasksSnapshot';
 
+import { Link } from 'react-router';
 import { produce } from 'immer';
 import { memo, useEffect, useRef } from 'react';
+import { getTasksDayUrl } from '@/consts/routes';
 import { LIMIT_CALENDAR_TASKS } from '@/consts/docLimits';
 import { ERRORS_MESSAGES, LOADING_MESSAGES } from '@/consts/messages';
 
@@ -119,9 +121,13 @@ const DayCalendar = memo(
 								</ul>
 
 								{hasMoreData && (
-									<button className={classNames('link', cl.more)} tabIndex={isFocus ? 0 : -1}>
+									<Link
+										to={getTasksDayUrl(timestamp)}
+										className={classNames('link', cl.more)}
+										tabIndex={isFocus ? 0 : -1}
+									>
 										Ещё
-									</button>
+									</Link>
 								)}
 							</div>
 						)}
