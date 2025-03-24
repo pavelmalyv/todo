@@ -9,6 +9,7 @@ import { lazy, Suspense } from 'react';
 import {
 	CALENDAR,
 	getTagUrl,
+	getTasksDayUrl,
 	LOGIN_URL,
 	REGISTRATION_URL,
 	TODAY_TASKS_URL,
@@ -24,6 +25,7 @@ const TodayPage = lazy(() => import('@/pages/TodayPage'));
 const TomorrowPage = lazy(() => import('@/pages/TomorrowPage'));
 const TagPage = lazy(() => import('@/pages/TagPage'));
 const CalendarPage = lazy(() => import('@/pages/CalendarPage'));
+const TasksDay = lazy(() => import('@/pages/TasksDay'));
 
 const AppRouter = () => {
 	const [user, isLoading, error] = useUserState();
@@ -70,6 +72,14 @@ const AppRouter = () => {
 				element={
 					<Suspense>
 						<CalendarPage />
+					</Suspense>
+				}
+			/>
+			<Route
+				path={getTasksDayUrl(':timestampDay')}
+				element={
+					<Suspense>
+						<TasksDay />
 					</Suspense>
 				}
 			/>
