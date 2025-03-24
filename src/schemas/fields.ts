@@ -1,4 +1,5 @@
 import { string, ref, date, boolean } from 'yup';
+import { isValidRangeTimestamp } from '@/utils/date';
 import { MESSAGES_FIELD } from '@/consts/messages';
 
 export const emailSchema = string().email().required(MESSAGES_FIELD.emailRequired);
@@ -23,7 +24,10 @@ export const getPasswordRepeatSchema = (fieldRef: string) => {
 export const datePickerSchema = date()
 	.required(MESSAGES_FIELD.dateRequired)
 	.nullable(MESSAGES_FIELD.dateRequired)
-	.test('not-empty', MESSAGES_FIELD.dateRequired, (value) => value !== null);
+	.test('not-empty', MESSAGES_FIELD.dateRequired, (value) => value !== null)
+	.test('is-valid-range', MESSAGES_FIELD.dateRange(), (value) => {
+		return value ? isValidRangeTimestamp(value.getTime()) : false;
+	});
 
 export const taskIdSchema = string().required();
 

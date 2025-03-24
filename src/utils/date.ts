@@ -1,3 +1,5 @@
+import { TIMESTAMP_MAX, TIMESTAMP_MIN } from '@/consts/validation';
+
 export const getDateRanges = () => {
 	const todayStart = new Date();
 	todayStart.setHours(0);
@@ -29,4 +31,8 @@ export const getDateRanges = () => {
 			end: nearEnd.getTime(),
 		},
 	};
+};
+
+export const isValidRangeTimestamp = (timestamp: number) => {
+	return timestamp >= TIMESTAMP_MIN && timestamp <= TIMESTAMP_MAX;
 };

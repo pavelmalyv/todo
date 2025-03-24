@@ -1,3 +1,5 @@
+import { TIMESTAMP_MAX, TIMESTAMP_MIN } from './validation';
+
 export const MESSAGES_FIELD = {
 	emailRequired: 'Email обязателен',
 	emailIncorrect: 'Некорректный email',
@@ -20,6 +22,12 @@ export const MESSAGES_FIELD = {
 	nameTagRequired: 'Название тега обязательно',
 	hexColorInvalid: 'Неверный цвет в формате HEX',
 	colorRequired: 'Цвет обязателен',
+	dateRange: () => {
+		const min = new Date(TIMESTAMP_MIN).getFullYear();
+		const max = new Date(TIMESTAMP_MAX).getFullYear();
+
+		return `Дата должна быть в диапазоне от ${min}г. до ${max}г.`;
+	},
 };
 
 export const ERRORS_MESSAGES_FIREBASE: Record<string, string> = {
