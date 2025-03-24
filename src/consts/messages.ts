@@ -40,6 +40,7 @@ export const ERRORS_MESSAGES = {
 	googleAuth: 'Ошибка аутентификации Google, повторите попытку позже',
 	updateTask: 'Ошибка обновления задачи, повторите попытку позже',
 	tasksLoading: 'При загрузке задач произошла ошибка, повторите попытку позже',
+	tasksLoadingShort: 'Ошибка загрузки задач',
 	quantityUpcomingTasksLoading:
 		'При загрузке количества предстоящих задач произошла ошибка, повторите попытку позже',
 	quantityTodayTasksLoading:
