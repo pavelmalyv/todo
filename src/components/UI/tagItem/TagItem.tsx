@@ -4,9 +4,8 @@ import Skeleton from 'react-loading-skeleton';
 import VisuallyHiddenLoader from '@/components/visuallyHiddenLoader/VisuallyHiddenLoader';
 
 interface TagItemProps {
-	color: string;
-	name?: string;
-	children: React.ReactNode;
+	color?: string;
+	children?: React.ReactNode;
 	isLoading?: boolean;
 	isSkeleton?: boolean;
 }
