@@ -36,3 +36,15 @@ export const getDateRanges = () => {
 export const isValidRangeTimestamp = (timestamp: number) => {
 	return timestamp >= TIMESTAMP_MIN && timestamp <= TIMESTAMP_MAX;
 };
+
+export const getDisplayTaskDate = (timestamp: number) => {
+	return new Date(timestamp * 1000)
+		.toLocaleString('ru-RU', {
+			year: 'numeric',
+			month: 'numeric',
+			day: 'numeric',
+			hour: '2-digit',
+			minute: '2-digit',
+		})
+		.replace(',', '');
+};

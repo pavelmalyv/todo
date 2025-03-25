@@ -63,6 +63,7 @@ export const ERRORS_MESSAGES = {
 	saveTag: 'Ошибка обновления тега, повторите попытку позже',
 	deleteTag: 'Ошибка удаления тега, повторите попытку позже',
 	tagNameLoading: 'Ошибка загрузки названия тега, повторите попытку позже',
+	tagLoading: 'Ошибка загрузки тега, повторите попытку позже',
 };
 
 export const LOADING_MESSAGES = {
@@ -77,6 +78,7 @@ export const NOT_FOUND_MESSAGES = {
 	nearTasks: 'Ближайших задач нет',
 	tags: 'Тегов нет',
 	tasks: 'Задач нет',
+	tagSet: 'Тег не установлен',
 };
 
 export const SUCCESS_MESSAGES = {
