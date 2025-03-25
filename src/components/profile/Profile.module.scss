@@ -11,8 +11,8 @@
 }
 
 .body {
-	display: grid;
-	grid-template-columns: auto 1fr;
+	display: flex;
+	align-items: flex-start;
 	column-gap: 29px;
 	flex-grow: 1;
 
@@ -22,6 +22,11 @@
 }
 
 .sidebar {
+	display: flex;
+	position: sticky;
+	top: var(--section-padding-y);
+	min-height: calc(100svh - (var(--section-padding-y) * 2));
+
 	@include utils.tablet-l {
 		display: none;
 	}
@@ -30,13 +35,11 @@
 .sidebar-dialog {
 	&-container {
 		display: inline-flex;
-		padding: var(--section-padding-y) var(--container-padding-x);
-
-		@include utils.mobile-l {
-			padding-top: 18px;
-			padding-bottom: 18px;
-		}
 	}
+}
+
+.page {
+	flex-grow: 1;
 }
 
 .head {
