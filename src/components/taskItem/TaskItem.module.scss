@@ -1,0 +1,27 @@
+@use '@styles/utils';
+
+.item {
+	--padding-x: 11px;
+}
+
+.task {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	column-gap: 10px;
+	padding: var(--padding-x) 13px;
+	border-bottom: 1px solid rgb(var(--color-border-primary));
+
+	@include utils.mobile-l {
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+.skeleton-wrapper {
+	padding: calc(var(--padding-x) / 2) 0;
+}
+
+.skeleton {
+	height: calc(22px + (var(--padding-x) / 2));
+}
