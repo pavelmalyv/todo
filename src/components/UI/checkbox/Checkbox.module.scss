@@ -11,10 +11,11 @@
 }
 
 .emulator {
+	--opacity: 1;
 	--background-color: transparent;
 	--border-color: rgb(var(--color-border-primary));
 
-	@include utils.base-animation(background-color, border-color);
+	@include utils.base-animation(background-color, border-color, opacity);
 	@include utils.square(22px);
 
 	position: relative;
@@ -22,6 +23,11 @@
 	background-color: var(--background-color);
 	border-radius: 4px;
 	flex-shrink: 0;
+	opacity: var(--opacity);
+
+	&_loading {
+		--opacity: 0.5;
+	}
 
 	&-marker {
 		@include utils.base-animation(opacity);

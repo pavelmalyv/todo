@@ -4,6 +4,7 @@ import FieldError from '@/components/UI/fieldError/FieldError';
 import Icon from '@/components/UI/icon/Icon';
 
 import { forwardRef, useId } from 'react';
+import useDelayedLoader from '@/hooks/useDelayedLoader';
 
 interface CheckboxProps {
 	label: React.ReactNode;
@@ -11,6 +12,7 @@ interface CheckboxProps {
 	style?: 'default' | 'through';
 	checked?: boolean;
 	disabled?: boolean;
+	isLoading?: boolean;
 	errorMessage?: string;
 	center?: boolean;
 	className?: string;
@@ -29,6 +31,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 			style = 'default',
 			checked,
 			disabled,
+			isLoading = false,
 			errorMessage,
 			center = false,
 			className,
@@ -40,6 +43,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 		},
 		ref,
 	) => {
+		const isLoadingDelayed = useDelayedLoader(isLoading);
 		const fieldId = useId();
 		const errorMessageId = useId();
 
@@ -59,7 +63,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 					className={cl.field}
 					name={name}
 					checked={checked}
-					disabled={disabled}
+					disabled={disabled || isLoading}
 					onChange={onChange}
 					onBlur={onBlur}
 					aria-controls={ariaControls}
@@ -67,7 +71,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 					aria-required={ariaRequired}
 				/>
 				<label htmlFor={fieldId} className={cl.label}>
-					<span className={cl.emulator}>
+					<span className={classNames(cl.emulator, { [cl['emulator_loading']]: isLoadingDelayed })}>
 						<Icon className={cl['emulator-marker']}>check</Icon>
 					</span>
 					<span className={cl.description}>{label}</span>
