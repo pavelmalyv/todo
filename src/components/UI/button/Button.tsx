@@ -70,27 +70,28 @@ const Button = ({
 		},
 	);
 
-	if (type === 'link') {
-		return (
-			<Link to={to ?? '#'} target={target} className={classNameButton}>
-				{body}
-			</Link>
-		);
-	}
 	return (
 		<div className={classNames(cl['button-wrapper'], cl[`button-wrapper_${size}`])}>
 			<VisuallyHiddenLoader isLoading={isLoadingSkeleton}>
 				{isSkeleton ? (
 					<Skeleton className={cl.skeleton} />
 				) : (
-					<button
-						type={type}
-						disabled={disabled || isLoading}
-						className={classNameButton}
-						onClick={onClick}
-					>
-						{body}
-					</button>
+					<>
+						{type === 'link' ? (
+							<Link to={to ?? '#'} target={target} className={classNameButton}>
+								{body}
+							</Link>
+						) : (
+							<button
+								type={type}
+								disabled={disabled || isLoading}
+								className={classNameButton}
+								onClick={onClick}
+							>
+								{body}
+							</button>
+						)}
+					</>
 				)}
 			</VisuallyHiddenLoader>
 		</div>
