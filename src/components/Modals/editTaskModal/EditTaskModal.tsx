@@ -18,7 +18,7 @@ import {
 	nameTaskSchema,
 	tagIdSchemaOptional,
 } from '@/schemas/fields';
-import { useId, useState } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { InferType, object } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -48,13 +48,27 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 
 	const { control, formState, reset, handleSubmit, setValue } = useForm<EditTaskModalFormData>({
 		resolver: yupResolver(editTaskModalFormSchema),
-		defaultValues: {
+	});
+
+	useEffect(() => {
+		if (formState.isDirty) {
+			return;
+		}
+
+		reset({
 			dueAt: new Date(initialData.dueAt.seconds * 1000),
 			name: initialData.name,
 			done: initialData.done,
 			tagId: initialData.tagId,
-		},
-	});
+		});
+	}, [
+		formState.isDirty,
+		initialData.dueAt.seconds,
+		initialData.name,
+		initialData.done,
+		initialData.tagId,
+		reset,
+	]);
 
 	const onSubmit: SubmitHandler<EditTaskModalFormData> = async (data) => {
 		try {
