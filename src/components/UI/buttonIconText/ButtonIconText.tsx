@@ -5,6 +5,7 @@ import Icon from '../icon/Icon';
 interface ButtonIconTextProps {
 	size?: 'small' | 'medium';
 	icon: string;
+	disabled?: boolean;
 	className?: string;
 	children?: React.ReactNode;
 	onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -13,6 +14,7 @@ interface ButtonIconTextProps {
 const ButtonIconText = ({
 	size = 'medium',
 	icon,
+	disabled,
 	className,
 	children,
 	onClick,
@@ -22,6 +24,7 @@ const ButtonIconText = ({
 			type="button"
 			className={classNames(cl.button, cl[`button_${size}`], className)}
 			onClick={onClick}
+			disabled={disabled}
 		>
 			<Icon className={cl.icon}>{icon}</Icon>
 
