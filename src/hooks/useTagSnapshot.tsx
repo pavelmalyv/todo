@@ -8,7 +8,7 @@ import { tagsCollectionRef } from '@/firebase';
 import { tagSchema } from '@/schemas/tags';
 import { normalizeError, NotFoundError } from '@/utils/error';
 
-const useTagSnapshot = (id: TagId) => {
+const useTagSnapshot = (id: TagId | undefined) => {
 	const [tag, setTag] = useState<Tag | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<Error | undefined>(undefined);
@@ -33,7 +33,7 @@ const useTagSnapshot = (id: TagId) => {
 	}, [errorUser?.message, handleError]);
 
 	useEffect(() => {
-		if (!uid) {
+		if (!uid || !id) {
 			return;
 		}
 
