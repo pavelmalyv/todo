@@ -12,6 +12,7 @@
 	width: 100%;
 	height: 100%;
 	z-index: 0;
+	background-color: rgba(var(--color-overlay-primary), 0.2);
 }
 
 .overlay,
@@ -29,10 +30,6 @@
 	height: 100%;
 
 	&_popup {
-		.overlay {
-			background-color: rgba(var(--color-overlay-primary), 0.2);
-		}
-
 		.container {
 			display: flex;
 			align-items: center;
@@ -61,13 +58,14 @@
 
 	&_full {
 		.container {
-			overflow: auto;
 			height: 100%;
+			max-width: 100%;
 		}
 
 		.modal {
-			display: flex;
-			min-height: 100%;
+			overflow: auto;
+			height: 100%;
+			margin: auto;
 		}
 	}
 }

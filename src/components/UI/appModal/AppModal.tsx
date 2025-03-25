@@ -34,8 +34,8 @@ const AppModal = ({
 	'aria-labelledby': ariaLabelledby,
 	'aria-describedby': ariaDescribedby,
 }: AppModalProps) => {
-	const fadeInAnimation = animation === 'fade' ? cl['fade-in'] : cl['slide-in'];
-	const fadeOutAnimation = animation === 'fade' ? cl['fade-out'] : cl['slide-out'];
+	const inAnimation = animation === 'fade' ? cl['fade-in'] : cl['slide-in'];
+	const outAnimation = animation === 'fade' ? cl['fade-out'] : cl['slide-out'];
 	const animationDurationMs = animation === 'fade' ? 200 : 600;
 
 	return (
@@ -48,10 +48,10 @@ const AppModal = ({
 					overlay: classNames(cl.overlay, className?.overlay),
 					modalContainer: classNames(cl.container, className?.modalContainer),
 					modal: classNames(cl.modal, className?.modal),
-					overlayAnimationIn: fadeInAnimation,
-					overlayAnimationOut: fadeOutAnimation,
-					modalAnimationIn: fadeInAnimation,
-					modalAnimationOut: fadeOutAnimation,
+					overlayAnimationIn: cl['fade-in'],
+					overlayAnimationOut: cl['fade-out'],
+					modalAnimationIn: inAnimation,
+					modalAnimationOut: outAnimation,
 				}}
 				animationDuration={animationDurationMs}
 				showCloseIcon={false}
