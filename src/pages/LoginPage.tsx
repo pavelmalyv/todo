@@ -42,54 +42,55 @@ const LoginPage = () => {
 
 	return (
 		<Book aria-labelledby={titleId}>
-			<Auth
-				type="signin"
-				title="Вход"
-				titleId={titleId}
-				isLoading={isLoading}
-				errorMessage={errorMessage}
-				buttonName="Войти"
-				footer={{
-					description: 'Нет аккаунта?',
-					linkName: 'Зарегистрироваться',
-					linkUrl: REGISTRATION_URL,
-				}}
-				onSubmit={handleSubmit(onSubmit)}
-			>
-				<Controller
-					name="email"
-					control={control}
-					render={({ field, fieldState }) => (
-						<Field
-							type="email"
-							label="Email"
-							placeholder="Email"
-							autoComplete="email"
-							aria-required={true}
-							aria-invalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
-							{...field}
-						/>
-					)}
-				/>
+			<Book.Main title="Вход" titleId={titleId}>
+				<Auth
+					type="signin"
+					titleId={titleId}
+					isLoading={isLoading}
+					errorMessage={errorMessage}
+					buttonName="Войти"
+					footer={{
+						description: 'Нет аккаунта?',
+						linkName: 'Зарегистрироваться',
+						linkUrl: REGISTRATION_URL,
+					}}
+					onSubmit={handleSubmit(onSubmit)}
+				>
+					<Controller
+						name="email"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Field
+								type="email"
+								label="Email"
+								placeholder="Email"
+								autoComplete="email"
+								aria-required={true}
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+								{...field}
+							/>
+						)}
+					/>
 
-				<Controller
-					name="password"
-					control={control}
-					render={({ field, fieldState }) => (
-						<Field
-							label="Пароль"
-							placeholder="Пароль"
-							autoComplete="current-password"
-							isProtected={true}
-							aria-required={true}
-							aria-invalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
-							{...field}
-						/>
-					)}
-				/>
-			</Auth>
+					<Controller
+						name="password"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Field
+								label="Пароль"
+								placeholder="Пароль"
+								autoComplete="current-password"
+								isProtected={true}
+								aria-required={true}
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+								{...field}
+							/>
+						)}
+					/>
+				</Auth>
+			</Book.Main>
 		</Book>
 	);
 };

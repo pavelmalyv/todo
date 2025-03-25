@@ -51,80 +51,81 @@ const RegistrationPage = () => {
 
 	return (
 		<Book aria-labelledby={titleId}>
-			<Auth
-				type="signup"
-				title="Регистрация"
-				titleId={titleId}
-				buttonName="Зарегистрироваться"
-				isLoading={isLoading}
-				errorMessage={errorMessage}
-				footer={{ description: 'Уже зарегистрированы?', linkName: 'Войти', linkUrl: LOGIN_URL }}
-				onSubmit={handleSubmit(onSubmit)}
-			>
-				<Controller
-					name="name"
-					control={control}
-					render={({ field, fieldState }) => (
-						<Field
-							label="Имя"
-							placeholder="Имя*"
-							autoComplete="name"
-							{...field}
-							aria-required={true}
-							aria-invalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
-						/>
-					)}
-				/>
-				<Controller
-					name="email"
-					control={control}
-					render={({ field, fieldState }) => (
-						<Field
-							type="email"
-							label="E-mail"
-							placeholder="E-mail*"
-							autoComplete="email"
-							{...field}
-							aria-required={true}
-							aria-invalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
-						/>
-					)}
-				/>
-				<Controller
-					name="password"
-					control={control}
-					render={({ field, fieldState }) => (
-						<Field
-							label="Пароль"
-							placeholder="Пароль*"
-							isProtected={true}
-							autoComplete="new-password"
-							{...field}
-							aria-required={true}
-							aria-invalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
-						/>
-					)}
-				/>
-				<Controller
-					name="passwordRepeat"
-					control={control}
-					render={({ field, fieldState }) => (
-						<Field
-							label="Повтор пароля"
-							placeholder="Повтор пароля*"
-							isProtected={true}
-							autoComplete="new-password"
-							{...field}
-							aria-required={true}
-							aria-invalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
-						/>
-					)}
-				/>
-			</Auth>
+			<Book.Main title="Регистрация" titleId={titleId}>
+				<Auth
+					type="signup"
+					titleId={titleId}
+					buttonName="Зарегистрироваться"
+					isLoading={isLoading}
+					errorMessage={errorMessage}
+					footer={{ description: 'Уже зарегистрированы?', linkName: 'Войти', linkUrl: LOGIN_URL }}
+					onSubmit={handleSubmit(onSubmit)}
+				>
+					<Controller
+						name="name"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Field
+								label="Имя"
+								placeholder="Имя*"
+								autoComplete="name"
+								{...field}
+								aria-required={true}
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+							/>
+						)}
+					/>
+					<Controller
+						name="email"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Field
+								type="email"
+								label="E-mail"
+								placeholder="E-mail*"
+								autoComplete="email"
+								{...field}
+								aria-required={true}
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+							/>
+						)}
+					/>
+					<Controller
+						name="password"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Field
+								label="Пароль"
+								placeholder="Пароль*"
+								isProtected={true}
+								autoComplete="new-password"
+								{...field}
+								aria-required={true}
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+							/>
+						)}
+					/>
+					<Controller
+						name="passwordRepeat"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Field
+								label="Повтор пароля"
+								placeholder="Повтор пароля*"
+								isProtected={true}
+								autoComplete="new-password"
+								{...field}
+								aria-required={true}
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+							/>
+						)}
+					/>
+				</Auth>
+			</Book.Main>
 		</Book>
 	);
 };

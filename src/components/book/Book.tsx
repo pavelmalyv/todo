@@ -3,7 +3,7 @@ import cl from './Book.module.scss';
 
 interface BookProps {
 	children: React.ReactNode;
-	'aria-labelledby'?: string;
+	'aria-labelledby': string;
 }
 
 const Book = ({ children, ['aria-labelledby']: ariaLabelledby }: BookProps) => {
@@ -30,5 +30,25 @@ const Book = ({ children, ['aria-labelledby']: ariaLabelledby }: BookProps) => {
 		</section>
 	);
 };
+
+interface MainProps {
+	title: string;
+	titleId?: string;
+	children: React.ReactNode;
+}
+
+const Main = ({ title, titleId, children }: MainProps) => {
+	return (
+		<div className={cl.main}>
+			<h1 id={titleId} className={classNames('h1', cl.title)}>
+				{title}
+			</h1>
+
+			{children}
+		</div>
+	);
+};
+
+Book.Main = Main;
 
 export default Book;
