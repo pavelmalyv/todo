@@ -50,7 +50,10 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 	useShowError(ERRORS_MESSAGES.quantityTomorrowTasksLoading, errorQuantityTomorrow);
 
 	return (
-		<aside className={cl.aside} aria-labelledby={titleId}>
+		<aside
+			className={classNames(cl.aside, { [cl['aside_modal']]: isModal })}
+			aria-labelledby={titleId}
+		>
 			<div className={cl.head}>
 				<h2 id={titleId} className={classNames('h2', cl.title)}>
 					Меню
