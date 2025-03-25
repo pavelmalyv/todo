@@ -64,6 +64,7 @@ export const ERRORS_MESSAGES = {
 	deleteTag: 'Ошибка удаления тега, повторите попытку позже',
 	tagNameLoading: 'Ошибка загрузки названия тега, повторите попытку позже',
 	tagLoading: 'Ошибка загрузки тега, повторите попытку позже',
+	signOut: 'Ошибка выхода, повторите попытку позже',
 };
 
 export const LOADING_MESSAGES = {

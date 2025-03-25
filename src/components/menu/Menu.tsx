@@ -14,6 +14,8 @@ import { useId } from 'react';
 import { getDateRanges } from '@/utils/date';
 import { Link, NavLink } from 'react-router';
 import { getQuantityShort } from '@/utils/quantity';
+import { useSignOut } from 'react-firebase-hooks/auth';
+import { auth } from '@/firebase';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LIMIT_QUANTITY_TASKS } from '@/consts/docLimits';
 import { CALENDAR, TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
@@ -27,9 +29,11 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 	const titleId = useId();
 	const dateRanges = getDateRanges();
 
+	const [signOut, isLoadingSignOut, error] = useSignOut(auth);
+	useShowError(ERRORS_MESSAGES.signOut, error);
+
 	const [quantityUpcoming, isLoadingQuantityUpcoming, errorQuantityUpcoming] =
 		useQuantityUpcomingTasksSnapshot();
-
 	useShowError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantityUpcoming);
 
 	const [quantityToday, isLoadingQuantityToday, errorQuantityToday] = useQuantityTasksSnapshot({
@@ -37,7 +41,6 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 		timestampEnd: dateRanges.today.end,
 		limit: LIMIT_QUANTITY_TASKS + 1,
 	});
-
 	useShowError(ERRORS_MESSAGES.quantityTodayTasksLoading, errorQuantityToday);
 
 	const [quantityTomorrow, isLoadingQuantityTomorrow, errorQuantityTomorrow] =
@@ -46,7 +49,6 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 			timestampEnd: dateRanges.tomorrow.end,
 			limit: LIMIT_QUANTITY_TASKS + 1,
 		});
-
 	useShowError(ERRORS_MESSAGES.quantityTomorrowTasksLoading, errorQuantityTomorrow);
 
 	return (
@@ -139,7 +141,12 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 			</div>
 
 			<div className={cl.bottom}>
-				<ButtonIconText className={cl.exit} icon="exit_to_app">
+				<ButtonIconText
+					disabled={isLoadingSignOut}
+					className={cl.exit}
+					icon="exit_to_app"
+					onClick={signOut}
+				>
 					Выйти
 				</ButtonIconText>
 
