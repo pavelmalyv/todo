@@ -1,7 +1,7 @@
 import cl from './TagMarker.module.scss';
 
 interface TagMarkerProps {
-	color: string;
+	color?: string;
 }
 
 const TagMarker = ({ color }: TagMarkerProps) => {
