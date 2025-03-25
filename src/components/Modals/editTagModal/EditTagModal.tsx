@@ -49,19 +49,18 @@ const EditTagModal = ({
 
 	const { control, formState, handleSubmit, reset } = useForm<EditTagFormData>({
 		resolver: yupResolver(editTagFormSchema),
-		defaultValues: {
-			name: initialData?.name ?? '',
-			color: initialData?.color ?? '',
-		},
 	});
 
 	useEffect(() => {
-		if (!initialData) {
+		if (formState.isDirty) {
 			return;
 		}
 
-		reset(initialData);
-	}, [initialData, reset]);
+		reset({
+			name: initialData?.name ?? '',
+			color: initialData?.color ?? '',
+		});
+	}, [formState.isDirty, initialData?.name, initialData?.color, reset]);
 
 	const onSubmit: SubmitHandler<EditTagFormData> = async (data) => {
 		if (!initialData) {
