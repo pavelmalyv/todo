@@ -1,0 +1,31 @@
+@use '@styles/utils';
+
+.item {
+	--min-height-item: 28px;
+	--border-radius-item: 30px;
+}
+
+.label {
+	display: inline-flex;
+	align-items: center;
+	column-gap: 10px;
+	min-height: var(--min-height-item);
+	max-width: 250px;
+	padding: 5px 12px;
+	border-radius: var(--border-radius-item);
+	color: rgb(var(--color-text-quaternary));
+	background-color: rgb(var(--color-background-sixth));
+}
+
+.name {
+	font-size: 14px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.skeleton {
+	height: var(--min-height-item);
+	width: 60px;
+	border-radius: var(--border-radius-item);
+}
