@@ -15,11 +15,11 @@ type ButtonProps = {
 	isLoadingSkeleton?: boolean;
 	isSkeleton?: boolean;
 	children: React.ReactNode;
+	onClick?: React.MouseEventHandler<HTMLElement>;
 } & (
 	| {
 			type?: 'button' | 'submit' | 'reset';
 			disabled?: boolean;
-			onClick?: React.MouseEventHandler<HTMLButtonElement>;
 			target?: never;
 			to?: never;
 	  }
@@ -28,7 +28,6 @@ type ButtonProps = {
 			to: string;
 			target?: string;
 			disabled?: never;
-			onClick?: never;
 	  }
 );
 
@@ -78,7 +77,7 @@ const Button = ({
 				) : (
 					<>
 						{type === 'link' ? (
-							<Link to={to ?? '#'} target={target} className={classNameButton}>
+							<Link to={to ?? '#'} target={target} className={classNameButton} onClick={onClick}>
 								{body}
 							</Link>
 						) : (
