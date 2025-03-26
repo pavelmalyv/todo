@@ -11,6 +11,7 @@ import {
 	getTasksDayUrl,
 	LOGIN_URL,
 	REGISTRATION_URL,
+	RESET_PASSWORD_URL,
 	TODAY_TASKS_URL,
 	TOMORROW_TASKS_URL,
 } from '@/consts/routes';
@@ -25,6 +26,7 @@ const TomorrowPage = lazy(() => import('@/pages/TomorrowPage'));
 const TagPage = lazy(() => import('@/pages/TagPage'));
 const CalendarPage = lazy(() => import('@/pages/CalendarPage'));
 const TasksDay = lazy(() => import('@/pages/TasksDay'));
+const ResetPasswordPage = lazy(() => import('@/pages/ResetPasswordPage'));
 
 const AppRouter = () => {
 	const [user, isLoading, error] = useUserState();
@@ -108,6 +110,14 @@ const AppRouter = () => {
 				element={
 					<Suspense>
 						<RegistrationPage />
+					</Suspense>
+				}
+			/>
+			<Route
+				path={RESET_PASSWORD_URL}
+				element={
+					<Suspense>
+						<ResetPasswordPage />
 					</Suspense>
 				}
 			/>
