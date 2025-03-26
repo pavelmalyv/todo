@@ -10,7 +10,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { emailSchema, passwordSchema } from '@/schemas/fields';
 import { getErrorMessageFirebase } from '@/utils/firebase';
-import { REGISTRATION_URL } from '@/consts/routes';
+import { REGISTRATION_URL, RESET_PASSWORD_URL } from '@/consts/routes';
 
 const formSchema = object({
 	email: emailSchema,
@@ -50,6 +50,10 @@ const LoginPage = () => {
 					errorMessage={errorMessage}
 					buttonName="Войти"
 					footerLinks={[
+						{
+							linkName: 'Восстановить пароль',
+							linkUrl: RESET_PASSWORD_URL,
+						},
 						{
 							description: 'Нет аккаунта?',
 							linkName: 'Зарегистрироваться',
