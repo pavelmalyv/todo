@@ -1,6 +1,6 @@
 import Root from '@/pages/Root';
 import useUserState from '@/hooks/useUserState';
-import LoadingScreen from '../loadingScreen/LoadingScreen';
+import LoadingScreen from '../components/loadingScreen/LoadingScreen';
 import useShowError from '@/hooks/useShowError';
 
 import { Navigate, Route, Routes } from 'react-router';
