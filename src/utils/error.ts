@@ -9,7 +9,7 @@ export class NotFoundError extends Error {
 
 export const checkNotFoundErrorOrThrow = (error: unknown) => {
 	if (error instanceof NotFoundError) {
-		throw NotFoundError;
+		throw new NotFoundError();
 	}
 };
 
