@@ -1,6 +1,9 @@
 import classNames from 'classnames';
 import cl from './Book.module.scss';
 
+import { Link } from 'react-router';
+import { LOGIN_URL } from '@/consts/routes';
+
 interface BookProps {
 	children: React.ReactNode;
 	'aria-labelledby': string;
@@ -35,9 +38,17 @@ interface MainProps {
 	title: string;
 	titleId?: string;
 	children: React.ReactNode;
+	isCancelButton?: boolean;
+	isCancelButtonCenter?: boolean;
 }
 
-const Main = ({ title, titleId, children }: MainProps) => {
+const Main = ({
+	title,
+	titleId,
+	children,
+	isCancelButton,
+	isCancelButtonCenter = true,
+}: MainProps) => {
 	return (
 		<div className={cl.main}>
 			<h1 id={titleId} className={classNames('h1', cl.title)}>
@@ -45,6 +56,18 @@ const Main = ({ title, titleId, children }: MainProps) => {
 			</h1>
 
 			{children}
+
+			{isCancelButton && (
+				<div
+					className={classNames(cl['link-wrapper'], {
+						[cl['link-wrapper_center']]: isCancelButtonCenter,
+					})}
+				>
+					<Link to={LOGIN_URL} className={'link'}>
+						Отмена
+					</Link>
+				</div>
+			)}
 		</div>
 	);
 };

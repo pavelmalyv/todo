@@ -78,6 +78,15 @@
 	max-width: 330px;
 }
 
+.link-wrapper {
+	margin-top: 26px;
+
+	&_center {
+		display: flex;
+		justify-content: center;
+	}
+}
+
 .title {
 	margin-bottom: 32px;
 }
