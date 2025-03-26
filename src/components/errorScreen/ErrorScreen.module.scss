@@ -1,0 +1,21 @@
+.section {
+	padding: var(--section-padding-y) 0;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+}
+
+.body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 28px;
+}
+
+.description {
+	max-width: 385px;
+	line-height: 1.5;
+}
