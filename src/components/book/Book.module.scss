@@ -1,4 +1,5 @@
 @use '@styles/utils';
+@use '@styles/shared/spinner';
 
 .book {
 	display: flex;
@@ -74,8 +75,19 @@
 }
 
 .main {
+	position: relative;
 	width: 100%;
 	max-width: 330px;
+}
+
+.spinner-wrapper {
+	display: flex;
+	justify-content: center;
+	margin: 40px auto;
+}
+
+.spinner {
+	@include spinner.base(40px);
 }
 
 .link-wrapper {
