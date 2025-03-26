@@ -90,4 +90,5 @@ export const SUCCESS_MESSAGES = {
 	saveTag: 'Тег сохранен',
 	deleteTag: 'Тег удален',
 	resetPassword: 'На указанный email было отправлено письмо с инструкцией по восстановлению',
+	confirmPasswordReset: 'Новый пароль установлен',
 };
