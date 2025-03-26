@@ -49,11 +49,13 @@ const LoginPage = () => {
 					isLoading={isLoading}
 					errorMessage={errorMessage}
 					buttonName="Войти"
-					footer={{
-						description: 'Нет аккаунта?',
-						linkName: 'Зарегистрироваться',
-						linkUrl: REGISTRATION_URL,
-					}}
+					footerLinks={[
+						{
+							description: 'Нет аккаунта?',
+							linkName: 'Зарегистрироваться',
+							linkUrl: REGISTRATION_URL,
+						},
+					]}
 					onSubmit={handleSubmit(onSubmit)}
 				>
 					<Controller

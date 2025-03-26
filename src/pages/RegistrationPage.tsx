@@ -58,7 +58,13 @@ const RegistrationPage = () => {
 					buttonName="Зарегистрироваться"
 					isLoading={isLoading}
 					errorMessage={errorMessage}
-					footer={{ description: 'Уже зарегистрированы?', linkName: 'Войти', linkUrl: LOGIN_URL }}
+					footerLinks={[
+						{
+							description: 'Уже зарегистрированы?',
+							linkName: 'Войти',
+							linkUrl: LOGIN_URL,
+						},
+					]}
 					onSubmit={handleSubmit(onSubmit)}
 				>
 					<Controller

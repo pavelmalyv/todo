@@ -10,11 +10,11 @@ interface AuthProps {
 	isLoading?: boolean;
 	errorMessage?: string;
 	buttonName: string;
-	footer: {
-		description: string;
+	footerLinks: {
+		description?: string;
 		linkName: string;
 		linkUrl: string;
-	};
+	}[];
 	onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
 
@@ -25,7 +25,7 @@ const Auth = ({
 	isLoading,
 	errorMessage,
 	buttonName,
-	footer,
+	footerLinks,
 	onSubmit,
 }: AuthProps) => {
 	return (
@@ -50,12 +50,16 @@ const Auth = ({
 
 			<AuthSocials className={cl['login-socials']} type={type} />
 
-			<div className={cl.registration}>
-				{footer.description}{' '}
-				<Link to={footer.linkUrl} className="link">
-					{footer.linkName}
-				</Link>
-			</div>
+			<ul className={cl.links}>
+				{footerLinks.map((link) => (
+					<li key={link.linkUrl}>
+						{link.description}{' '}
+						<Link to={link.linkUrl} className="link">
+							{link.linkName}
+						</Link>
+					</li>
+				))}
+			</ul>
 		</div>
 	);
 };
