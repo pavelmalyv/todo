@@ -1,10 +1,13 @@
-import AppRouter from './components/appRouter/AppRouter';
+import AppRouter from './app/AppRouter';
+import ErrorBoundaryApp from './app/ErrorBoundaryApp';
 import { BrowserRouter } from 'react-router';
 
 const App = () => {
 	return (
 		<BrowserRouter>
-			<AppRouter />
+			<ErrorBoundaryApp>
+				<AppRouter />
+			</ErrorBoundaryApp>
 		</BrowserRouter>
 	);
 };
