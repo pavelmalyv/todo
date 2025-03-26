@@ -1,7 +1,6 @@
 import Root from '@/pages/Root';
 import useUserState from '@/hooks/useUserState';
 import LoadingScreen from '../loadingScreen/LoadingScreen';
-import useDelayedLoader from '@/hooks/useDelayedLoader';
 import useShowError from '@/hooks/useShowError';
 
 import { Navigate, Route, Routes } from 'react-router';
@@ -29,8 +28,6 @@ const TasksDay = lazy(() => import('@/pages/TasksDay'));
 
 const AppRouter = () => {
 	const [user, isLoading, error] = useUserState();
-	const isDelayedLoading = useDelayedLoader(isLoading);
-
 	useShowError(ERRORS_MESSAGES.userLoading, error);
 
 	const privateRoutes = (
@@ -118,7 +115,7 @@ const AppRouter = () => {
 		</>
 	);
 
-	if (isDelayedLoading) {
+	if (isLoading) {
 		return <LoadingScreen />;
 	}
 
