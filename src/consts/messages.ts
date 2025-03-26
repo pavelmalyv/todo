@@ -40,6 +40,8 @@ export const ERRORS_MESSAGES_FIREBASE: Record<string, string> = {
 	'auth/invalid-password': 'Некорректный пароль',
 	'auth/password-does-not-meet-requirements': 'Некорректный пароль',
 	'auth/email-already-in-use': 'Пользователь с таким Email уже существует',
+	'auth/expired-action-code': 'Срок действия ссылки истек',
+	'auth/invalid-action-code': 'Некорректная ссылка',
 	unknown: 'Неизвестная ошибка, попробуйте позже',
 };
 
@@ -65,6 +67,7 @@ export const ERRORS_MESSAGES = {
 	tagNameLoading: 'Ошибка загрузки названия тега, повторите попытку позже',
 	tagLoading: 'Ошибка загрузки тега, повторите попытку позже',
 	signOut: 'Ошибка выхода, повторите попытку позже',
+	unknown: 'Неизвестная ошибка, попробуйте позже',
 };
 
 export const LOADING_MESSAGES = {

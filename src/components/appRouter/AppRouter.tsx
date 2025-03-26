@@ -6,6 +6,7 @@ import useShowError from '@/hooks/useShowError';
 import { Navigate, Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';
 import {
+	ACTION_URL,
 	CALENDAR,
 	getTagUrl,
 	getTasksDayUrl,
@@ -27,6 +28,7 @@ const TagPage = lazy(() => import('@/pages/TagPage'));
 const CalendarPage = lazy(() => import('@/pages/CalendarPage'));
 const TasksDay = lazy(() => import('@/pages/TasksDay'));
 const ResetPasswordPage = lazy(() => import('@/pages/ResetPasswordPage'));
+const ActionPage = lazy(() => import('@/pages/ActionPage'));
 
 const AppRouter = () => {
 	const [user, isLoading, error] = useUserState();
@@ -125,13 +127,29 @@ const AppRouter = () => {
 		</>
 	);
 
+	const commonRoutes = (
+		<>
+			<Route
+				path={ACTION_URL}
+				element={
+					<Suspense>
+						<ActionPage />
+					</Suspense>
+				}
+			/>
+		</>
+	);
+
 	if (isLoading) {
 		return <LoadingScreen />;
 	}
 
 	return (
 		<Routes>
-			<Route element={<Root />}>{user ? privateRoutes : publicRoutes}</Route>
+			<Route element={<Root />}>
+				{commonRoutes}
+				{user ? privateRoutes : publicRoutes}
+			</Route>
 		</Routes>
 	);
 };
