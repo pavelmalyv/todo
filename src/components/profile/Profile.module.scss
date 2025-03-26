@@ -26,6 +26,7 @@
 	position: sticky;
 	top: var(--section-padding-y);
 	min-height: calc(100svh - (var(--section-padding-y) * 2));
+	flex-shrink: 0;
 
 	@include utils.tablet-l {
 		display: none;
