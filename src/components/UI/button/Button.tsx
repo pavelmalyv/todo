@@ -7,7 +7,7 @@ import useDelayedLoader from '@/hooks/useDelayedLoader';
 import { Link } from 'react-router';
 
 type ButtonProps = {
-	size?: 'small' | 'medium';
+	size?: 'small' | 'medium' | 'medium-short';
 	style?: 'background' | 'border' | 'delete';
 	className?: string;
 	isFull?: boolean;

@@ -57,6 +57,12 @@
 		}
 	}
 
+	&_medium-short {
+		--min-height: 38px;
+
+		min-width: initial;
+	}
+
 	&_full {
 		width: 100%;
 	}
