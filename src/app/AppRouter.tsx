@@ -127,19 +127,6 @@ const AppRouter = () => {
 		</>
 	);
 
-	const commonRoutes = (
-		<>
-			<Route
-				path={ACTION_URL}
-				element={
-					<Suspense>
-						<ActionPage />
-					</Suspense>
-				}
-			/>
-		</>
-	);
-
 	if (isLoading) {
 		return <LoadingScreen />;
 	}
@@ -147,7 +134,14 @@ const AppRouter = () => {
 	return (
 		<Routes>
 			<Route element={<Root />}>
-				{commonRoutes}
+				<Route
+					path={ACTION_URL}
+					element={
+						<Suspense>
+							<ActionPage />
+						</Suspense>
+					}
+				/>
 				{user ? privateRoutes : publicRoutes}
 			</Route>
 		</Routes>
