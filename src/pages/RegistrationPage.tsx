@@ -13,15 +13,19 @@ import {
 	getPasswordRepeatSchema,
 	nameSchema,
 	passwordCreateSchema,
+	policySchema,
 } from '@/schemas/fields';
 
 import { LOGIN_URL } from '@/consts/routes';
+import Checkbox from '@/components/UI/checkbox/Checkbox';
+import { Link } from 'react-router';
 
 const formSchema = object({
 	name: nameSchema,
 	email: emailSchema,
 	password: passwordCreateSchema,
 	passwordRepeat: getPasswordRepeatSchema('password'),
+	policy: policySchema,
 });
 
 type FormData = InferType<typeof formSchema>;
@@ -37,6 +41,7 @@ const RegistrationPage = () => {
 			email: '',
 			password: '',
 			passwordRepeat: '',
+			policy: false,
 		},
 	});
 
@@ -122,6 +127,27 @@ const RegistrationPage = () => {
 								placeholder="Повтор пароля*"
 								isProtected={true}
 								autoComplete="new-password"
+								{...field}
+								aria-required={true}
+								aria-invalid={fieldState.invalid}
+								errorMessage={fieldState.error?.message}
+							/>
+						)}
+					/>
+					<Controller
+						name="policy"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Checkbox
+								label={
+									<>
+										Я принимаю
+										<br />
+										<Link to={'#'} target="_blank" className="link">
+											политику конфиденциальности
+										</Link>
+									</>
+								}
 								{...field}
 								aria-required={true}
 								aria-invalid={fieldState.invalid}

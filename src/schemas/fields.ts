@@ -47,3 +47,7 @@ export const hexColorSchema = string()
 
 export const tagIdSchema = string().required();
 export const tagIdSchemaOptional = string();
+
+export const policySchema = boolean()
+	.oneOf([true], MESSAGES_FIELD.policyCheckbox)
+	.required(MESSAGES_FIELD.policyRequired);
