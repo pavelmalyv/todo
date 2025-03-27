@@ -53,7 +53,6 @@ const RegistrationPage = () => {
 		<Book aria-labelledby={titleId}>
 			<Book.Main title="Регистрация" titleId={titleId}>
 				<Auth
-					type="signup"
 					titleId={titleId}
 					buttonName="Зарегистрироваться"
 					isLoading={isLoading}

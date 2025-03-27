@@ -1,10 +1,8 @@
 import cl from './Auth.module.scss';
 import SmallForm from '@/components/Forms/smallForm/SmallForm';
-import AuthSocials from '../authSocials/AuthSocials';
 import { Link } from 'react-router';
 
 interface AuthProps {
-	type?: 'signin' | 'signup';
 	titleId?: string;
 	children: React.ReactNode;
 	isLoading?: boolean;
@@ -19,7 +17,6 @@ interface AuthProps {
 }
 
 const Auth = ({
-	type,
 	titleId,
 	children,
 	isLoading,
@@ -47,8 +44,6 @@ const Auth = ({
 					политикой конфиденциальности
 				</Link>
 			</small>
-
-			<AuthSocials className={cl['login-socials']} type={type} />
 
 			<ul className={cl.links}>
 				{footerLinks.map((link) => (

@@ -44,7 +44,6 @@ const LoginPage = () => {
 		<Book aria-labelledby={titleId}>
 			<Book.Main title="Вход" titleId={titleId}>
 				<Auth
-					type="signin"
 					titleId={titleId}
 					isLoading={isLoading}
 					errorMessage={errorMessage}
