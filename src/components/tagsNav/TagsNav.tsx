@@ -18,7 +18,7 @@ const TagsNav = () => {
 	const tags: Tags | null[] = tagsData ?? new Array(4).fill(null);
 
 	if (error) {
-		return <ErrorMessage message={ERRORS_MESSAGES.tasksLoading} error={error} />;
+		return <ErrorMessage message={ERRORS_MESSAGES.tagsLoading} error={error} />;
 	}
 
 	return (
