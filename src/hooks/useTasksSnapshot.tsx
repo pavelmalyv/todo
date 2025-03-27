@@ -37,8 +37,10 @@ const useTasksSnapshot = ({
 	const [isLoadingMore, setIsLoadingMore] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<Error | undefined>(undefined);
+	const [isInit, setIsInit] = useState(false);
 	const [user, , errorUser] = useUserState();
 	const uid = user ? user.uid : null;
+
 	const {
 		subscribesScopes,
 		unsubscribeFetchMore,
@@ -171,6 +173,7 @@ const useTasksSnapshot = ({
 			async (querySnapshot) => {
 				try {
 					await setTasksFromSnapshot(querySnapshot, subscribeId);
+					setIsInit(true);
 					setIsLoading(false);
 				} catch (error) {
 					handleErrorInit(normalizeError(error));
@@ -237,8 +240,8 @@ const useTasksSnapshot = ({
 			});
 		});
 
-		return isLoading ? null : tasks;
-	}, [subscribesScopes, hasMoreData, isLoading]);
+		return isInit ? tasks : null;
+	}, [subscribesScopes, hasMoreData, isInit]);
 
 	return [tasks, isLoading, error, { fetchMore, isLoadingMore, hasMoreData }] as const;
 };
