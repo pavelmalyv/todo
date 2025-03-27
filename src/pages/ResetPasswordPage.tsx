@@ -24,7 +24,7 @@ const ResetPasswordPage = () => {
 	const [sendPasswordResetEmail, isLoading, error] = useSendPasswordResetEmail(auth);
 	const errorMessage = error ? getErrorMessageFirebase(error) : undefined;
 
-	if (!error) {
+	if (error !== undefined) {
 		console.error(error);
 	}
 
