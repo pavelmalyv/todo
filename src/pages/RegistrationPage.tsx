@@ -1,7 +1,8 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
-import useCreateUserEmailPasswordFullField from '@/hooks/useCreateUserEmailPasswordFullField';
+import Checkbox from '@/components/UI/checkbox/Checkbox';
+import useCreateUser from '@/hooks/useCreateUser';
 
 import { useId } from 'react';
 import { InferType, object } from 'yup';
@@ -11,17 +12,14 @@ import { getErrorMessageFirebase } from '@/utils/firebase';
 import {
 	emailSchema,
 	getPasswordRepeatSchema,
-	nameSchema,
 	passwordCreateSchema,
 	policySchema,
 } from '@/schemas/fields';
 
 import { LOGIN_URL } from '@/consts/routes';
-import Checkbox from '@/components/UI/checkbox/Checkbox';
 import { Link } from 'react-router';
 
 const formSchema = object({
-	name: nameSchema,
 	email: emailSchema,
 	password: passwordCreateSchema,
 	passwordRepeat: getPasswordRepeatSchema('password'),
@@ -32,12 +30,11 @@ type FormData = InferType<typeof formSchema>;
 
 const RegistrationPage = () => {
 	const titleId = useId();
-	const [createUser, isLoading, error] = useCreateUserEmailPasswordFullField();
+	const [createUser, isLoading, error] = useCreateUser();
 
 	const { handleSubmit, control } = useForm<FormData>({
 		resolver: yupResolver(formSchema),
 		defaultValues: {
-			name: '',
 			email: '',
 			password: '',
 			passwordRepeat: '',
@@ -46,7 +43,7 @@ const RegistrationPage = () => {
 	});
 
 	const onSubmit: SubmitHandler<FormData> = async (data) => {
-		await createUser({ email: data.email, password: data.password, name: data.name });
+		await createUser({ email: data.email, password: data.password });
 	};
 
 	let errorMessage: string | undefined;
@@ -71,21 +68,6 @@ const RegistrationPage = () => {
 					]}
 					onSubmit={handleSubmit(onSubmit)}
 				>
-					<Controller
-						name="name"
-						control={control}
-						render={({ field, fieldState }) => (
-							<Field
-								label="Имя"
-								placeholder="Имя*"
-								autoComplete="name"
-								{...field}
-								aria-required={true}
-								aria-invalid={fieldState.invalid}
-								errorMessage={fieldState.error?.message}
-							/>
-						)}
-					/>
 					<Controller
 						name="email"
 						control={control}

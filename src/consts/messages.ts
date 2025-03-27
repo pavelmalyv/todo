@@ -9,7 +9,6 @@ export const MESSAGES_FIELD = {
 	passwordNumber: 'Пароль должен содержать хотя бы одну цифру',
 	passwordMin: (min: number) => `Минимальная длина пароля ${min} символов`,
 	passwordMax: (max: number) => `Максимальная длина пароля ${max} символов`,
-	nameRequired: 'Имя обязательно',
 	nameMax: (max: number) => `Максимальная длина имени ${max} символов`,
 	passwordRepeatRequired: 'Введите пароль еще раз',
 	passwordRepeatIncorrect: 'Пароли не совпадают',

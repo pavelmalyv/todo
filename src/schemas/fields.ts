@@ -12,10 +12,6 @@ export const passwordCreateSchema = string()
 	.matches(/[0-9]/, MESSAGES_FIELD.passwordNumber)
 	.required(MESSAGES_FIELD.passwordRequired);
 
-export const nameSchema = string()
-	.required(MESSAGES_FIELD.nameRequired)
-	.max(4096, MESSAGES_FIELD.nameMax(4096));
-
 export const getPasswordRepeatSchema = (fieldRef: string) => {
 	return string()
 		.oneOf([ref(fieldRef)], MESSAGES_FIELD.passwordRepeatIncorrect)
