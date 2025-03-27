@@ -1,0 +1,21 @@
+@use '@styles/utils';
+
+.root {
+	--padding: 16px;
+
+	right: 0;
+	bottom: var(--padding);
+	padding: 0 var(--padding);
+}
+
+.title {
+	margin-bottom: 16px;
+}
+
+.body {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 14px 40px;
+}
