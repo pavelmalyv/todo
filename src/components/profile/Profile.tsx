@@ -14,7 +14,7 @@ import { throttle } from 'lodash';
 interface ProfileProps {
 	title: string | null;
 	isLoadingTitle?: boolean;
-	quantity?: string | null;
+	quantity?: string | number | null;
 	isLoadingQuantity?: boolean;
 	children: React.ReactNode;
 	headButtons?: React.ReactNode;

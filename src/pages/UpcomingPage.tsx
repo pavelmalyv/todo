@@ -44,7 +44,7 @@ const UpcomingPage = () => {
 	useShowError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantity);
 
 	return (
-		<Profile title="Предстоящие" quantity={String(quantity)} isLoadingQuantity={isLoadingQuantity}>
+		<Profile title="Предстоящие" quantity={quantity} isLoadingQuantity={isLoadingQuantity}>
 			<Section title="Сегодня">
 				<TasksList
 					tasks={tasksToday}
