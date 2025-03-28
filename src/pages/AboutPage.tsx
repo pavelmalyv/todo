@@ -1,8 +1,11 @@
 import Book from '@/components/book/Book';
+
+import { useTitle } from '@/hooks/useTitle';
 import { useId } from 'react';
 import { Link } from 'react-router';
 
 const AboutPage = () => {
+	useTitle('О проекте');
 	const titleId = useId();
 
 	return (

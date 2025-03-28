@@ -10,6 +10,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { emailSchema, passwordSchema } from '@/schemas/fields';
 import { getErrorMessageFirebase } from '@/utils/firebase';
+import { useTitle } from '@/hooks/useTitle';
 import { REGISTRATION_URL, RESET_PASSWORD_URL } from '@/consts/routes';
 
 const formSchema = object({
@@ -20,6 +21,8 @@ const formSchema = object({
 type FormData = InferType<typeof formSchema>;
 
 const LoginPage = () => {
+	useTitle('Вход');
+
 	const titleId = useId();
 	const [signInWithEmailAndPassword, , isLoading, error] = useSignInWithEmailAndPassword(auth);
 

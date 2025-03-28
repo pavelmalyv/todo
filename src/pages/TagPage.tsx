@@ -8,6 +8,7 @@ import useRedirectNotFound from '@/hooks/useRedirectNotFound';
 import { checkNotFoundErrorOrThrow, isNotFoundError, requiredParamOrThrow } from '@/utils/error';
 import { useParams } from 'react-router';
 import { useState } from 'react';
+import { useTitle } from '@/hooks/useTitle';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 const TagPage = () => {
@@ -23,6 +24,8 @@ const TagPage = () => {
 	useRedirectNotFound(isRedirect, '/');
 	checkNotFoundErrorOrThrow(errorWithoutDeleting);
 	useShowError(ERRORS_MESSAGES.tagNameLoading, errorWithoutDeleting);
+
+	useTitle(tag?.name);
 
 	return (
 		<>

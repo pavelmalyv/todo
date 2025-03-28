@@ -10,11 +10,14 @@ import useShowError from '@/hooks/useShowError';
 import Button from '@/components/UI/button/Button';
 
 import { getDateRanges } from '@/utils/date';
+import { useTitle } from '@/hooks/useTitle';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 import { LIMIT_UPCOMING_TASKS } from '@/consts/docLimits';
 import { TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
 
 const UpcomingPage = () => {
+	useTitle('Предстоящие задачи');
+
 	const dateRanges = getDateRanges();
 
 	const [tasksDataToday, isLoadingToday, errorToday] = useTasksSnapshot({

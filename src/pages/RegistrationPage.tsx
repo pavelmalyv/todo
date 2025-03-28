@@ -15,9 +15,9 @@ import {
 	passwordCreateSchema,
 	policySchema,
 } from '@/schemas/fields';
-
-import { LOGIN_URL, POLICY_URL } from '@/consts/routes';
 import { Link } from 'react-router';
+import { useTitle } from '@/hooks/useTitle';
+import { LOGIN_URL, POLICY_URL } from '@/consts/routes';
 
 const formSchema = object({
 	email: emailSchema,
@@ -29,6 +29,8 @@ const formSchema = object({
 type FormData = InferType<typeof formSchema>;
 
 const RegistrationPage = () => {
+	useTitle('Регистрация');
+
 	const titleId = useId();
 	const [createUser, isLoading, error] = useCreateUser();
 

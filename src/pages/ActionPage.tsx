@@ -5,12 +5,15 @@ import useCheckActionCode from '@/hooks/useCheckActionCode';
 
 import { getErrorMessageFirebase } from '@/utils/firebase';
 import { useId } from 'react';
+import { useTitle } from '@/hooks/useTitle';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LOGIN_URL } from '@/consts/routes';
 
 const SUPPORTED_ACTIONS = ['PASSWORD_RESET'];
 
 const ActionPage = () => {
+	useTitle();
+
 	const titleId = useId();
 	const [code, operation, isLoading, error] = useCheckActionCode(SUPPORTED_ACTIONS);
 	const errorMessage = error ? getErrorMessageFirebase(error) : undefined;

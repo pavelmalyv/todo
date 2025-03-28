@@ -1,6 +1,8 @@
 import Button from '../UI/button/Button';
 import cl from './ErrorScreen.module.scss';
+
 import { useId } from 'react';
+import { useTitle } from '@/hooks/useTitle';
 
 type ErrorProps = {
 	title: string;
@@ -17,6 +19,8 @@ type ErrorProps = {
 );
 
 const ErrorScreen = ({ title, description, isHomeButton, onClickHomeButton }: ErrorProps) => {
+	useTitle(title);
+
 	const titleId = useId();
 
 	return (

@@ -11,6 +11,7 @@ import { useId } from 'react';
 import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { InferType, object } from 'yup';
+import { useTitle } from '@/hooks/useTitle';
 import { SUCCESS_MESSAGES } from '@/consts/messages';
 
 const resetPasswordFormSchema = object({
@@ -20,6 +21,8 @@ const resetPasswordFormSchema = object({
 type ResetPasswordFormData = InferType<typeof resetPasswordFormSchema>;
 
 const ResetPasswordPage = () => {
+	useTitle('Сброс пароля');
+
 	const titleId = useId();
 	const [sendPasswordResetEmail, isLoading, error] = useSendPasswordResetEmail(auth);
 	const errorMessage = error ? getErrorMessageFirebase(error) : undefined;

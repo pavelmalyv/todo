@@ -1,9 +1,12 @@
 import TasksPage from './TasksPage';
 
 import { getDateRanges } from '@/utils/date';
+import { useTitle } from '@/hooks/useTitle';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 const TomorrowPage = () => {
+	useTitle('Задачи на завтра');
+
 	const dateRanges = getDateRanges();
 
 	return (

@@ -2,6 +2,7 @@ import TasksPage from './TasksPage';
 
 import { validateTimestampParamOrThrow } from '@/utils/error';
 import { useParams } from 'react-router';
+import { useTitle } from '@/hooks/useTitle';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 const TasksDay = () => {
@@ -12,9 +13,13 @@ const TasksDay = () => {
 	dateEnd.setDate(dateEnd.getDate() + 1);
 
 	const date = new Date(timestamp);
+	const dataDisplay = date.toLocaleDateString('ru-RU');
+
+	useTitle(`Задачи на ${dataDisplay}`);
+
 	return (
 		<TasksPage
-			title={date.toLocaleDateString('ru-RU')}
+			title={dataDisplay}
 			timestampStart={timestamp}
 			timestampEnd={dateEnd.getTime()}
 			errorMessageQuantityLoading={ERRORS_MESSAGES.quantityTasksLoading}

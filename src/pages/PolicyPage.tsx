@@ -1,3 +1,4 @@
+import { useTitle } from '@/hooks/useTitle';
 import { useId } from 'react';
 import { Link } from 'react-router';
 
@@ -6,6 +7,7 @@ const POLICY_URL = 'https://example.com/policy';
 const EMAIL = 'pavelmalyv@gmail.com';
 
 const PolicyPage = () => {
+	useTitle('Политика конфиденциальности');
 	const titleId = useId();
 
 	return (
