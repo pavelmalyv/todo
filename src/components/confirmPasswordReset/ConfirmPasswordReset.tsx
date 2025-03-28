@@ -2,7 +2,7 @@ import type { SubmitHandler } from 'react-hook-form';
 
 import SmallForm from '../Forms/smallForm/SmallForm';
 import Field from '../UI/field/Field';
-import useConfirmPasswordReset from '@/hooks/useConfirmPasswordReset';
+import useConfirmPasswordReset from '@/hooks/data/useConfirmPasswordReset';
 
 import { Controller, useForm } from 'react-hook-form';
 import { getPasswordRepeatSchema, passwordCreateSchema } from '@/schemas/fields';

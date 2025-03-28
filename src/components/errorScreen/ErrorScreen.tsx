@@ -2,7 +2,7 @@ import Button from '../UI/button/Button';
 import cl from './ErrorScreen.module.scss';
 
 import { useId } from 'react';
-import { useTitle } from '@/hooks/useTitle';
+import { useTitle } from '@/hooks/ui/useTitle';
 
 type ErrorProps = {
 	title: string;

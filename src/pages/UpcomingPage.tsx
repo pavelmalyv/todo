@@ -4,13 +4,13 @@ import Profile from '@/components/profile/Profile';
 import Section from '@/components/UI/section/Section';
 import TasksList from '@/components/tasksList/TasksList';
 import TableSections from '@/components/tableSections/TableSections';
-import useTasksSnapshot from '@/hooks/useTasksSnapshot';
-import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
-import useShowError from '@/hooks/useShowError';
+import useTasksSnapshot from '@/hooks/data/useTasksSnapshot';
+import useQuantityUpcomingTasksSnapshot from '@/hooks/data/useQuantityUpcomingTasksSnapshot';
+import useShowError from '@/hooks/ui/useShowError';
 import Button from '@/components/UI/button/Button';
 
 import { getDateRanges } from '@/utils/date';
-import { useTitle } from '@/hooks/useTitle';
+import { useTitle } from '@/hooks/ui/useTitle';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 import { LIMIT_UPCOMING_TASKS } from '@/consts/docLimits';
 import { TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';

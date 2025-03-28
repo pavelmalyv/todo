@@ -5,7 +5,7 @@ import AppModal from '@/components/UI/appModal/AppModal';
 import Field from '@/components/UI/field/Field';
 import FieldDate from '@/components/UI/fieldDate/FieldDate';
 import TagsSelectList from '@/components/tagsSelectList/TagsSelectList';
-import useAddTask from '@/hooks/useAddTask';
+import useAddTask from '@/hooks/data/useAddTask';
 
 import { useId } from 'react';
 import { Controller, useForm } from 'react-hook-form';

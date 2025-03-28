@@ -1,14 +1,14 @@
 import TasksPage from './TasksPage';
 import Button from '@/components/UI/button/Button';
-import useTagSnapshot from '@/hooks/useTagSnapshot';
-import useShowError from '@/hooks/useShowError';
+import useTagSnapshot from '@/hooks/data/useTagSnapshot';
+import useShowError from '@/hooks/ui/useShowError';
 import EditTagModal from '@/components/Modals/editTagModal/EditTagModal';
-import useRedirectNotFound from '@/hooks/useRedirectNotFound';
+import useRedirectNotFound from '@/hooks/ui/useRedirectNotFound';
 
 import { checkNotFoundErrorOrThrow, isNotFoundError, requiredParamOrThrow } from '@/utils/error';
 import { useParams } from 'react-router';
 import { useState } from 'react';
-import { useTitle } from '@/hooks/useTitle';
+import { useTitle } from '@/hooks/ui/useTitle';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 const TagPage = () => {

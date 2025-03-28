@@ -4,7 +4,7 @@ import FieldError from '@/components/UI/fieldError/FieldError';
 import Icon from '@/components/UI/icon/Icon';
 
 import { forwardRef, useId } from 'react';
-import useDelayedLoader from '@/hooks/useDelayedLoader';
+import useDelayedLoader from '@/hooks/ui/useDelayedLoader';
 
 interface CheckboxProps {
 	label: React.ReactNode;

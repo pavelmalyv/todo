@@ -1,7 +1,7 @@
 import Root from '@/pages/Root';
-import useUserState from '@/hooks/useUserState';
+import useUserState from '@/hooks/data/useUserState';
 import LoadingScreen from '../components/loadingScreen/LoadingScreen';
-import useShowError from '@/hooks/useShowError';
+import useShowError from '@/hooks/ui/useShowError';
 
 import { Navigate, Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';

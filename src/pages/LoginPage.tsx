@@ -10,7 +10,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { emailSchema, passwordSchema } from '@/schemas/fields';
 import { getErrorMessageFirebase } from '@/utils/firebase';
-import { useTitle } from '@/hooks/useTitle';
+import { useTitle } from '@/hooks/ui/useTitle';
 import { REGISTRATION_URL, RESET_PASSWORD_URL } from '@/consts/routes';
 
 const formSchema = object({

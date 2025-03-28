@@ -7,7 +7,7 @@ import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import Skeleton from 'react-loading-skeleton';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import ViewTaskModal from '../Modals/viewTaskModal/ViewTaskModal';
-import useTasksSnapshot from '@/hooks/useTasksSnapshot';
+import useTasksSnapshot from '@/hooks/data/useTasksSnapshot';
 
 import { Link } from 'react-router';
 import { produce } from 'immer';

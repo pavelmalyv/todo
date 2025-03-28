@@ -2,7 +2,7 @@ import type { Tags } from '@/types/tags';
 
 import cl from './TagsNav.module.scss';
 import TagMarker from '../UI/tagMarker/TagMarker';
-import useTagsSnapshot from '@/hooks/useTagsSnapshot';
+import useTagsSnapshot from '@/hooks/data/useTagsSnapshot';
 import Skeleton from 'react-loading-skeleton';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';

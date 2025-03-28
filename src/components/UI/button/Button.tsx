@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import cl from './Button.module.scss';
 import VisuallyHiddenLoader from '@/components/visuallyHiddenLoader/VisuallyHiddenLoader';
 import Skeleton from 'react-loading-skeleton';
-import useDelayedLoader from '@/hooks/useDelayedLoader';
+import useDelayedLoader from '@/hooks/ui/useDelayedLoader';
 
 import { Link } from 'react-router';
 

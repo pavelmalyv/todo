@@ -8,8 +8,8 @@ import TagItem from '@/components/UI/tagItem/TagItem';
 import DescriptionList from '@/components/UI/descriptionList/DescriptionList';
 import ErrorMessage from '@/components/UI/errorMessage/ErrorMessage';
 import EditTaskModal from '../editTaskModal/EditTaskModal';
-import useSetDoneTask from '@/hooks/useSetDoneTask';
-import useTagSnapshot from '@/hooks/useTagSnapshot';
+import useSetDoneTask from '@/hooks/data/useSetDoneTask';
+import useTagSnapshot from '@/hooks/data/useTagSnapshot';
 
 import { showError } from '@/utils/notification';
 import { useId, useState } from 'react';

@@ -6,11 +6,11 @@ import AppModal from '@/components/UI/appModal/AppModal';
 import FieldDate from '@/components/UI/fieldDate/FieldDate';
 import Field from '@/components/UI/field/Field';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
-import useSaveTask from '@/hooks/useSaveTask';
+import useSaveTask from '@/hooks/data/useSaveTask';
 import ConfirmModal from '../confirmModal/ConfirmModal';
 import Button from '@/components/UI/button/Button';
 import TagsSelectList from '@/components/tagsSelectList/TagsSelectList';
-import useDeleteTask from '@/hooks/useDeleteTask';
+import useDeleteTask from '@/hooks/data/useDeleteTask';
 
 import {
 	datePickerSchema,

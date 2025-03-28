@@ -6,7 +6,7 @@ import TagsSelect from '../UI/tagsSelect/TagsSelect';
 import MessageInfo from '../UI/messageInfo/MessageInfo';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import AddTagButton from '../addTagButton/AddTagButton';
-import useTagsSnapshot from '@/hooks/useTagsSnapshot';
+import useTagsSnapshot from '@/hooks/data/useTagsSnapshot';
 
 import { forwardRef } from 'react';
 import { ERRORS_MESSAGES, LOADING_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';

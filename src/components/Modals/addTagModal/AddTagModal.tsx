@@ -2,7 +2,7 @@ import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import AppModal from '@/components/UI/appModal/AppModal';
 import Field from '@/components/UI/field/Field';
 import FieldColor from '@/components/UI/fieldColor/FieldColor';
-import useAddTag from '@/hooks/useAddTag';
+import useAddTag from '@/hooks/data/useAddTag';
 
 import { hexColorSchema, nameTagSchema } from '@/schemas/fields';
 import { showError, showSuccess } from '@/utils/notification';

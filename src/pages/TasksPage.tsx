@@ -5,9 +5,9 @@ import Profile from '@/components/profile/Profile';
 import Section from '@/components/UI/section/Section';
 import TasksList from '@/components/tasksList/TasksList';
 import Button from '@/components/UI/button/Button';
-import useTasksSnapshot from '@/hooks/useTasksSnapshot';
-import useQuantityTasksSnapshot from '@/hooks/useQuantityTasksSnapshot';
-import useShowError from '@/hooks/useShowError';
+import useTasksSnapshot from '@/hooks/data/useTasksSnapshot';
+import useQuantityTasksSnapshot from '@/hooks/data/useQuantityTasksSnapshot';
+import useShowError from '@/hooks/ui/useShowError';
 
 import { getQuantityShort } from '@/utils/quantity';
 import { showError } from '@/utils/notification';

@@ -2,7 +2,7 @@ import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import Field from '@/components/UI/field/Field';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
-import useCreateUser from '@/hooks/useCreateUser';
+import useCreateUser from '@/hooks/data/useCreateUser';
 
 import { useId } from 'react';
 import { InferType, object } from 'yup';
@@ -16,7 +16,7 @@ import {
 	policySchema,
 } from '@/schemas/fields';
 import { Link } from 'react-router';
-import { useTitle } from '@/hooks/useTitle';
+import { useTitle } from '@/hooks/ui/useTitle';
 import { LOGIN_URL, POLICY_URL } from '@/consts/routes';
 
 const formSchema = object({

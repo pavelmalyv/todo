@@ -5,7 +5,7 @@ import Checkbox from '../UI/checkbox/Checkbox';
 import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import EditTaskModal from '../Modals/editTaskModal/EditTaskModal';
 import Skeleton from 'react-loading-skeleton';
-import useSetDoneTask from '@/hooks/useSetDoneTask';
+import useSetDoneTask from '@/hooks/data/useSetDoneTask';
 
 import { useState } from 'react';
 import { showError } from '@/utils/notification';

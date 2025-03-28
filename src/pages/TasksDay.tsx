@@ -2,7 +2,7 @@ import TasksPage from './TasksPage';
 
 import { validateTimestampParamOrThrow } from '@/utils/error';
 import { useParams } from 'react-router';
-import { useTitle } from '@/hooks/useTitle';
+import { useTitle } from '@/hooks/ui/useTitle';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 
 const TasksDay = () => {

@@ -1,6 +1,6 @@
 import Book from '@/components/book/Book';
 
-import { useTitle } from '@/hooks/useTitle';
+import { useTitle } from '@/hooks/ui/useTitle';
 import { useId } from 'react';
 import { Link } from 'react-router';
 

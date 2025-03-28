@@ -1,11 +1,11 @@
 import ConfirmPasswordReset from '@/components/confirmPasswordReset/ConfirmPasswordReset';
 import Book from '@/components/book/Book';
 import MessageInfo from '@/components/UI/messageInfo/MessageInfo';
-import useCheckActionCode from '@/hooks/useCheckActionCode';
+import useCheckActionCode from '@/hooks/data/useCheckActionCode';
 
 import { getErrorMessageFirebase } from '@/utils/firebase';
 import { useId } from 'react';
-import { useTitle } from '@/hooks/useTitle';
+import { useTitle } from '@/hooks/ui/useTitle';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LOGIN_URL } from '@/consts/routes';
 

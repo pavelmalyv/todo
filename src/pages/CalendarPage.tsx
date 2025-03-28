@@ -1,6 +1,6 @@
 import Calendar from '@/components/calendar/Calendar';
 import Profile from '@/components/profile/Profile';
-import { useTitle } from '@/hooks/useTitle';
+import { useTitle } from '@/hooks/ui/useTitle';
 
 const CalendarPage = () => {
 	useTitle('Календарь');

@@ -6,9 +6,9 @@ import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 import Skeleton from 'react-loading-skeleton';
 import TagsNav from '../tagsNav/TagsNav';
 import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
-import useQuantityUpcomingTasksSnapshot from '@/hooks/useQuantityUpcomingTasksSnapshot';
-import useQuantityTasksSnapshot from '@/hooks/useQuantityTasksSnapshot';
-import useShowError from '@/hooks/useShowError';
+import useQuantityUpcomingTasksSnapshot from '@/hooks/data/useQuantityUpcomingTasksSnapshot';
+import useQuantityTasksSnapshot from '@/hooks/data/useQuantityTasksSnapshot';
+import useShowError from '@/hooks/ui/useShowError';
 
 import { useId } from 'react';
 import { getDateRanges } from '@/utils/date';

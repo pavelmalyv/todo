@@ -6,8 +6,8 @@ import Field from '@/components/UI/field/Field';
 import FieldColor from '@/components/UI/fieldColor/FieldColor';
 import Button from '@/components/UI/button/Button';
 import ConfirmModal from '../confirmModal/ConfirmModal';
-import useSaveTag from '@/hooks/useSaveTag';
-import useDeleteTag from '@/hooks/useDeleteTag';
+import useSaveTag from '@/hooks/data/useSaveTag';
+import useDeleteTag from '@/hooks/data/useDeleteTag';
 
 import { hexColorSchema, nameTagSchema } from '@/schemas/fields';
 import { showError, showSuccess } from '@/utils/notification';
