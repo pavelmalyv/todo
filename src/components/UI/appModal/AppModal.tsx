@@ -5,7 +5,8 @@ import ButtonIcon from '../buttonIcon/ButtonIcon';
 import { createCompoundContext } from '@/context/createCompoundContext';
 
 interface AppModalProps {
-	styleModal?: 'popup' | 'full';
+	role?: string;
+	styleModal?: 'popup' | 'full' | 'dialog';
 	isOpen: boolean;
 	children: React.ReactNode;
 	animation?: 'fade' | 'slide';
@@ -25,6 +26,7 @@ type AppModalContext = Pick<AppModalProps, 'onClose'>;
 const [useAppModalContext, AppModalProvider] = createCompoundContext<AppModalContext>();
 
 const AppModal = ({
+	role = 'dialog',
 	styleModal = 'popup',
 	isOpen,
 	children,
@@ -41,8 +43,12 @@ const AppModal = ({
 	return (
 		<AppModalProvider value={{ onClose }}>
 			<Modal
+				role={role}
 				open={isOpen}
 				onClose={onClose}
+				aria-modal="true"
+				blockScroll={styleModal !== 'dialog'}
+				closeOnOverlayClick={styleModal !== 'dialog'}
 				classNames={{
 					root: classNames(cl.root, cl[`root_${styleModal}`], className?.root),
 					overlay: classNames(cl.overlay, className?.overlay),
