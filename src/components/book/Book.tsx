@@ -3,7 +3,7 @@ import cl from './Book.module.scss';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 
 import { Link } from 'react-router';
-import { POLICY_URL } from '@/consts/routes';
+import { ABOUT_URL, POLICY_URL } from '@/consts/routes';
 
 interface BookProps {
 	children: React.ReactNode;
@@ -33,7 +33,7 @@ const Book = ({ children, ['aria-labelledby']: ariaLabelledby }: BookProps) => {
 							<div className={cl.footer}>
 								<ul className={cl['nav']}>
 									<li>
-										<Link to={'#'} className={cl['nav-link']}>
+										<Link to={ABOUT_URL} className={cl['nav-link']}>
 											О проекте
 										</Link>
 									</li>

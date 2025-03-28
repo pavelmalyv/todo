@@ -18,7 +18,13 @@ import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LIMIT_QUANTITY_TASKS } from '@/consts/docLimits';
-import { CALENDAR, POLICY_URL, TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
+import {
+	ABOUT_URL,
+	CALENDAR,
+	POLICY_URL,
+	TODAY_TASKS_URL,
+	TOMORROW_TASKS_URL,
+} from '@/consts/routes';
 
 interface MenuProps {
 	isModal?: boolean;
@@ -153,13 +159,8 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 				<nav className={cl['small-menu']}>
 					<ul className={cl['small-menu-list']}>
 						<li className={cl['small-menu-item']}>
-							<Link to={'#'} className={cl['small-menu-link']}>
-								Атрибуция
-							</Link>
-						</li>
-						<li className={cl['small-menu-item']}>
-							<Link to={'#'} className={cl['small-menu-link']}>
-								Cookie
+							<Link to={ABOUT_URL} className={cl['small-menu-link']}>
+								О проекте
 							</Link>
 						</li>
 						<li className={cl['small-menu-item']}>
