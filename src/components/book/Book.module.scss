@@ -63,14 +63,61 @@
 .body {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
 	justify-content: center;
-	padding: 45px 30px;
+	position: relative;
 	border-radius: var(--border-radius);
 	background-color: rgb(var(--color-background-tertiary));
+}
+
+.body-inner {
+	display: flex;
+	justify-content: center;
+	padding: 80px 30px;
+
+	@include utils.tablet-l {
+		padding: 45px 30px;
+	}
 
 	@include utils.mobile-l {
 		padding: 35px var(--container-padding-x);
+	}
+}
+
+.footer {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	border-top: 1px solid rgb(var(--color-border-primary));
+
+	@include utils.tablet-l {
+		position: static;
+		margin-top: 10px;
+	}
+}
+
+.nav {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: 10px 15px;
+	padding: 24px 30px;
+
+	&-link {
+		--color-text: rgb(var(--color-text-secondary));
+
+		@include utils.base-animation(color);
+
+		font-size: 14px;
+		text-decoration: underline;
+		text-decoration-skip-ink: none;
+		color: var(--color-text);
+
+		@include utils.hover {
+			--color-text: rgb(var(--color-text-primary));
+
+			text-decoration: none;
+		}
 	}
 }
 

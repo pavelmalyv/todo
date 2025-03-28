@@ -3,6 +3,7 @@ import cl from './Book.module.scss';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 
 import { Link } from 'react-router';
+import { POLICY_URL } from '@/consts/routes';
 
 interface BookProps {
 	children: React.ReactNode;
@@ -26,7 +27,24 @@ const Book = ({ children, ['aria-labelledby']: ariaLabelledby }: BookProps) => {
 								/>
 							</picture>
 						</div>
-						<div className={cl.body}>{children}</div>
+						<div className={cl.body}>
+							<div className={cl['body-inner']}>{children}</div>
+
+							<div className={cl.footer}>
+								<ul className={cl['nav']}>
+									<li>
+										<Link to={'#'} className={cl['nav-link']}>
+											О проекте
+										</Link>
+									</li>
+									<li>
+										<Link to={POLICY_URL} target="_blank" className={cl['nav-link']}>
+											Политика конфиденциальности
+										</Link>
+									</li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
