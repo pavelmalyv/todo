@@ -8,7 +8,7 @@
 	@include field.base;
 
 	&_icon {
-		padding-right: 30px;
+		padding-right: 48px;
 	}
 }
 
@@ -20,6 +20,6 @@
 .button {
 	position: absolute;
 	top: 50%;
-	right: 0;
+	right: 8px;
 	translate: 0 -50%;
 }
