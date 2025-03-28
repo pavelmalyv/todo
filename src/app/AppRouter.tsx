@@ -11,6 +11,7 @@ import {
 	getTagUrl,
 	getTasksDayUrl,
 	LOGIN_URL,
+	POLICY_URL,
 	REGISTRATION_URL,
 	RESET_PASSWORD_URL,
 	TODAY_TASKS_URL,
@@ -29,6 +30,7 @@ const CalendarPage = lazy(() => import('@/pages/CalendarPage'));
 const TasksDay = lazy(() => import('@/pages/TasksDay'));
 const ResetPasswordPage = lazy(() => import('@/pages/ResetPasswordPage'));
 const ActionPage = lazy(() => import('@/pages/ActionPage'));
+const PolicyPage = lazy(() => import('@/pages/PolicyPage'));
 
 const AppRouter = () => {
 	const [user, isLoading, error] = useUserState();
@@ -139,6 +141,14 @@ const AppRouter = () => {
 					element={
 						<Suspense>
 							<ActionPage />
+						</Suspense>
+					}
+				/>
+				<Route
+					path={POLICY_URL}
+					element={
+						<Suspense>
+							<PolicyPage />
 						</Suspense>
 					}
 				/>
