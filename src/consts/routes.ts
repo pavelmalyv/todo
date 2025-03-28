@@ -6,5 +6,7 @@ export const CALENDAR = '/calendar';
 export const POLICY_URL = '/privacy-policy';
 export const RESET_PASSWORD_URL = '/auth/reset-password';
 export const ACTION_URL = '/auth/action';
+export const ABOUT_URL = '/about';
+
 export const getTagUrl = (id: string) => `/tag/${id}`;
 export const getTasksDayUrl = (timestamp: number | string) => `/tasks-day/${timestamp}`;

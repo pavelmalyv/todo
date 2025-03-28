@@ -6,6 +6,7 @@ import useShowError from '@/hooks/useShowError';
 import { Navigate, Route, Routes } from 'react-router';
 import { lazy, Suspense } from 'react';
 import {
+	ABOUT_URL,
 	ACTION_URL,
 	CALENDAR,
 	getTagUrl,
@@ -31,6 +32,7 @@ const TasksDay = lazy(() => import('@/pages/TasksDay'));
 const ResetPasswordPage = lazy(() => import('@/pages/ResetPasswordPage'));
 const ActionPage = lazy(() => import('@/pages/ActionPage'));
 const PolicyPage = lazy(() => import('@/pages/PolicyPage'));
+const AboutPage = lazy(() => import('@/pages/AboutPage'));
 
 const AppRouter = () => {
 	const [user, isLoading, error] = useUserState();
@@ -149,6 +151,14 @@ const AppRouter = () => {
 					element={
 						<Suspense>
 							<PolicyPage />
+						</Suspense>
+					}
+				/>
+				<Route
+					path={ABOUT_URL}
+					element={
+						<Suspense>
+							<AboutPage />
 						</Suspense>
 					}
 				/>
