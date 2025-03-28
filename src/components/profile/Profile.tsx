@@ -11,15 +11,22 @@ import AddTaskModal from '../Modals/addTaskModal/AddTaskModal';
 import { useEffect, useRef, useState } from 'react';
 import { throttle } from 'lodash';
 
-interface ProfileProps {
+type ProfileProps = {
 	title: string | null;
 	isLoadingTitle?: boolean;
-	quantity?: string | number | null;
-	isLoadingQuantity?: boolean;
 	children: React.ReactNode;
 	headButtons?: React.ReactNode;
 	isAddButton?: boolean;
-}
+} & (
+	| {
+			quantity: string | number | null;
+			isLoadingQuantity?: boolean;
+	  }
+	| {
+			quantity?: never;
+			isLoadingQuantity?: never;
+	  }
+);
 
 const Profile = ({
 	title,
