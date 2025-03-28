@@ -110,11 +110,11 @@
 	}
 
 	h2 {
-		font-size: 22px;
+		font-size: 28px;
 		font-family: var(--font-secondary);
 
 		@include utils.mobile-l {
-			font-size: 20px;
+			font-size: 26px;
 		}
 	}
 
