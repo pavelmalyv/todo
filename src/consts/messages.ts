@@ -1,4 +1,4 @@
-import { TIMESTAMP_MAX, TIMESTAMP_MIN } from './validation';
+import { TIMESTAMP_MAX, TIMESTAMP_MIN } from './config';
 
 export const MESSAGES_FIELD = {
 	emailRequired: 'Email обязателен',

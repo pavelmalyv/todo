@@ -1,4 +1,4 @@
-import { TIMESTAMP_MAX, TIMESTAMP_MIN } from '@/consts/validation';
+import { TIMESTAMP_MAX, TIMESTAMP_MIN } from '@/consts/config';
 
 export const getDateRanges = () => {
 	const todayStart = new Date();
