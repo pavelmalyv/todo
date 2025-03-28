@@ -9,9 +9,9 @@ import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import MessageInfo from '../UI/messageInfo/MessageInfo';
 import AddTagButton from '../addTagButton/AddTagButton';
 
+import { getTagUrl } from '@/consts/routes';
 import { NavLink } from 'react-router';
 import { ERRORS_MESSAGES, LOADING_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
-import { getTagUrl } from '@/consts/routes';
 
 const TagsNav = () => {
 	const [tagsData, isLoading, error] = useTagsSnapshot();
