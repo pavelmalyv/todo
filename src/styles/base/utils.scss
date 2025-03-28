@@ -82,3 +82,55 @@
 	font-size: 15px;
 	font-family: var(--font-secondary);
 }
+
+.text {
+	line-height: 1.6;
+
+	h1,
+	h2 {
+		padding: 10px 0;
+	}
+
+	h1 {
+		font-size: 36px;
+		font-family: var(--font-secondary);
+
+		@include utils.tablet-l {
+			font-size: 32px;
+		}
+
+		@include utils.mobile-l {
+			font-size: 28px;
+		}
+	}
+
+	h2 {
+		font-size: 22px;
+		font-family: var(--font-secondary);
+
+		@include utils.mobile-l {
+			font-size: 20px;
+		}
+	}
+
+	a {
+		@include utils.base-animation(color);
+
+		text-decoration: underline;
+		text-decoration-skip-ink: none;
+
+		@include utils.hover {
+			text-decoration: none;
+			color: rgb(var(--color-text-secondary));
+		}
+	}
+
+	ul,
+	ol {
+		padding: 0.5em 0;
+	}
+
+	p {
+		padding: 0.3em 0;
+	}
+}
