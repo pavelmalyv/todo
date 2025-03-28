@@ -14,7 +14,7 @@ const Section = ({ title, children }: SectionProps) => {
 	return (
 		<section className="section" aria-labelledby={titleId}>
 			<div className={cl.body}>
-				<h2 id={titleId} className={classNames(cl.title, 'h1')}>
+				<h2 id={titleId} className={classNames(cl.title, 'h2')}>
 					{title}
 				</h2>
 
