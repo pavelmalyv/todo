@@ -32,14 +32,14 @@
 				--size: 32px;
 				--border-color: rgb(var(--color-border-primary));
 
-				@include utils.hover {
-					--border-color: rgb(var(--color-text-tertiary));
-				}
-
 				top: 3px;
 				width: var(--size);
 				height: var(--size);
 				border-radius: 50%;
+
+				@include utils.hover {
+					--border-color: rgb(var(--color-text-tertiary));
+				}
 
 				&--previous {
 					left: 3px;
