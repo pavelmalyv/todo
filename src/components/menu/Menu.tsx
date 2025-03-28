@@ -18,7 +18,7 @@ import { useSignOut } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LIMIT_QUANTITY_TASKS } from '@/consts/docLimits';
-import { CALENDAR, TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
+import { CALENDAR, POLICY_URL, TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
 
 interface MenuProps {
 	isModal?: boolean;
@@ -163,7 +163,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 							</Link>
 						</li>
 						<li className={cl['small-menu-item']}>
-							<Link to={'#'} className={cl['small-menu-link']}>
+							<Link to={POLICY_URL} target="_blank" className={cl['small-menu-link']}>
 								Политика конфиденциальности
 							</Link>
 						</li>

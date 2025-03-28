@@ -16,7 +16,7 @@ import {
 	policySchema,
 } from '@/schemas/fields';
 
-import { LOGIN_URL } from '@/consts/routes';
+import { LOGIN_URL, POLICY_URL } from '@/consts/routes';
 import { Link } from 'react-router';
 
 const formSchema = object({
@@ -125,7 +125,7 @@ const RegistrationPage = () => {
 									<>
 										Я принимаю
 										<br />
-										<Link to={'#'} target="_blank" className="link">
+										<Link to={POLICY_URL} target="_blank" className="link">
 											политику конфиденциальности
 										</Link>
 									</>
