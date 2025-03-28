@@ -3,7 +3,6 @@ import cl from './Book.module.scss';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
 
 import { Link } from 'react-router';
-import { LOGIN_URL } from '@/consts/routes';
 
 interface BookProps {
 	children: React.ReactNode;
@@ -39,19 +38,15 @@ interface MainProps {
 	title: string;
 	titleId?: string;
 	children: React.ReactNode;
-	isCancelButton?: boolean;
-	isCancelButtonCenter?: boolean;
 	isLoading?: boolean;
+	backButton?: {
+		to: string;
+		isCenter?: boolean;
+		text?: string;
+	};
 }
 
-const Main = ({
-	title,
-	titleId,
-	children,
-	isCancelButton,
-	isCancelButtonCenter = true,
-	isLoading = false,
-}: MainProps) => {
+const Main = ({ title, titleId, children, backButton, isLoading = false }: MainProps) => {
 	return (
 		<VisuallyHiddenLoader isLoading={isLoading}>
 			<div className={cl.main}>
@@ -67,14 +62,14 @@ const Main = ({
 
 						{children}
 
-						{isCancelButton && (
+						{backButton && (
 							<div
 								className={classNames(cl['link-wrapper'], {
-									[cl['link-wrapper_center']]: isCancelButtonCenter,
+									[cl['link-wrapper_center']]: backButton.isCenter,
 								})}
 							>
-								<Link to={LOGIN_URL} className={'link'}>
-									Отмена
+								<Link to={backButton?.to} className={'link'}>
+									{backButton?.text ?? 'Назад'}
 								</Link>
 							</div>
 						)}

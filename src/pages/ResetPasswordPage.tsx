@@ -47,7 +47,7 @@ const ResetPasswordPage = () => {
 
 	return (
 		<Book aria-labelledby={titleId}>
-			<Book.Main title="Сброс пароля" titleId={titleId} isCancelButton={true}>
+			<Book.Main title="Сброс пароля" titleId={titleId} backButton={{ to: '/', isCenter: true }}>
 				<SmallForm
 					onSubmit={handleSubmit(onSubmit)}
 					buttonName="Восстановить"

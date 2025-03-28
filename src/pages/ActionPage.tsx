@@ -6,6 +6,7 @@ import useCheckActionCode from '@/hooks/useCheckActionCode';
 import { getErrorMessageFirebase } from '@/utils/firebase';
 import { useId } from 'react';
 import { ERRORS_MESSAGES } from '@/consts/messages';
+import { LOGIN_URL } from '@/consts/routes';
 
 const SUPPORTED_ACTIONS = ['PASSWORD_RESET'];
 
@@ -28,10 +29,10 @@ const ActionPage = () => {
 	}
 
 	let body: React.ReactNode;
-	let isCancelButtonCenter = true;
+	let isBackButtonCenter = true;
 	if (error || !code) {
 		body = <MessageInfo message={errorMessage ?? ERRORS_MESSAGES.unknown} />;
-		isCancelButtonCenter = false;
+		isBackButtonCenter = false;
 	} else {
 		switch (operation) {
 			case 'PASSWORD_RESET': {
@@ -46,9 +47,12 @@ const ActionPage = () => {
 			<Book.Main
 				title={title}
 				titleId={titleId}
-				isCancelButton={true}
-				isCancelButtonCenter={isCancelButtonCenter}
 				isLoading={isLoading}
+				backButton={{
+					to: LOGIN_URL,
+					isCenter: isBackButtonCenter,
+					text: 'Отмена',
+				}}
 			>
 				{body}
 			</Book.Main>
