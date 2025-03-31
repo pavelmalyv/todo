@@ -1,6 +1,6 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
-import Field from '@/components/UI/field/Field';
+import FieldText from '@/components/UI/Fields/fieldText/FieldText';
 
 import { useId } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
@@ -68,7 +68,7 @@ const LoginPage = () => {
 						name="email"
 						control={control}
 						render={({ field, fieldState }) => (
-							<Field
+							<FieldText
 								type="email"
 								label="Email"
 								placeholder="Email"
@@ -85,11 +85,11 @@ const LoginPage = () => {
 						name="password"
 						control={control}
 						render={({ field, fieldState }) => (
-							<Field
+							<FieldText
 								label="Пароль"
 								placeholder="Пароль"
 								autoComplete="current-password"
-								isProtected={true}
+								isPassword={true}
 								aria-required={true}
 								aria-invalid={fieldState.invalid}
 								errorMessage={fieldState.error?.message}

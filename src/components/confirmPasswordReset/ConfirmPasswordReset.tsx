@@ -1,7 +1,7 @@
 import type { SubmitHandler } from 'react-hook-form';
 
 import SmallForm from '../Forms/smallForm/SmallForm';
-import Field from '../UI/field/Field';
+import FieldText from '../UI/Fields/fieldText/FieldText';
 import useConfirmPasswordReset from '@/hooks/data/useConfirmPasswordReset';
 
 import { Controller, useForm } from 'react-hook-form';
@@ -57,10 +57,10 @@ const ConfirmPasswordReset = ({ code }: ConfirmPasswordResetProps) => {
 				name="password"
 				control={control}
 				render={({ field, fieldState }) => (
-					<Field
+					<FieldText
 						label="Пароль"
 						placeholder="Пароль*"
-						isProtected={true}
+						isPassword={true}
 						autoComplete="new-password"
 						{...field}
 						aria-required={true}
@@ -73,10 +73,10 @@ const ConfirmPasswordReset = ({ code }: ConfirmPasswordResetProps) => {
 				name="passwordRepeat"
 				control={control}
 				render={({ field, fieldState }) => (
-					<Field
+					<FieldText
 						label="Повтор пароля"
 						placeholder="Повтор пароля*"
-						isProtected={true}
+						isPassword={true}
 						autoComplete="new-password"
 						{...field}
 						aria-required={true}

@@ -1,18 +1,9 @@
 @use '@styles/utils';
 
-.head-wrapper {
-	margin-bottom: 12px;
-}
-
-.head {
+.field-wrapper {
 	display: flex;
-	align-items: center;
-	column-gap: 10px;
-}
-
-.label {
-	font-size: 16px;
-	color: rgb(var(--color-text-tertiary));
+	flex-direction: column;
+	row-gap: 12px;
 }
 
 .selected {
@@ -32,6 +23,8 @@
 }
 
 .field {
+	@include utils.visually-hidden;
+
 	&:focus + .selected,
 	&[aria-invalid='true'] + .selected {
 		outline: 2px solid rgb(var(--color-background-tertiary));

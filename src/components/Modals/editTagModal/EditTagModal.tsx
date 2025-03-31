@@ -2,8 +2,8 @@ import type { Tag } from '@/types/tags';
 
 import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import AppModal from '@/components/UI/appModal/AppModal';
-import Field from '@/components/UI/field/Field';
-import FieldColor from '@/components/UI/fieldColor/FieldColor';
+import FieldText from '@/components/UI/Fields/fieldText/FieldText';
+import FieldColor from '@/components/UI/Fields/fieldColor/FieldColor';
 import Button from '@/components/UI/button/Button';
 import ConfirmModal from '../confirmModal/ConfirmModal';
 import useTagsCRUD from '@/hooks/data/useTagsCRUD';
@@ -105,7 +105,7 @@ const EditTagModal = ({
 						name="name"
 						control={control}
 						render={({ field, fieldState }) => (
-							<Field
+							<FieldText
 								label="Название тега"
 								placeholder="Название тега"
 								isLoading={isLoadingData}

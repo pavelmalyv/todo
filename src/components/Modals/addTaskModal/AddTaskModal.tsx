@@ -2,8 +2,8 @@ import type { SubmitHandler } from 'react-hook-form';
 
 import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import AppModal from '@/components/UI/appModal/AppModal';
-import Field from '@/components/UI/field/Field';
-import FieldDate from '@/components/UI/fieldDate/FieldDate';
+import FieldText from '@/components/UI/Fields/fieldText/FieldText';
+import FieldDate from '@/components/UI/Fields/fieldDate/FieldsDate';
 import TagsSelectList from '@/components/tagsSelectList/TagsSelectList';
 import useTaskCRUD from '@/hooks/data/useTaskCRUD';
 
@@ -88,7 +88,7 @@ const AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
 					name="name"
 					control={control}
 					render={({ field, fieldState }) => (
-						<Field
+						<FieldText
 							label="Название"
 							placeholder="Название"
 							aria-required={true}

@@ -1,6 +1,6 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
-import Field from '@/components/UI/field/Field';
+import FieldText from '@/components/UI/Fields/fieldText/FieldText';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
 import useCreateUser from '@/hooks/data/useCreateUser';
 
@@ -74,7 +74,7 @@ const RegistrationPage = () => {
 						name="email"
 						control={control}
 						render={({ field, fieldState }) => (
-							<Field
+							<FieldText
 								type="email"
 								label="E-mail"
 								placeholder="E-mail*"
@@ -90,10 +90,10 @@ const RegistrationPage = () => {
 						name="password"
 						control={control}
 						render={({ field, fieldState }) => (
-							<Field
+							<FieldText
 								label="Пароль"
 								placeholder="Пароль*"
-								isProtected={true}
+								isPassword={true}
 								autoComplete="new-password"
 								{...field}
 								aria-required={true}
@@ -106,10 +106,10 @@ const RegistrationPage = () => {
 						name="passwordRepeat"
 						control={control}
 						render={({ field, fieldState }) => (
-							<Field
+							<FieldText
 								label="Повтор пароля"
 								placeholder="Повтор пароля*"
-								isProtected={true}
+								isPassword={true}
 								autoComplete="new-password"
 								{...field}
 								aria-required={true}

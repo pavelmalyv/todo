@@ -1,0 +1,26 @@
+@use '@styles/shared/field';
+@use '@styles/utils';
+
+.label-wrapper {
+	display: flex;
+	align-items: center;
+	column-gap: 10px;
+}
+
+.label {
+	font-size: 16px;
+	color: rgb(var(--color-text-tertiary));
+}
+
+.body {
+	flex-grow: 1;
+}
+
+.field {
+	@include field.base;
+}
+
+.skeleton {
+	height: 38px;
+	border-radius: 8px;
+}

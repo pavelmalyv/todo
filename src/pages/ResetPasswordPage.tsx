@@ -1,6 +1,6 @@
 import Book from '@/components/book/Book';
 import SmallForm from '@/components/Forms/smallForm/SmallForm';
-import Field from '@/components/UI/field/Field';
+import FieldText from '@/components/UI/Fields/fieldText/FieldText';
 import useSendPasswordResetEmailUser from '@/hooks/data/useSendPasswordResetEmailUser';
 
 import { emailSchema } from '@/schemas/fields';
@@ -56,7 +56,7 @@ const ResetPasswordPage = () => {
 						name="email"
 						control={control}
 						render={({ field, fieldState }) => (
-							<Field
+							<FieldText
 								label="Ваш email"
 								placeholder="Ваш email"
 								{...field}

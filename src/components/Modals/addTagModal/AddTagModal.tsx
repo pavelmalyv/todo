@@ -1,7 +1,7 @@
 import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import AppModal from '@/components/UI/appModal/AppModal';
-import Field from '@/components/UI/field/Field';
-import FieldColor from '@/components/UI/fieldColor/FieldColor';
+import FieldText from '@/components/UI/Fields/fieldText/FieldText';
+import FieldColor from '@/components/UI/Fields/fieldColor/FieldColor';
 import useTagsCRUD from '@/hooks/data/useTagsCRUD';
 
 import { hexColorSchema, nameTagSchema } from '@/schemas/fields';
@@ -60,7 +60,7 @@ const AddTagModal = ({ isOpen, onClose }: AddTagModalProps) => {
 					name="name"
 					control={control}
 					render={({ field, fieldState }) => (
-						<Field
+						<FieldText
 							label="Название тега"
 							placeholder="Название тега"
 							aria-required={true}

@@ -3,8 +3,8 @@ import type { Task } from '@/types/tasks';
 
 import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import AppModal from '@/components/UI/appModal/AppModal';
-import FieldDate from '@/components/UI/fieldDate/FieldDate';
-import Field from '@/components/UI/field/Field';
+import FieldDate from '@/components/UI/Fields/fieldDate/FieldsDate';
+import FieldText from '@/components/UI/Fields/fieldText/FieldText';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
 import ConfirmModal from '../confirmModal/ConfirmModal';
 import Button from '@/components/UI/button/Button';
@@ -125,7 +125,7 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 						name="name"
 						control={control}
 						render={({ field, fieldState }) => (
-							<Field
+							<FieldText
 								label="Название"
 								placeholder="Название"
 								aria-required={true}

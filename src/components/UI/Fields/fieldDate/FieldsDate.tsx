@@ -1,11 +1,12 @@
 import 'react-datepicker/dist/react-datepicker.css';
 import cl from './FieldDate.module.scss';
 
+import Icon from '../../icon/Icon';
+import FieldError from '../../fieldError/FieldError';
 import DatePicker, { registerLocale } from 'react-datepicker';
+
 import { forwardRef, useId, useRef } from 'react';
 import { ru } from 'date-fns/locale';
-import Icon from '../icon/Icon';
-import FieldError from '../fieldError/FieldError';
 
 registerLocale('ru', ru);
 
