@@ -6,8 +6,7 @@ import Field from '@/components/UI/field/Field';
 import FieldColor from '@/components/UI/fieldColor/FieldColor';
 import Button from '@/components/UI/button/Button';
 import ConfirmModal from '../confirmModal/ConfirmModal';
-import useSaveTag from '@/hooks/data/useSaveTag';
-import useDeleteTag from '@/hooks/data/useDeleteTag';
+import useTagsCRUD from '@/hooks/data/useTagsCRUD';
 
 import { hexColorSchema, nameTagSchema } from '@/schemas/fields';
 import { showError, showSuccess } from '@/utils/notification';
@@ -43,8 +42,7 @@ const EditTagModal = ({
 }: EditTagModalProps) => {
 	const titleId = useId();
 	const [isOpenConfirm, setIsOpenConfirm] = useState(false);
-	const [saveTag, isLoadingSave] = useSaveTag();
-	const [deleteTag, isLoadingDelete] = useDeleteTag();
+	const { updateTag, deleteTag } = useTagsCRUD();
 	const isNoData = initialData === null;
 
 	const { control, formState, handleSubmit, reset } = useForm<EditTagFormData>({
@@ -68,7 +66,7 @@ const EditTagModal = ({
 		}
 
 		try {
-			await saveTag(initialData.id, data);
+			await updateTag.update(initialData.id, data);
 
 			reset(data);
 			onClose();
@@ -86,7 +84,7 @@ const EditTagModal = ({
 		try {
 			onBeforeDelete?.();
 
-			await deleteTag(initialData.id);
+			await deleteTag.delete(initialData.id);
 
 			onClose();
 			setIsOpenConfirm(false);
@@ -102,7 +100,7 @@ const EditTagModal = ({
 		<>
 			<AppModal isOpen={isOpen} onClose={onClose} aria-labelledby={titleId}>
 				<AppModal.Title id={titleId}>Редактировать тег</AppModal.Title>
-				<SmallForm isLoading={isLoadingSave} onSubmit={handleSubmit(onSubmit)}>
+				<SmallForm isLoading={updateTag.isLoading} onSubmit={handleSubmit(onSubmit)}>
 					<Controller
 						name="name"
 						control={control}
@@ -162,7 +160,7 @@ const EditTagModal = ({
 							</Button>
 							<Button
 								type="submit"
-								isLoading={isLoadingSave}
+								isLoading={updateTag.isLoading}
 								isSkeleton={isNoData}
 								isLoadingSkeleton={isLoadingData}
 								isFull={true}
@@ -180,7 +178,7 @@ const EditTagModal = ({
 				description="Вы уверены, что хотите удалить тег? Это действие нельзя будет отменить"
 				buttonConfirmName="Удалить"
 				isOpen={isOpenConfirm}
-				isLoading={isLoadingDelete}
+				isLoading={deleteTag.isLoading}
 				onClose={() => setIsOpenConfirm(false)}
 				onClickConfirm={handleDeleteTag}
 			/>

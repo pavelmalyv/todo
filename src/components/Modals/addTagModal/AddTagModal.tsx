@@ -2,7 +2,7 @@ import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import AppModal from '@/components/UI/appModal/AppModal';
 import Field from '@/components/UI/field/Field';
 import FieldColor from '@/components/UI/fieldColor/FieldColor';
-import useAddTag from '@/hooks/data/useAddTag';
+import useTagsCRUD from '@/hooks/data/useTagsCRUD';
 
 import { hexColorSchema, nameTagSchema } from '@/schemas/fields';
 import { showError, showSuccess } from '@/utils/notification';
@@ -25,7 +25,7 @@ const addTagFormSchema = object({
 type AddTagFormData = InferType<typeof addTagFormSchema>;
 
 const AddTagModal = ({ isOpen, onClose }: AddTagModalProps) => {
-	const [addTag, isLoading] = useAddTag();
+	const { addTag } = useTagsCRUD();
 	const titleId = useId();
 
 	const { control, handleSubmit, reset } = useForm<AddTagFormData>({
@@ -38,7 +38,7 @@ const AddTagModal = ({ isOpen, onClose }: AddTagModalProps) => {
 
 	const onSubmit: SubmitHandler<AddTagFormData> = async (data) => {
 		try {
-			await addTag(data);
+			await addTag.add(data);
 
 			reset();
 			onClose();
@@ -51,7 +51,11 @@ const AddTagModal = ({ isOpen, onClose }: AddTagModalProps) => {
 	return (
 		<AppModal isOpen={isOpen} onClose={onClose} aria-labelledby={titleId}>
 			<AppModal.Title id={titleId}>Добавить новый тег</AppModal.Title>
-			<SmallForm isLoading={isLoading} buttonName="Добавить" onSubmit={handleSubmit(onSubmit)}>
+			<SmallForm
+				isLoading={addTag.isLoading}
+				buttonName="Добавить"
+				onSubmit={handleSubmit(onSubmit)}
+			>
 				<Controller
 					name="name"
 					control={control}
