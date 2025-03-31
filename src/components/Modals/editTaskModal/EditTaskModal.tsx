@@ -6,11 +6,10 @@ import AppModal from '@/components/UI/appModal/AppModal';
 import FieldDate from '@/components/UI/fieldDate/FieldDate';
 import Field from '@/components/UI/field/Field';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
-import useSaveTask from '@/hooks/data/useSaveTask';
 import ConfirmModal from '../confirmModal/ConfirmModal';
 import Button from '@/components/UI/button/Button';
 import TagsSelectList from '@/components/tagsSelectList/TagsSelectList';
-import useDeleteTask from '@/hooks/data/useDeleteTask';
+import useTaskCRUD from '@/hooks/data/useTaskCRUD';
 
 import {
 	datePickerSchema,
@@ -41,9 +40,8 @@ const editTaskModalFormSchema = object({
 });
 
 const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => {
-	const [saveTask, isLoading] = useSaveTask();
+	const { updateTask, deleteTask } = useTaskCRUD();
 	const [isOpenConfirm, setIsOpenConfirm] = useState(false);
-	const [deleteTask, isLoadingDelete] = useDeleteTask();
 	const titleId = useId();
 
 	const { control, formState, reset, handleSubmit, setValue } = useForm<EditTaskModalFormData>({
@@ -77,7 +75,7 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 				throw new Error('The date field cannot be empty');
 			}
 
-			await saveTask(initialData.id, { ...data, dueAt });
+			await updateTask.update(initialData.id, { ...data, dueAt });
 
 			showSuccess(SUCCESS_MESSAGES.saveTask);
 			onClose();
@@ -89,7 +87,7 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 
 	const handleDeleteTask = async () => {
 		try {
-			await deleteTask(initialData.id);
+			await deleteTask.delete(initialData.id);
 
 			onClose();
 			setIsOpenConfirm(false);
@@ -107,7 +105,7 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 				<SmallForm
 					onSubmit={handleSubmit(onSubmit)}
 					isDisabledButtonName={!formState.isDirty}
-					isLoading={isLoading}
+					isLoading={updateTask.isLoading}
 				>
 					<Controller
 						name="dueAt"
@@ -185,7 +183,7 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 							</Button>
 							<Button
 								type="submit"
-								isLoading={isLoading}
+								isLoading={updateTask.isLoading}
 								isFull={true}
 								disabled={!formState.isDirty}
 							>
@@ -201,7 +199,7 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 				description="Вы уверены, что хотите удалить задачу? Это действие нельзя будет отменить"
 				buttonConfirmName="Удалить"
 				isOpen={isOpenConfirm}
-				isLoading={isLoadingDelete}
+				isLoading={deleteTask.isLoading}
 				onClose={() => setIsOpenConfirm(false)}
 				onClickConfirm={handleDeleteTask}
 			/>

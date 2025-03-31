@@ -8,8 +8,8 @@ import TagItem from '@/components/UI/tagItem/TagItem';
 import DescriptionList from '@/components/UI/descriptionList/DescriptionList';
 import ErrorMessage from '@/components/UI/errorMessage/ErrorMessage';
 import EditTaskModal from '../editTaskModal/EditTaskModal';
-import useSetDoneTask from '@/hooks/data/useSetDoneTask';
 import useTagSnapshot from '@/hooks/data/useTagSnapshot';
+import useTaskCRUD from '@/hooks/data/useTaskCRUD';
 
 import { showError } from '@/utils/notification';
 import { useId, useState } from 'react';
@@ -25,12 +25,12 @@ interface ViewTaskModalProps {
 const ViewTaskModal = ({ task, isOpen, onClose }: ViewTaskModalProps) => {
 	const titleId = useId();
 	const [isOpenEdit, setIsOpenEdit] = useState(false);
-	const [setDoneTask, isLoadingDone] = useSetDoneTask();
+	const { updateTask } = useTaskCRUD();
 	const [tag, isLoadingTag, errorTag] = useTagSnapshot(task.tagId);
 
 	const handleChangeDone = async (e: React.ChangeEvent<HTMLInputElement>, id: TaskId) => {
 		try {
-			setDoneTask(id, e.target.checked);
+			updateTask.update(id, { done: e.target.checked });
 		} catch (error) {
 			showError(ERRORS_MESSAGES.updateTask, error);
 		}
@@ -68,7 +68,7 @@ const ViewTaskModal = ({ task, isOpen, onClose }: ViewTaskModalProps) => {
 						style="through"
 						label="Выполнено"
 						checked={task.done}
-						isLoading={isLoadingDone}
+						isLoading={updateTask.isLoading}
 						onChange={(e) => handleChangeDone(e, task.id)}
 					/>
 				</div>

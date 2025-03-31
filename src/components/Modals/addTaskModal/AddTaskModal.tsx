@@ -5,7 +5,7 @@ import AppModal from '@/components/UI/appModal/AppModal';
 import Field from '@/components/UI/field/Field';
 import FieldDate from '@/components/UI/fieldDate/FieldDate';
 import TagsSelectList from '@/components/tagsSelectList/TagsSelectList';
-import useAddTask from '@/hooks/data/useAddTask';
+import useTaskCRUD from '@/hooks/data/useTaskCRUD';
 
 import { useId } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -29,7 +29,7 @@ const addTaskFormSchema = object({
 type AddTaskFormData = InferType<typeof addTaskFormSchema>;
 
 const AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
-	const [addTask, isLoading] = useAddTask();
+	const { addTask } = useTaskCRUD();
 
 	const titleId = useId();
 	const { control, reset, handleSubmit, setValue } = useForm<AddTaskFormData>({
@@ -48,7 +48,7 @@ const AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
 				throw new Error('The date field cannot be empty');
 			}
 
-			await addTask({
+			await addTask.add({
 				...data,
 				dueAt: dueAt,
 				done: false,
@@ -65,7 +65,11 @@ const AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
 	return (
 		<AppModal isOpen={isOpen} onClose={onClose} aria-labelledby={titleId}>
 			<AppModal.Title id={titleId}>Добавить задачу</AppModal.Title>
-			<SmallForm buttonName="Добавить" onSubmit={handleSubmit(onSubmit)} isLoading={isLoading}>
+			<SmallForm
+				buttonName="Добавить"
+				onSubmit={handleSubmit(onSubmit)}
+				isLoading={addTask.isLoading}
+			>
 				<Controller
 					name="dueAt"
 					control={control}

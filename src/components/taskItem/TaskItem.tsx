@@ -5,7 +5,7 @@ import Checkbox from '../UI/checkbox/Checkbox';
 import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import EditTaskModal from '../Modals/editTaskModal/EditTaskModal';
 import Skeleton from 'react-loading-skeleton';
-import useSetDoneTask from '@/hooks/data/useSetDoneTask';
+import useTaskCRUD from '@/hooks/data/useTaskCRUD';
 
 import { useState } from 'react';
 import { showError } from '@/utils/notification';
@@ -16,12 +16,12 @@ interface TaskItemProps {
 }
 
 const TaskItem = ({ task }: TaskItemProps) => {
-	const [setDoneTask, isLoadingDone] = useSetDoneTask();
+	const { updateTask } = useTaskCRUD();
 	const [isOpenEditModals, setIsOpenEditModals] = useState(false);
 
 	const handleChangeDone = async (e: React.ChangeEvent<HTMLInputElement>, id: TaskId) => {
 		try {
-			setDoneTask(id, e.target.checked);
+			updateTask.update(id, { done: e.target.checked });
 		} catch (error) {
 			showError(ERRORS_MESSAGES.updateTask, error);
 		}
@@ -36,7 +36,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
 							style="through"
 							label={task.name}
 							checked={task.done}
-							isLoading={isLoadingDone}
+							isLoading={updateTask.isLoading}
 							onChange={(e) => handleChangeDone(e, task.id)}
 						/>
 						<ButtonIcon
