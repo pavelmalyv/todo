@@ -31,8 +31,8 @@ const ViewTaskModal = ({ task, isOpen, onClose }: ViewTaskModalProps) => {
 	const handleChangeDone = async (e: React.ChangeEvent<HTMLInputElement>, id: TaskId) => {
 		try {
 			updateTask.update(id, { done: e.target.checked });
-		} catch (error) {
-			showError(ERRORS_MESSAGES.updateTask, error);
+		} catch {
+			showError(ERRORS_MESSAGES.updateTask);
 		}
 	};
 
@@ -49,7 +49,7 @@ const ViewTaskModal = ({ task, isOpen, onClose }: ViewTaskModalProps) => {
 						<DescriptionList.Item label="Название:">{task.name}</DescriptionList.Item>
 						<DescriptionList.Item label="Тег:">
 							{errorTag ? (
-								<ErrorMessage message={ERRORS_MESSAGES.tagLoading} error={errorTag} />
+								<ErrorMessage message={ERRORS_MESSAGES.tagLoading} />
 							) : (
 								<>
 									{task.tagId ? (

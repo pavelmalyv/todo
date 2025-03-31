@@ -9,13 +9,12 @@ import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
 import useQuantityUpcomingTasksSnapshot from '@/hooks/data/useQuantityUpcomingTasksSnapshot';
 import useQuantityTasksSnapshot from '@/hooks/data/useQuantityTasksSnapshot';
 import useShowError from '@/hooks/ui/useShowError';
+import useUserSignOut from '@/hooks/data/useUserSignOut';
 
 import { useId } from 'react';
 import { getDateRanges } from '@/utils/date';
 import { Link, NavLink } from 'react-router';
 import { getQuantityShort } from '@/utils/quantity';
-import { useSignOut } from 'react-firebase-hooks/auth';
-import { auth } from '@/firebase';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LIMIT_QUANTITY_TASKS } from '@/consts/docLimits';
 import {
@@ -35,7 +34,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 	const titleId = useId();
 	const dateRanges = getDateRanges();
 
-	const [signOut, isLoadingSignOut, error] = useSignOut(auth);
+	const [signOut, isLoadingSignOut, error] = useUserSignOut();
 	useShowError(ERRORS_MESSAGES.signOut, error);
 
 	const [quantityUpcoming, isLoadingQuantityUpcoming, errorQuantityUpcoming] =

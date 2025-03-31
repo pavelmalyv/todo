@@ -1,13 +1,9 @@
 import { Slide, toast } from 'react-toastify';
 
-export const showError = (message: string, error?: unknown) => {
+export const showError = (message: string) => {
 	toast.error(message, {
 		transition: Slide,
 	});
-
-	if (error) {
-		console.error(error);
-	}
 };
 
 export const showSuccess = (message: string) => {

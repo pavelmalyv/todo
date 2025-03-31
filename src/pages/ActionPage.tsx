@@ -18,10 +18,6 @@ const ActionPage = () => {
 	const [code, operation, isLoading, error] = useCheckActionCode(SUPPORTED_ACTIONS);
 	const errorMessage = error ? getErrorMessageFirebase(error) : undefined;
 
-	if (error !== undefined) {
-		console.error(error);
-	}
-
 	let title: string;
 	switch (operation) {
 		case 'PASSWORD_RESET':

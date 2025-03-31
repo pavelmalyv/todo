@@ -71,8 +71,8 @@ const EditTagModal = ({
 			reset(data);
 			onClose();
 			showSuccess(SUCCESS_MESSAGES.saveTag);
-		} catch (error) {
-			showError(ERRORS_MESSAGES.saveTag, error);
+		} catch {
+			showError(ERRORS_MESSAGES.saveTag);
 		}
 	};
 
@@ -89,8 +89,8 @@ const EditTagModal = ({
 			onClose();
 			setIsOpenConfirm(false);
 			showSuccess(SUCCESS_MESSAGES.deleteTag);
-		} catch (error) {
-			showError(ERRORS_MESSAGES.deleteTag, error);
+		} catch {
+			showError(ERRORS_MESSAGES.deleteTag);
 		} finally {
 			onAfterDelete?.();
 		}

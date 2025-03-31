@@ -17,7 +17,7 @@ type TasksListProps = {
 
 const TasksList = ({ tasks, isLoading, notFoundMessage, error, children }: TasksListProps) => {
 	if (error) {
-		return <ErrorMessage message={ERRORS_MESSAGES.tasksLoading} error={error} />;
+		return <ErrorMessage message={ERRORS_MESSAGES.tasksLoading} />;
 	}
 
 	return (

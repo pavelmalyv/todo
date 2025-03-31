@@ -57,8 +57,8 @@ const AddTaskModal = ({ isOpen, onClose }: AddTaskModalProps) => {
 			reset();
 			onClose();
 			showSuccess(SUCCESS_MESSAGES.addTask);
-		} catch (error) {
-			showError(ERRORS_MESSAGES.addTask, error);
+		} catch {
+			showError(ERRORS_MESSAGES.addTask);
 		}
 	};
 

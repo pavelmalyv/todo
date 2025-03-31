@@ -11,12 +11,20 @@ const useCheckActionCode = (supportedActions: string[]) => {
 
 	useEffect(() => {
 		if (!parseAction?.operation) {
-			setError(new Error('Invalid action in the URL'));
+			const error = new Error('Invalid action in the URL');
+
+			setError(error);
+			console.error(error);
+
 			return;
 		}
 
 		if (!supportedActions.includes(parseAction.operation)) {
+			const error = new Error('The action is not supported');
+
 			setError(new Error('The action is not supported'));
+			console.error(error);
+
 			return;
 		}
 
@@ -28,6 +36,7 @@ const useCheckActionCode = (supportedActions: string[]) => {
 				setValidCode(parseAction.code);
 			} catch (error) {
 				setError(normalizeError(error));
+				console.error(error);
 			} finally {
 				setIsLoading(false);
 			}

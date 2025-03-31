@@ -9,10 +9,6 @@ const useShowError = (message: string, error: Error | undefined) => {
 
 		showError(message);
 	}, [error?.name, error?.message, message]);
-
-	if (error) {
-		console.error(error);
-	}
 };
 
 export default useShowError;

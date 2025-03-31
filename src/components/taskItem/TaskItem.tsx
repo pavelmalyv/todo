@@ -22,8 +22,8 @@ const TaskItem = ({ task }: TaskItemProps) => {
 	const handleChangeDone = async (e: React.ChangeEvent<HTMLInputElement>, id: TaskId) => {
 		try {
 			updateTask.update(id, { done: e.target.checked });
-		} catch (error) {
-			showError(ERRORS_MESSAGES.updateTask, error);
+		} catch {
+			showError(ERRORS_MESSAGES.updateTask);
 		}
 	};
 

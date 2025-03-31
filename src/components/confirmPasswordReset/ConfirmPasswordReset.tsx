@@ -39,15 +39,11 @@ const ConfirmPasswordReset = ({ code }: ConfirmPasswordResetProps) => {
 	});
 
 	const onSubmit: SubmitHandler<ConfirmFormData> = async (data) => {
-		try {
-			await confirmPasswordReset(code, data.password);
+		await confirmPasswordReset(code, data.password);
 
-			showSuccess(SUCCESS_MESSAGES.confirmPasswordReset);
-			navigate(LOGIN_URL);
-			reset();
-		} catch (error) {
-			console.error(error);
-		}
+		showSuccess(SUCCESS_MESSAGES.confirmPasswordReset);
+		navigate(LOGIN_URL);
+		reset();
 	};
 
 	return (

@@ -56,10 +56,14 @@ const useTagSnapshot = (id: TagId | undefined) => {
 					setIsLoading(false);
 				} catch (error) {
 					handleError(normalizeError(error));
+
+					console.error(error);
 				}
 			},
 			(error) => {
 				handleError(error);
+
+				console.error(error);
 			},
 		);
 

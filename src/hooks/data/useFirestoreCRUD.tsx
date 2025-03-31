@@ -20,6 +20,9 @@ const useFirestoreCRUD = () => {
 			);
 
 			await updateDoc(docRef, data);
+		} catch (error) {
+			console.error(error);
+			throw error;
 		} finally {
 			setLoading(
 				produce((draft) => {
@@ -42,6 +45,9 @@ const useFirestoreCRUD = () => {
 					...data,
 					createdAt: serverTimestamp(),
 				});
+			} catch (error) {
+				console.error(error);
+				throw error;
 			} finally {
 				setLoading(
 					produce((draft) => {
@@ -62,6 +68,9 @@ const useFirestoreCRUD = () => {
 			);
 
 			await deleteDoc(docRef);
+		} catch (error) {
+			console.error(error);
+			throw error;
 		} finally {
 			setLoading(
 				produce((draft) => {

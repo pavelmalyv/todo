@@ -3,15 +3,10 @@ import cl from './ErrorMessage.module.scss';
 
 interface ErrorMessageProps {
 	message: string | undefined;
-	error?: Error;
 	className?: string;
 }
 
-const ErrorMessage = ({ message, error, className }: ErrorMessageProps) => {
-	if (error) {
-		console.error(error);
-	}
-
+const ErrorMessage = ({ message, className }: ErrorMessageProps) => {
 	return (
 		<div className={classNames(cl.error, className)} role="status">
 			{message}

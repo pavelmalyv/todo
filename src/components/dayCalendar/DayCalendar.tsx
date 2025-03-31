@@ -103,7 +103,7 @@ const DayCalendar = memo(
 				<div className={cl['day-number']}>{day}</div>
 
 				{error ? (
-					<ErrorMessage message={ERRORS_MESSAGES.tasksLoadingShort} error={error} />
+					<ErrorMessage message={ERRORS_MESSAGES.tasksLoadingShort} />
 				) : (
 					<VisuallyHiddenLoader isLoading={isLoading} hiddenMessage={LOADING_MESSAGES.tasks}>
 						{tasks.length > 0 && (

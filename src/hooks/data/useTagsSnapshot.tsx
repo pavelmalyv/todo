@@ -68,6 +68,7 @@ const useTagsSnapshot = () => {
 			},
 			(error) => {
 				handleError(error);
+				console.error(error);
 			},
 		);
 

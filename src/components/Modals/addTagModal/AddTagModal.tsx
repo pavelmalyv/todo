@@ -43,8 +43,8 @@ const AddTagModal = ({ isOpen, onClose }: AddTagModalProps) => {
 			reset();
 			onClose();
 			showSuccess(SUCCESS_MESSAGES.addTag);
-		} catch (error) {
-			showError(ERRORS_MESSAGES.addTag, error);
+		} catch {
+			showError(ERRORS_MESSAGES.addTag);
 		}
 	};
 

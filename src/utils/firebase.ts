@@ -19,6 +19,5 @@ export const getErrorMessageFirebase = (error: unknown) => {
 		}
 	}
 
-	console.error(error);
 	return ERRORS_MESSAGES_FIREBASE.unknown;
 };

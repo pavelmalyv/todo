@@ -11,7 +11,12 @@ const useCreateUser = () => {
 		useCreateUserWithEmailAndPassword(auth);
 
 	const createUser = async ({ email, password }: createUser) => {
-		await createUserWithEmailAndPassword(email, password);
+		try {
+			await createUserWithEmailAndPassword(email, password);
+		} catch (error) {
+			console.error(error);
+			throw error;
+		}
 	};
 
 	return [createUser, isLoading, error] as const;

@@ -1,14 +1,13 @@
 import Book from '@/components/book/Book';
 import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import Field from '@/components/UI/field/Field';
+import useSendPasswordResetEmailUser from '@/hooks/data/useSendPasswordResetEmailUser';
 
-import { auth } from '@/firebase';
 import { emailSchema } from '@/schemas/fields';
 import { getErrorMessageFirebase } from '@/utils/firebase';
 import { showSuccess } from '@/utils/notification';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useId } from 'react';
-import { useSendPasswordResetEmail } from 'react-firebase-hooks/auth';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { InferType, object } from 'yup';
 import { useTitle } from '@/hooks/ui/useTitle';
@@ -24,12 +23,8 @@ const ResetPasswordPage = () => {
 	useTitle('Сброс пароля');
 
 	const titleId = useId();
-	const [sendPasswordResetEmail, isLoading, error] = useSendPasswordResetEmail(auth);
+	const [sendPasswordResetEmail, isLoading, error] = useSendPasswordResetEmailUser();
 	const errorMessage = error ? getErrorMessageFirebase(error) : undefined;
-
-	if (error !== undefined) {
-		console.error(error);
-	}
 
 	const { control, handleSubmit, reset } = useForm<ResetPasswordFormData>({
 		resolver: yupResolver(resetPasswordFormSchema),

@@ -57,8 +57,8 @@ const TasksPage = ({
 	const handleFetchMore = () => {
 		try {
 			fetchMore();
-		} catch (error) {
-			showError(errorMessageTasksLoading, error);
+		} catch {
+			showError(errorMessageTasksLoading);
 		}
 	};
 

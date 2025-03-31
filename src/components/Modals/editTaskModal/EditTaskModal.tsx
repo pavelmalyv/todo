@@ -80,8 +80,8 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 			showSuccess(SUCCESS_MESSAGES.saveTask);
 			onClose();
 			reset(data);
-		} catch (error) {
-			showError(ERRORS_MESSAGES.saveTask, error);
+		} catch {
+			showError(ERRORS_MESSAGES.saveTask);
 		}
 	};
 
@@ -92,8 +92,8 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 			onClose();
 			setIsOpenConfirm(false);
 			showSuccess(SUCCESS_MESSAGES.deleteTask);
-		} catch (error) {
-			showError(ERRORS_MESSAGES.deleteTask, error);
+		} catch {
+			showError(ERRORS_MESSAGES.deleteTask);
 		}
 	};
 

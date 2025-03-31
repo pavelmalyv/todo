@@ -95,10 +95,10 @@ const useTasksSnapshot = ({
 		[timestampStart, timestampEnd, tagId],
 	);
 
-	const handleErrorInit = (error: Error) => {
+	const handleErrorInit = useCallback((error: Error) => {
 		setIsLoading(false);
 		setError(error);
-	};
+	}, []);
 
 	const fetchMore = useCallback(() => {
 		if (isLoading || isLoadingMore) {
@@ -106,16 +106,22 @@ const useTasksSnapshot = ({
 		}
 
 		if (!hasMoreData) {
-			throw new Error('There is no data to fetch');
+			const error = new Error('There is no data to fetch');
+			console.error(error);
+			throw error;
 		}
 
 		const user = auth.currentUser;
 		if (!user) {
-			throw new Error('Authorization error');
+			const error = new Error('Authorization error');
+			console.error(error);
+			throw error;
 		}
 
 		if (!subscribesScopes.ids.length) {
-			throw new Error('The first data has not been uploaded yet');
+			const error = new Error('The first data has not been uploaded yet');
+			console.error(error);
+			throw error;
 		}
 
 		const lastSubscribesScopes =
@@ -137,11 +143,18 @@ const useTasksSnapshot = ({
 		const unsubscribe = onSnapshot(
 			q,
 			async (querySnapshot) => {
-				setIsLoadingMore(true);
-				await setTasksFromSnapshot(querySnapshot, subscribeId);
-				setIsLoadingMore(false);
+				try {
+					setIsLoadingMore(true);
+					await setTasksFromSnapshot(querySnapshot, subscribeId);
+				} catch (error) {
+					console.error(error);
+					throw error;
+				} finally {
+					setIsLoadingMore(false);
+				}
 			},
 			(error) => {
+				console.error(error);
 				throw error;
 			},
 		);
@@ -177,10 +190,14 @@ const useTasksSnapshot = ({
 					setIsLoading(false);
 				} catch (error) {
 					handleErrorInit(normalizeError(error));
+
+					console.error(error);
 				}
 			},
 			(error) => {
 				handleErrorInit(error);
+
+				console.error(error);
 			},
 		);
 
@@ -195,6 +212,7 @@ const useTasksSnapshot = ({
 		setEmptySubscribeScope,
 		setUnsubscribeScope,
 		deleteSubscribeScope,
+		handleErrorInit,
 	]);
 
 	useEffect(() => {
@@ -215,7 +233,7 @@ const useTasksSnapshot = ({
 		}
 
 		handleErrorInit(new Error('Authorization error'));
-	}, [errorUser?.message]);
+	}, [errorUser?.message, handleErrorInit]);
 
 	useEffect(() => {
 		return () => unsubscribeFetchMore();
