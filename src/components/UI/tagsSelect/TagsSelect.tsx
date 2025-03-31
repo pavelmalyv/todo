@@ -1,7 +1,7 @@
 import cl from './TagsSelect.module.scss';
 import TagMarker from '../tagMarker/TagMarker';
 import Skeleton from 'react-loading-skeleton';
-import FieldError from '../fieldError/FieldError';
+import ErrorField from '../errorField/ErrorField';
 
 import { forwardRef, useId } from 'react';
 import { createCompoundContext } from '@/context/createCompoundContext';
@@ -35,7 +35,7 @@ const TagsSelect = ({ errorMessage, children }: TagsSelectProps) => {
 
 				<div className={cl.tags}>{children}</div>
 
-				<FieldError id={errorMessageId} message={errorMessage ? errorMessage : null} />
+				<ErrorField id={errorMessageId} message={errorMessage ? errorMessage : null} />
 			</fieldset>
 		</TagsSelectProvider>
 	);

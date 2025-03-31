@@ -2,7 +2,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import cl from './FieldDate.module.scss';
 
 import Icon from '../../icon/Icon';
-import FieldError from '../../fieldError/FieldError';
+import ErrorField from '../../errorField/ErrorField';
 import DatePicker, { registerLocale } from 'react-datepicker';
 
 import { forwardRef, useId, useRef } from 'react';
@@ -107,7 +107,7 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 					<Icon className={cl.icon}>calendar_month</Icon>
 				</div>
 
-				<FieldError id={errorMessageId} message={errorMessage ? errorMessage : null} />
+				<ErrorField id={errorMessageId} message={errorMessage ? errorMessage : null} />
 			</div>
 		);
 	},

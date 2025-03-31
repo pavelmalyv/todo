@@ -4,7 +4,7 @@ import cl from './FieldBase.module.scss';
 import classNames from 'classnames';
 import VisuallyHiddenLoader from '@/components/visuallyHiddenLoader/VisuallyHiddenLoader';
 import Skeleton from 'react-loading-skeleton';
-import FieldError from '../../fieldError/FieldError';
+import ErrorField from '../../errorField/ErrorField';
 
 import { forwardRef, useId } from 'react';
 
@@ -63,7 +63,7 @@ const FieldBase = forwardRef<HTMLInputElement, FieldBaseProps>(
 									{children}
 								</div>
 							</div>
-							<FieldError id={errorMessageId} message={errorMessage ? errorMessage : null} />
+							<ErrorField id={errorMessageId} message={errorMessage ? errorMessage : null} />
 						</>
 					)}
 				</VisuallyHiddenLoader>

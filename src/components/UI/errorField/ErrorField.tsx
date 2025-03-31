@@ -1,12 +1,12 @@
 import classNames from 'classnames';
-import cl from './FieldError.module.scss';
+import cl from './ErrorField.module.scss';
 
 interface FieldErrorProps {
 	id: string;
 	message: string | null;
 }
 
-const FieldError = ({ id, message }: FieldErrorProps) => {
+const ErrorField = ({ id, message }: FieldErrorProps) => {
 	return (
 		<div
 			id={id}
@@ -18,4 +18,4 @@ const FieldError = ({ id, message }: FieldErrorProps) => {
 	);
 };
 
-export default FieldError;
+export default ErrorField;
