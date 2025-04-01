@@ -13,7 +13,7 @@ import { getDateRanges } from '@/utils/date';
 import { useTitle } from '@/hooks/ui/useTitle';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
 import { LIMIT_UPCOMING_TASKS } from '@/consts/docLimits';
-import { TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
+import { CALENDAR_URL, TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
 
 const UpcomingPage = () => {
 	useTitle('Предстоящие задачи');
@@ -91,7 +91,7 @@ const UpcomingPage = () => {
 					>
 						{tasksDataNear?.length === LIMIT_UPCOMING_TASKS && (
 							<TasksList.Button>
-								<Button to="#" styleType="border" size="small">
+								<Button to={CALENDAR_URL} styleType="border" size="small">
 									Смотреть все
 								</Button>
 							</TasksList.Button>
