@@ -9,7 +9,7 @@ import useDelayedLoader from '@/hooks/ui/useDelayedLoader';
 interface CheckboxProps {
 	label: React.ReactNode;
 	name?: string;
-	style?: 'default' | 'through';
+	styleType?: 'default' | 'through';
 	checked?: boolean;
 	disabled?: boolean;
 	isLoading?: boolean;
@@ -28,7 +28,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 		{
 			label,
 			name,
-			style = 'default',
+			styleType = 'default',
 			checked,
 			disabled,
 			isLoading = false,
@@ -51,7 +51,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 			<div
 				className={classNames(
 					cl.checkbox,
-					cl[`checkbox_${style}`],
+					cl[`checkbox_${styleType}`],
 					{ [cl['checkbox_center']]: center },
 					className,
 				)}

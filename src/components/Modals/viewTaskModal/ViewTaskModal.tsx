@@ -65,7 +65,7 @@ const ViewTaskModal = ({ task, isOpen, onClose }: ViewTaskModalProps) => {
 					</DescriptionList>
 
 					<Checkbox
-						style="through"
+						styleType="through"
 						label="Выполнено"
 						checked={task.done}
 						isLoading={updateTask.isLoading}

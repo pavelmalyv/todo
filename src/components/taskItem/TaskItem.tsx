@@ -33,7 +33,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
 				<>
 					<div className={cl.task}>
 						<Checkbox
-							style="through"
+							styleType="through"
 							label={task.name}
 							checked={task.done}
 							isLoading={updateTask.isLoading}
