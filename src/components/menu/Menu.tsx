@@ -16,7 +16,7 @@ import { getDateRanges } from '@/utils/date';
 import { Link, NavLink } from 'react-router';
 import { getQuantityShort } from '@/utils/quantity';
 import { ERRORS_MESSAGES } from '@/consts/messages';
-import { LIMIT_QUANTITY_TASKS } from '@/consts/docLimits';
+import { LIMIT_QUANTITY_TASKS } from '@/consts/config';
 import {
 	ABOUT_URL,
 	CALENDAR_URL,

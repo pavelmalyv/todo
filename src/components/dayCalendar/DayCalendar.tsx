@@ -13,7 +13,7 @@ import { Link } from 'react-router';
 import { produce } from 'immer';
 import { memo, useEffect, useRef, useState } from 'react';
 import { getTasksDayUrl } from '@/consts/routes';
-import { LIMIT_CALENDAR_TASKS } from '@/consts/docLimits';
+import { LIMIT_CALENDAR_TASKS } from '@/consts/config';
 import { ERRORS_MESSAGES, LOADING_MESSAGES } from '@/consts/messages';
 
 interface DayCalendarProps {

@@ -6,7 +6,7 @@ import { limit, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { tagsCollectionRef } from '@/firebase';
 import { tagSchema } from '@/schemas/tags';
 import { normalizeError } from '@/utils/error';
-import { LIMIT_TAGS } from '@/consts/docLimits';
+import { LIMIT_TAGS } from '@/consts/config';
 
 const useTagsSnapshot = () => {
 	const [tags, setTags] = useState<Tags | null>(null);

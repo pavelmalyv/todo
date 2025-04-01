@@ -1,7 +1,7 @@
 import useQuantityTasksSnapshot from './useQuantityTasksSnapshot';
 
 import { getDateRanges } from '@/utils/date';
-import { LIMIT_UPCOMING_TASKS } from '@/consts/docLimits';
+import { LIMIT_UPCOMING_TASKS } from '@/consts/config';
 
 const useQuantityUpcomingTasksSnapshot = () => {
 	const dateRanges = getDateRanges();

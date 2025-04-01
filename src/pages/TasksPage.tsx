@@ -11,7 +11,7 @@ import useShowError from '@/hooks/ui/useShowError';
 
 import { getQuantityShort } from '@/utils/quantity';
 import { showError } from '@/utils/notification';
-import { LIMIT_QUANTITY_TASKS, LIMIT_TASKS } from '@/consts/docLimits';
+import { LIMIT_QUANTITY_TASKS, LIMIT_TASKS } from '@/consts/config';
 
 interface TasksPageProps {
 	title: string | null;

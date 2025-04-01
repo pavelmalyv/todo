@@ -12,7 +12,7 @@ import useShowError from '@/hooks/ui/useShowError';
 import { getDateRanges } from '@/utils/date';
 import { useTitle } from '@/hooks/ui/useTitle';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
-import { LIMIT_UPCOMING_TASKS } from '@/consts/docLimits';
+import { LIMIT_UPCOMING_TASKS } from '@/consts/config';
 import { CALENDAR_URL, TODAY_TASKS_URL, TOMORROW_TASKS_URL } from '@/consts/routes';
 
 const UpcomingPage = () => {

@@ -4,7 +4,7 @@ import ButtonIconText from '../UI/Buttons/buttonIconText/ButtonIconText';
 import AddTagModal from '../Modals/addTagModal/AddTagModal';
 
 import { useState } from 'react';
-import { LIMIT_TAGS } from '@/consts/docLimits';
+import { LIMIT_TAGS } from '@/consts/config';
 
 interface AddTagButtonProps {
 	tags: Tags | null;
