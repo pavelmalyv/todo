@@ -8,7 +8,7 @@ import { lazy, Suspense } from 'react';
 import {
 	ABOUT_URL,
 	ACTION_URL,
-	CALENDAR,
+	CALENDAR_URL,
 	getTagUrl,
 	getTasksDayUrl,
 	LOGIN_URL,
@@ -73,7 +73,7 @@ const AppRouter = () => {
 				}
 			/>
 			<Route
-				path={CALENDAR}
+				path={CALENDAR_URL}
 				element={
 					<Suspense>
 						<CalendarPage />

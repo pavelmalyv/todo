@@ -19,7 +19,7 @@ import { ERRORS_MESSAGES } from '@/consts/messages';
 import { LIMIT_QUANTITY_TASKS } from '@/consts/docLimits';
 import {
 	ABOUT_URL,
-	CALENDAR,
+	CALENDAR_URL,
 	POLICY_URL,
 	TODAY_TASKS_URL,
 	TOMORROW_TASKS_URL,
@@ -127,7 +127,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 								</NavLink>
 							</li>
 							<li className={cl['menu-item']}>
-								<NavLink className={cl['menu-link']} to={CALENDAR}>
+								<NavLink className={cl['menu-link']} to={CALENDAR_URL}>
 									<div className={cl['menu-name']}>
 										<Icon className={cl['menu-icon']}>calendar_month</Icon>
 
