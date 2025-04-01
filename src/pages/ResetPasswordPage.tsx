@@ -12,6 +12,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { InferType, object } from 'yup';
 import { useTitle } from '@/hooks/ui/useTitle';
 import { SUCCESS_MESSAGES } from '@/consts/messages';
+import { LOGIN_URL } from '@/consts/routes';
 
 const resetPasswordFormSchema = object({
 	email: emailSchema,
@@ -45,7 +46,11 @@ const ResetPasswordPage = () => {
 
 	return (
 		<Book aria-labelledby={titleId}>
-			<Book.Main title="Сброс пароля" titleId={titleId} backButton={{ to: '/', isCenter: true }}>
+			<Book.Main
+				title="Сброс пароля"
+				titleId={titleId}
+				backButton={{ to: LOGIN_URL, isCenter: true }}
+			>
 				<SmallForm
 					onSubmit={handleSubmit(onSubmit)}
 					buttonName="Восстановить"
