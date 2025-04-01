@@ -1,12 +1,18 @@
 import { string, ref, date, boolean } from 'yup';
 import { isValidRangeTimestamp } from '@/utils/date';
 import { MESSAGES_FIELD } from '@/consts/messages';
+import {
+	PASSWORD_MAX_LENGTH,
+	PASSWORD_MIN_LENGTH,
+	TAG_TITLE_MAX_LENGTH,
+	TASK_TITLE_MAX_LENGTH,
+} from '@/consts/config';
 
 export const emailSchema = string().email().required(MESSAGES_FIELD.emailRequired);
 export const passwordSchema = string().required(MESSAGES_FIELD.passwordRequired);
 export const passwordCreateSchema = string()
-	.min(8, MESSAGES_FIELD.passwordMin(8))
-	.max(4096, MESSAGES_FIELD.passwordMax(4096))
+	.min(PASSWORD_MIN_LENGTH, MESSAGES_FIELD.passwordMin(PASSWORD_MIN_LENGTH))
+	.max(PASSWORD_MAX_LENGTH, MESSAGES_FIELD.passwordMax(PASSWORD_MAX_LENGTH))
 	.matches(/[A-Z]/, MESSAGES_FIELD.passwordUpperCase)
 	.matches(/[a-z]/, MESSAGES_FIELD.passwordLowerCase)
 	.matches(/[0-9]/, MESSAGES_FIELD.passwordNumber)
@@ -28,13 +34,13 @@ export const datePickerSchema = date()
 export const taskIdSchema = string().required();
 
 export const nameTaskSchema = string()
-	.max(350, MESSAGES_FIELD.nameTaskMax(350))
+	.max(TASK_TITLE_MAX_LENGTH, MESSAGES_FIELD.nameTaskMax(TASK_TITLE_MAX_LENGTH))
 	.required(MESSAGES_FIELD.nameTaskRequired);
 
 export const doneTaskSchema = boolean().required();
 
 export const nameTagSchema = string()
-	.max(100, MESSAGES_FIELD.nameTagMax(100))
+	.max(TAG_TITLE_MAX_LENGTH, MESSAGES_FIELD.nameTagMax(TAG_TITLE_MAX_LENGTH))
 	.required(MESSAGES_FIELD.nameTagRequired);
 
 export const hexColorSchema = string()
