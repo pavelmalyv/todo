@@ -18,6 +18,7 @@ const Book = ({ children, ['aria-labelledby']: ariaLabelledby }: BookProps) => {
 					<div className={cl.inner}>
 						<div className={cl.image}>
 							<picture>
+								<source srcSet="/img/book.webp" type="image/webp" />
 								<img
 									className={cl['image-img']}
 									src="/img/book.jpg"
