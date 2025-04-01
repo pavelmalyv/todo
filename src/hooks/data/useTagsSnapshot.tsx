@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { limit, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { tagsCollectionRef } from '@/firebase';
 import { tagSchema } from '@/schemas/tags';
+import { normalizeError } from '@/utils/error';
 import { LIMIT_TAGS } from '@/consts/docLimits';
 
 const useTagsSnapshot = () => {
@@ -67,7 +68,7 @@ const useTagsSnapshot = () => {
 				setIsLoading(false);
 			},
 			(error) => {
-				handleError(error);
+				handleError(normalizeError(error));
 				console.error(error);
 			},
 		);

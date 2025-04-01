@@ -13,10 +13,11 @@ const useConfirmPasswordReset = () => {
 
 			await confirmPasswordReset(auth, code, newPassword);
 		} catch (error) {
-			setError(normalizeError(error));
-
 			console.log(error);
-			throw error;
+
+			const normalizedError = normalizeError(error);
+			setError(normalizedError);
+			throw normalizedError;
 		} finally {
 			setIsLoading(false);
 		}

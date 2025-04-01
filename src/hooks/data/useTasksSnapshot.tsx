@@ -148,14 +148,14 @@ const useTasksSnapshot = ({
 					await setTasksFromSnapshot(querySnapshot, subscribeId);
 				} catch (error) {
 					console.error(error);
-					throw error;
+					throw normalizeError(error);
 				} finally {
 					setIsLoadingMore(false);
 				}
 			},
 			(error) => {
 				console.error(error);
-				throw error;
+				throw normalizeError(error);
 			},
 		);
 
@@ -195,7 +195,7 @@ const useTasksSnapshot = ({
 				}
 			},
 			(error) => {
-				handleErrorInit(error);
+				handleErrorInit(normalizeError(error));
 
 				console.error(error);
 			},

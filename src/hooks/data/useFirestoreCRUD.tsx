@@ -3,6 +3,7 @@ import type { CollectionReference, DocumentData, DocumentReference } from 'fireb
 import { addDoc, deleteDoc, serverTimestamp, updateDoc } from 'firebase/firestore';
 import { useCallback, useState } from 'react';
 import { produce } from 'immer';
+import { normalizeError } from '@/utils/error';
 
 const useFirestoreCRUD = () => {
 	const [loading, setLoading] = useState({
@@ -22,7 +23,7 @@ const useFirestoreCRUD = () => {
 			await updateDoc(docRef, data);
 		} catch (error) {
 			console.error(error);
-			throw error;
+			throw normalizeError(error);
 		} finally {
 			setLoading(
 				produce((draft) => {
@@ -47,7 +48,7 @@ const useFirestoreCRUD = () => {
 				});
 			} catch (error) {
 				console.error(error);
-				throw error;
+				throw normalizeError(error);
 			} finally {
 				setLoading(
 					produce((draft) => {
@@ -70,7 +71,7 @@ const useFirestoreCRUD = () => {
 			await deleteDoc(docRef);
 		} catch (error) {
 			console.error(error);
-			throw error;
+			throw normalizeError(error);
 		} finally {
 			setLoading(
 				produce((draft) => {
