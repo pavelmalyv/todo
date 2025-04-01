@@ -1,3 +1,4 @@
+import { auth } from '@/firebase';
 import { isValidRangeTimestamp } from './date';
 
 export class NotFoundError extends Error {
@@ -41,4 +42,13 @@ export const normalizeError = (error: unknown) => {
 	}
 
 	return new Error(typeof error === 'string' ? error : 'An unknown error occurred');
+};
+
+export const getCurrentUserOrThrow = () => {
+	const user = auth.currentUser;
+	if (!user) {
+		throw new Error('The user is not logged in');
+	}
+
+	return user;
 };
