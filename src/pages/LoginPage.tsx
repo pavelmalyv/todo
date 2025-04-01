@@ -1,13 +1,12 @@
 import Auth from '@/components/auth/Auth';
 import Book from '@/components/book/Book';
 import FieldText from '@/components/UI/Fields/fieldText/FieldText';
+import useSignInUser from '@/hooks/data/useSignInUser';
 
 import { useId } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InferType, object } from 'yup';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { auth } from '@/firebase';
 import { emailSchema, passwordSchema } from '@/schemas/fields';
 import { getErrorMessageFirebase } from '@/utils/firebase';
 import { useTitle } from '@/hooks/ui/useTitle';
@@ -24,7 +23,7 @@ const LoginPage = () => {
 	useTitle('Вход');
 
 	const titleId = useId();
-	const [signInWithEmailAndPassword, , isLoading, error] = useSignInWithEmailAndPassword(auth);
+	const [signIn, isLoading, error] = useSignInUser();
 
 	let errorMessage: string | undefined;
 	if (error) {
@@ -40,7 +39,7 @@ const LoginPage = () => {
 	});
 
 	const onSubmit: SubmitHandler<FormData> = async (data) => {
-		await signInWithEmailAndPassword(data.email, data.password);
+		await signIn(data.email, data.password);
 	};
 
 	return (
