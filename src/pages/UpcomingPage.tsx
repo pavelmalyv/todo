@@ -4,10 +4,10 @@ import Profile from '@/components/profile/Profile';
 import Section from '@/components/UI/section/Section';
 import TasksList from '@/components/tasksList/TasksList';
 import TableSections from '@/components/tableSections/TableSections';
+import Button from '@/components/UI/Buttons/button/Button';
 import useTasksSnapshot from '@/hooks/data/useTasksSnapshot';
 import useQuantityUpcomingTasksSnapshot from '@/hooks/data/useQuantityUpcomingTasksSnapshot';
 import useShowError from '@/hooks/ui/useShowError';
-import Button from '@/components/UI/button/Button';
 
 import { getDateRanges } from '@/utils/date';
 import { useTitle } from '@/hooks/ui/useTitle';
@@ -57,7 +57,7 @@ const UpcomingPage = () => {
 				>
 					{tasksDataToday?.length === LIMIT_UPCOMING_TASKS && (
 						<TasksList.Button>
-							<Button type="link" to={TODAY_TASKS_URL} style="border" size="small">
+							<Button to={TODAY_TASKS_URL} styleType="border" size="small">
 								Смотреть все
 							</Button>
 						</TasksList.Button>
@@ -75,7 +75,7 @@ const UpcomingPage = () => {
 					>
 						{tasksDataTomorrow?.length === LIMIT_UPCOMING_TASKS && (
 							<TasksList.Button>
-								<Button type="link" to={TOMORROW_TASKS_URL} style="border" size="small">
+								<Button to={TOMORROW_TASKS_URL} styleType="border" size="small">
 									Смотреть все
 								</Button>
 							</TasksList.Button>
@@ -91,7 +91,7 @@ const UpcomingPage = () => {
 					>
 						{tasksDataNear?.length === LIMIT_UPCOMING_TASKS && (
 							<TasksList.Button>
-								<Button type="link" to="#" style="border" size="small">
+								<Button to="#" styleType="border" size="small">
 									Смотреть все
 								</Button>
 							</TasksList.Button>

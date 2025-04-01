@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import cl from './StartBook.module.scss';
-import Button from '../UI/button/Button';
+import Button from '../UI/Buttons/button/Button';
 
 import { LOGIN_URL } from '@/consts/routes';
 

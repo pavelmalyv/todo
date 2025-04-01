@@ -1,10 +1,10 @@
 import cl from './Profile.module.scss';
 import classNames from 'classnames';
-import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
+import ButtonIcon from '../UI/Buttons/buttonIcon/ButtonIcon';
 import AppModal from '../UI/appModal/AppModal';
 import Skeleton from 'react-loading-skeleton';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
-import Button from '../UI/button/Button';
+import Button from '../UI/Buttons/button/Button';
 import Menu from '../menu/Menu';
 import AddTaskModal from '../Modals/addTaskModal/AddTaskModal';
 
@@ -117,7 +117,7 @@ const Profile = ({
 									<Button
 										className={cl.button}
 										size="small"
-										style="border"
+										styleType="border"
 										onClick={() => setIsOpenTaskModal(true)}
 									>
 										Добавить задачу

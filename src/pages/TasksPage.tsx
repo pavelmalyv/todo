@@ -4,7 +4,7 @@ import type { TagId } from '@/types/fields';
 import Profile from '@/components/profile/Profile';
 import Section from '@/components/UI/section/Section';
 import TasksList from '@/components/tasksList/TasksList';
-import Button from '@/components/UI/button/Button';
+import Button from '@/components/UI/Buttons/button/Button';
 import useTasksSnapshot from '@/hooks/data/useTasksSnapshot';
 import useQuantityTasksSnapshot from '@/hooks/data/useQuantityTasksSnapshot';
 import useShowError from '@/hooks/ui/useShowError';
@@ -82,7 +82,7 @@ const TasksPage = ({
 					{hasMoreData && (
 						<TasksList.Button>
 							<Button
-								style="border"
+								styleType="border"
 								size="small"
 								onClick={handleFetchMore}
 								isLoading={isLoadingMore}

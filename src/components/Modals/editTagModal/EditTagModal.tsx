@@ -4,7 +4,7 @@ import SmallForm from '@/components/Forms/smallForm/SmallForm';
 import AppModal from '@/components/UI/appModal/AppModal';
 import FieldText from '@/components/UI/Fields/fieldText/FieldText';
 import FieldColor from '@/components/UI/Fields/fieldColor/FieldColor';
-import Button from '@/components/UI/button/Button';
+import Button from '@/components/UI/Buttons/button/Button';
 import ConfirmModal from '../confirmModal/ConfirmModal';
 import useTagsCRUD from '@/hooks/data/useTagsCRUD';
 
@@ -142,14 +142,14 @@ const EditTagModal = ({
 							<Button
 								isSkeleton={isNoData}
 								isLoadingSkeleton={isLoadingData}
-								style="delete"
+								styleType="delete"
 								isFull={true}
 								onClick={() => setIsOpenConfirm(true)}
 							>
 								Удалить
 							</Button>
 							<Button
-								style="border"
+								styleType="border"
 								isSkeleton={isNoData}
 								isLoadingSkeleton={isLoadingData}
 								isFull={true}

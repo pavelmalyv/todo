@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import cl from './SmallForm.module.scss';
 import ErrorMessage from '@/components/UI/errorMessage/ErrorMessage';
-import Button from '@/components/UI/button/Button';
+import Button from '@/components/UI/Buttons/button/Button';
 
 interface SmallFormProps {
 	children: React.ReactNode;

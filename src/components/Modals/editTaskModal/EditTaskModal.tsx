@@ -7,7 +7,7 @@ import FieldDate from '@/components/UI/Fields/fieldDate/FieldsDate';
 import FieldText from '@/components/UI/Fields/fieldText/FieldText';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
 import ConfirmModal from '../confirmModal/ConfirmModal';
-import Button from '@/components/UI/button/Button';
+import Button from '@/components/UI/Buttons/button/Button';
 import TagsSelectList from '@/components/tagsSelectList/TagsSelectList';
 import useTaskCRUD from '@/hooks/data/useTaskCRUD';
 
@@ -170,11 +170,11 @@ const EditTaskModal = ({ initialData, isOpen, onClose }: EditTaskModalProps) => 
 
 					<SmallForm.Footer>
 						<AppModal.Buttons>
-							<Button style="delete" isFull={true} onClick={() => setIsOpenConfirm(true)}>
+							<Button styleType="delete" isFull={true} onClick={() => setIsOpenConfirm(true)}>
 								Удалить
 							</Button>
 							<Button
-								style="border"
+								styleType="border"
 								isFull={true}
 								onClick={() => reset()}
 								disabled={!formState.isDirty}

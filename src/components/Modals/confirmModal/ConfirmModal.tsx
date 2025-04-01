@@ -1,5 +1,5 @@
-import Button from '@/components/UI/button/Button';
 import cl from './ConfirmModal.module.scss';
+import Button from '@/components/UI/Buttons/button/Button';
 import AppModal from '@/components/UI/appModal/AppModal';
 
 interface ConfirmModalProps {
@@ -27,10 +27,10 @@ const ConfirmModal = ({
 			<AppModal.Description className={cl.description}>{description}</AppModal.Description>
 
 			<AppModal.Buttons>
-				<Button style="border" isFull={true} onClick={onClose}>
+				<Button styleType="border" isFull={true} onClick={onClose}>
 					Отмена
 				</Button>
-				<Button style="delete" isFull={true} onClick={onClickConfirm} isLoading={isLoading}>
+				<Button styleType="delete" isFull={true} onClick={onClickConfirm} isLoading={isLoading}>
 					{buttonConfirmName}
 				</Button>
 			</AppModal.Buttons>

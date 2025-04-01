@@ -3,7 +3,7 @@ import type { Task, TaskId } from '@/types/tasks';
 import cl from './ViewTaskModal.module.scss';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
 import AppModal from '@/components/UI/appModal/AppModal';
-import Button from '@/components/UI/button/Button';
+import Button from '@/components/UI/Buttons/button/Button';
 import TagItem from '@/components/UI/tagItem/TagItem';
 import DescriptionList from '@/components/UI/descriptionList/DescriptionList';
 import ErrorMessage from '@/components/UI/errorMessage/ErrorMessage';
@@ -74,7 +74,7 @@ const ViewTaskModal = ({ task, isOpen, onClose }: ViewTaskModalProps) => {
 				</div>
 
 				<AppModal.Buttons>
-					<Button style="border" isFull={true} onClick={() => setIsOpenEdit(true)}>
+					<Button styleType="border" isFull={true} onClick={() => setIsOpenEdit(true)}>
 						Редактировать
 					</Button>
 				</AppModal.Buttons>

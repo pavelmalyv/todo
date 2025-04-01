@@ -1,5 +1,5 @@
 import TasksPage from './TasksPage';
-import Button from '@/components/UI/button/Button';
+import Button from '@/components/UI/Buttons/button/Button';
 import useTagSnapshot from '@/hooks/data/useTagSnapshot';
 import useShowError from '@/hooks/ui/useShowError';
 import EditTagModal from '@/components/Modals/editTagModal/EditTagModal';
@@ -37,7 +37,7 @@ const TagPage = () => {
 				notFoundMessage={NOT_FOUND_MESSAGES.tasks}
 				tagId={id}
 				headButtons={
-					<Button size="small" style="border" onClick={() => setIsOpenModal(true)}>
+					<Button size="small" styleType="border" onClick={() => setIsOpenModal(true)}>
 						Редактировать тег
 					</Button>
 				}

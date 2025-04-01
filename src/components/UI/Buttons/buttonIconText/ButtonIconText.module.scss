@@ -11,8 +11,8 @@
 	align-items: center;
 	column-gap: 18px;
 	font-weight: 300;
-	font-size: 20px;
-	padding: 5px 0;
+	font-size: var(--font-size);
+	padding: var(--padding-x) 0;
 	color: var(--color);
 
 	&:not(:disabled) {
@@ -25,18 +25,32 @@
 	&:disabled {
 		opacity: 0.8;
 	}
+}
+
+.wrapper {
+	--font-size: 20px;
+	--padding-x: 5px;
 
 	&_small {
-		--opacity-icon: 0.7;
+		--font-size: 14px;
 
-		column-gap: 11px;
-		font-size: 14px;
+		.button {
+			--opacity-icon: 0.7;
+
+			column-gap: 11px;
+		}
 	}
+}
+
+.skeleton {
+	max-width: 150px;
+	padding: var(--padding-x) 0;
+	font-size: var(--font-size);
+	line-height: initial;
 }
 
 .icon {
 	@include utils.base-animation(color);
 
-	font-size: 15px;
 	color: var(--color-icon);
 }

@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import cl from './AppModal.module.scss';
 import Modal from 'react-responsive-modal';
-import ButtonIcon from '../buttonIcon/ButtonIcon';
+import ButtonIcon from '../Buttons/buttonIcon/ButtonIcon';
 import { createCompoundContext } from '@/context/createCompoundContext';
 
 interface AppModalProps {
@@ -83,9 +83,11 @@ const Title = ({ id, children }: TitleProps) => {
 			<div id={id} className={classNames('h2', cl.title)}>
 				{children}
 			</div>
-			<ButtonIcon size="large" className={cl.close} hiddenName="Закрыть" onClick={onClose}>
-				close
-			</ButtonIcon>
+			<div className={cl.close}>
+				<ButtonIcon className={cl.close} size="large" hiddenName="Закрыть" onClick={onClose}>
+					close
+				</ButtonIcon>
+			</div>
 		</>
 	);
 };

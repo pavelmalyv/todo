@@ -1,5 +1,5 @@
-import Button from '../UI/button/Button';
 import cl from './ErrorScreen.module.scss';
+import Button from '../UI/Buttons/button/Button';
 
 import { useId } from 'react';
 import { useTitle } from '@/hooks/ui/useTitle';
@@ -14,7 +14,7 @@ type ErrorProps = {
 	  }
 	| {
 			isHomeButton?: true;
-			onClickHomeButton?: React.MouseEventHandler<HTMLLinkElement>;
+			onClickHomeButton?: React.MouseEventHandler<HTMLAnchorElement>;
 	  }
 );
 
@@ -33,7 +33,7 @@ const ErrorScreen = ({ title, description, isHomeButton, onClickHomeButton }: Er
 					<div className={cl.description}>{description}</div>
 
 					{isHomeButton && (
-						<Button to="/" type="link" style="border" onClick={onClickHomeButton}>
+						<Button to="/" styleType="border" onClick={onClickHomeButton}>
 							На главную
 						</Button>
 					)}

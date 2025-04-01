@@ -1,22 +1,32 @@
 @use '@styles/utils';
 
+.wrapper {
+	--width-button: 30px;
+	--width-icon: 15px;
+
+	&_large {
+		--width-button: 44px;
+		--width-icon: 24px;
+	}
+}
+
+.skeleton {
+	width: var(--width-button);
+	height: var(--width-button);
+	border-radius: 50%;
+}
+
 .button {
 	@include utils.base-animation(color);
 	@include utils.flex-center(true);
-	@include utils.square(30px);
+	@include utils.square(var(--width-button));
 
-	font-size: 15px;
+	font-size: var(--width-icon);
 	color: rgb(var(--color-text-secondary));
 	flex-shrink: 0;
 
 	@include utils.hover {
 		color: rgb(var(--color-text-primary));
-	}
-
-	&_large {
-		@include utils.square(44px);
-
-		font-size: 24px;
 	}
 
 	&_circle {

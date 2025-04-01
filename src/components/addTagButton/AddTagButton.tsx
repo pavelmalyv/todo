@@ -1,6 +1,6 @@
 import type { Tags } from '@/types/tags';
 
-import ButtonIconText from '../UI/buttonIconText/ButtonIconText';
+import ButtonIconText from '../UI/Buttons/buttonIconText/ButtonIconText';
 import AddTagModal from '../Modals/addTagModal/AddTagModal';
 
 import { useState } from 'react';

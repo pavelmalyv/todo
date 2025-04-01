@@ -1,0 +1,44 @@
+@use '@styles/shared/spinner';
+@use '@styles/utils';
+
+.wrapper {
+	@include utils.base-animation(opacity);
+
+	position: relative;
+	display: inline-flex;
+
+	&_disabled {
+		opacity: 0.8;
+	}
+
+	&:not(&_spinner-small) {
+		.body {
+			position: relative;
+			padding: 0 25px;
+		}
+
+		.spinner {
+			position: absolute;
+			top: 50%;
+			right: 0;
+			translate: 0 -50%;
+		}
+	}
+
+	&_spinner-small {
+		.spinner-wrapper {
+			@include utils.flex-center(true);
+
+			position: absolute;
+			inset: 0;
+			font-size: 14px;
+			background-color: rgba(var(--color-background-primary), 0.3);
+			color: rgb(var(--color-text-primary));
+			z-index: 100;
+		}
+	}
+}
+
+.spinner {
+	@include spinner.base(16px);
+}

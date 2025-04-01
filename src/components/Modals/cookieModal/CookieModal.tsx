@@ -1,10 +1,11 @@
 import cl from './CookieModal.module.scss';
 
-import { useEffect, useId, useState } from 'react';
-import { boolean, date, InferType, object } from 'yup';
 import AppModal from '@/components/UI/appModal/AppModal';
 import classNames from 'classnames';
-import Button from '@/components/UI/button/Button';
+import Button from '@/components/UI/Buttons/button/Button';
+
+import { useEffect, useId, useState } from 'react';
+import { boolean, date, InferType, object } from 'yup';
 
 const cookieAcceptSchema = object({
 	accept: boolean().required(),
@@ -82,7 +83,7 @@ const CookieModal = () => {
 			</h2>
 			<div className={cl.body}>
 				<div>Этот сайт использует файлы куки</div>
-				<Button size="medium-short" onClick={handleClose}>
+				<Button size="medium" onClick={handleClose}>
 					Принять
 				</Button>
 			</div>

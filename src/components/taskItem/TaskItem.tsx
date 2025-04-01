@@ -2,7 +2,7 @@ import type { Task, TaskId } from '@/types/tasks';
 
 import cl from './TaskItem.module.scss';
 import Checkbox from '../UI/checkbox/Checkbox';
-import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
+import ButtonIcon from '../UI/Buttons/buttonIcon/ButtonIcon';
 import EditTaskModal from '../Modals/editTaskModal/EditTaskModal';
 import Skeleton from 'react-loading-skeleton';
 import useTaskCRUD from '@/hooks/data/useTaskCRUD';
@@ -40,7 +40,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
 							onChange={(e) => handleChangeDone(e, task.id)}
 						/>
 						<ButtonIcon
-							style="circle"
+							styleType="circle"
 							hiddenName="Редактировать задачу"
 							onClick={() => setIsOpenEditModals(true)}
 						>
