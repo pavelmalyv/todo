@@ -77,7 +77,7 @@ const RegistrationPage = () => {
 							<FieldText
 								type="email"
 								label="E-mail"
-								placeholder="E-mail*"
+								placeholder="E-mail"
 								autoComplete="email"
 								{...field}
 								aria-required={true}
@@ -92,7 +92,7 @@ const RegistrationPage = () => {
 						render={({ field, fieldState }) => (
 							<FieldText
 								label="Пароль"
-								placeholder="Пароль*"
+								placeholder="Пароль"
 								isPassword={true}
 								autoComplete="new-password"
 								{...field}
@@ -108,7 +108,7 @@ const RegistrationPage = () => {
 						render={({ field, fieldState }) => (
 							<FieldText
 								label="Повтор пароля"
-								placeholder="Повтор пароля*"
+								placeholder="Повтор пароля"
 								isPassword={true}
 								autoComplete="new-password"
 								{...field}
