@@ -24,7 +24,7 @@ const StartBook = ({ titleId }: StartBookProps) => {
 				</p>
 			</div>
 
-			<Button type="link" to={LOGIN_URL} className={cl.button} isFull={true}>
+			<Button to={LOGIN_URL} isFull={true}>
 				Начать
 			</Button>
 		</div>
