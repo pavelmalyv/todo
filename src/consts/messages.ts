@@ -40,7 +40,7 @@ export const ERRORS_MESSAGES_FIREBASE: Record<string, string> = {
 	'auth/password-does-not-meet-requirements': 'Некорректный пароль',
 	'auth/email-already-in-use': 'Пользователь с таким Email уже существует',
 	'auth/expired-action-code': 'Срок действия ссылки истек',
-	'auth/invalid-action-code': 'Некорректная ссылка',
+	'auth/invalid-action-code': 'Недействительная ссылка',
 	unknown: 'Неизвестная ошибка, попробуйте позже',
 };
 
