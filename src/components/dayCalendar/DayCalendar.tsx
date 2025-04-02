@@ -11,10 +11,11 @@ import useTasksSnapshot from '@/hooks/data/useTasksSnapshot';
 
 import { Link } from 'react-router';
 import { produce } from 'immer';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { getTasksDayUrl } from '@/consts/routes';
 import { LIMIT_CALENDAR_TASKS } from '@/consts/config';
-import { ERRORS_MESSAGES, LOADING_MESSAGES } from '@/consts/messages';
+import { ERRORS_MESSAGES, LOADING_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
+import { getWordForm } from '@/utils/words';
 
 interface DayCalendarProps {
 	day: number;
@@ -28,6 +29,7 @@ interface DayCalendarProps {
 const DayCalendar = memo(
 	({ day, timestamp, isFocus, className, classNameCell, setDaysFocus }: DayCalendarProps) => {
 		const dayRef = useRef<HTMLDivElement | null>(null);
+		const defaultLabelRef = useRef<string | null>(null);
 		const [isOpenTask, setIsOpenTask] = useState(false);
 
 		const dateEnd = new Date(timestamp);
@@ -40,6 +42,20 @@ const DayCalendar = memo(
 		});
 
 		const tasks: Tasks | null[] = tasksData ? tasksData : new Array(1).fill(null);
+
+		const getCellElement = useCallback(() => {
+			const dayElement = dayRef.current;
+			if (!dayElement) {
+				return undefined;
+			}
+
+			const cellElement = dayElement.closest(`.${classNameCell}`);
+			if (!cellElement) {
+				return undefined;
+			}
+
+			return cellElement;
+		}, [classNameCell]);
 
 		useEffect(() => {
 			setDaysFocus(
@@ -58,8 +74,8 @@ const DayCalendar = memo(
 		}, [timestamp, setDaysFocus]);
 
 		useEffect(() => {
-			const dayElement = dayRef.current;
-			if (!dayElement) {
+			const cellElement = getCellElement();
+			if (!cellElement) {
 				return;
 			}
 
@@ -90,13 +106,50 @@ const DayCalendar = memo(
 				});
 			});
 
-			const cellElement = dayElement.closest(`.${classNameCell}`);
+			observer.observe(cellElement, { attributes: true, attributeFilter: ['tabindex'] });
+		}, [getCellElement]);
+
+		useEffect(() => {
+			const cellElement = getCellElement();
 			if (!cellElement) {
 				return;
 			}
 
-			observer.observe(cellElement, { attributes: true, attributeFilter: ['tabindex'] });
-		}, [classNameCell]);
+			if (!tasksData) {
+				return;
+			}
+
+			let defaultLabel = defaultLabelRef.current;
+
+			if (!defaultLabel) {
+				let label = cellElement.getAttribute('aria-label') ?? '';
+				label = label.replace('Choose ', '');
+
+				defaultLabelRef.current = label;
+				defaultLabel = label;
+			}
+
+			let labelTasks;
+			const taskCount = tasksData.length;
+			if (taskCount > 0) {
+				labelTasks = hasMoreData ? 'больше ' : '';
+				labelTasks += `${taskCount} ${getWordForm(taskCount, 'задача', 'задачи', 'задач')}`;
+			} else {
+				labelTasks = NOT_FOUND_MESSAGES.tasks;
+			}
+
+			cellElement.setAttribute('aria-label', `${defaultLabel}: ${labelTasks}`);
+		}, [getCellElement, tasksData, hasMoreData]);
+
+		useEffect(() => {
+			const cellElement = getCellElement();
+			if (!cellElement) {
+				return;
+			}
+
+			cellElement.removeAttribute('role');
+			cellElement.removeAttribute('aria-selected');
+		}, [getCellElement]);
 
 		return (
 			<div className={classNames(className, cl.day)} ref={dayRef} data-id={timestamp}>
