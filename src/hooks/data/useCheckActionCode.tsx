@@ -10,26 +10,16 @@ const useCheckActionCode = (supportedActions: string[]) => {
 	const parseAction = parseActionCodeURL(window.location.href);
 
 	useEffect(() => {
-		if (!parseAction?.operation) {
-			const error = new Error('Invalid action in the URL');
-
-			setError(error);
-			console.error(error);
-
-			return;
-		}
-
-		if (!supportedActions.includes(parseAction.operation)) {
-			const error = new Error('The action is not supported');
-
-			setError(new Error('The action is not supported'));
-			console.error(error);
-
-			return;
-		}
-
 		(async () => {
 			try {
+				if (!parseAction?.operation) {
+					throw new Error('Invalid action in the URL');
+				}
+
+				if (!supportedActions.includes(parseAction.operation)) {
+					throw new Error('The action is not supported');
+				}
+
 				setIsLoading(true);
 
 				await checkActionCode(auth, parseAction.code);
