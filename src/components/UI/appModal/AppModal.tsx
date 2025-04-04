@@ -83,13 +83,13 @@ const Title = ({ id, children }: TitleProps) => {
 
 	return (
 		<>
-			<div id={id} className={classNames('h2', cl.title)}>
-				{children}
-			</div>
 			<div className={cl.close}>
 				<ButtonIcon className={cl.close} size="large" hiddenName="Закрыть" onClick={onClose}>
 					close
 				</ButtonIcon>
+			</div>
+			<div id={id} className={classNames('h2', cl.title)}>
+				{children}
 			</div>
 		</>
 	);
