@@ -50,7 +50,7 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 		const errorMessageId = useId();
 
 		const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
-			if (event.key == 'Escape' && isOpenRef.current) {
+			if (isOpenRef.current) {
 				event.stopPropagation();
 			}
 		};
