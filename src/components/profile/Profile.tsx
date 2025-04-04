@@ -135,8 +135,7 @@ const Profile = ({
 				isOpen={isOpenSidebar}
 				animation="slide"
 				className={{
-					root: cl['sidebar-dialog'],
-					modalContainer: cl['sidebar-dialog-container'],
+					modal: cl['sidebar-dialog'],
 				}}
 				onClose={handleSidebarClose}
 			>

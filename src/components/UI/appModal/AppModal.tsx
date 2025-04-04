@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import cl from './AppModal.module.scss';
-import Modal from 'react-responsive-modal';
+import Modal from 'react-modal';
 import ButtonIcon from '../Buttons/buttonIcon/ButtonIcon';
 import { createCompoundContext } from '@/context/createCompoundContext';
 
@@ -12,8 +12,7 @@ interface AppModalProps {
 	animation?: 'fade' | 'slide';
 	className?: {
 		root?: string;
-		overlay?: string;
-		modalContainer?: string;
+		container?: string;
 		modal?: string;
 	};
 	onClose: () => void;
@@ -36,33 +35,37 @@ const AppModal = ({
 	'aria-labelledby': ariaLabelledby,
 	'aria-describedby': ariaDescribedby,
 }: AppModalProps) => {
-	const inAnimation = animation === 'fade' ? cl['fade-in'] : cl['slide-in'];
-	const outAnimation = animation === 'fade' ? cl['fade-out'] : cl['slide-out'];
-	const animationDurationMs = animation === 'fade' ? 200 : 600;
-
 	return (
 		<AppModalProvider value={{ onClose }}>
 			<Modal
 				role={role}
-				open={isOpen}
-				onClose={onClose}
-				aria-modal="true"
-				blockScroll={styleModal !== 'dialog'}
-				closeOnOverlayClick={styleModal !== 'dialog'}
-				classNames={{
-					root: classNames(cl.root, cl[`root_${styleModal}`], className?.root),
-					overlay: classNames(cl.overlay, className?.overlay),
-					modalContainer: classNames(cl.container, className?.modalContainer),
-					modal: classNames(cl.modal, className?.modal),
-					overlayAnimationIn: cl['fade-in'],
-					overlayAnimationOut: cl['fade-out'],
-					modalAnimationIn: inAnimation,
-					modalAnimationOut: outAnimation,
+				isOpen={isOpen}
+				onRequestClose={onClose}
+				bodyOpenClassName={styleModal !== 'dialog' ? cl['body-open'] : null}
+				shouldCloseOnOverlayClick={styleModal !== 'dialog'}
+				className={classNames(cl.modal, className?.modal)}
+				closeTimeoutMS={animation === 'fade' ? 200 : 600}
+				overlayClassName={{
+					base: classNames(
+						cl.root,
+						cl[`root_${styleModal}`],
+						cl[`root_animation-${animation}`],
+						className?.root,
+					),
+
+					afterOpen: cl[`root_after-open-${animation}`],
+					beforeClose: cl[`root_before-close-${animation}`],
 				}}
-				animationDuration={animationDurationMs}
-				showCloseIcon={false}
-				ariaLabelledby={ariaLabelledby}
-				ariaDescribedby={ariaDescribedby}
+				aria={{
+					labelledby: ariaLabelledby,
+					describedby: ariaDescribedby,
+				}}
+				overlayElement={(props, contentElement) => (
+					<div {...props}>
+						<div className={cl.overlay}></div>
+						<div className={cl.container}>{contentElement}</div>
+					</div>
+				)}
 			>
 				{children}
 			</Modal>
