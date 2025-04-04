@@ -147,6 +147,12 @@ const DayCalendar = memo(
 
 			cellElement.removeAttribute('role');
 			cellElement.removeAttribute('aria-selected');
+
+			if (cellElement.classList.contains('react-datepicker__day--outside-month')) {
+				cellElement.setAttribute('aria-hidden', 'true');
+			} else {
+				cellElement.removeAttribute('aria-hidden');
+			}
 		}, [getCellElement]);
 
 		return (

@@ -127,6 +127,7 @@
 
 			&__day {
 				--background-color: transparent;
+				--border-width: 1px;
 
 				text-align: left;
 				width: auto;
@@ -143,7 +144,19 @@
 				}
 
 				&:not(:last-child) {
-					border-right: 1px solid rgb(var(--color-border-primary));
+					border-right: var(--border-width) solid rgb(var(--color-border-primary));
+				}
+
+				&[aria-hidden='true'] {
+					position: relative;
+
+					&::after {
+						content: '';
+						position: absolute;
+						inset: var(--border-width);
+						background-color: rgb(var(--color-background-primary));
+						opacity: 0.5;
+					}
 				}
 			}
 		}
