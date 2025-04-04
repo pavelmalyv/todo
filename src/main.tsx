@@ -1,7 +1,6 @@
 import App from './App.tsx';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { ToastContainer } from 'react-toastify';
 import './consts/yupLocales.ts';
 
 import '@fontsource/inter/300.css';
@@ -19,6 +18,5 @@ import 'material-symbols';
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<App />
-		<ToastContainer />
 	</StrictMode>,
 );
