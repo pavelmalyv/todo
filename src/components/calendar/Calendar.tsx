@@ -68,7 +68,6 @@ const Calendar = () => {
 			onBlur={(e) => updateDaysTabindex(e, false)}
 		>
 			<DatePicker
-				disabled={true}
 				selected={null}
 				inline
 				dateFormat="dd.MM.yyyy"
