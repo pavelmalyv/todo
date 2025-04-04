@@ -22,7 +22,7 @@ const ConfirmModal = ({
 	onClickConfirm,
 }: ConfirmModalProps) => {
 	return (
-		<AppModal isOpen={isOpen} onClose={onClose}>
+		<AppModal role="alertdialog" isOpen={isOpen} onClose={onClose}>
 			<AppModal.Title>{title}</AppModal.Title>
 			<AppModal.Description className={cl.description}>{description}</AppModal.Description>
 
