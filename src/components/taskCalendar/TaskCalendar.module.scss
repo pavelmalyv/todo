@@ -1,0 +1,42 @@
+@use '@styles/utils';
+
+.task {
+	--min-height: 18px;
+}
+
+.button {
+	--text-decoration: none;
+	--background-color: rgb(var(--color-highlight-background-second));
+
+	display: inline-block;
+	align-items: center;
+	padding: 0 8px;
+	max-width: 100%;
+	font-size: 12px;
+	min-height: var(--min-height);
+	background-color: var(--background-color);
+	border-radius: 30px;
+	color: rgb(var(--color-text-secondary));
+
+	@include utils.hover {
+		--text-decoration: underline;
+	}
+
+	&_event {
+		--background-color: rgb(var(--color-highlight-background-first));
+	}
+}
+
+.body {
+	display: inline-block;
+	max-width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-decoration-skip-ink: none;
+	text-decoration: var(--text-decoration);
+}
+
+.skeleton {
+	height: var(--min-height);
+}

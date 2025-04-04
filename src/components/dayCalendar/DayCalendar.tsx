@@ -4,14 +4,13 @@ import type { Tasks } from '@/types/tasks';
 import classNames from 'classnames';
 import cl from './DayCalendar.module.scss';
 import VisuallyHiddenLoader from '../visuallyHiddenLoader/VisuallyHiddenLoader';
-import Skeleton from 'react-loading-skeleton';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
-import ViewTaskModal from '../Modals/viewTaskModal/ViewTaskModal';
+import TaskCalendar from '../taskCalendar/TaskCalendar';
 import useTasksSnapshot from '@/hooks/data/useTasksSnapshot';
 
 import { Link } from 'react-router';
 import { produce } from 'immer';
-import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef } from 'react';
 import { getTasksDayUrl } from '@/consts/routes';
 import { LIMIT_CALENDAR_TASKS } from '@/consts/config';
 import { ERRORS_MESSAGES, LOADING_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
@@ -30,7 +29,6 @@ const DayCalendar = memo(
 	({ day, timestamp, isFocus, className, classNameCell, setDaysFocus }: DayCalendarProps) => {
 		const dayRef = useRef<HTMLDivElement | null>(null);
 		const defaultLabelRef = useRef<string | null>(null);
-		const [isOpenTask, setIsOpenTask] = useState(false);
 
 		const dateEnd = new Date(timestamp);
 		dateEnd.setDate(dateEnd.getDate() + 1);
@@ -163,26 +161,8 @@ const DayCalendar = memo(
 							<div className={cl.tasks}>
 								<ul className={cl.list}>
 									{tasks.map((task, index) => (
-										<li className={cl.item} key={task?.id ?? index}>
-											{task ? (
-												<>
-													<button
-														className={cl.task}
-														tabIndex={isFocus ? 0 : -1}
-														onClick={() => setIsOpenTask(true)}
-													>
-														<span className={cl['task-body']}>{task.name}</span>
-													</button>
-
-													<ViewTaskModal
-														task={task}
-														isOpen={isOpenTask}
-														onClose={() => setIsOpenTask(false)}
-													/>
-												</>
-											) : (
-												<Skeleton className={cl.skeleton} />
-											)}
+										<li key={task?.id ?? index}>
+											<TaskCalendar task={task} isFocus={isFocus} isEvent={index % 2 === 0} />
 										</li>
 									))}
 								</ul>
