@@ -15,6 +15,17 @@ interface TaskCalendarProps {
 const TaskCalendar = ({ task, isFocus, isEvent }: TaskCalendarProps) => {
 	const [isOpenTask, setIsOpenTask] = useState(false);
 
+	const handleClick = () => {
+		setIsOpenTask(true);
+	};
+
+	const handleKeyDown = (e: React.KeyboardEvent) => {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault();
+			handleClick();
+		}
+	};
+
 	return (
 		<div className={cl.task}>
 			{task ? (
@@ -22,12 +33,15 @@ const TaskCalendar = ({ task, isFocus, isEvent }: TaskCalendarProps) => {
 					<button
 						className={classNames(cl.button, { [cl['button_event']]: isEvent })}
 						tabIndex={isFocus ? 0 : -1}
-						onClick={() => setIsOpenTask(true)}
+						onClick={handleClick}
+						onKeyDown={handleKeyDown}
 					>
 						<span className={cl.body}>{task.name}</span>
 					</button>
 
-					<ViewTaskModal task={task} isOpen={isOpenTask} onClose={() => setIsOpenTask(false)} />
+					<div onKeyDown={(e) => e.stopPropagation()}>
+						<ViewTaskModal task={task} isOpen={isOpenTask} onClose={() => setIsOpenTask(false)} />
+					</div>
 				</>
 			) : (
 				<Skeleton className={cl.skeleton} />
