@@ -7,16 +7,23 @@ import { forwardRef, useId, useState } from 'react';
 
 type FieldTextProps = BaseFieldProps & {
 	isPassword?: boolean;
+	className?: string;
 };
 
 const FieldText = forwardRef<HTMLInputElement, FieldTextProps>(
-	({ isPassword = false, ...props }, ref) => {
+	({ isPassword = false, className, ...props }, ref) => {
 		const fieldId = useId();
 		const [isPasswordState, setIsPasswordState] = useState(true);
 		const type = isPassword && isPasswordState ? 'password' : 'text';
 
 		return (
-			<FieldBase ref={ref} type={type} id={fieldId} className={{ body: cl.body }} {...props}>
+			<FieldBase
+				ref={ref}
+				type={type}
+				id={fieldId}
+				className={{ body: cl.body, field: className }}
+				{...props}
+			>
 				{isPassword && (
 					<ButtonIcon
 						hiddenName={'Показать пароль'}
