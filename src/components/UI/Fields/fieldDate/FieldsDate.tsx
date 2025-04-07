@@ -1,10 +1,14 @@
+import type { BaseFieldProps } from '@/types/baseProps';
+
 import 'react-datepicker/dist/react-datepicker.css';
 import cl from './FieldDate.module.scss';
 
 import Icon from '../../icon/Icon';
 import ErrorField from '../../errorField/ErrorField';
-import DatePicker, { registerLocale } from 'react-datepicker';
+import FieldText from '../fieldText/FieldText';
 import mergeRefs from 'merge-refs';
+import DatePicker, { registerLocale } from 'react-datepicker';
+
 import { forwardRef, useId, useRef } from 'react';
 import { ru } from 'date-fns/locale';
 
@@ -12,9 +16,12 @@ registerLocale('ru', ru);
 
 const CustomInput = forwardRef<
 	HTMLInputElement,
-	React.HTMLProps<HTMLInputElement> & { mergeRef: React.Ref<HTMLInputElement> }
->(({ mergeRef, ...props }, ref) => {
-	return <input ref={mergeRefs(ref, mergeRef)} {...props} />;
+	BaseFieldProps & {
+		label: string;
+		mergeRef: React.Ref<HTMLInputElement>;
+	}
+>(({ label, mergeRef, ...props }, ref) => {
+	return <FieldText ref={mergeRefs(ref, mergeRef)} label={label} className={cl.field} {...props} />;
 });
 
 interface FieldDateProps {
@@ -47,7 +54,6 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 		ref,
 	) => {
 		const isOpenRef = useRef<boolean | null>(null);
-		const titleId = useId();
 		const errorMessageId = useId();
 
 		const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
@@ -62,13 +68,8 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 
 		return (
 			<div>
-				<label htmlFor={titleId} className="visually-hidden">
-					{label}
-				</label>
-
 				<div className={cl['field-wrapper']} onKeyDown={handleKeyDown}>
 					<DatePicker
-						id={titleId}
 						selected={value}
 						name={name}
 						disabled={disabled}
@@ -95,7 +96,7 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 						ariaInvalid={String(ariaInvalid)}
 						ariaRequired={String(ariaRequired)}
 						ariaDescribedBy={errorMessageId}
-						customInput={<CustomInput mergeRef={ref} />}
+						customInput={<CustomInput mergeRef={ref} label={label} />}
 						onCalendarClose={handleCalendarClose}
 						onCalendarOpen={() => (isOpenRef.current = true)}
 						popperModifiers={[

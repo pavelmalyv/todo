@@ -1,4 +1,3 @@
-@use '@styles/shared/field';
 @use '@styles/utils';
 
 .date-wrapper {
@@ -10,8 +9,6 @@
 }
 
 .field {
-	@include field.base;
-
 	padding-right: 46px;
 }
 
