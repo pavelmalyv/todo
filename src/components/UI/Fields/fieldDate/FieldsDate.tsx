@@ -4,17 +4,18 @@ import cl from './FieldDate.module.scss';
 import Icon from '../../icon/Icon';
 import ErrorField from '../../errorField/ErrorField';
 import DatePicker, { registerLocale } from 'react-datepicker';
-
+import mergeRefs from 'merge-refs';
 import { forwardRef, useId, useRef } from 'react';
 import { ru } from 'date-fns/locale';
 
 registerLocale('ru', ru);
 
-const CustomInput = forwardRef<HTMLInputElement, React.HTMLProps<HTMLInputElement>>(
-	(props, ref) => {
-		return <input ref={ref} {...props} />;
-	},
-);
+const CustomInput = forwardRef<
+	HTMLInputElement,
+	React.HTMLProps<HTMLInputElement> & { mergeRef: React.Ref<HTMLInputElement> }
+>(({ mergeRef, ...props }, ref) => {
+	return <input ref={mergeRefs(ref, mergeRef)} {...props} />;
+});
 
 interface FieldDateProps {
 	label: string;
@@ -55,13 +56,17 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 			}
 		};
 
+		const handleCalendarClose = () => {
+			isOpenRef.current = false;
+		};
+
 		return (
 			<div>
 				<label htmlFor={titleId} className="visually-hidden">
 					{label}
 				</label>
 
-				<div className={cl['field-wrapper']}>
+				<div className={cl['field-wrapper']} onKeyDown={handleKeyDown}>
 					<DatePicker
 						id={titleId}
 						selected={value}
@@ -90,8 +95,8 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 						ariaInvalid={String(ariaInvalid)}
 						ariaRequired={String(ariaRequired)}
 						ariaDescribedBy={errorMessageId}
-						customInput={<CustomInput ref={ref} />}
-						onCalendarClose={() => (isOpenRef.current = false)}
+						customInput={<CustomInput mergeRef={ref} />}
+						onCalendarClose={handleCalendarClose}
 						onCalendarOpen={() => (isOpenRef.current = true)}
 						popperModifiers={[
 							{
@@ -101,7 +106,6 @@ const FieldDate = forwardRef<HTMLInputElement, FieldDateProps>(
 								}),
 							},
 						]}
-						onKeyDown={handleKeyDown}
 					/>
 
 					<Icon className={cl.icon}>calendar_month</Icon>
