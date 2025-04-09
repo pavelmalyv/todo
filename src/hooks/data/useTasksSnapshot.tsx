@@ -1,36 +1,22 @@
-import type { Tasks } from '@/types/tasks';
-import type { QueryConstraint, QueryDocumentSnapshot } from 'firebase/firestore';
-import type { TagId } from '@/types/fields';
+import type { CreateQueryFilter, Tasks } from '@/types/tasks';
 
 import useUserState from './useUserState';
 import useSubscribesScopesTasks from './useSubscribesScopesTasks';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { auth, tasksCollectionRef } from '@/firebase';
+import { auth } from '@/firebase';
 import { normalizeError } from '@/utils/error';
 import { v4 as uuid } from 'uuid';
-import {
-	onSnapshot,
-	orderBy,
-	query,
-	Timestamp,
-	where,
-	limit,
-	startAfter,
-} from 'firebase/firestore';
+import { onSnapshot } from 'firebase/firestore';
+import { createQueryTasks } from '@/utils/tasks';
+import { LIMIT_TASKS_DEFAULT } from '@/consts/config';
 
-interface TasksSnapshotOptions {
-	timestampStart?: number;
-	timestampEnd?: number;
-	tagId?: TagId;
-	limit?: number;
-}
 const useTasksSnapshot = ({
 	timestampStart,
 	timestampEnd,
 	tagId,
-	limit: limitQuery = 30,
-}: TasksSnapshotOptions) => {
+	limit: limitQuery = LIMIT_TASKS_DEFAULT,
+}: CreateQueryFilter) => {
 	const limitQueryNext = limitQuery + 1;
 
 	const [hasMoreData, setHasMoreData] = useState(false);
@@ -55,43 +41,8 @@ const useTasksSnapshot = ({
 	}
 
 	const createQuery = useCallback(
-		({
-			uid,
-			limitQuery,
-			startDoc,
-		}: {
-			uid: string;
-			limitQuery?: number;
-			startDoc?: QueryDocumentSnapshot;
-		}) => {
-			const conditions: QueryConstraint[] = [];
-
-			if (timestampStart) {
-				const startDate = Timestamp.fromMillis(timestampStart);
-				conditions.push(where('dueAt', '>=', startDate));
-			}
-
-			if (timestampEnd) {
-				const endDate = Timestamp.fromMillis(timestampEnd);
-				conditions.push(where('dueAt', '<', endDate));
-			}
-
-			if (tagId) {
-				conditions.push(where('tagId', '==', tagId));
-			}
-
-			conditions.push(orderBy('dueAt', 'desc'));
-
-			if (limitQuery) {
-				conditions.push(limit(limitQuery));
-			}
-
-			if (startDoc) {
-				conditions.push(startAfter(startDoc));
-			}
-
-			return query(tasksCollectionRef(uid), ...conditions);
-		},
+		(uid: string, filter: CreateQueryFilter) =>
+			createQueryTasks(uid, { timestampStart, timestampEnd, tagId, ...filter }),
 		[timestampStart, timestampEnd, tagId],
 	);
 
@@ -134,9 +85,8 @@ const useTasksSnapshot = ({
 		const subscribeId = uuid();
 		setEmptySubscribeScope(subscribeId, 'fetch');
 
-		const q = createQuery({
-			uid: user.uid,
-			limitQuery: limitQueryNext,
+		const q = createQuery(user.uid, {
+			limit: limitQueryNext,
 			startDoc: penultimateTaskData.doc,
 		});
 
@@ -180,7 +130,7 @@ const useTasksSnapshot = ({
 		const subscribeId = uuid();
 		setEmptySubscribeScope(subscribeId, 'init');
 
-		const q = createQuery({ uid, limitQuery: limitQueryNext });
+		const q = createQuery(uid, { limit: limitQueryNext });
 		const unsubscribe = onSnapshot(
 			q,
 			async (querySnapshot) => {
