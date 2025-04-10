@@ -1,4 +1,4 @@
-import Calendar from '@/components/calendar/Calendar';
+import Calendar from '@/components/Calendar/calendar/Calendar';
 import Profile from '@/components/profile/Profile';
 import { useTitle } from '@/hooks/ui/useTitle';
 

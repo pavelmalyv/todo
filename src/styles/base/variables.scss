@@ -36,8 +36,6 @@
 	--color-error: 213, 0, 0;
 	--color-overlay-primary: 0, 0, 0;
 	--color-highlight-background-first: 209, 234, 237;
-	--color-highlight-background-second: 255, 218, 218;
-	--color-highlight-background-third: 223, 242, 255;
 
 	@include utils.mobile-l {
 		--container-padding-x: 16px;

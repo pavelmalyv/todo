@@ -1,0 +1,87 @@
+@use '@styles/utils';
+@use '@styles/shared/title';
+
+:global {
+	:root {
+		--fc-button-text-color: inherit;
+		--fc-button-border-color: transparent;
+		--fc-button-hover-border-color: transparent;
+		--fc-button-active-border-color: transparent;
+		--fc-event-selected-overlay-color: transparent;
+	}
+
+	.fc {
+		.fc-daygrid {
+			overflow: auto;
+			margin: 0 calc(var(--container-padding-x) * -1);
+			padding: 0 var(--container-padding-x);
+		}
+
+		.fc-scrollgrid {
+			min-width: 750px;
+		}
+
+		.fc-toolbar {
+			gap: 14px 10px;
+			flex-wrap: wrap;
+		}
+
+		.fc-toolbar-title {
+			@include title.h2;
+
+			&::first-letter {
+				text-transform: uppercase;
+			}
+		}
+
+		.fc-button {
+			--background-color: rgb(var(--color-accent-primary));
+
+			@include utils.base-animation(background-color, opacity);
+
+			outline: revert;
+			box-shadow: none !important;
+			background-color: var(--background-color) !important;
+
+			@include utils.hover {
+				--background-color: rgb(var(--color-accent-secondary));
+			}
+		}
+	}
+}
+
+.cell {
+	a {
+		width: 100%;
+	}
+}
+
+a.event {
+	--margin-x: 2px;
+
+	display: inline-flex;
+	width: auto;
+	padding: 0;
+	max-width: calc(100% - calc(var(--margin-x) * 2));
+	margin-right: var(--margin-x) !important;
+	margin-left: var(--margin-x) !important;
+	box-shadow: none !important;
+	cursor: pointer;
+
+	&:hover {
+		background-color: transparent;
+	}
+}
+
+a.more {
+	display: inline-block;
+	text-align: left;
+	width: auto;
+	font-size: 12px;
+	margin-top: 8px !important;
+	color: rgb(var(--color-text-secondary));
+
+	&:hover {
+		background-color: transparent !important;
+	}
+}
