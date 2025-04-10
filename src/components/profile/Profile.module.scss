@@ -13,6 +13,7 @@
 .body {
 	display: flex;
 	align-items: flex-start;
+	flex-direction: row-reverse;
 	column-gap: 29px;
 	flex-grow: 1;
 

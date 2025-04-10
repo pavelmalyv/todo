@@ -77,10 +77,6 @@ const Profile = ({
 		<>
 			<div className={classNames('container', cl.profile)} ref={profileRef}>
 				<div className={cl.body}>
-					<div className={cl.sidebar}>
-						<Menu />
-					</div>
-
 					<div className={cl.page}>
 						<div className={cl.head}>
 							<div className={cl.main}>
@@ -126,6 +122,10 @@ const Profile = ({
 							</div>
 						</div>
 						<div>{children}</div>
+					</div>
+
+					<div className={cl.sidebar}>
+						<Menu />
 					</div>
 				</div>
 			</div>
