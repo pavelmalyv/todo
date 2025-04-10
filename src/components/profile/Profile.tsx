@@ -86,7 +86,7 @@ const Profile = ({
 									</ButtonIcon>
 								</div>
 								<div className={cl.title}>
-									<h1 className="h2">
+									<h1 className="h1">
 										<VisuallyHiddenLoader isLoading={isLoadingTitle}>
 											{title ? title : <Skeleton width={160} />}
 										</VisuallyHiddenLoader>
