@@ -22,10 +22,6 @@ const useQuantityTasksSnapshot = ({
 		limit,
 	});
 
-	if (error) {
-		console.error(error);
-	}
-
 	let quantity: number | null = null;
 
 	if (tasks) {
