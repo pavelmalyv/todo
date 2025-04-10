@@ -94,29 +94,31 @@ const Tag = forwardRef<HTMLInputElement, TagProps>(
 
 		return (
 			<div className={cl.item}>
-				<input
-					id={titleId}
-					type="checkbox"
-					className={cl.checkbox}
-					ref={ref}
-					name={name}
-					value={value}
-					disabled={disabled}
-					checked={checked}
-					onChange={onChange}
-					onBlur={onBlur}
-					aria-controls={ariaControls}
-					aria-invalid={ariaInvalid}
-					aria-required={ariaRequired}
-					aria-describedby={errorMessageId}
-				/>
 				{isSkeleton ? (
 					<Skeleton className={cl.skeleton} />
 				) : (
-					<label htmlFor={titleId} className={cl.label}>
-						<TagMarker color={color} />
-						<span className={cl.name}>{children}</span>
-					</label>
+					<>
+						<input
+							id={titleId}
+							type="checkbox"
+							className={cl.checkbox}
+							ref={ref}
+							name={name}
+							value={value}
+							disabled={disabled}
+							checked={checked}
+							onChange={onChange}
+							onBlur={onBlur}
+							aria-controls={ariaControls}
+							aria-invalid={ariaInvalid}
+							aria-required={ariaRequired}
+							aria-describedby={errorMessageId}
+						/>
+						<label htmlFor={titleId} className={cl.label}>
+							<TagMarker color={color} />
+							<span className={cl.name}>{children}</span>
+						</label>
+					</>
 				)}
 			</div>
 		);
