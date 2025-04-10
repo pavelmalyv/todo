@@ -19,9 +19,11 @@ const useTagSnapshot = (id: TagId | undefined) => {
 		console.error(errorUser);
 	}
 
-	const handleError = useCallback((error: Error) => {
-		setError(error);
+	const handleError = useCallback((error: unknown) => {
+		setError(normalizeError(error));
 		setIsLoading(false);
+
+		console.error(error);
 	}, []);
 
 	useEffect(() => {
@@ -55,15 +57,11 @@ const useTagSnapshot = (id: TagId | undefined) => {
 					setTag(tag);
 					setIsLoading(false);
 				} catch (error) {
-					handleError(normalizeError(error));
-
-					console.error(error);
+					handleError(error);
 				}
 			},
 			(error) => {
-				handleError(normalizeError(error));
-
-				console.error(error);
+				handleError(error);
 			},
 		);
 
