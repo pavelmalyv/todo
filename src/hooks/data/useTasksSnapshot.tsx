@@ -23,6 +23,7 @@ const useTasksSnapshot = ({
 	const [isLoadingMore, setIsLoadingMore] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<Error | undefined>(undefined);
+	const [errorFetch, setErrorFetch] = useState<Error | undefined>(undefined);
 	const [isInit, setIsInit] = useState(false);
 	const [user, , errorUser] = useUserState();
 	const uid = user ? user.uid : null;
@@ -46,9 +47,18 @@ const useTasksSnapshot = ({
 		[timestampStart, timestampEnd, tagId],
 	);
 
-	const handleErrorInit = useCallback((error: Error) => {
+	const handleErrorInit = useCallback((error: unknown) => {
 		setIsLoading(false);
-		setError(error);
+		setError(normalizeError(error));
+
+		console.error(error);
+	}, []);
+
+	const handleErrorFetch = useCallback((error: unknown) => {
+		setIsLoadingMore(false);
+		setErrorFetch(normalizeError(error));
+
+		console.error(error);
 	}, []);
 
 	const fetchMore = useCallback(() => {
@@ -57,22 +67,19 @@ const useTasksSnapshot = ({
 		}
 
 		if (!hasMoreData) {
-			const error = new Error('There is no data to fetch');
-			console.error(error);
-			throw error;
+			handleErrorFetch(new Error('There is no data to fetch'));
+			return;
 		}
 
 		const user = auth.currentUser;
 		if (!user) {
-			const error = new Error('Authorization error');
-			console.error(error);
-			throw error;
+			handleErrorFetch(new Error('Authorization error'));
+			return;
 		}
 
 		if (!subscribesScopes.ids.length) {
-			const error = new Error('The first data has not been uploaded yet');
-			console.error(error);
-			throw error;
+			handleErrorFetch(new Error('The first data has not been uploaded yet'));
+			return;
 		}
 
 		const lastSubscribesScopes =
@@ -83,6 +90,7 @@ const useTasksSnapshot = ({
 			];
 
 		const subscribeId = uuid();
+		setIsLoadingMore(true);
 		setEmptySubscribeScope(subscribeId, 'fetch');
 
 		const q = createQuery(user.uid, {
@@ -94,18 +102,15 @@ const useTasksSnapshot = ({
 			q,
 			async (querySnapshot) => {
 				try {
-					setIsLoadingMore(true);
 					await setTasksFromSnapshot(querySnapshot, subscribeId);
-				} catch (error) {
-					console.error(error);
-					throw normalizeError(error);
-				} finally {
+
 					setIsLoadingMore(false);
+				} catch (error) {
+					handleErrorFetch(error);
 				}
 			},
 			(error) => {
-				console.error(error);
-				throw normalizeError(error);
+				handleErrorFetch(error);
 			},
 		);
 
@@ -120,6 +125,7 @@ const useTasksSnapshot = ({
 		setEmptySubscribeScope,
 		setTasksFromSnapshot,
 		setUnsubscribeScope,
+		handleErrorFetch,
 	]);
 
 	useEffect(() => {
@@ -139,15 +145,11 @@ const useTasksSnapshot = ({
 					setIsInit(true);
 					setIsLoading(false);
 				} catch (error) {
-					handleErrorInit(normalizeError(error));
-
-					console.error(error);
+					handleErrorInit(error);
 				}
 			},
 			(error) => {
-				handleErrorInit(normalizeError(error));
-
-				console.error(error);
+				handleErrorInit(error);
 			},
 		);
 
@@ -166,7 +168,7 @@ const useTasksSnapshot = ({
 	]);
 
 	useEffect(() => {
-		if (!subscribesScopes.ids.length) {
+		if (!subscribesScopes.ids.length || isLoadingMore) {
 			return;
 		}
 
@@ -175,7 +177,7 @@ const useTasksSnapshot = ({
 		const hasMoreData = lastSubscribesScopes.data.ids.length >= limitQueryNext;
 
 		setHasMoreData(hasMoreData);
-	}, [subscribesScopes, limitQueryNext]);
+	}, [subscribesScopes, limitQueryNext, isLoadingMore]);
 
 	useEffect(() => {
 		if (!errorUser?.message) {
@@ -211,7 +213,12 @@ const useTasksSnapshot = ({
 		return isInit ? tasks : null;
 	}, [subscribesScopes, hasMoreData, isInit]);
 
-	return [tasks, isLoading, error, { fetchMore, isLoadingMore, hasMoreData }] as const;
+	return [
+		tasks,
+		isLoading,
+		error,
+		{ fetchMore, isLoadingMore, hasMoreData, error: errorFetch },
+	] as const;
 };
 
 export default useTasksSnapshot;

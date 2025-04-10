@@ -10,7 +10,6 @@ import useQuantityTasksSnapshot from '@/hooks/data/useQuantityTasksSnapshot';
 import useShowError from '@/hooks/ui/useShowError';
 
 import { getQuantityShort } from '@/utils/quantity';
-import { showError } from '@/utils/notification';
 import { LIMIT_QUANTITY_TASKS, LIMIT_TASKS } from '@/consts/config';
 
 interface TasksPageProps {
@@ -36,13 +35,15 @@ const TasksPage = ({
 	notFoundMessage,
 	headButtons,
 }: TasksPageProps) => {
-	const [tasks, isLoading, errorToday, { fetchMore, isLoadingMore, hasMoreData }] =
+	const [tasks, isLoading, errorToday, { fetchMore, isLoadingMore, hasMoreData, error }] =
 		useTasksSnapshot({
 			timestampStart,
 			timestampEnd,
 			tagId,
 			limit: LIMIT_TASKS,
 		});
+
+	useShowError(errorMessageTasksLoading, error);
 
 	const tasksToday: Tasks | null[] = tasks ?? new Array(LIMIT_TASKS).fill(null);
 	const [quantity, isLoadingQuantity, errorQuantityToday] = useQuantityTasksSnapshot({
@@ -53,14 +54,6 @@ const TasksPage = ({
 	});
 
 	useShowError(errorMessageQuantityLoading, errorQuantityToday);
-
-	const handleFetchMore = () => {
-		try {
-			fetchMore();
-		} catch {
-			showError(errorMessageTasksLoading);
-		}
-	};
 
 	const quantityShort = quantity !== null ? getQuantityShort(quantity, LIMIT_QUANTITY_TASKS) : null;
 
@@ -81,12 +74,7 @@ const TasksPage = ({
 				>
 					{hasMoreData && (
 						<TasksList.Button>
-							<Button
-								styleType="border"
-								size="small"
-								onClick={handleFetchMore}
-								isLoading={isLoadingMore}
-							>
+							<Button styleType="border" size="small" onClick={fetchMore} isLoading={isLoadingMore}>
 								Загрузить еще
 							</Button>
 						</TasksList.Button>
