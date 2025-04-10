@@ -66,7 +66,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 					Меню
 				</h2>
 				{isModal && (
-					<ButtonIcon className={cl.close} size="large" hiddenName="Меню" onClick={onClose}>
+					<ButtonIcon className={cl.close} size="large" hiddenName="Закрыть" onClick={onClose}>
 						close
 					</ButtonIcon>
 				)}
