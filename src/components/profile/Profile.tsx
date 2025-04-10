@@ -92,8 +92,8 @@ const Profile = ({
 										</VisuallyHiddenLoader>
 									</h1>
 									{quantity !== undefined && (
-										<VisuallyHiddenLoader isLoading={isLoadingQuantity}>
-											<div className={cl.quantity}>
+										<div className={cl.quantity}>
+											<VisuallyHiddenLoader isLoading={isLoadingQuantity}>
 												{quantity !== null ? (
 													quantity
 												) : (
@@ -101,8 +101,8 @@ const Profile = ({
 														<Skeleton />
 													</div>
 												)}
-											</div>
-										</VisuallyHiddenLoader>
+											</VisuallyHiddenLoader>
+										</div>
 									)}
 								</div>
 							</div>
