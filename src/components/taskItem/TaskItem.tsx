@@ -33,6 +33,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
 				<>
 					<div className={cl.task}>
 						<Checkbox
+							className={cl.checkbox}
 							styleType="through"
 							label={task.name}
 							checked={task.done}
