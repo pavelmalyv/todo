@@ -20,14 +20,20 @@ const UpcomingPage = () => {
 
 	const dateRanges = getDateRanges();
 
-	const [tasksDataToday, isLoadingToday, errorToday] = useTasksSnapshot({
-		timestampStart: dateRanges.today.start,
-		timestampEnd: dateRanges.today.end,
-		limit: LIMIT_UPCOMING_TASKS,
-	});
+	const [tasksDataToday, isLoadingToday, errorToday, { hasMoreData: taskHasMoreDataToday }] =
+		useTasksSnapshot({
+			timestampStart: dateRanges.today.start,
+			timestampEnd: dateRanges.today.end,
+			limit: LIMIT_UPCOMING_TASKS,
+		});
 	const tasksToday: Tasks | null[] = tasksDataToday ?? new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
-	const [tasksDataTomorrow, isLoadingTomorrow, errorTomorrow] = useTasksSnapshot({
+	const [
+		tasksDataTomorrow,
+		isLoadingTomorrow,
+		errorTomorrow,
+		{ hasMoreData: taskHasMoreDataTomorrow },
+	] = useTasksSnapshot({
 		timestampStart: dateRanges.tomorrow.start,
 		timestampEnd: dateRanges.tomorrow.end,
 		limit: LIMIT_UPCOMING_TASKS,
@@ -35,11 +41,12 @@ const UpcomingPage = () => {
 	const tasksTomorrow: Tasks | null[] =
 		tasksDataTomorrow ?? new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
-	const [tasksDataNear, isLoadingNear, errorNear] = useTasksSnapshot({
-		timestampStart: dateRanges.near.start,
-		timestampEnd: dateRanges.near.end,
-		limit: LIMIT_UPCOMING_TASKS,
-	});
+	const [tasksDataNear, isLoadingNear, errorNear, { hasMoreData: taskHasMoreDataNear }] =
+		useTasksSnapshot({
+			timestampStart: dateRanges.near.start,
+			timestampEnd: dateRanges.near.end,
+			limit: LIMIT_UPCOMING_TASKS,
+		});
 	const tasksNear: Tasks | null[] = tasksDataNear ?? new Array(LIMIT_UPCOMING_TASKS).fill(null);
 
 	const [quantity, isLoadingQuantity, errorQuantity] = useQuantityUpcomingTasksSnapshot();
@@ -55,7 +62,7 @@ const UpcomingPage = () => {
 					notFoundMessage={NOT_FOUND_MESSAGES.todayTasks}
 					error={errorToday}
 				>
-					{tasksDataToday?.length === LIMIT_UPCOMING_TASKS && (
+					{taskHasMoreDataToday && (
 						<TasksList.Button>
 							<Button to={TODAY_TASKS_URL} styleType="border" size="small">
 								Смотреть все
@@ -73,7 +80,7 @@ const UpcomingPage = () => {
 						notFoundMessage={NOT_FOUND_MESSAGES.tomorrowTasks}
 						error={errorTomorrow}
 					>
-						{tasksDataTomorrow?.length === LIMIT_UPCOMING_TASKS && (
+						{taskHasMoreDataTomorrow && (
 							<TasksList.Button>
 								<Button to={TOMORROW_TASKS_URL} styleType="border" size="small">
 									Смотреть все
@@ -89,7 +96,7 @@ const UpcomingPage = () => {
 						notFoundMessage={NOT_FOUND_MESSAGES.nearTasks}
 						error={errorNear}
 					>
-						{tasksDataNear?.length === LIMIT_UPCOMING_TASKS && (
+						{taskHasMoreDataNear && (
 							<TasksList.Button>
 								<Button to={CALENDAR_URL} styleType="border" size="small">
 									Смотреть все
