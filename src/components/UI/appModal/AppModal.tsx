@@ -38,6 +38,7 @@ const AppModal = ({
 	return (
 		<AppModalProvider value={{ onClose }}>
 			<Modal
+				contentRef={(node) => node?.removeAttribute('aria-modal')}
 				role={role}
 				isOpen={isOpen}
 				onRequestClose={onClose}
