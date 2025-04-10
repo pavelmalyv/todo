@@ -19,9 +19,11 @@ const useTagsSnapshot = () => {
 		console.error(errorUser);
 	}
 
-	const handleError = useCallback((error: Error) => {
-		setError(error);
+	const handleError = useCallback((error: unknown) => {
+		setError(normalizeError(error));
 		setIsLoading(false);
+
+		console.error(error);
 	}, []);
 
 	useEffect(() => {
@@ -68,8 +70,7 @@ const useTagsSnapshot = () => {
 				setIsLoading(false);
 			},
 			(error) => {
-				handleError(normalizeError(error));
-				console.error(error);
+				handleError(error);
 			},
 		);
 
