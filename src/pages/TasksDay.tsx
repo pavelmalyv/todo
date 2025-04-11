@@ -9,18 +9,20 @@ const TasksDay = () => {
 	const params = useParams<{ timestampDay?: string }>();
 	const timestamp = validateTimestampParamOrThrow(params.timestampDay);
 
-	const dateEnd = new Date(timestamp);
+	const startDay = new Date(timestamp);
+	startDay.setHours(0, 0, 0, 0);
+
+	const dateEnd = new Date(startDay);
 	dateEnd.setDate(dateEnd.getDate() + 1);
 
-	const date = new Date(timestamp);
-	const dataDisplay = date.toLocaleDateString('ru-RU');
+	const dataDisplay = startDay.toLocaleDateString('ru-RU');
 
 	useTitle(`Задачи на ${dataDisplay}`);
 
 	return (
 		<TasksPage
 			title={dataDisplay}
-			timestampStart={timestamp}
+			timestampStart={startDay.getTime()}
 			timestampEnd={dateEnd.getTime()}
 			errorMessageQuantityLoading={ERRORS_MESSAGES.quantityTasksLoading}
 			errorMessageTasksLoading={ERRORS_MESSAGES.tasksLoading}
