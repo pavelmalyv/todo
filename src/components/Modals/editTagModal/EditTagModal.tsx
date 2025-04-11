@@ -17,7 +17,7 @@ import { InferType, object } from 'yup';
 import { ERRORS_MESSAGES, SUCCESS_MESSAGES } from '@/consts/messages';
 
 interface EditTagModalProps {
-	initialData: Tag | null;
+	initialData: Tag | null | undefined;
 	isLoadingData?: boolean;
 	isOpen: boolean;
 	onClose: () => void;
@@ -43,7 +43,7 @@ const EditTagModal = ({
 	const titleId = useId();
 	const [isOpenConfirm, setIsOpenConfirm] = useState(false);
 	const { updateTag, deleteTag } = useTagsCRUD();
-	const isNoData = initialData === null;
+	const isNoData = initialData === null || initialData === undefined;
 
 	const { control, formState, handleSubmit, reset } = useForm<EditTagFormData>({
 		resolver: yupResolver(editTagFormSchema),

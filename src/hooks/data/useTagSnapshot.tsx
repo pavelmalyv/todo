@@ -8,8 +8,12 @@ import { tagsCollectionRef } from '@/firebase';
 import { tagSchema } from '@/schemas/tags';
 import { normalizeError, NotFoundError } from '@/utils/error';
 
-const useTagSnapshot = (id: TagId | undefined) => {
-	const [tag, setTag] = useState<Tag | null>(null);
+interface TagSnapshotOptions {
+	isOptional?: boolean;
+}
+
+const useTagSnapshot = (id: TagId | undefined, { isOptional }: TagSnapshotOptions = {}) => {
+	const [tag, setTag] = useState<Tag | null | undefined>(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState<Error | undefined>(undefined);
 	const [user, , errorUser] = useUserState();
@@ -45,16 +49,21 @@ const useTagSnapshot = (id: TagId | undefined) => {
 				try {
 					setIsLoading(true);
 
-					if (!querySnapshot.data()) {
-						throw new NotFoundError();
+					if (querySnapshot.data()) {
+						const tag = await tagSchema.validate({
+							id: querySnapshot.id,
+							...querySnapshot.data(),
+						});
+
+						setTag(tag);
+					} else {
+						if (!isOptional) {
+							throw new NotFoundError();
+						}
+
+						setTag(undefined);
 					}
 
-					const tag = await tagSchema.validate({
-						id: querySnapshot.id,
-						...querySnapshot.data(),
-					});
-
-					setTag(tag);
 					setIsLoading(false);
 				} catch (error) {
 					handleError(error);
@@ -66,7 +75,7 @@ const useTagSnapshot = (id: TagId | undefined) => {
 		);
 
 		return () => unsubscribe();
-	}, [uid, id, handleError]);
+	}, [uid, id, isOptional, handleError]);
 
 	return [tag, isLoading, error] as const;
 };

@@ -22,7 +22,7 @@ interface ViewTaskModalProps {
 const ViewTaskModal = ({ task, isOpen, onClose }: ViewTaskModalProps) => {
 	const titleId = useId();
 	const [isOpenEdit, setIsOpenEdit] = useState(false);
-	const [tag, isLoadingTag, errorTag] = useTagSnapshot(task.tagId);
+	const [tag, isLoadingTag, errorTag] = useTagSnapshot(task.tagId, { isOptional: true });
 
 	return (
 		<>
@@ -40,7 +40,7 @@ const ViewTaskModal = ({ task, isOpen, onClose }: ViewTaskModalProps) => {
 								<ErrorMessage message={ERRORS_MESSAGES.tagLoading} />
 							) : (
 								<>
-									{task.tagId ? (
+									{task.tagId && tag !== undefined ? (
 										<TagItem color={tag?.color} isLoading={isLoadingTag} isSkeleton={tag === null}>
 											{tag?.name}
 										</TagItem>
