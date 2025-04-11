@@ -18,6 +18,13 @@
 	}
 }
 
+.time {
+	background-color: rgba(var(--color-highlight-background-first), 0.6);
+	font-size: 12px;
+	padding: 0.1em 0.4em;
+	border-radius: 0.4em;
+}
+
 .checkbox {
 	max-width: 100%;
 }

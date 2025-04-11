@@ -9,6 +9,7 @@ import useTaskCRUD from '@/hooks/data/useTaskCRUD';
 
 import { useState } from 'react';
 import { showError } from '@/utils/notification';
+import { getDisplayTaskTime } from '@/utils/date';
 import { ERRORS_MESSAGES } from '@/consts/messages';
 
 interface TaskItemProps {
@@ -35,7 +36,12 @@ const TaskItem = ({ task }: TaskItemProps) => {
 						<Checkbox
 							className={cl.checkbox}
 							styleType="through"
-							label={task.name}
+							label={
+								<>
+									<span className={cl.time}>{getDisplayTaskTime(task.dueAt.seconds)}</span>{' '}
+									{task.name}
+								</>
+							}
 							checked={task.done}
 							isLoading={updateTask.isLoading}
 							onChange={(e) => handleChangeDone(e, task.id)}
@@ -44,6 +50,7 @@ const TaskItem = ({ task }: TaskItemProps) => {
 							styleType="circle"
 							hiddenName="Редактировать задачу"
 							onClick={() => setIsOpenEditModals(true)}
+							className={cl.button}
 						>
 							edit
 						</ButtonIcon>
