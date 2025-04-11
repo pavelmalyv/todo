@@ -48,3 +48,10 @@ export const getDisplayTaskDate = (timestamp: number) => {
 		})
 		.replace(',', '');
 };
+
+export const getDisplayTaskTime = (timestamp: number) => {
+	return new Date(timestamp * 1000).toLocaleTimeString('ru-RU', {
+		hour: '2-digit',
+		minute: '2-digit',
+	});
+};
