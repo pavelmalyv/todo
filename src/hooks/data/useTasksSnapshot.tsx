@@ -189,7 +189,7 @@ const useTasksSnapshot = ({
 
 	useEffect(() => {
 		return () => unsubscribeFetchMore();
-	}, [unsubscribeFetchMore]);
+	}, [unsubscribeFetchMore, createQuery]);
 
 	const tasks = useMemo(() => {
 		const tasks: Tasks = [];
