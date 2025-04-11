@@ -22,20 +22,6 @@ type SubscribeScope = {
 const useSubscribesScopesTasks = () => {
 	const [subscribesScopes, setSubscribesScopes] = useState(createNormalizedEmpty<SubscribeScope>());
 
-	const applyDeleteSubscribeScope = useCallback(
-		(id: string, state: NormalizedObj<SubscribeScope>) => {
-			const unsubscribe = state.entities[id].unsubscribe;
-			if (unsubscribe) {
-				unsubscribe();
-			} else {
-				console.warn('The subscription has not been cleared');
-			}
-
-			return applyDeleteNormalizedById(state, id);
-		},
-		[],
-	);
-
 	const unsubscribeFetchMore = useCallback(() => {
 		setSubscribesScopes((prev) => {
 			let updatedPrev = { ...prev };
@@ -47,12 +33,19 @@ const useSubscribesScopesTasks = () => {
 					return;
 				}
 
-				updatedPrev = applyDeleteSubscribeScope(idSubscribeScope, prev);
+				const unsubscribe = prev.entities[idSubscribeScope].unsubscribe;
+				if (unsubscribe) {
+					unsubscribe();
+				} else {
+					console.warn('The subscription has not been cleared');
+				}
+
+				updatedPrev = applyDeleteNormalizedById(prev, idSubscribeScope);
 			});
 
 			return updatedPrev;
 		});
-	}, [applyDeleteSubscribeScope]);
+	}, []);
 
 	const setTasksFromSnapshot = useCallback(
 		async (querySnapshot: QuerySnapshot, subscribeId: string) => {
@@ -181,12 +174,9 @@ const useSubscribesScopesTasks = () => {
 		});
 	}, []);
 
-	const deleteSubscribeScope = useCallback(
-		(id: string) => {
-			setSubscribesScopes((prev) => applyDeleteSubscribeScope(id, prev));
-		},
-		[applyDeleteSubscribeScope],
-	);
+	const deleteSubscribeScope = useCallback((id: string) => {
+		setSubscribesScopes((prev) => applyDeleteNormalizedById(prev, id));
+	}, []);
 
 	return {
 		subscribesScopes,

@@ -155,7 +155,10 @@ const useTasksSnapshot = ({
 
 		setUnsubscribeScope(subscribeId, unsubscribe);
 
-		return () => deleteSubscribeScope(subscribeId);
+		return () => {
+			unsubscribe();
+			deleteSubscribeScope(subscribeId);
+		};
 	}, [
 		uid,
 		limitQueryNext,
