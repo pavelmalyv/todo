@@ -130,7 +130,12 @@ const Calendar = () => {
 	};
 
 	const handleMoreClick = (linkInfo: MoreLinkArg) => {
-		const url = getTasksDayUrl(linkInfo.date.getTime());
+		const dateLocal = new Date(
+			linkInfo.date.getUTCFullYear(),
+			linkInfo.date.getUTCMonth(),
+			linkInfo.date.getUTCDate(),
+		);
+		const url = getTasksDayUrl(dateLocal.getTime());
 		navigate(url);
 
 		return '_';
