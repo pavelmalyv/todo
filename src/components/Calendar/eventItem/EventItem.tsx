@@ -20,7 +20,7 @@ const EventItem = ({ className, eventContent, height }: EventItemProps) => {
 	return (
 		<>
 			<div
-				className={classNames(cl.event, className)}
+				className={classNames(cl.event, { [cl['event_done']]: task?.done }, className)}
 				onClick={() => setIsOpenTask(true)}
 				style={{ height: height }}
 			>

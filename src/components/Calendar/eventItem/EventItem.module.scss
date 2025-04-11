@@ -12,6 +12,10 @@
 	border-radius: 30px;
 	color: rgb(var(--color-text-secondary));
 
+	&_done {
+		text-decoration: line-through;
+	}
+
 	@include utils.hover {
 		--text-decoration: underline;
 	}
