@@ -31,7 +31,7 @@ export const createQueryTasks = (
 		conditions.push(where('tagId', '==', tagId));
 	}
 
-	conditions.push(orderBy('dueAt', 'desc'));
+	conditions.push(orderBy('dueAt', 'asc'));
 
 	if (limitQuery) {
 		conditions.push(limit(limitQuery));
