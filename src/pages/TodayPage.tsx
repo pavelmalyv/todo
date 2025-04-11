@@ -14,7 +14,6 @@ const TodayPage = () => {
 			title="Сегодня"
 			timestampStart={dateRanges.today.start}
 			timestampEnd={dateRanges.today.end}
-			errorMessageQuantityLoading={ERRORS_MESSAGES.quantityTodayTasksLoading}
 			errorMessageTasksLoading={ERRORS_MESSAGES.tasksLoading}
 			notFoundMessage={NOT_FOUND_MESSAGES.todayTasks}
 		/>

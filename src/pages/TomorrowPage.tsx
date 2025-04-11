@@ -14,7 +14,6 @@ const TomorrowPage = () => {
 			title="Завтра"
 			timestampStart={dateRanges.tomorrow.start}
 			timestampEnd={dateRanges.tomorrow.end}
-			errorMessageQuantityLoading={ERRORS_MESSAGES.quantityTomorrowTasksLoading}
 			errorMessageTasksLoading={ERRORS_MESSAGES.tasksLoading}
 			notFoundMessage={NOT_FOUND_MESSAGES.tomorrowTasks}
 		/>

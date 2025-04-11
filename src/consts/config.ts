@@ -9,7 +9,6 @@ export const TAG_TITLE_MAX_LENGTH = 350;
 
 export const LIMIT_TASKS_DEFAULT = 30;
 export const LIMIT_UPCOMING_TASKS = 4;
-export const LIMIT_QUANTITY_TASKS = 10;
 export const LIMIT_TASKS = 10;
 export const LIMIT_TAGS = 10;
 export const LIMIT_CALENDAR_TASKS = 3;

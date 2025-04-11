@@ -32,7 +32,6 @@ const TagPage = () => {
 			<TasksPage
 				title={tag?.name ?? null}
 				isLoadingTitle={isLoading}
-				errorMessageQuantityLoading={ERRORS_MESSAGES.quantityTasksLoading}
 				errorMessageTasksLoading={ERRORS_MESSAGES.tasksLoading}
 				notFoundMessage={NOT_FOUND_MESSAGES.tasks}
 				tagId={id}

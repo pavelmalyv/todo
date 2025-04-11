@@ -6,11 +6,9 @@ import Section from '@/components/UI/section/Section';
 import TasksList from '@/components/tasksList/TasksList';
 import Button from '@/components/UI/Buttons/button/Button';
 import useTasksSnapshot from '@/hooks/data/useTasksSnapshot';
-import useQuantityTasksSnapshot from '@/hooks/data/useQuantityTasksSnapshot';
 import useShowError from '@/hooks/ui/useShowError';
 
-import { getQuantityShort } from '@/utils/quantity';
-import { LIMIT_QUANTITY_TASKS, LIMIT_TASKS } from '@/consts/config';
+import { LIMIT_TASKS } from '@/consts/config';
 
 interface TasksPageProps {
 	title: string | null;
@@ -18,7 +16,6 @@ interface TasksPageProps {
 	timestampStart?: number;
 	timestampEnd?: number;
 	tagId?: TagId;
-	errorMessageQuantityLoading: string;
 	errorMessageTasksLoading: string;
 	notFoundMessage: string;
 	headButtons?: React.ReactNode;
@@ -30,7 +27,6 @@ const TasksPage = ({
 	timestampStart,
 	timestampEnd,
 	tagId,
-	errorMessageQuantityLoading,
 	errorMessageTasksLoading,
 	notFoundMessage,
 	headButtons,
@@ -46,25 +42,9 @@ const TasksPage = ({
 	useShowError(errorMessageTasksLoading, error);
 
 	const tasksToday: Tasks | null[] = tasks ?? new Array(LIMIT_TASKS).fill(null);
-	const [quantity, isLoadingQuantity, errorQuantityToday] = useQuantityTasksSnapshot({
-		timestampStart,
-		timestampEnd,
-		tagId,
-		limit: LIMIT_QUANTITY_TASKS + 1,
-	});
-
-	useShowError(errorMessageQuantityLoading, errorQuantityToday);
-
-	const quantityShort = quantity !== null ? getQuantityShort(quantity, LIMIT_QUANTITY_TASKS) : null;
 
 	return (
-		<Profile
-			title={title}
-			isLoadingTitle={isLoadingTitle}
-			quantity={quantityShort}
-			isLoadingQuantity={isLoadingQuantity}
-			headButtons={headButtons}
-		>
+		<Profile title={title} isLoadingTitle={isLoadingTitle} headButtons={headButtons}>
 			<Section title="Задачи">
 				<TasksList
 					tasks={tasksToday}

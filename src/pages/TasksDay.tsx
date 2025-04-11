@@ -24,7 +24,6 @@ const TasksDay = () => {
 			title={dataDisplay}
 			timestampStart={startDay.getTime()}
 			timestampEnd={dateEnd.getTime()}
-			errorMessageQuantityLoading={ERRORS_MESSAGES.quantityTasksLoading}
 			errorMessageTasksLoading={ERRORS_MESSAGES.tasksLoading}
 			notFoundMessage={NOT_FOUND_MESSAGES.tasks}
 		/>

@@ -7,16 +7,12 @@ import Skeleton from 'react-loading-skeleton';
 import TagsNav from '../tagsNav/TagsNav';
 import ButtonIconText from '../UI/Buttons/buttonIconText/ButtonIconText';
 import useQuantityUpcomingTasksSnapshot from '@/hooks/data/useQuantityUpcomingTasksSnapshot';
-import useQuantityTasksSnapshot from '@/hooks/data/useQuantityTasksSnapshot';
 import useShowError from '@/hooks/ui/useShowError';
 import useUserSignOut from '@/hooks/data/useUserSignOut';
 
 import { useId } from 'react';
-import { getDateRanges } from '@/utils/date';
 import { Link, NavLink } from 'react-router';
-import { getQuantityShort } from '@/utils/quantity';
 import { ERRORS_MESSAGES } from '@/consts/messages';
-import { LIMIT_QUANTITY_TASKS } from '@/consts/config';
 import {
 	ABOUT_URL,
 	CALENDAR_URL,
@@ -32,7 +28,6 @@ interface MenuProps {
 
 const Menu = ({ isModal = false, onClose }: MenuProps) => {
 	const titleId = useId();
-	const dateRanges = getDateRanges();
 
 	const [signOut, isLoadingSignOut, error] = useUserSignOut();
 	useShowError(ERRORS_MESSAGES.signOut, error);
@@ -40,21 +35,6 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 	const [quantityUpcoming, isLoadingQuantityUpcoming, errorQuantityUpcoming] =
 		useQuantityUpcomingTasksSnapshot();
 	useShowError(ERRORS_MESSAGES.quantityUpcomingTasksLoading, errorQuantityUpcoming);
-
-	const [quantityToday, isLoadingQuantityToday, errorQuantityToday] = useQuantityTasksSnapshot({
-		timestampStart: dateRanges.today.start,
-		timestampEnd: dateRanges.today.end,
-		limit: LIMIT_QUANTITY_TASKS + 1,
-	});
-	useShowError(ERRORS_MESSAGES.quantityTodayTasksLoading, errorQuantityToday);
-
-	const [quantityTomorrow, isLoadingQuantityTomorrow, errorQuantityTomorrow] =
-		useQuantityTasksSnapshot({
-			timestampStart: dateRanges.tomorrow.start,
-			timestampEnd: dateRanges.tomorrow.end,
-			limit: LIMIT_QUANTITY_TASKS + 1,
-		});
-	useShowError(ERRORS_MESSAGES.quantityTomorrowTasksLoading, errorQuantityTomorrow);
 
 	return (
 		<aside
@@ -97,15 +77,6 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 
 										<span>Сегодня</span>
 									</div>
-									<div className={cl['menu-quantity']}>
-										<VisuallyHiddenLoader isLoading={isLoadingQuantityToday}>
-											{quantityToday !== null ? (
-												getQuantityShort(quantityToday, LIMIT_QUANTITY_TASKS)
-											) : (
-												<Skeleton />
-											)}
-										</VisuallyHiddenLoader>
-									</div>
 								</NavLink>
 							</li>
 							<li className={cl['menu-item']}>
@@ -114,15 +85,6 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 										<Icon className={cl['menu-icon']}>list</Icon>
 
 										<span>Завтра</span>
-									</div>
-									<div className={cl['menu-quantity']}>
-										<VisuallyHiddenLoader isLoading={isLoadingQuantityTomorrow}>
-											{quantityTomorrow !== null ? (
-												getQuantityShort(quantityTomorrow, LIMIT_QUANTITY_TASKS)
-											) : (
-												<Skeleton />
-											)}
-										</VisuallyHiddenLoader>
 									</div>
 								</NavLink>
 							</li>
