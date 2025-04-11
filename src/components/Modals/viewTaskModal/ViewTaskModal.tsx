@@ -1,7 +1,6 @@
-import type { Task, TaskId } from '@/types/tasks';
+import type { Task } from '@/types/tasks';
 
 import cl from './ViewTaskModal.module.scss';
-import Checkbox from '@/components/UI/checkbox/Checkbox';
 import AppModal from '@/components/UI/appModal/AppModal';
 import Button from '@/components/UI/Buttons/button/Button';
 import TagItem from '@/components/UI/tagItem/TagItem';
@@ -9,9 +8,7 @@ import DescriptionList from '@/components/UI/descriptionList/DescriptionList';
 import ErrorMessage from '@/components/UI/errorMessage/ErrorMessage';
 import EditTaskModal from '../editTaskModal/EditTaskModal';
 import useTagSnapshot from '@/hooks/data/useTagSnapshot';
-import useTaskCRUD from '@/hooks/data/useTaskCRUD';
 
-import { showError } from '@/utils/notification';
 import { useId, useState } from 'react';
 import { getDisplayTaskDate } from '@/utils/date';
 import { ERRORS_MESSAGES, NOT_FOUND_MESSAGES } from '@/consts/messages';
@@ -25,16 +22,7 @@ interface ViewTaskModalProps {
 const ViewTaskModal = ({ task, isOpen, onClose }: ViewTaskModalProps) => {
 	const titleId = useId();
 	const [isOpenEdit, setIsOpenEdit] = useState(false);
-	const { updateTask } = useTaskCRUD();
 	const [tag, isLoadingTag, errorTag] = useTagSnapshot(task.tagId);
-
-	const handleChangeDone = async (e: React.ChangeEvent<HTMLInputElement>, id: TaskId) => {
-		try {
-			updateTask.update(id, { done: e.target.checked });
-		} catch {
-			showError(ERRORS_MESSAGES.updateTask);
-		}
-	};
 
 	return (
 		<>
@@ -62,15 +50,10 @@ const ViewTaskModal = ({ task, isOpen, onClose }: ViewTaskModalProps) => {
 								</>
 							)}
 						</DescriptionList.Item>
+						<DescriptionList.Item label="Состояние:">
+							{task.done ? 'Выполнено' : 'Не выполнено'}
+						</DescriptionList.Item>
 					</DescriptionList>
-
-					<Checkbox
-						styleType="through"
-						label="Выполнено"
-						checked={task.done}
-						isLoading={updateTask.isLoading}
-						onChange={(e) => handleChangeDone(e, task.id)}
-					/>
 				</div>
 
 				<AppModal.Buttons>
