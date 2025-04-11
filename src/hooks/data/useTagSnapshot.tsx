@@ -46,28 +46,27 @@ const useTagSnapshot = (id: TagId | undefined, { isOptional }: TagSnapshotOption
 		const unsubscribe = onSnapshot(
 			doc(tagsCollectionRef(uid), id),
 			async (querySnapshot) => {
-				try {
-					setIsLoading(true);
+				setIsLoading(true);
 
-					if (querySnapshot.data()) {
-						const tag = await tagSchema.validate({
+				let tag: Tag | undefined;
+
+				if (querySnapshot.data()) {
+					try {
+						tag = await tagSchema.validate({
 							id: querySnapshot.id,
 							...querySnapshot.data(),
 						});
-
-						setTag(tag);
-					} else {
-						if (!isOptional) {
-							throw new NotFoundError();
-						}
-
-						setTag(undefined);
+					} catch (error) {
+						console.error(error);
 					}
-
-					setIsLoading(false);
-				} catch (error) {
-					handleError(error);
 				}
+
+				if (tag === undefined && !isOptional) {
+					handleError(new NotFoundError());
+				}
+
+				setTag(tag);
+				setIsLoading(false);
 			},
 			(error) => {
 				handleError(error);
