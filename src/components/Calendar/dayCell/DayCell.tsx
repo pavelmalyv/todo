@@ -6,7 +6,6 @@ import { ERRORS_MESSAGES, LOADING_MESSAGES } from '@/consts/messages';
 
 interface DayCellProps {
 	dayText: string;
-	timestamp: number;
 	isSkeleton: boolean;
 	isLoading: boolean;
 	error: Error | undefined;

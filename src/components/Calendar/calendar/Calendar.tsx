@@ -121,7 +121,6 @@ const Calendar = () => {
 		return (
 			<DayCell
 				dayText={dayNumberText}
-				timestamp={timestamp}
 				isSkeleton={tasksDay ? tasksDay.tasks === null : true}
 				isLoading={tasksDay ? tasksDay.isLoading : true}
 				error={tasksDay?.error}
