@@ -1,1 +1,0 @@
-import{av as t}from"./index-DZnvPZAH.js";const n=e=>typeof e=="object"&&e!==null&&"code"in e&&"message"in e&&typeof e.code=="string"&&typeof e.message=="string",o=e=>{if(n(e)){const s=t[e.code];if(s)return s}return t.unknown};export{o as g};
