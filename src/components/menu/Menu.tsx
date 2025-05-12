@@ -58,7 +58,7 @@ const Menu = ({ isModal = false, onClose }: MenuProps) => {
 					<nav className={cl.menu}>
 						<ul className={cl['menu-list']}>
 							<li className={cl['menu-item']}>
-								<NavLink className={cl['menu-link']} to={BASE_URL}>
+								<NavLink className={cl['menu-link']} to={BASE_URL} end>
 									<div className={cl['menu-name']}>
 										<Icon className={cl['menu-icon']}>double_arrow</Icon>
 
